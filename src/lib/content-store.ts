@@ -7,7 +7,6 @@
 // PostgREST's nested-embed syntax require foreign-key disambiguation and
 // gets fragile fast. Simpler and more robust: fetch every table flat, then
 // stitch in plain TypeScript using id -> slug lookup maps.
-import { supabase } from '@/lib/supabase/client'
 import type {
   BlogCategory,
   BlogPost,
@@ -21,6 +20,17 @@ import type {
   Solution,
   Testimonial,
 } from '@/content/types'
+import { services as staticServices } from '@/content/services'
+import { solutions as staticSolutions } from '@/content/solutions'
+import { equipmentCategories as staticEquipmentCategories } from '@/content/equipment-categories'
+import { equipmentItems as staticEquipmentItems } from '@/content/equipment'
+import { projects as staticProjects } from '@/content/projects'
+import { blogCategories as staticBlogCategories } from '@/content/blog-categories'
+import { blogPosts as staticBlogPosts } from '@/content/blog-posts'
+import { testimonials as staticTestimonials } from '@/content/testimonials'
+import { clients as staticClients } from '@/content/clients'
+import { faqs as staticFaqs } from '@/content/faqs'
+import { industries as staticIndustries } from '@/content/industries'
 
 export interface ContentBundle {
   services: Service[]
@@ -39,13 +49,19 @@ export interface ContentBundle {
 let cache: ContentBundle | null = null
 let inflight: Promise<ContentBundle> | null = null
 
+const hasSupabaseConfig = Boolean(
+  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY,
+)
+
 /** Fetches (once) and returns the full content bundle. Safe to call from
- * multiple places concurrently — subsequent calls reuse the same promise. */
+ * multiple places concurrently — subsequent calls reuse the same promise.
+ * Falls back to the static `content/*.ts` modules when no Supabase project
+ * is configured, so local dev works without setup. */
 export function loadContent(): Promise<ContentBundle> {
   if (cache) return Promise.resolve(cache)
   if (inflight) return inflight
 
-  inflight = fetchAndStitch()
+  inflight = (hasSupabaseConfig ? fetchAndStitch() : loadStaticBundle())
     .then((bundle) => {
       cache = bundle
       inflight = null
@@ -74,7 +90,24 @@ export function clearContentCache() {
   inflight = null
 }
 
+async function loadStaticBundle(): Promise<ContentBundle> {
+  return {
+    services: staticServices,
+    solutions: staticSolutions,
+    equipmentCategories: staticEquipmentCategories,
+    equipmentItems: staticEquipmentItems,
+    projects: staticProjects,
+    blogCategories: staticBlogCategories,
+    blogPosts: staticBlogPosts,
+    testimonials: staticTestimonials,
+    clients: staticClients,
+    faqs: staticFaqs,
+    industries: staticIndustries,
+  }
+}
+
 async function fetchAndStitch(): Promise<ContentBundle> {
+  const { supabase } = await import('@/lib/supabase/client')
   const [
     servicesRes,
     solutionsRes,
