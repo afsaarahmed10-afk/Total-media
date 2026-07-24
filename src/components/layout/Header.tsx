@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu } from 'lucide-react'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Menu, LayoutDashboard, Settings, LogOut } from 'lucide-react'
+import { toast } from 'sonner'
 import { Logo } from '@/components/brand/Logo'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,7 +20,17 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { UserAvatar } from '@/components/shared/UserAvatar'
 import { getServices, getEquipmentCategories } from '@/lib/data'
+import { useAuth } from '@/lib/auth/AuthContext'
 import { cn } from '@/lib/utils'
 
 const primaryLinks = [
@@ -34,6 +45,14 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { user, profile, signOut } = useAuth()
+
+  async function handleSignOut() {
+    await signOut()
+    toast.success('Logout successful')
+    navigate('/')
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -191,6 +210,45 @@ export function Header() {
           <Button asChild variant="ghost">
             <Link to="/contact">Contact</Link>
           </Button>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <UserAvatar
+                  name={profile?.full_name ?? ''}
+                  email={user.email ?? ''}
+                  avatarUrl={profile?.avatar_url}
+                  className="size-9"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel className="truncate">
+                  {profile?.full_name || user.email}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard" className="flex items-center gap-2">
+                    <LayoutDashboard className="size-4" /> Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard/settings" className="flex items-center gap-2">
+                    <Settings className="size-4" /> Profile Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleSignOut}
+                  className="flex items-center gap-2 text-red-600 focus:text-red-600"
+                >
+                  <LogOut className="size-4" /> Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild variant="ghost">
+              <Link to="/login">Log In</Link>
+            </Button>
+          )}
           <Button asChild className="bg-navy text-white hover:bg-navy-deep">
             <Link to="/quote">Request a Quote</Link>
           </Button>
@@ -242,6 +300,45 @@ export function Header() {
                   </Link>
                 </SheetClose>
               ))}
+              <div className="my-2 border-t border-border" />
+              {user ? (
+                <>
+                  <SheetClose asChild>
+                    <Link
+                      to="/dashboard"
+                      className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                    >
+                      <LayoutDashboard className="size-4" /> Dashboard
+                    </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <Link
+                      to="/dashboard/settings"
+                      className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                    >
+                      <Settings className="size-4" /> Profile Settings
+                    </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <button
+                      type="button"
+                      onClick={handleSignOut}
+                      className="flex items-center gap-2 rounded-md px-3 py-3 text-left text-base font-medium text-red-600 hover:bg-mist"
+                    >
+                      <LogOut className="size-4" /> Sign Out
+                    </button>
+                  </SheetClose>
+                </>
+              ) : (
+                <SheetClose asChild>
+                  <Link
+                    to="/login"
+                    className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                  >
+                    Log In
+                  </Link>
+                </SheetClose>
+              )}
               <SheetClose asChild>
                 <Button asChild className="mt-4 bg-navy text-white hover:bg-navy-deep">
                   <Link to="/quote">Request a Quote</Link>

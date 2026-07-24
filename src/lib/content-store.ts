@@ -31,6 +31,7 @@ import { testimonials as staticTestimonials } from '@/content/testimonials'
 import { clients as staticClients } from '@/content/clients'
 import { faqs as staticFaqs } from '@/content/faqs'
 import { industries as staticIndustries } from '@/content/industries'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client'
 
 export interface ContentBundle {
   services: Service[]
@@ -49,10 +50,6 @@ export interface ContentBundle {
 let cache: ContentBundle | null = null
 let inflight: Promise<ContentBundle> | null = null
 
-const hasSupabaseConfig = Boolean(
-  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY,
-)
-
 /** Fetches (once) and returns the full content bundle. Safe to call from
  * multiple places concurrently — subsequent calls reuse the same promise.
  * Falls back to the static `content/*.ts` modules when no Supabase project
@@ -61,7 +58,7 @@ export function loadContent(): Promise<ContentBundle> {
   if (cache) return Promise.resolve(cache)
   if (inflight) return inflight
 
-  inflight = (hasSupabaseConfig ? fetchAndStitch() : loadStaticBundle())
+  inflight = (isSupabaseConfigured ? fetchAndStitch() : loadStaticBundle())
     .then((bundle) => {
       cache = bundle
       inflight = null
@@ -107,7 +104,6 @@ async function loadStaticBundle(): Promise<ContentBundle> {
 }
 
 async function fetchAndStitch(): Promise<ContentBundle> {
-  const { supabase } = await import('@/lib/supabase/client')
   const [
     servicesRes,
     solutionsRes,
