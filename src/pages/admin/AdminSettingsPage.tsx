@@ -16,6 +16,7 @@ const schema = z.object({
   addressLines: z.string().min(1, 'Address is required.'),
   phone: z.string().min(1, 'Phone is required.'),
   email: z.string().email('Enter a valid email.'),
+  notificationEmail: z.string().email('Enter a valid email.'),
   siteUrl: z.string().url('Enter a valid URL.'),
   standardDays: z.string().regex(/^\d+$/, 'Enter a whole number.'),
   complexDays: z.string().regex(/^\d+$/, 'Enter a whole number.'),
@@ -26,6 +27,7 @@ const FALLBACK: FormValues = {
   addressLines: 'TOTAL MEDIA Inc.\nShibuya-ku, Tokyo 150-0002, Japan',
   phone: '+81 3-4567-8901',
   email: 'hello@totalmedia.co.jp',
+  notificationEmail: 'hello@totalmedia.co.jp',
   siteUrl: 'https://www.totalmedia.co.jp',
   standardDays: '2',
   complexDays: '5',
@@ -56,6 +58,8 @@ export default function AdminSettingsPage() {
       addressLines: address?.lines?.join('\n') ?? FALLBACK.addressLines,
       phone: (byKey.get('contact_phone') as string | undefined) ?? FALLBACK.phone,
       email: (byKey.get('contact_email') as string | undefined) ?? FALLBACK.email,
+      notificationEmail:
+        (byKey.get('notification_email') as string | undefined) ?? FALLBACK.notificationEmail,
       siteUrl: (byKey.get('site_url') as string | undefined) ?? FALLBACK.siteUrl,
       standardDays: sla?.standard_days !== undefined ? String(sla.standard_days) : FALLBACK.standardDays,
       complexDays: sla?.complex_days !== undefined ? String(sla.complex_days) : FALLBACK.complexDays,
@@ -76,6 +80,7 @@ export default function AdminSettingsPage() {
       },
       { key: 'contact_phone', value: values.phone },
       { key: 'contact_email', value: values.email },
+      { key: 'notification_email', value: values.notificationEmail },
       { key: 'site_url', value: values.siteUrl },
       {
         key: 'quote_response_sla',
@@ -98,7 +103,7 @@ export default function AdminSettingsPage() {
       <Reveal>
         <AdminPageHeader
           title="Site Settings"
-          description="These aren't read by the live site yet — Footer.tsx and ContactPage.tsx still use hardcoded defaults until that wiring lands. Editing here updates the database only."
+          description="Notification Email is read live by the Contact/Quote email alerts. The rest aren't read by the live site yet — Footer.tsx and ContactPage.tsx still use hardcoded defaults until that wiring lands."
         />
       </Reveal>
 
@@ -155,6 +160,23 @@ export default function AdminSettingsPage() {
                     )}
                   />
                 </div>
+                <FormField
+                  control={form.control}
+                  name="notificationEmail"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Notification Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Where new Contact/Quote form alerts are sent. Can differ from the public
+                        contact email above.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="siteUrl"

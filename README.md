@@ -118,13 +118,15 @@ at `/admin` — CRUD for every content domain (services, solutions,
 equipment, portfolio, blog, testimonials, clients, FAQs, industries), a
 media library, the quote/contact inbox, site settings, and admin-user role
 management. CI (`.github/workflows/ci.yml`) runs lint/type-check/build on
-every push and PR to `main`.
+every push and PR to `main`. Admins also get an email alert (via a Resend-
+backed Supabase Edge Function, `supabase/functions/notify-form-submission`)
+the moment a new quote request or contact message comes in — see
+`supabase/SCHEMA.md`'s "Email Notifications" section for the one-time
+deploy/secrets setup.
 
 **Not done yet:**
 - Production deployment (no Vercel project connected yet)
 - Automated tests (none exist — CI currently only catches type/build/lint errors)
-- Email notifications when a new quote request or contact message arrives
-  (admins currently only see new submissions by opening the dashboard)
 - Rate-limiting/CAPTCHA on the public Quote/Contact forms (both have a
   honeypot field only — see `supabase/SCHEMA.md`'s "Known Limitation" note)
 - The content/legal placeholders below

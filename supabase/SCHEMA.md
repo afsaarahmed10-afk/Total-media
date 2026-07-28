@@ -89,6 +89,31 @@ recursing into `admin_users`' own RLS.
 | `media` | Yes | any | Admin-curated; backs the `media` table. |
 | `quote-attachments` | No | `{quote_request_id}/{file_name}` | The path's first segment is the owning `quote_requests.id`, so RLS can check ownership without a join. |
 
+## Email Notifications
+
+`supabase/functions/notify-form-submission` sends an admin alert email via
+[Resend](https://resend.com) whenever the Contact or Quote form is
+submitted. It's invoked directly from the client
+(`supabase.functions.invoke(...)` in `ContactPage.tsx`/`QuotePage.tsx`)
+right after the row insert succeeds, fire-and-forget — a failed email never
+blocks the visitor's success screen, since the submission is already saved
+and visible in `/admin` regardless.
+
+Deploy and configure it once a Supabase project is linked:
+
+```bash
+supabase functions deploy notify-form-submission
+supabase secrets set RESEND_API_KEY=re_your_key_here
+# Optional — defaults to Resend's sandbox sender, which only delivers to the
+# email the Resend account was signed up with. Set this once a sending
+# domain is verified in Resend so notifications reach any inbox.
+supabase secrets set RESEND_FROM_EMAIL="TOTAL MEDIA <notifications@yourdomain.com>"
+```
+
+The recipient address comes from `site_settings`'s `notification_email` key
+(editable at `/admin/settings` → "Notification Email"), falling back to
+`contact_email` if unset.
+
 ## Known Limitation, Flagged Deliberately
 
 `quote_request_attachments` (and the matching `quote-attachments` bucket

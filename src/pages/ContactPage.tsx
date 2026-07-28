@@ -62,6 +62,24 @@ export default function ContactPage() {
       return
     }
 
+    // Best-effort admin alert — the message is already saved and visible in
+    // /admin regardless, so a notification failure shouldn't affect the
+    // visitor's experience.
+    supabase.functions
+      .invoke('notify-form-submission', {
+        body: {
+          type: 'contact',
+          record: {
+            name: values.name,
+            email: values.email,
+            company: values.company || null,
+            subject: values.subject,
+            message: values.message,
+          },
+        },
+      })
+      .catch((err) => console.error('Failed to send contact notification email:', err))
+
     setSubmitted(true)
   }
 

@@ -183,6 +183,32 @@ export default function QuotePage() {
       }
     }
 
+    // Best-effort admin alert — the request is already saved and visible in
+    // /admin regardless, so a notification failure shouldn't affect the
+    // visitor's experience.
+    supabase.functions
+      .invoke('notify-form-submission', {
+        body: {
+          type: 'quote',
+          record: {
+            name: values.name,
+            company: values.company,
+            country: values.country,
+            email: values.email,
+            phone: values.phone,
+            eventType: values.eventType,
+            venue: values.venue || null,
+            city: values.city,
+            eventDate: values.eventDate || null,
+            attendees: values.attendees ? Number(values.attendees) : null,
+            budget: values.budget || null,
+            services: values.services,
+            notes: values.notes || null,
+          },
+        },
+      })
+      .catch((err) => console.error('Failed to send quote notification email:', err))
+
     setIsSubmitting(false)
     setSubmitted(true)
   }
