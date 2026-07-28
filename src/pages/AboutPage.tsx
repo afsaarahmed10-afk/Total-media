@@ -2,7 +2,6 @@ import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { Target, Users, Globe2, ShieldCheck } from 'lucide-react'
 
@@ -33,35 +32,12 @@ const values = [
   },
 ]
 
-const team = [
-  {
-    name: 'Aiko Tanaka',
-    role: 'Head of Event Planning',
-    bio: 'Leads planning and client strategy across our corporate and conference engagements, with a focus on translating business objectives into event design.',
-  },
-  {
-    name: 'Kenji Watanabe',
-    role: 'Technical Director, LED & Visual Systems',
-    bio: 'Oversees LED, lighting, and visual systems design — the specification work that determines whether a stage looks right from every seat in the room.',
-  },
-  {
-    name: 'Daichi Suzuki',
-    role: 'Senior Production Manager',
-    bio: 'Runs build and strike operations for exhibitions and large-scale productions, where the schedule leaves no margin for improvisation.',
-  },
-  {
-    name: 'Sarah Whitfield',
-    role: 'Director of International Accounts',
-    bio: 'The primary point of contact for international clients planning their first event in Japan, from venue sourcing through final handover.',
-  },
-]
-
 export default function AboutPage() {
   return (
     <>
       <Seo
         title="About TOTAL MEDIA"
-        description="TOTAL MEDIA is a full-service event production and technical solutions company operating across Japan. Learn about our approach, values, and team."
+        description="TOTAL MEDIA is a full-service event production and technical solutions company operating across Japan. Learn about our approach and values."
         path="/about"
       />
       <PageHero
@@ -115,30 +91,6 @@ export default function AboutPage() {
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {value.description}
                   </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-28">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Leadership"
-            title="The Team Behind the Production"
-            description="A small group of specialists, each owning a discipline that has to be right."
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((member, i) => (
-              <Reveal key={member.name} delay={i * 0.08}>
-                <div>
-                  <div className="aspect-square overflow-hidden rounded-xl">
-                    <AbstractVisual seed={member.name} variant="facet" />
-                  </div>
-                  <h3 className="mt-4 font-semibold text-navy">{member.name}</h3>
-                  <p className="text-sm font-medium text-signal">{member.role}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{member.bio}</p>
                 </div>
               </Reveal>
             ))}
