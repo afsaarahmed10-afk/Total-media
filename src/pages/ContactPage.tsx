@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Mail, MapPin, Phone, Clock, CheckCircle2 } from 'lucide-react'
+import { Mail, MapPin, Phone, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Button } from '@/components/ui/button'
@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { supabase } from '@/lib/supabase/client'
+import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Please enter your name.'),
@@ -106,6 +107,20 @@ export default function ContactPage() {
                   className="text-sm text-muted-foreground hover:text-signal"
                 >
                   hello@totalmedia.co.jp
+                </a>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <MessageCircle className="size-5 shrink-0 text-signal" />
+              <div>
+                <p className="font-semibold text-navy">WhatsApp</p>
+                <a
+                  href={getWhatsAppUrl("Hi TOTAL MEDIA, I'd like to know more about your services.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-signal"
+                >
+                  {WHATSAPP_DISPLAY_NUMBER}
                 </a>
               </div>
             </div>

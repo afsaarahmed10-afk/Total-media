@@ -1,11 +1,8 @@
 # TOTAL MEDIA — Corporate Website
 
 Marketing website for TOTAL MEDIA, a full-service event production and
-technical solutions company operating across Japan.
-
-This repository is **Phase 1: Frontend**. It ships a complete, responsive,
-production-quality public website against a typed content layer. There is
-no backend yet — see [Phase 2](#phase-2-not-yet-started) below.
+technical solutions company operating across Japan. Public site, customer
+accounts, and an internal admin dashboard, all backed by Supabase.
 
 ## Tech Stack
 
@@ -13,15 +10,23 @@ no backend yet — see [Phase 2](#phase-2-not-yet-started) below.
 - **TailwindCSS v4 + shadcn/ui** (New York style, Radix primitives)
 - **Framer Motion** for scroll reveals and micro-interactions
 - **React Router v7**
-- **react-hook-form + zod** for the Quote and Contact forms
+- **Supabase** — Postgres + Auth + Storage (`@supabase/supabase-js`)
+- **react-hook-form + zod** for every form: Quote, Contact, auth, and the
+  full admin CRUD surface
 - **react-helmet-async** for per-page SEO (title/meta/OG/Twitter/JSON-LD)
 
 ## Getting Started
 
 ```bash
 npm install
-npm run dev       # http://localhost:5173
+cp .env.example .env.local   # fill in your Supabase project's URL + anon key
+npm run dev                  # http://localhost:5173
 ```
+
+Without `.env.local`, the public pages still render (from the static
+content in `src/content/*.ts`), but sign-in, the customer dashboard, and
+`/admin` won't work. See `supabase/SCHEMA.md` for schema setup and the
+one-time step to bootstrap the first admin account.
 
 ```bash
 npm run build     # type-check, production build, regenerate sitemap.xml
@@ -35,20 +40,32 @@ npm run lint       # oxlint
 src/
   components/
     ui/         shadcn/ui primitives
-    layout/     Header, Footer, Layout shell, Seo component
+    layout/     Header, Footer, Layout/DashboardLayout/AdminLayout shells, Seo
     sections/   Home page sections (Hero, WhyChooseUs, ProcessSteps, ...)
     shared/     Reusable page-level pieces (PageHero, CtaBand, AbstractVisual, ...)
+    auth/       Login/signup form pieces, ProtectedRoute, AdminRoute, GuestOnlyRoute
+    admin/      Shared admin CRUD building blocks (AdminDataTable, RelationPicker,
+                ObjectListField, MediaPickerField, ConfirmDeleteDialog, ...)
     brand/      Logo component
-  content/      Typed content modules — shaped to match the planned Supabase schema
+  content/      Typed static content modules — the public site's fallback when
+                no Supabase project is configured (see content-store.ts)
   lib/
-    data.ts     Data-access layer wrapping `content/` — this is the ONLY file
-                that changes when Phase 2 swaps in Supabase queries
-    utils.ts    `cn()` helper
-  pages/        One file per route, lazy-loaded in App.tsx
+    data.ts          Public read API pages call — reads content-store's bundle
+    content-store.ts Fetches all public content from Supabase once (or falls
+                      back to content/*.ts when unconfigured); data.ts's source
+    supabase/         Client + generated database.types.ts
+    auth/             AuthContext (session, customer profile, admin profile)
+    admin/            Small helpers shared by admin pages (media upload, ...)
+  pages/
+    (routes)/   Public marketing pages, one file per route
+    auth/       Login, signup, password reset
+    account/    Customer dashboard + profile settings
+    admin/      Every /admin/* page — one list + form pair per content domain
 scripts/
   generate-brand-assets.mjs   Rasterizes public/brand/*.svg into favicons, app icons, OG image
   generate-sitemap.ts         Builds public/sitemap.xml + robots.txt from routes + content slugs
 public/brand/    Source SVGs for the logo mark and app-icon tile
+supabase/migrations/  Full schema: content tables, accounts, forms, settings, storage buckets
 ```
 
 ## Brand Assets
@@ -91,10 +108,26 @@ the static defaults in `index.html`. A prerendering step could be added
 later without changing the stack if guaranteed static HTML per route
 becomes a requirement.
 
-## Phase 2 (Not Yet Started)
+## Status
 
-Supabase schema and migrations, Supabase Auth, the admin dashboard (CRUD
-for services, equipment, portfolio, blog, testimonials, clients, FAQs,
-quote requests, contact messages, media library, users, settings,
-analytics), Supabase Storage for the quote form's file upload, and
-production deployment to Vercel. To be scoped once Phase 1 is reviewed.
+**Shipped:** the full Supabase schema (`supabase/migrations/`), customer
+auth (email/password + Google OAuth, password reset, protected routes),
+the customer account dashboard, both public forms (Quote, Contact) writing
+to Supabase with file attachments, and a complete internal admin dashboard
+at `/admin` — CRUD for every content domain (services, solutions,
+equipment, portfolio, blog, testimonials, clients, FAQs, industries), a
+media library, the quote/contact inbox, site settings, and admin-user role
+management. CI (`.github/workflows/ci.yml`) runs lint/type-check/build on
+every push and PR to `main`.
+
+**Not done yet:**
+- Production deployment (no Vercel project connected yet)
+- Automated tests (none exist — CI currently only catches type/build/lint errors)
+- Email notifications when a new quote request or contact message arrives
+  (admins currently only see new submissions by opening the dashboard)
+- Rate-limiting/CAPTCHA on the public Quote/Contact forms (both have a
+  honeypot field only — see `supabase/SCHEMA.md`'s "Known Limitation" note)
+- The content/legal placeholders below
+- A security review of the RLS policies across all migrations
+- Prerendering/SSR, if guaranteed static HTML per route becomes a
+  requirement (see the SEO note above)

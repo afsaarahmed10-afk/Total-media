@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Logo } from '@/components/brand/Logo'
 import { getEquipmentCategories } from '@/lib/data'
+import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
 // Contact details below are placeholders — replace with the real
 // registered address, phone, and inbox before launch.
@@ -75,6 +76,16 @@ export function Footer() {
               <p>
                 <a href={`mailto:${CONTACT.email}`} className="hover:text-white">
                   {CONTACT.email}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={getWhatsAppUrl("Hi TOTAL MEDIA, I'd like to know more about your services.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  WhatsApp: {WHATSAPP_DISPLAY_NUMBER}
                 </a>
               </p>
             </address>

@@ -68,6 +68,8 @@ console.log(`wrote public/sitemap.xml (${allRoutes.length} URLs)`)
 
 const robots = `User-agent: *
 Allow: /
+Disallow: /dashboard/
+Disallow: /admin/
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `

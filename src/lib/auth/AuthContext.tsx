@@ -5,6 +5,7 @@ import type { Database } from '@/lib/supabase/database.types'
 import { mapAuthError } from './auth-errors'
 
 export type CustomerProfile = Database['public']['Tables']['customers']['Row']
+export type AdminProfile = Database['public']['Tables']['admin_users']['Row']
 type ProfileUpdate = Partial<Pick<CustomerProfile, 'full_name' | 'company' | 'phone' | 'avatar_url'>>
 
 interface AuthResult {
@@ -19,6 +20,9 @@ interface AuthContextValue {
   user: User | null
   session: Session | null
   profile: CustomerProfile | null
+  adminProfile: AdminProfile | null
+  /** True when the signed-in user has a row in admin_users. Only meaningful once `loading` is false. */
+  isAdmin: boolean
   /** True until the initial session check resolves — gates ProtectedRoute/GuestOnlyRoute. */
   loading: boolean
   signIn: (email: string, password: string, remember: boolean) => Promise<AuthResult>
@@ -36,11 +40,17 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [profile, setProfile] = useState<CustomerProfile | null>(null)
+  const [adminProfile, setAdminProfile] = useState<AdminProfile | null>(null)
   const [loading, setLoading] = useState(true)
 
   async function loadProfile(userId: string) {
     const { data } = await supabase.from('customers').select('*').eq('id', userId).maybeSingle()
     setProfile(data ?? null)
+  }
+
+  async function loadAdminProfile(userId: string) {
+    const { data } = await supabase.from('admin_users').select('*').eq('id', userId).maybeSingle()
+    setAdminProfile(data ?? null)
   }
 
   useEffect(() => {
@@ -51,7 +61,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(data.session)
       const userId = data.session?.user.id
       if (userId) {
-        loadProfile(userId).finally(() => mounted && setLoading(false))
+        Promise.all([loadProfile(userId), loadAdminProfile(userId)]).finally(
+          () => mounted && setLoading(false),
+        )
       } else {
         setLoading(false)
       }
@@ -62,8 +74,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(newSession)
       if (newSession?.user) {
         loadProfile(newSession.user.id)
+        loadAdminProfile(newSession.user.id)
       } else {
         setProfile(null)
+        setAdminProfile(null)
       }
     })
 
@@ -138,6 +152,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user: session?.user ?? null,
     session,
     profile,
+    adminProfile,
+    isAdmin: adminProfile !== null,
     loading,
     signIn,
     signUp,
