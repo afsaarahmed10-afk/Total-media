@@ -9,7 +9,6 @@ import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects'
 import { EquipmentShowcase } from '@/components/sections/EquipmentShowcase'
 import { TestimonialsCarousel } from '@/components/sections/TestimonialsCarousel'
-import { TrustedByLogos } from '@/components/sections/TrustedByLogos'
 import { LatestArticles } from '@/components/sections/LatestArticles'
 import { HomeFaqSection } from '@/components/sections/HomeFaqSection'
 import { CtaBand } from '@/components/shared/CtaBand'
@@ -44,7 +43,6 @@ export default function HomePage() {
       <FeaturedProjects />
       <EquipmentShowcase />
       <TestimonialsCarousel />
-      <TrustedByLogos />
       <LatestArticles />
       <HomeFaqSection />
       <CtaBand title={t('cta.title')} description={t('cta.description')} />
