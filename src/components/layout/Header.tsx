@@ -262,102 +262,102 @@ export function Header() {
           </Button>
         </div>
 
-        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="lg:hidden" aria-label={t('openMenu')}>
-              <Menu className="size-6" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-full max-w-sm overflow-y-auto">
-            <SheetHeader>
-              <SheetTitle>
-                <Logo />
-              </SheetTitle>
-            </SheetHeader>
-            <nav className="flex flex-col gap-1 px-4 pb-8" aria-label="Mobile">
-              <div className="border-b border-border py-3">
-                <LanguageSwitcher />
-              </div>
-              <MobileSection title={t('servicesMenu')}>
-                {services.map((s) => (
-                  <SheetClose asChild key={s.slug}>
-                    <LocalizedLink to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
-                      {s.name}
+        <div className="flex items-center gap-3 lg:hidden">
+          <LanguageSwitcher />
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label={t('openMenu')}>
+                <Menu className="size-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full max-w-sm overflow-y-auto">
+              <SheetHeader>
+                <SheetTitle>
+                  <Logo />
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col gap-1 px-4 pb-8" aria-label="Mobile">
+                <MobileSection title={t('servicesMenu')}>
+                  {services.map((s) => (
+                    <SheetClose asChild key={s.slug}>
+                      <LocalizedLink to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
+                        {s.name}
+                      </LocalizedLink>
+                    </SheetClose>
+                  ))}
+                </MobileSection>
+                <MobileSection title={t('equipmentMenu')}>
+                  {equipmentCategories.map((c) => (
+                    <SheetClose asChild key={c.slug}>
+                      <LocalizedLink to={`/equipment/${c.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
+                        {c.name}
+                      </LocalizedLink>
+                    </SheetClose>
+                  ))}
+                </MobileSection>
+                {[
+                  ...primaryLinks,
+                  { label: t('nav.faq'), to: '/faq' },
+                  { label: t('nav.careers'), to: '/careers' },
+                  { label: t('nav.contact'), to: '/contact' },
+                ].map((link) => (
+                  <SheetClose asChild key={link.to}>
+                    <LocalizedLink
+                      to={link.to}
+                      className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                    >
+                      {link.label}
                     </LocalizedLink>
                   </SheetClose>
                 ))}
-              </MobileSection>
-              <MobileSection title={t('equipmentMenu')}>
-                {equipmentCategories.map((c) => (
-                  <SheetClose asChild key={c.slug}>
-                    <LocalizedLink to={`/equipment/${c.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
-                      {c.name}
-                    </LocalizedLink>
-                  </SheetClose>
-                ))}
-              </MobileSection>
-              {[
-                ...primaryLinks,
-                { label: t('nav.faq'), to: '/faq' },
-                { label: t('nav.careers'), to: '/careers' },
-                { label: t('nav.contact'), to: '/contact' },
-              ].map((link) => (
-                <SheetClose asChild key={link.to}>
-                  <LocalizedLink
-                    to={link.to}
-                    className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                  >
-                    {link.label}
-                  </LocalizedLink>
-                </SheetClose>
-              ))}
-              <div className="my-2 border-t border-border" />
-              {user ? (
-                <>
+                <div className="my-2 border-t border-border" />
+                {user ? (
+                  <>
+                    <SheetClose asChild>
+                      <LocalizedLink
+                        to="/dashboard"
+                        className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                      >
+                        <LayoutDashboard className="size-4" /> {t('dashboard')}
+                      </LocalizedLink>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <LocalizedLink
+                        to="/dashboard/settings"
+                        className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                      >
+                        <Settings className="size-4" /> {t('profileSettings')}
+                      </LocalizedLink>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <button
+                        type="button"
+                        onClick={handleSignOut}
+                        className="flex items-center gap-2 rounded-md px-3 py-3 text-left text-base font-medium text-red-600 hover:bg-mist"
+                      >
+                        <LogOut className="size-4" /> {t('signOut')}
+                      </button>
+                    </SheetClose>
+                  </>
+                ) : (
                   <SheetClose asChild>
                     <LocalizedLink
-                      to="/dashboard"
-                      className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
+                      to="/login"
+                      className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
                     >
-                      <LayoutDashboard className="size-4" /> {t('dashboard')}
+                      {t('logIn')}
                     </LocalizedLink>
                   </SheetClose>
-                  <SheetClose asChild>
-                    <LocalizedLink
-                      to="/dashboard/settings"
-                      className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                    >
-                      <Settings className="size-4" /> {t('profileSettings')}
-                    </LocalizedLink>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <button
-                      type="button"
-                      onClick={handleSignOut}
-                      className="flex items-center gap-2 rounded-md px-3 py-3 text-left text-base font-medium text-red-600 hover:bg-mist"
-                    >
-                      <LogOut className="size-4" /> {t('signOut')}
-                    </button>
-                  </SheetClose>
-                </>
-              ) : (
+                )}
                 <SheetClose asChild>
-                  <LocalizedLink
-                    to="/login"
-                    className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                  >
-                    {t('logIn')}
-                  </LocalizedLink>
+                  <Button asChild className="mt-4 bg-navy text-white hover:bg-navy-deep">
+                    <LocalizedLink to="/quote">{t('requestQuote')}</LocalizedLink>
+                  </Button>
                 </SheetClose>
-              )}
-              <SheetClose asChild>
-                <Button asChild className="mt-4 bg-navy text-white hover:bg-navy-deep">
-                  <LocalizedLink to="/quote">{t('requestQuote')}</LocalizedLink>
-                </Button>
-              </SheetClose>
-            </nav>
-          </SheetContent>
-        </Sheet>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )
