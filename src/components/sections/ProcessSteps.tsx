@@ -1,42 +1,24 @@
+import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 
-const steps = [
-  {
-    number: '01',
-    title: 'Consultation',
-    description: 'We start with your objectives, audience, and constraints — not a standard package.',
-  },
-  {
-    number: '02',
-    title: 'Proposal & Design',
-    description: 'A detailed technical plan and transparent, itemized pricing within 1–2 business days.',
-  },
-  {
-    number: '03',
-    title: 'Pre-Production',
-    description: 'Venue coordination, equipment allocation, and technical rehearsal before event day.',
-  },
-  {
-    number: '04',
-    title: 'Live Execution',
-    description: 'On-site production management and technical operation by the team that designed it.',
-  },
-  {
-    number: '05',
-    title: 'Post-Event Review',
-    description: 'A structured report and asset handover — what worked, and what to refine next time.',
-  },
-]
+interface Step {
+  number: string
+  title: string
+  description: string
+}
 
 export function ProcessSteps() {
+  const { t } = useTranslation('home')
+  const steps = t('processSteps.steps', { returnObjects: true }) as Step[]
+
   return (
     <section className="bg-mist py-20 lg:py-28">
       <div className="container-page">
         <SectionHeading
-          eyebrow="How We Work"
-          title="Our Process"
-          description="The same five stages whether the event is a boardroom briefing or a two-day conference."
+          eyebrow={t('processSteps.eyebrow')}
+          title={t('processSteps.title')}
+          description={t('processSteps.description')}
         />
 
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">

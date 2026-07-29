@@ -1,22 +1,28 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
 import { CtaBand } from '@/components/shared/CtaBand'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getBlogPostBySlug, getBlogCategories, getBlogPosts } from '@/lib/data'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 export default function BlogDetailPage() {
+  const { t } = useTranslation(['blog', 'common'])
+  const { locale } = useLocale()
   const { slug = '' } = useParams()
   const post = getBlogPostBySlug(slug)
 
   if (!post) return <NotFoundPage />
 
-  const category = getBlogCategories().find((c) => c.slug === post.categorySlug)
+  const category = getBlogCategories(locale).find((c) => c.slug === post.categorySlug)
   const morePosts = getBlogPosts()
     .filter((p) => p.slug !== post.slug)
     .slice(0, 3)
+  const dateLocale = locale === 'ja' ? 'ja-JP' : 'en-US'
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -37,13 +43,13 @@ export default function BlogDetailPage() {
         jsonLd={articleSchema}
       />
       <PageHero
-        eyebrow={category?.name ?? 'Article'}
+        eyebrow={category?.name ?? t('detail.article')}
         title={post.title}
         description={post.excerpt}
         visualSeed={post.visualSeed}
         breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Blog', to: '/blog' },
+          { label: t('home', { ns: 'common' }), to: '/' },
+          { label: t('index.eyebrow'), to: '/blog' },
           { label: post.title },
         ]}
       >
@@ -53,14 +59,14 @@ export default function BlogDetailPage() {
           <span>{post.authorRole}</span>
           <span aria-hidden="true">·</span>
           <span>
-            {new Date(post.publishedAt).toLocaleDateString('en-US', {
+            {new Date(post.publishedAt).toLocaleDateString(dateLocale, {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
           </span>
           <span aria-hidden="true">·</span>
-          <span>{post.readMinutes} min read</span>
+          <span>{post.readMinutes} {t('detail.minRead')}</span>
         </div>
       </PageHero>
 
@@ -79,10 +85,10 @@ export default function BlogDetailPage() {
 
       <section className="bg-mist py-20 lg:py-24">
         <div className="container-page">
-          <SectionHeading eyebrow="Keep Reading" title="More Articles" />
+          <SectionHeading eyebrow={t('detail.keepReading')} title={t('detail.moreArticles')} />
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {morePosts.map((p) => (
-              <Link key={p.slug} to={`/blog/${p.slug}`} className="group block">
+              <LocalizedLink key={p.slug} to={`/blog/${p.slug}`} className="group block">
                 <div className="aspect-[16/10] overflow-hidden rounded-xl">
                   <div className="transition-transform duration-500 group-hover:scale-105">
                     <AbstractVisual seed={p.visualSeed} />
@@ -91,16 +97,13 @@ export default function BlogDetailPage() {
                 <h3 className="mt-3 font-semibold leading-snug text-navy group-hover:text-signal">
                   {p.title}
                 </h3>
-              </Link>
+              </LocalizedLink>
             ))}
           </div>
         </div>
       </section>
 
-      <CtaBand
-        title="Have a Project in Mind?"
-        description="Tell us what you're planning and we'll respond within 1–2 business days."
-      />
+      <CtaBand title={t('detail.ctaTitle')} description={t('detail.ctaDescription')} />
     </>
   )
 }

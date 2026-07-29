@@ -29,7 +29,7 @@ export default function AdminServicesPage() {
   }, [])
 
   async function load() {
-    const { data, error } = await supabase.from('services').select('*').order('name')
+    const { data, error } = await supabase.from('services').select('*').order('name_en')
     if (error) {
       toast.error('Failed to load services.')
       return
@@ -52,7 +52,7 @@ export default function AdminServicesPage() {
   }
 
   const columns: AdminColumn<Service>[] = [
-    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name}</span> },
+    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name_en}</span> },
     {
       key: 'category',
       header: 'Category',
@@ -101,7 +101,7 @@ export default function AdminServicesPage() {
           columns={columns}
           rows={rows}
           getRowId={(r) => r.id}
-          searchText={(r) => `${r.name} ${r.short_description}`}
+          searchText={(r) => `${r.name_en} ${r.short_description_en}`}
           searchPlaceholder="Search services…"
           emptyMessage="No services yet."
         />
@@ -110,7 +110,7 @@ export default function AdminServicesPage() {
       <ConfirmDeleteDialog
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
-        description={`Delete "${deleting?.name}"? This also removes it from any related services, equipment categories, FAQs, and solutions that reference it. This can't be undone.`}
+        description={`Delete "${deleting?.name_en}"? This also removes it from any related services, equipment categories, FAQs, and solutions that reference it. This can't be undone.`}
         onConfirm={confirmDelete}
         loading={deletingBusy}
       />

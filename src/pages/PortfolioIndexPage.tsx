@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { MapPin } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { cn } from '@/lib/utils'
 import { getProjects } from '@/lib/data'
 import type { ProjectCategory } from '@/content/types'
@@ -21,6 +22,7 @@ const CATEGORIES: (ProjectCategory | 'All')[] = [
 ]
 
 export default function PortfolioIndexPage() {
+  const { t } = useTranslation(['portfolio', 'common'])
   const projects = getProjects()
   const [active, setActive] = useState<ProjectCategory | 'All'>('All')
 
@@ -31,16 +33,12 @@ export default function PortfolioIndexPage() {
 
   return (
     <>
-      <Seo
-        title="Portfolio"
-        description="Explore TOTAL MEDIA's portfolio of corporate events, conferences, exhibitions, hybrid productions, and outdoor ceremonies delivered across Japan."
-        path="/portfolio"
-      />
+      <Seo title={t('index.seoTitle')} description={t('index.seoDescription')} path="/portfolio" />
       <PageHero
-        eyebrow="Portfolio"
-        title="Selected Work Across Japan"
-        description="A sample of the events our planning, technical design, and on-site teams have delivered — filter by format below."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Portfolio' }]}
+        eyebrow={t('index.eyebrow')}
+        title={t('index.title')}
+        description={t('index.description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]}
       />
 
       <section className="py-16 lg:py-20">
@@ -58,7 +56,7 @@ export default function PortfolioIndexPage() {
                     : 'border-border text-charcoal hover:border-navy/30',
                 )}
               >
-                {cat}
+                {t(`categories.${cat}`)}
               </button>
             ))}
           </div>
@@ -66,13 +64,13 @@ export default function PortfolioIndexPage() {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((project, i) => (
               <Reveal key={project.slug} delay={(i % 6) * 0.05}>
-                <Link to={`/portfolio/${project.slug}`} className="group block">
+                <LocalizedLink to={`/portfolio/${project.slug}`} className="group block">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                     <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
                       <AbstractVisual seed={project.visualSeed} />
                     </div>
                     <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy">
-                      {project.category}
+                      {t(`categories.${project.category}`)}
                     </span>
                   </div>
                   <div className="mt-4">
@@ -84,23 +82,18 @@ export default function PortfolioIndexPage() {
                     </h3>
                     <p className="mt-1 text-sm text-muted-foreground">{project.client}</p>
                   </div>
-                </Link>
+                </LocalizedLink>
               </Reveal>
             ))}
           </div>
 
           {filtered.length === 0 && (
-            <p className="mt-10 text-center text-muted-foreground">
-              No projects in this category yet.
-            </p>
+            <p className="mt-10 text-center text-muted-foreground">{t('index.noneFound')}</p>
           )}
         </div>
       </section>
 
-      <CtaBand
-        title="Want Results Like These?"
-        description="Tell us about your event and we'll show you how we'd approach it."
-      />
+      <CtaBand title={t('index.ctaTitle')} description={t('index.ctaDescription')} />
     </>
   )
 }

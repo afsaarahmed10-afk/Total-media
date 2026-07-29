@@ -1,0 +1,30 @@
+{
+  "tagline": "日本国内で事業を展開する組織様向けに、企画から技術制作までワンストップで提供するイベントプロダクション会社です。",
+  "whatsappPrefix": "WhatsApp: ",
+  "columns": {
+    "company": "会社情報",
+    "services": "サービス",
+    "equipment": "機材",
+    "support": "サポート"
+  },
+  "links": {
+    "about": "会社概要",
+    "industries": "業界別対応",
+    "careers": "採用情報",
+    "blog": "ブログ",
+    "contact": "お問い合わせ",
+    "allServices": "サービス一覧",
+    "solutions": "ソリューション",
+    "equipmentRental": "機材レンタル",
+    "portfolio": "実績紹介",
+    "requestQuote": "見積もりを依頼する",
+    "faq": "よくある質問",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsConditions": "利用規約"
+  },
+  "copyright": "© {{year}} TOTAL MEDIA Inc. All rights reserved.",
+  "bottomTagline": "日本全国で、記憶に残るイベントを。",
+  "address": {
+    "lines": ["株式会社TOTAL MEDIA", "〒150-0002 東京都渋谷区"]
+  }
+}

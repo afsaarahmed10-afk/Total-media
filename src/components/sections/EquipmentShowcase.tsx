@@ -1,34 +1,38 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentCategories } from '@/lib/data'
 
 export function EquipmentShowcase() {
-  const equipmentCategories = getEquipmentCategories()
+  const { t } = useTranslation('home')
+  const { locale } = useLocale()
+  const equipmentCategories = getEquipmentCategories(locale)
 
   return (
     <section className="bg-mist py-20 lg:py-28">
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Equipment Rental"
-            title="A Nationwide Technical Inventory"
-            description="Broadcast and touring-grade equipment, maintained on a fixed inspection schedule — available on its own or with our production team."
+            eyebrow={t('equipmentShowcase.eyebrow')}
+            title={t('equipmentShowcase.title')}
+            description={t('equipmentShowcase.description')}
           />
-          <Link
+          <LocalizedLink
             to="/equipment"
             className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-signal hover:underline sm:flex"
           >
-            Browse full catalogue <ArrowRight className="size-4" />
-          </Link>
+            {t('equipmentShowcase.browseCatalogue')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {equipmentCategories.map((category, i) => (
             <Reveal key={category.slug} delay={(i % 5) * 0.05}>
-              <Link
+              <LocalizedLink
                 to={`/equipment/${category.slug}`}
                 className="group block overflow-hidden rounded-xl border border-border bg-white"
               >
@@ -40,15 +44,15 @@ export function EquipmentShowcase() {
                 <p className="px-3 py-3 text-sm font-semibold text-navy group-hover:text-signal">
                   {category.name}
                 </p>
-              </Link>
+              </LocalizedLink>
             </Reveal>
           ))}
         </div>
 
         <div className="mt-8 sm:hidden">
-          <Link to="/equipment" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
-            Browse full catalogue <ArrowRight className="size-4" />
-          </Link>
+          <LocalizedLink to="/equipment" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
+            {t('equipmentShowcase.browseCatalogue')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
       </div>
     </section>

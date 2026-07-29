@@ -1,0 +1,30 @@
+{
+  "tagline": "Full-service event production and technical solutions for organizations operating across Japan.",
+  "whatsappPrefix": "WhatsApp: ",
+  "columns": {
+    "company": "Company",
+    "services": "Services",
+    "equipment": "Equipment",
+    "support": "Support"
+  },
+  "links": {
+    "about": "About",
+    "industries": "Industries",
+    "careers": "Careers",
+    "blog": "Blog",
+    "contact": "Contact",
+    "allServices": "All Services",
+    "solutions": "Solutions",
+    "equipmentRental": "Equipment Rental",
+    "portfolio": "Portfolio",
+    "requestQuote": "Request a Quote",
+    "faq": "FAQ",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions"
+  },
+  "copyright": "© {{year}} TOTAL MEDIA Inc. All rights reserved.",
+  "bottomTagline": "Creating Exceptional Events Across Japan.",
+  "address": {
+    "lines": ["TOTAL MEDIA Inc.", "Shibuya-ku, Tokyo 150-0002, Japan"]
+  }
+}

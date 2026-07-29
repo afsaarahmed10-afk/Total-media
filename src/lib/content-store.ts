@@ -8,6 +8,13 @@
 // gets fragile fast. Simpler and more robust: fetch every table flat, then
 // stitch in plain TypeScript using id -> slug lookup maps.
 import type {
+  BilingualBlogCategory,
+  BilingualEquipmentCategory,
+  BilingualEquipmentItem,
+  BilingualFaq,
+  BilingualIndustry,
+  BilingualService,
+  BilingualSolution,
   BlogCategory,
   BlogPost,
   Client,
@@ -15,6 +22,7 @@ import type {
   EquipmentItem,
   Faq,
   Industry,
+  Locale,
   Project,
   Service,
   Solution,
@@ -33,6 +41,27 @@ import { faqs as staticFaqs } from '@/content/faqs'
 import { industries as staticIndustries } from '@/content/industries'
 import { supabase, isSupabaseConfigured } from '@/lib/supabase/client'
 
+/** Raw bundle as fetched/loaded — bilingual for every table migrated so
+ * far (services, solutions, equipment_categories, equipment_items,
+ * blog_categories, faqs, industries); the rest (projects, blog_posts,
+ * testimonials) aren't migrated to bilingual columns yet, so still
+ * single-language English. */
+export interface RawContentBundle {
+  services: BilingualService[]
+  solutions: BilingualSolution[]
+  equipmentCategories: BilingualEquipmentCategory[]
+  equipmentItems: BilingualEquipmentItem[]
+  projects: Project[]
+  blogCategories: BilingualBlogCategory[]
+  blogPosts: BlogPost[]
+  testimonials: Testimonial[]
+  clients: Client[]
+  faqs: BilingualFaq[]
+  industries: BilingualIndustry[]
+}
+
+/** Resolved, single-language bundle — what `data.ts` hands to pages.
+ * Unchanged shape from before bilingual support landed. */
 export interface ContentBundle {
   services: Service[]
   solutions: Solution[]
@@ -47,20 +76,25 @@ export interface ContentBundle {
   industries: Industry[]
 }
 
-let cache: ContentBundle | null = null
-let inflight: Promise<ContentBundle> | null = null
+let rawCache: RawContentBundle | null = null
+let inflight: Promise<RawContentBundle> | null = null
+// Resolved bundles are derived from rawCache and memoized per locale, so
+// switching languages mid-session (client-side nav from /about to
+// /en/about) never triggers a refetch and never shows stale-language
+// content — only the cheap resolve step below reruns.
+const resolvedCache: Partial<Record<Locale, ContentBundle>> = {}
 
-/** Fetches (once) and returns the full content bundle. Safe to call from
+/** Fetches (once) and caches the raw bilingual bundle. Safe to call from
  * multiple places concurrently — subsequent calls reuse the same promise.
  * Falls back to the static `content/*.ts` modules when no Supabase project
  * is configured, so local dev works without setup. */
-export function loadContent(): Promise<ContentBundle> {
-  if (cache) return Promise.resolve(cache)
+export function loadContent(): Promise<RawContentBundle> {
+  if (rawCache) return Promise.resolve(rawCache)
   if (inflight) return inflight
 
   inflight = (isSupabaseConfigured ? fetchAndStitch() : loadStaticBundle())
     .then((bundle) => {
-      cache = bundle
+      rawCache = bundle
       inflight = null
       return bundle
     })
@@ -72,22 +106,136 @@ export function loadContent(): Promise<ContentBundle> {
   return inflight
 }
 
-/** Returns the cached bundle, or throws if `loadContent()` hasn't resolved
- * yet. `data.ts` uses this — `ContentGate` guarantees it's populated before
- * any page renders. */
-export function getContentBundle(): ContentBundle {
-  if (!cache) {
+function resolveService(s: BilingualService, lang: Locale): Service {
+  const ja = lang === 'ja'
+  return {
+    id: s.id,
+    slug: s.slug,
+    category: s.category,
+    name: (ja && s.nameJa) || s.nameEn,
+    shortDescription: (ja && s.shortDescriptionJa) || s.shortDescriptionEn,
+    heroStatement: (ja && s.heroStatementJa) || s.heroStatementEn,
+    overview: ja && s.overviewJa.length ? s.overviewJa : s.overviewEn,
+    capabilities: ja && s.capabilitiesJa.length ? s.capabilitiesJa : s.capabilitiesEn,
+    process: ja && s.processJa.length ? s.processJa : s.processEn,
+    idealFor: ja && s.idealForJa.length ? s.idealForJa : s.idealForEn,
+    relatedServiceSlugs: s.relatedServiceSlugs,
+    relatedEquipmentCategorySlugs: s.relatedEquipmentCategorySlugs,
+    faqIds: s.faqIds,
+    seoTitle: (ja && s.seoTitleJa) || s.seoTitleEn,
+    seoDescription: (ja && s.seoDescriptionJa) || s.seoDescriptionEn,
+  }
+}
+
+function resolveSolution(s: BilingualSolution, lang: Locale): Solution {
+  const ja = lang === 'ja'
+  return {
+    id: s.id,
+    slug: s.slug,
+    name: (ja && s.nameJa) || s.nameEn,
+    shortDescription: (ja && s.shortDescriptionJa) || s.shortDescriptionEn,
+    heroStatement: (ja && s.heroStatementJa) || s.heroStatementEn,
+    overview: ja && s.overviewJa.length ? s.overviewJa : s.overviewEn,
+    highlights: ja && s.highlightsJa.length ? s.highlightsJa : s.highlightsEn,
+    includedServiceSlugs: s.includedServiceSlugs,
+    seoTitle: (ja && s.seoTitleJa) || s.seoTitleEn,
+    seoDescription: (ja && s.seoDescriptionJa) || s.seoDescriptionEn,
+  }
+}
+
+function resolveEquipmentCategory(c: BilingualEquipmentCategory, lang: Locale): EquipmentCategory {
+  const ja = lang === 'ja'
+  return {
+    id: c.id,
+    slug: c.slug,
+    name: (ja && c.nameJa) || c.nameEn,
+    description: (ja && c.descriptionJa) || c.descriptionEn,
+  }
+}
+
+function resolveEquipmentItem(item: BilingualEquipmentItem, lang: Locale): EquipmentItem {
+  const ja = lang === 'ja'
+  return {
+    id: item.id,
+    slug: item.slug,
+    categorySlug: item.categorySlug,
+    name: (ja && item.nameJa) || item.nameEn,
+    summary: (ja && item.summaryJa) || item.summaryEn,
+    description: (ja && item.descriptionJa) || item.descriptionEn,
+    specs: ja && item.specsJa.length ? item.specsJa : item.specsEn,
+    applications: ja && item.applicationsJa.length ? item.applicationsJa : item.applicationsEn,
+    availability: item.availability,
+    relatedItemSlugs: item.relatedItemSlugs,
+    visualSeed: item.visualSeed,
+  }
+}
+
+function resolveBlogCategory(c: BilingualBlogCategory, lang: Locale): BlogCategory {
+  const ja = lang === 'ja'
+  return {
+    id: c.id,
+    slug: c.slug,
+    name: (ja && c.nameJa) || c.nameEn,
+  }
+}
+
+function resolveFaq(f: BilingualFaq, lang: Locale): Faq {
+  const ja = lang === 'ja'
+  return {
+    id: f.id,
+    slug: f.slug,
+    question: (ja && f.questionJa) || f.questionEn,
+    answer: (ja && f.answerJa) || f.answerEn,
+    category: f.category,
+  }
+}
+
+function resolveIndustry(i: BilingualIndustry, lang: Locale): Industry {
+  const ja = lang === 'ja'
+  return {
+    id: i.id,
+    slug: i.slug,
+    name: (ja && i.nameJa) || i.nameEn,
+    description: (ja && i.descriptionJa) || i.descriptionEn,
+    useCases: ja && i.useCasesJa.length ? i.useCasesJa : i.useCasesEn,
+  }
+}
+
+function resolveBundle(raw: RawContentBundle, lang: Locale): ContentBundle {
+  return {
+    ...raw,
+    services: raw.services.map((s) => resolveService(s, lang)),
+    solutions: raw.solutions.map((s) => resolveSolution(s, lang)),
+    equipmentCategories: raw.equipmentCategories.map((c) => resolveEquipmentCategory(c, lang)),
+    equipmentItems: raw.equipmentItems.map((i) => resolveEquipmentItem(i, lang)),
+    blogCategories: raw.blogCategories.map((c) => resolveBlogCategory(c, lang)),
+    faqs: raw.faqs.map((f) => resolveFaq(f, lang)),
+    industries: raw.industries.map((i) => resolveIndustry(i, lang)),
+  }
+}
+
+/** Returns the resolved, single-language bundle for `lang`, or throws if
+ * `loadContent()` hasn't resolved yet. `data.ts` uses this — `ContentGate`
+ * guarantees the raw bundle is populated before any page renders. */
+export function getContentBundle(lang: Locale): ContentBundle {
+  if (!rawCache) {
     throw new Error('Content not loaded yet — data.ts was called before ContentGate resolved.')
   }
-  return cache
+  const cached = resolvedCache[lang]
+  if (cached) return cached
+  const resolved = resolveBundle(rawCache, lang)
+  resolvedCache[lang] = resolved
+  return resolved
 }
 
 export function clearContentCache() {
-  cache = null
+  rawCache = null
   inflight = null
+  resolvedCache.ja = undefined
+  resolvedCache.en = undefined
 }
 
-async function loadStaticBundle(): Promise<ContentBundle> {
+async function loadStaticBundle(): Promise<RawContentBundle> {
   return {
     services: staticServices,
     solutions: staticSolutions,
@@ -103,7 +251,7 @@ async function loadStaticBundle(): Promise<ContentBundle> {
   }
 }
 
-async function fetchAndStitch(): Promise<ContentBundle> {
+async function fetchAndStitch(): Promise<RawContentBundle> {
   const [
     servicesRes,
     solutionsRes,
@@ -187,17 +335,24 @@ async function fetchAndStitch(): Promise<ContentBundle> {
   const servicesByProject = groupBy(projectServicesRes.data!, (r) => r.project_id)
   const equipmentByProject = groupBy(projectEquipmentRes.data!, (r) => r.project_id)
 
-  const stitchedServices: Service[] = services.map((s) => ({
+  const stitchedServices: BilingualService[] = services.map((s) => ({
     id: s.id,
     slug: s.slug,
     category: s.category,
-    name: s.name,
-    shortDescription: s.short_description,
-    heroStatement: s.hero_statement,
-    overview: s.overview,
-    capabilities: s.capabilities,
-    process: s.process as unknown as Service['process'],
-    idealFor: s.ideal_for,
+    nameEn: s.name_en,
+    nameJa: s.name_ja,
+    shortDescriptionEn: s.short_description_en,
+    shortDescriptionJa: s.short_description_ja,
+    heroStatementEn: s.hero_statement_en,
+    heroStatementJa: s.hero_statement_ja,
+    overviewEn: s.overview_en,
+    overviewJa: s.overview_ja,
+    capabilitiesEn: s.capabilities_en,
+    capabilitiesJa: s.capabilities_ja,
+    processEn: s.process_en as unknown as BilingualService['processEn'],
+    processJa: s.process_ja as unknown as BilingualService['processJa'],
+    idealForEn: s.ideal_for_en,
+    idealForJa: s.ideal_for_ja,
     relatedServiceSlugs: (relatedServicesByService.get(s.id) ?? [])
       .map((r) => serviceSlugById.get(r.related_service_id))
       .filter((slug): slug is string => Boolean(slug)),
@@ -205,41 +360,57 @@ async function fetchAndStitch(): Promise<ContentBundle> {
       .map((r) => equipmentCategorySlugById.get(r.equipment_category_id))
       .filter((slug): slug is string => Boolean(slug)),
     faqIds: (faqsByService.get(s.id) ?? []).map((r) => r.faq_id),
-    seoTitle: s.seo_title,
-    seoDescription: s.seo_description,
+    seoTitleEn: s.seo_title_en,
+    seoTitleJa: s.seo_title_ja,
+    seoDescriptionEn: s.seo_description_en,
+    seoDescriptionJa: s.seo_description_ja,
   }))
 
-  const stitchedSolutions: Solution[] = solutionsRes.data!.map((s) => ({
+  const stitchedSolutions: BilingualSolution[] = solutionsRes.data!.map((s) => ({
     id: s.id,
     slug: s.slug,
-    name: s.name,
-    shortDescription: s.short_description,
-    heroStatement: s.hero_statement,
-    overview: s.overview,
-    highlights: s.highlights as unknown as Solution['highlights'],
+    nameEn: s.name_en,
+    nameJa: s.name_ja,
+    shortDescriptionEn: s.short_description_en,
+    shortDescriptionJa: s.short_description_ja,
+    heroStatementEn: s.hero_statement_en,
+    heroStatementJa: s.hero_statement_ja,
+    overviewEn: s.overview_en,
+    overviewJa: s.overview_ja,
+    highlightsEn: s.highlights_en as unknown as BilingualSolution['highlightsEn'],
+    highlightsJa: s.highlights_ja as unknown as BilingualSolution['highlightsJa'],
     includedServiceSlugs: (servicesBySolution.get(s.id) ?? [])
       .map((r) => serviceSlugById.get(r.service_id))
       .filter((slug): slug is string => Boolean(slug)),
-    seoTitle: s.seo_title,
-    seoDescription: s.seo_description,
+    seoTitleEn: s.seo_title_en,
+    seoTitleJa: s.seo_title_ja,
+    seoDescriptionEn: s.seo_description_en,
+    seoDescriptionJa: s.seo_description_ja,
   }))
 
-  const stitchedEquipmentCategories: EquipmentCategory[] = equipmentCategories.map((c) => ({
+  const stitchedEquipmentCategories: BilingualEquipmentCategory[] = equipmentCategories.map((c) => ({
     id: c.id,
     slug: c.slug,
-    name: c.name,
-    description: c.description,
+    nameEn: c.name_en,
+    nameJa: c.name_ja,
+    descriptionEn: c.description_en,
+    descriptionJa: c.description_ja,
   }))
 
-  const stitchedEquipmentItems: EquipmentItem[] = equipmentItems.map((item) => ({
+  const stitchedEquipmentItems: BilingualEquipmentItem[] = equipmentItems.map((item) => ({
     id: item.id,
     slug: item.slug,
     categorySlug: equipmentCategorySlugById.get(item.category_id) ?? '',
-    name: item.name,
-    summary: item.summary,
-    description: item.description,
-    specs: item.specs as unknown as EquipmentItem['specs'],
-    applications: item.applications,
+    nameEn: item.name_en,
+    nameJa: item.name_ja,
+    summaryEn: item.summary_en,
+    summaryJa: item.summary_ja,
+    descriptionEn: item.description_en,
+    descriptionJa: item.description_ja,
+    specsEn: item.specs_en as unknown as BilingualEquipmentItem['specsEn'],
+    specsJa: item.specs_ja as unknown as BilingualEquipmentItem['specsJa'],
+    applicationsEn: item.applications_en,
+    applicationsJa: item.applications_ja,
     availability: item.availability,
     relatedItemSlugs: (relatedItemsByEquipment.get(item.id) ?? [])
       .map((r) => equipmentItemSlugById.get(r.related_item_id))
@@ -289,20 +460,32 @@ async function fetchAndStitch(): Promise<ContentBundle> {
     company: t.company,
   }))
 
-  const stitchedFaqs: Faq[] = faqsRes.data!.map((f) => ({
+  const stitchedBlogCategories: BilingualBlogCategory[] = blogCategories.map((c) => ({
+    id: c.id,
+    slug: c.slug,
+    nameEn: c.name_en,
+    nameJa: c.name_ja,
+  }))
+
+  const stitchedFaqs: BilingualFaq[] = faqsRes.data!.map((f) => ({
     id: f.id,
     slug: f.slug,
-    question: f.question,
-    answer: f.answer,
+    questionEn: f.question_en,
+    questionJa: f.question_ja,
+    answerEn: f.answer_en,
+    answerJa: f.answer_ja,
     category: f.category ?? undefined,
   }))
 
-  const stitchedIndustries: Industry[] = industriesRes.data!.map((i) => ({
+  const stitchedIndustries: BilingualIndustry[] = industriesRes.data!.map((i) => ({
     id: i.id,
     slug: i.slug,
-    name: i.name,
-    description: i.description,
-    useCases: i.use_cases,
+    nameEn: i.name_en,
+    nameJa: i.name_ja,
+    descriptionEn: i.description_en,
+    descriptionJa: i.description_ja,
+    useCasesEn: i.use_cases_en,
+    useCasesJa: i.use_cases_ja,
   }))
 
   return {
@@ -311,7 +494,7 @@ async function fetchAndStitch(): Promise<ContentBundle> {
     equipmentCategories: stitchedEquipmentCategories,
     equipmentItems: stitchedEquipmentItems,
     projects: stitchedProjects,
-    blogCategories,
+    blogCategories: stitchedBlogCategories,
     blogPosts: stitchedBlogPosts,
     testimonials: stitchedTestimonials,
     clients: clientsRes.data!,

@@ -1,0 +1,28 @@
+{
+  "skipToContent": "Skip to content",
+  "homeAriaLabel": "TOTAL MEDIA home",
+  "openMenu": "Open menu",
+  "servicesMenu": "Services",
+  "byEventType": "By Event Type",
+  "byTechnicalDiscipline": "By Technical Discipline",
+  "viewAllServices": "View all services →",
+  "equipmentMenu": "Equipment",
+  "rentalCategories": "Rental Categories",
+  "viewFullCatalogue": "View full catalogue →",
+  "nav": {
+    "solutions": "Solutions",
+    "portfolio": "Portfolio",
+    "industries": "Industries",
+    "about": "About",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "careers": "Careers",
+    "contact": "Contact"
+  },
+  "logIn": "Log In",
+  "requestQuote": "Request a Quote",
+  "dashboard": "Dashboard",
+  "profileSettings": "Profile Settings",
+  "signOut": "Sign Out",
+  "logoutSuccess": "Logout successful"
+}

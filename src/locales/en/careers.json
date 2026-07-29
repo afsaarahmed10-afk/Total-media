@@ -1,0 +1,27 @@
+{
+  "seoTitle": "Careers",
+  "seoDescription": "Join TOTAL MEDIA's event production and technical team. Explore open roles across LED, audio, lighting, and project management, based in Tokyo and nationwide.",
+  "eyebrow": "Careers",
+  "title": "Build the Events Behind the Scenes",
+  "description": "We hire people who'd rather own a technical discipline than manage around one. If that's you, we'd like to talk.",
+  "whyEyebrow": "Why TOTAL MEDIA",
+  "whyTitle": "What It's Like to Work Here",
+  "benefits": [
+    { "title": "Real Technical Ownership", "description": "You own your discipline on-site — no second-guessing from a generalist manager who has never run a show." },
+    { "title": "Growth Across Disciplines", "description": "Cross-train across LED, audio, lighting, and broadcast as your career develops, not siloed into one lane permanently." },
+    { "title": "Nationwide Project Variety", "description": "Work spans venues and cities across Japan — no two months look the same." },
+    { "title": "Bilingual, International Teams", "description": "Collaborate daily with international clients and colleagues in a genuinely bilingual working environment." }
+  ],
+  "openRolesEyebrow": "Open Roles",
+  "openRolesTitle": "Current Openings",
+  "roles": [
+    { "title": "Live Sound Engineer", "location": "Tokyo", "type": "Full-time" },
+    { "title": "LED & Video Technician", "location": "Osaka", "type": "Full-time" },
+    { "title": "Event Project Manager (Bilingual JP/EN)", "location": "Tokyo", "type": "Full-time" },
+    { "title": "Lighting Programmer", "location": "Nationwide (Travel Required)", "type": "Full-time" },
+    { "title": "Broadcast Camera Operator", "location": "Tokyo", "type": "Contract" }
+  ],
+  "apply": "Apply",
+  "noRoleText": "Don't see the right role listed? Send your background to",
+  "noRoleSuffix": "— we keep strong applications on file for future openings."
+}

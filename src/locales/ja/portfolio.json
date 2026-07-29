@@ -1,0 +1,30 @@
+{
+  "index": {
+    "seoTitle": "実績紹介",
+    "seoDescription": "日本全国で手がけた企業イベント、カンファレンス、展示会、ハイブリッド制作、屋外式典など、TOTAL MEDIAの実績をご紹介します。",
+    "eyebrow": "実績紹介",
+    "title": "日本全国での実績",
+    "description": "企画・技術設計・現地運営チームが手がけたイベントの一例です。下記の形式で絞り込みできます。",
+    "noneFound": "このカテゴリーの実績はまだありません。",
+    "ctaTitle": "同じような成果をご希望ですか？",
+    "ctaDescription": "イベントについてお聞かせいただければ、私たちのアプローチをご紹介します。"
+  },
+  "categories": {
+    "All": "すべて",
+    "Conference": "カンファレンス",
+    "Corporate": "企業イベント",
+    "Exhibition": "展示会",
+    "Hybrid": "ハイブリッド",
+    "Virtual": "バーチャル",
+    "Outdoor": "屋外"
+  },
+  "detail": {
+    "results": "成果",
+    "servicesUsed": "利用サービス",
+    "equipmentUsed": "使用機材",
+    "moreWork": "その他の実績",
+    "moreProjects": "その他の{{category}}実績",
+    "ctaTitle": "同じようなイベントをご検討中ですか？",
+    "ctaDescription": "詳細をお聞かせいただければ、私たちのアプローチをご紹介します。"
+  }
+}

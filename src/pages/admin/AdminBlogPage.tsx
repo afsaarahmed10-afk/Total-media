@@ -31,14 +31,14 @@ export default function AdminBlogPage() {
   async function load() {
     const [postsRes, categoriesRes] = await Promise.all([
       supabase.from('blog_posts').select('*').order('published_at', { ascending: false }),
-      supabase.from('blog_categories').select('id, name'),
+      supabase.from('blog_categories').select('id, name_en'),
     ])
     if (postsRes.error) {
       toast.error('Failed to load blog posts.')
       return
     }
     setRows(postsRes.data)
-    setCategories(new Map((categoriesRes.data ?? []).map((c: Pick<BlogCategory, 'id' | 'name'>) => [c.id, c.name])))
+    setCategories(new Map((categoriesRes.data ?? []).map((c: Pick<BlogCategory, 'id' | 'name_en'>) => [c.id, c.name_en])))
   }
 
   async function confirmDelete() {

@@ -67,21 +67,24 @@ export type Database = {
         Row: {
           created_at: string
           id: string
-          name: string
+          name_en: string
+          name_ja: string | null
           slug: string
           updated_at: string
         }
         Insert: {
           created_at?: string
           id?: string
-          name: string
+          name_en: string
+          name_ja?: string | null
           slug: string
           updated_at?: string
         }
         Update: {
           created_at?: string
           id?: string
-          name?: string
+          name_en?: string
+          name_ja?: string | null
           slug?: string
           updated_at?: string
         }
@@ -257,25 +260,31 @@ export type Database = {
       equipment_categories: {
         Row: {
           created_at: string
-          description: string
+          description_en: string
+          description_ja: string | null
           id: string
-          name: string
+          name_en: string
+          name_ja: string | null
           slug: string
           updated_at: string
         }
         Insert: {
           created_at?: string
-          description: string
+          description_en: string
+          description_ja?: string | null
           id?: string
-          name: string
+          name_en: string
+          name_ja?: string | null
           slug: string
           updated_at?: string
         }
         Update: {
           created_at?: string
-          description?: string
+          description_en?: string
+          description_ja?: string | null
           id?: string
-          name?: string
+          name_en?: string
+          name_ja?: string | null
           slug?: string
           updated_at?: string
         }
@@ -316,44 +325,59 @@ export type Database = {
       }
       equipment_items: {
         Row: {
-          applications: string[]
+          applications_en: string[]
+          applications_ja: string[]
           availability: Database["public"]["Enums"]["equipment_availability"]
           category_id: string
           created_at: string
-          description: string
+          description_en: string
+          description_ja: string | null
           id: string
-          name: string
+          name_en: string
+          name_ja: string | null
           slug: string
-          specs: Json
-          summary: string
+          specs_en: Json
+          specs_ja: Json
+          summary_en: string
+          summary_ja: string | null
           updated_at: string
           visual_seed: string
         }
         Insert: {
-          applications?: string[]
+          applications_en?: string[]
+          applications_ja?: string[]
           availability?: Database["public"]["Enums"]["equipment_availability"]
           category_id: string
           created_at?: string
-          description: string
+          description_en: string
+          description_ja?: string | null
           id?: string
-          name: string
+          name_en: string
+          name_ja?: string | null
           slug: string
-          specs?: Json
-          summary: string
+          specs_en?: Json
+          specs_ja?: Json
+          summary_en: string
+          summary_ja?: string | null
           updated_at?: string
           visual_seed: string
         }
         Update: {
-          applications?: string[]
+          applications_en?: string[]
+          applications_ja?: string[]
           availability?: Database["public"]["Enums"]["equipment_availability"]
           category_id?: string
           created_at?: string
-          description?: string
+          description_en?: string
+          description_ja?: string | null
           id?: string
-          name?: string
+          name_en?: string
+          name_ja?: string | null
           slug?: string
-          specs?: Json
-          summary?: string
+          specs_en?: Json
+          specs_ja?: Json
+          summary_en?: string
+          summary_ja?: string | null
           updated_at?: string
           visual_seed?: string
         }
@@ -402,29 +426,35 @@ export type Database = {
       }
       faqs: {
         Row: {
-          answer: string
+          answer_en: string
+          answer_ja: string | null
           category: Database["public"]["Enums"]["faq_category"] | null
           created_at: string
           id: string
-          question: string
+          question_en: string
+          question_ja: string | null
           slug: string
           updated_at: string
         }
         Insert: {
-          answer: string
+          answer_en: string
+          answer_ja?: string | null
           category?: Database["public"]["Enums"]["faq_category"] | null
           created_at?: string
           id?: string
-          question: string
+          question_en: string
+          question_ja?: string | null
           slug: string
           updated_at?: string
         }
         Update: {
-          answer?: string
+          answer_en?: string
+          answer_ja?: string | null
           category?: Database["public"]["Enums"]["faq_category"] | null
           created_at?: string
           id?: string
-          question?: string
+          question_en?: string
+          question_ja?: string | null
           slug?: string
           updated_at?: string
         }
@@ -433,30 +463,39 @@ export type Database = {
       industries: {
         Row: {
           created_at: string
-          description: string
+          description_en: string
+          description_ja: string | null
           id: string
-          name: string
+          name_en: string
+          name_ja: string | null
           slug: string
           updated_at: string
-          use_cases: string[]
+          use_cases_en: string[]
+          use_cases_ja: string[]
         }
         Insert: {
           created_at?: string
-          description: string
+          description_en: string
+          description_ja?: string | null
           id?: string
-          name: string
+          name_en: string
+          name_ja?: string | null
           slug: string
           updated_at?: string
-          use_cases?: string[]
+          use_cases_en?: string[]
+          use_cases_ja?: string[]
         }
         Update: {
           created_at?: string
-          description?: string
+          description_en?: string
+          description_ja?: string | null
           id?: string
-          name?: string
+          name_en?: string
+          name_ja?: string | null
           slug?: string
           updated_at?: string
-          use_cases?: string[]
+          use_cases_en?: string[]
+          use_cases_ja?: string[]
         }
         Relationships: []
       }
@@ -867,50 +906,77 @@ export type Database = {
       }
       services: {
         Row: {
-          capabilities: string[]
+          capabilities_en: string[]
+          capabilities_ja: string[]
           category: Database["public"]["Enums"]["service_category"]
           created_at: string
-          hero_statement: string
+          hero_statement_en: string
+          hero_statement_ja: string | null
           id: string
-          ideal_for: string[]
-          name: string
-          overview: string[]
-          process: Json
-          seo_description: string
-          seo_title: string
-          short_description: string
+          ideal_for_en: string[]
+          ideal_for_ja: string[]
+          name_en: string
+          name_ja: string | null
+          overview_en: string[]
+          overview_ja: string[]
+          process_en: Json
+          process_ja: Json
+          seo_description_en: string
+          seo_description_ja: string | null
+          seo_title_en: string
+          seo_title_ja: string | null
+          short_description_en: string
+          short_description_ja: string | null
           slug: string
           updated_at: string
         }
         Insert: {
-          capabilities?: string[]
+          capabilities_en?: string[]
+          capabilities_ja?: string[]
           category: Database["public"]["Enums"]["service_category"]
           created_at?: string
-          hero_statement: string
+          hero_statement_en: string
+          hero_statement_ja?: string | null
           id?: string
-          ideal_for?: string[]
-          name: string
-          overview?: string[]
-          process?: Json
-          seo_description: string
-          seo_title: string
-          short_description: string
+          ideal_for_en?: string[]
+          ideal_for_ja?: string[]
+          name_en: string
+          name_ja?: string | null
+          overview_en?: string[]
+          overview_ja?: string[]
+          process_en?: Json
+          process_ja?: Json
+          seo_description_en: string
+          seo_description_ja?: string | null
+          seo_title_en: string
+          seo_title_ja?: string | null
+          short_description_en: string
+          short_description_ja?: string | null
           slug: string
           updated_at?: string
         }
         Update: {
-          capabilities?: string[]
+          capabilities_en?: string[]
+          capabilities_ja?: string[]
           category?: Database["public"]["Enums"]["service_category"]
           created_at?: string
-          hero_statement?: string
+          hero_statement_en?: string
+          hero_statement_ja?: string | null
           id?: string
-          ideal_for?: string[]
-          name?: string
-          overview?: string[]
-          process?: Json
-          seo_description?: string
-          seo_title?: string
-          short_description?: string
+          ideal_for_en?: string[]
+          ideal_for_ja?: string[]
+          name_en?: string
+          name_ja?: string | null
+          overview_en?: string[]
+          overview_ja?: string[]
+          process_en?: Json
+          process_ja?: Json
+          seo_description_en?: string
+          seo_description_ja?: string | null
+          seo_title_en?: string
+          seo_title_ja?: string | null
+          short_description_en?: string
+          short_description_ja?: string | null
           slug?: string
           updated_at?: string
         }
@@ -970,40 +1036,61 @@ export type Database = {
       solutions: {
         Row: {
           created_at: string
-          hero_statement: string
-          highlights: Json
+          hero_statement_en: string
+          hero_statement_ja: string | null
+          highlights_en: Json
+          highlights_ja: Json
           id: string
-          name: string
-          overview: string[]
-          seo_description: string
-          seo_title: string
-          short_description: string
+          name_en: string
+          name_ja: string | null
+          overview_en: string[]
+          overview_ja: string[]
+          seo_description_en: string
+          seo_description_ja: string | null
+          seo_title_en: string
+          seo_title_ja: string | null
+          short_description_en: string
+          short_description_ja: string | null
           slug: string
           updated_at: string
         }
         Insert: {
           created_at?: string
-          hero_statement: string
-          highlights?: Json
+          hero_statement_en: string
+          hero_statement_ja?: string | null
+          highlights_en?: Json
+          highlights_ja?: Json
           id?: string
-          name: string
-          overview?: string[]
-          seo_description: string
-          seo_title: string
-          short_description: string
+          name_en: string
+          name_ja?: string | null
+          overview_en?: string[]
+          overview_ja?: string[]
+          seo_description_en: string
+          seo_description_ja?: string | null
+          seo_title_en: string
+          seo_title_ja?: string | null
+          short_description_en: string
+          short_description_ja?: string | null
           slug: string
           updated_at?: string
         }
         Update: {
           created_at?: string
-          hero_statement?: string
-          highlights?: Json
+          hero_statement_en?: string
+          hero_statement_ja?: string | null
+          highlights_en?: Json
+          highlights_ja?: Json
           id?: string
-          name?: string
-          overview?: string[]
-          seo_description?: string
-          seo_title?: string
-          short_description?: string
+          name_en?: string
+          name_ja?: string | null
+          overview_en?: string[]
+          overview_ja?: string[]
+          seo_description_en?: string
+          seo_description_ja?: string | null
+          seo_title_en?: string
+          seo_title_ja?: string | null
+          short_description_en?: string
+          short_description_ja?: string | null
           slug?: string
           updated_at?: string
         }

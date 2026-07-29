@@ -1,0 +1,23 @@
+{
+  "siteName": "TOTAL MEDIA",
+  "language": "Language",
+  "languageJa": "日本語",
+  "languageEn": "English",
+  "home": "Home",
+  "ctaBand": {
+    "letsTalk": "Let's Talk"
+  },
+  "buttons": {
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "viewDetails": "View Details",
+    "readMore": "Read More",
+    "getQuote": "Request a Quote",
+    "contactUs": "Contact Us",
+    "back": "Back",
+    "continue": "Continue",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "loading": "Loading…"
+}

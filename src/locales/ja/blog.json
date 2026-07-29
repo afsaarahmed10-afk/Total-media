@@ -1,0 +1,19 @@
+{
+  "index": {
+    "seoTitle": "ブログ",
+    "seoDescription": "TOTAL MEDIAチームによる、イベント企画、技術制作、そして日本全国でのイベント運営から得た知見をお届けします。",
+    "eyebrow": "ブログ",
+    "title": "イベント制作の現場から",
+    "description": "企画・技術チームによる実践的な内容です。アドバイスを装ったマーケティングコピーではありません。",
+    "allArticles": "すべての記事",
+    "minRead": "分で読めます"
+  },
+  "detail": {
+    "article": "記事",
+    "minRead": "分で読めます",
+    "keepReading": "あわせて読む",
+    "moreArticles": "他の記事",
+    "ctaTitle": "ご検討中のプロジェクトはありますか？",
+    "ctaDescription": "ご検討中の内容をお聞かせください。1〜2営業日以内にご返信します。"
+  }
+}

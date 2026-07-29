@@ -1,0 +1,28 @@
+{
+  "skipToContent": "コンテンツへスキップ",
+  "homeAriaLabel": "TOTAL MEDIA ホーム",
+  "openMenu": "メニューを開く",
+  "servicesMenu": "サービス",
+  "byEventType": "イベントの種類別",
+  "byTechnicalDiscipline": "技術分野別",
+  "viewAllServices": "すべてのサービスを見る →",
+  "equipmentMenu": "機材",
+  "rentalCategories": "レンタルカテゴリー",
+  "viewFullCatalogue": "全カタログを見る →",
+  "nav": {
+    "solutions": "ソリューション",
+    "portfolio": "実績紹介",
+    "industries": "業界別対応",
+    "about": "会社概要",
+    "blog": "ブログ",
+    "faq": "よくある質問",
+    "careers": "採用情報",
+    "contact": "お問い合わせ"
+  },
+  "logIn": "ログイン",
+  "requestQuote": "見積もりを依頼する",
+  "dashboard": "ダッシュボード",
+  "profileSettings": "プロフィール設定",
+  "signOut": "ログアウト",
+  "logoutSuccess": "ログアウトしました"
+}

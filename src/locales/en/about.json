@@ -1,0 +1,21 @@
+{
+  "seoTitle": "About TOTAL MEDIA",
+  "seoDescription": "TOTAL MEDIA is a full-service event production and technical solutions company operating across Japan. Learn about our approach and values.",
+  "eyebrow": "About Us",
+  "title": "A Technical Standard Built Over Years, Not Assumed on Day One",
+  "description": "TOTAL MEDIA was built around a simple observation: most event failures happen at the coordination seams between vendors, not within any single discipline.",
+  "storyEyebrow": "Our Story",
+  "storyTitle": "From equipment rental to full production, because clients kept asking for both.",
+  "storyParagraph1": "TOTAL MEDIA started as a technical equipment provider and grew into a full-service production company because our clients kept asking for the same thing: someone to own the whole event, not just the gear. Today, equipment rental is one part of a broader practice that includes event planning, technical direction, and on-site management.",
+  "storyParagraph2": "We operate nationwide across Japan, serving international companies, Japanese enterprises, government bodies, universities, and luxury brands — organizations that need production values matching the seriousness of what they're announcing, launching, or presenting.",
+  "valuesEyebrow": "What We Believe",
+  "valuesTitle": "Our Values",
+  "values": [
+    { "title": "Precision Over Improvisation", "description": "Every technical plan is rehearsed before it's live. We treat contingency planning as part of the design, not a reaction to something going wrong." },
+    { "title": "One Accountable Team", "description": "We'd rather say no to a job than hand you a coordination burden across five vendors. If we take it on, we own it end to end." },
+    { "title": "Built for International Clients", "description": "Bilingual project management isn't a premium add-on — it's how every international engagement is staffed from day one." },
+    { "title": "Quiet, Disciplined Crews", "description": "The best technical production is the kind your audience never notices. Our crews are trained to be invisible until they're needed." }
+  ],
+  "ctaTitle": "Want to Talk Through Your Event?",
+  "ctaDescription": "Tell us what you're planning — we'll respond with next steps within 1–2 business days."
+}

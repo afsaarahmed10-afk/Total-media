@@ -1,0 +1,19 @@
+{
+  "index": {
+    "seoTitle": "Blog",
+    "seoDescription": "Field notes on event planning, technical production, and lessons learned running events across Japan, from the TOTAL MEDIA team.",
+    "eyebrow": "Blog",
+    "title": "Field Notes on Event Production",
+    "description": "Practical writing from our planning and technical teams — not marketing copy dressed up as advice.",
+    "allArticles": "All Articles",
+    "minRead": "min read"
+  },
+  "detail": {
+    "article": "Article",
+    "minRead": "min read",
+    "keepReading": "Keep Reading",
+    "moreArticles": "More Articles",
+    "ctaTitle": "Have a Project in Mind?",
+    "ctaDescription": "Tell us what you're planning and we'll respond within 1–2 business days."
+  }
+}

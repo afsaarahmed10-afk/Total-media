@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Mail, MapPin, Phone, Clock, CheckCircle2, MessageCircle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Button } from '@/components/ui/button'
@@ -19,22 +20,26 @@ import {
 import { supabase } from '@/lib/supabase/client'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Please enter your name.'),
-  email: z.string().email('Please enter a valid email address.'),
-  company: z.string().optional(),
-  subject: z.string().min(2, 'Please enter a subject.'),
-  message: z.string().min(10, 'Please include a few details so we can help.'),
-  // Honeypot field — left empty by real users, filled by most simple bots.
-  website: z.string().max(0).optional(),
-})
-
-type ContactFormValues = z.infer<typeof contactSchema>
-
 export default function ContactPage() {
+  const { t } = useTranslation(['contact', 'common'])
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+
+  const contactSchema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, t('validation.name')),
+        email: z.string().email(t('validation.email')),
+        company: z.string().optional(),
+        subject: z.string().min(2, t('validation.subject')),
+        message: z.string().min(10, t('validation.message')),
+        // Honeypot field — left empty by real users, filled by most simple bots.
+        website: z.string().max(0).optional(),
+      }),
+    [t],
+  )
+  type ContactFormValues = z.infer<typeof contactSchema>
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -56,9 +61,7 @@ export default function ContactPage() {
     setIsSubmitting(false)
 
     if (error) {
-      setSubmitError(
-        'Something went wrong sending your message. Please try again, or email us directly at hello@totalmedia.co.jp.',
-      )
+      setSubmitError(t('submitError'))
       return
     }
 
@@ -85,16 +88,12 @@ export default function ContactPage() {
 
   return (
     <>
-      <Seo
-        title="Contact Us"
-        description="Get in touch with TOTAL MEDIA to discuss your next event. Based in Tokyo, serving clients nationwide across Japan."
-        path="/contact"
-      />
+      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/contact" />
       <PageHero
-        eyebrow="Contact"
-        title="Let's Talk About Your Event"
-        description="For a detailed proposal, use Request a Quote. For anything else — general questions, partnership inquiries, press — reach out here."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        description={t('description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
       />
 
       <section className="py-20 lg:py-28">
@@ -103,14 +102,14 @@ export default function ContactPage() {
             <div className="flex gap-4">
               <MapPin className="size-5 shrink-0 text-signal" />
               <div>
-                <p className="font-semibold text-navy">Office</p>
-                <p className="text-sm text-muted-foreground">Shibuya-ku, Tokyo 150-0002, Japan</p>
+                <p className="font-semibold text-navy">{t('office')}</p>
+                <p className="text-sm text-muted-foreground">{t('officeAddress')}</p>
               </div>
             </div>
             <div className="flex gap-4">
               <Phone className="size-5 shrink-0 text-signal" />
               <div>
-                <p className="font-semibold text-navy">Phone</p>
+                <p className="font-semibold text-navy">{t('phone')}</p>
                 <a href="tel:+81345678901" className="text-sm text-muted-foreground hover:text-signal">
                   +81 3-4567-8901
                 </a>
@@ -119,7 +118,7 @@ export default function ContactPage() {
             <div className="flex gap-4">
               <Mail className="size-5 shrink-0 text-signal" />
               <div>
-                <p className="font-semibold text-navy">Email</p>
+                <p className="font-semibold text-navy">{t('email')}</p>
                 <a
                   href="mailto:hello@totalmedia.co.jp"
                   className="text-sm text-muted-foreground hover:text-signal"
@@ -131,7 +130,7 @@ export default function ContactPage() {
             <div className="flex gap-4">
               <MessageCircle className="size-5 shrink-0 text-signal" />
               <div>
-                <p className="font-semibold text-navy">WhatsApp</p>
+                <p className="font-semibold text-navy">{t('whatsapp')}</p>
                 <a
                   href={getWhatsAppUrl("Hi TOTAL MEDIA, I'd like to know more about your services.")}
                   target="_blank"
@@ -145,11 +144,11 @@ export default function ContactPage() {
             <div className="flex gap-4">
               <Clock className="size-5 shrink-0 text-signal" />
               <div>
-                <p className="font-semibold text-navy">Business Hours</p>
+                <p className="font-semibold text-navy">{t('businessHours')}</p>
                 <p className="text-sm text-muted-foreground">
-                  Monday – Friday, 9:00 – 18:00 JST
+                  {t('businessHoursValue')}
                   <br />
-                  On-site event support available outside these hours.
+                  {t('businessHoursNote')}
                 </p>
               </div>
             </div>
@@ -159,10 +158,8 @@ export default function ContactPage() {
             {submitted ? (
               <div className="flex flex-col items-center py-10 text-center">
                 <CheckCircle2 className="size-12 text-signal" />
-                <h2 className="mt-4 text-xl font-bold text-navy">Message Sent</h2>
-                <p className="mt-2 max-w-sm text-muted-foreground">
-                  Thanks for reaching out — we'll get back to you within one business day.
-                </p>
+                <h2 className="mt-4 text-xl font-bold text-navy">{t('successTitle')}</h2>
+                <p className="mt-2 max-w-sm text-muted-foreground">{t('successDescription')}</p>
               </div>
             ) : (
               <Form {...form}>
@@ -173,9 +170,9 @@ export default function ContactPage() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Name</FormLabel>
+                          <FormLabel>{t('form.name')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Your name" {...field} />
+                            <Input placeholder={t('form.namePlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -186,9 +183,9 @@ export default function ContactPage() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel>{t('form.email')}</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="you@company.com" {...field} />
+                            <Input type="email" placeholder={t('form.emailPlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -200,9 +197,9 @@ export default function ContactPage() {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Company (optional)</FormLabel>
+                        <FormLabel>{t('form.company')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your company" {...field} />
+                          <Input placeholder={t('form.companyPlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -213,9 +210,9 @@ export default function ContactPage() {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Subject</FormLabel>
+                        <FormLabel>{t('form.subject')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="What's this about?" {...field} />
+                          <Input placeholder={t('form.subjectPlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -226,9 +223,9 @@ export default function ContactPage() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel>{t('form.message')}</FormLabel>
                         <FormControl>
-                          <Textarea rows={5} placeholder="Tell us a bit more..." {...field} />
+                          <Textarea rows={5} placeholder={t('form.messagePlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -257,7 +254,7 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                     className="w-full bg-navy text-white hover:bg-navy-deep"
                   >
-                    {isSubmitting ? 'Sending…' : 'Send Message'}
+                    {isSubmitting ? t('form.sending') : t('form.send')}
                   </Button>
                 </form>
               </Form>

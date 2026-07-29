@@ -1,0 +1,36 @@
+{
+  "index": {
+    "seoTitle": "機材レンタルカタログ",
+    "seoDescription": "TOTAL MEDIAの全国対応機材レンタルカタログをご覧ください。LEDウォール、音響、照明、ステージ、トラス、プロジェクター、ディスプレイ、カメラ、周辺機材まで。",
+    "eyebrow": "機材レンタル",
+    "title": "全国対応の技術機材インベントリ",
+    "description": "放送・ツアーグレードの機材を定期点検スケジュールで維持管理しています。単体でも、制作・技術クルーとあわせてもご利用いただけます。",
+    "allCategories": "すべてのカテゴリー",
+    "viewSpecs": "仕様を見る",
+    "noneFound": "このカテゴリーの機材は現在整理中です。最新の在庫状況はお問い合わせください。",
+    "ctaTitle": "カタログにない機材をお探しですか？",
+    "ctaDescription": "実際の在庫はこのカタログよりも豊富です。イベントに必要な機材をお聞かせください。"
+  },
+  "category": {
+    "eyebrow": "機材カテゴリー",
+    "noneInCategory": "このカテゴリーの機材は現在整理中です。最新の在庫状況はお問い合わせください。",
+    "readyToBook": "{{name}}のご予約はお決まりですか？",
+    "ctaDescription": "見積もりをご依頼いただければ、在庫状況・仕様・料金をご案内します。"
+  },
+  "detail": {
+    "overview": "概要",
+    "applications": "活用シーン",
+    "availability": "在庫状況",
+    "specifications": "仕様",
+    "related": "関連機材",
+    "relatedEquipment": "関連機材",
+    "readyToBook": "{{name}}のご予約はお決まりですか？",
+    "ctaDescription": "在庫状況、納品ロジスティクス、料金を1〜2営業日以内にご案内します。",
+    "viewImage": "画像 {{n}} を見る"
+  },
+  "availability": {
+    "in-stock": "在庫あり",
+    "limited": "在庫僅少",
+    "made-to-order": "受注生産"
+  }
+}

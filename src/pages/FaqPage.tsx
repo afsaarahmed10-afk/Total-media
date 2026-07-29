@@ -1,17 +1,11 @@
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { FaqAccordion } from '@/components/sections/FaqAccordion'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getFaqs } from '@/lib/data'
 import type { FaqCategory } from '@/content/types'
-
-const CATEGORY_LABELS: Record<FaqCategory, string> = {
-  general: 'General',
-  'quotes-pricing': 'Quotes & Pricing',
-  equipment: 'Equipment',
-  planning: 'Planning & Timeline',
-  technical: 'Technical & Safety',
-}
 
 const CATEGORY_ORDER: FaqCategory[] = [
   'general',
@@ -22,7 +16,9 @@ const CATEGORY_ORDER: FaqCategory[] = [
 ]
 
 export default function FaqPage() {
-  const faqs = getFaqs()
+  const { t } = useTranslation(['faq', 'common'])
+  const { locale } = useLocale()
+  const faqs = getFaqs(locale)
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -35,17 +31,12 @@ export default function FaqPage() {
 
   return (
     <>
-      <Seo
-        title="Frequently Asked Questions"
-        description="Answers to common questions about quotes, pricing, equipment, planning timelines, and technical safety at TOTAL MEDIA."
-        path="/faq"
-        jsonLd={faqSchema}
-      />
+      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/faq" jsonLd={faqSchema} />
       <PageHero
-        eyebrow="Support"
-        title="Frequently Asked Questions"
-        description="If you don't find what you're looking for here, reach out directly — we respond within one business day."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'FAQ' }]}
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        description={t('description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
       />
 
       <section className="py-20 lg:py-28">
@@ -55,7 +46,7 @@ export default function FaqPage() {
             if (items.length === 0) return null
             return (
               <div key={category}>
-                <h2 className="mb-4 text-xl font-bold text-navy">{CATEGORY_LABELS[category]}</h2>
+                <h2 className="mb-4 text-xl font-bold text-navy">{t(`categories.${category}`)}</h2>
                 <FaqAccordion faqs={items} />
               </div>
             )
@@ -64,11 +55,11 @@ export default function FaqPage() {
       </section>
 
       <CtaBand
-        title="Still Have Questions?"
-        description="Send us the details of what you're planning and we'll get back to you directly."
-        primaryLabel="Contact Us"
+        title={t('ctaTitle')}
+        description={t('ctaDescription')}
+        primaryLabel={t('buttons.contactUs', { ns: 'common' })}
         primaryTo="/contact"
-        secondaryLabel="Request a Quote"
+        secondaryLabel={t('buttons.getQuote', { ns: 'common' })}
         secondaryTo="/quote"
       />
     </>

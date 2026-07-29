@@ -23,7 +23,7 @@ export default function AdminSolutionsPage() {
   }, [])
 
   async function load() {
-    const { data, error } = await supabase.from('solutions').select('*').order('name')
+    const { data, error } = await supabase.from('solutions').select('*').order('name_en')
     if (error) {
       toast.error('Failed to load solutions.')
       return
@@ -46,11 +46,11 @@ export default function AdminSolutionsPage() {
   }
 
   const columns: AdminColumn<Solution>[] = [
-    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name}</span> },
+    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name_en}</span> },
     {
       key: 'short_description',
       header: 'Short Description',
-      render: (r) => <span className="line-clamp-1 max-w-md">{r.short_description}</span>,
+      render: (r) => <span className="line-clamp-1 max-w-md">{r.short_description_en}</span>,
     },
     { key: 'slug', header: 'Slug', render: (r) => <code className="text-xs text-muted-foreground">{r.slug}</code> },
     {
@@ -95,7 +95,7 @@ export default function AdminSolutionsPage() {
           columns={columns}
           rows={rows}
           getRowId={(r) => r.id}
-          searchText={(r) => `${r.name} ${r.short_description}`}
+          searchText={(r) => `${r.name_en} ${r.short_description_en}`}
           searchPlaceholder="Search solutions…"
           emptyMessage="No solutions yet."
         />
@@ -104,7 +104,7 @@ export default function AdminSolutionsPage() {
       <ConfirmDeleteDialog
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
-        description={`Delete "${deleting?.name}"? This can't be undone.`}
+        description={`Delete "${deleting?.name_en}"? This can't be undone.`}
         onConfirm={confirmDelete}
         loading={deletingBusy}
       />

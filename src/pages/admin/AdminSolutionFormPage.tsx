@@ -9,6 +9,7 @@ import { Reveal } from '@/components/shared/Reveal'
 import { Seo } from '@/components/layout/Seo'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { ObjectListField } from '@/components/admin/ObjectListField'
+import { LangTabs } from '@/components/admin/LangTabs'
 import { RelationPicker, type RelationOption } from '@/components/admin/RelationPicker'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -22,26 +23,40 @@ const schema = z.object({
     .string()
     .min(1, 'Slug is required.')
     .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, and hyphens only.'),
-  name: z.string().min(1, 'Name is required.'),
-  shortDescription: z.string().min(1, 'Short description is required.'),
-  heroStatement: z.string().min(1, 'Hero statement is required.'),
-  overviewText: z.string(),
-  highlights: z.array(z.object({ title: z.string().min(1, 'Required'), description: z.string().min(1, 'Required') })),
-  seoTitle: z.string().min(1, 'SEO title is required.'),
-  seoDescription: z.string().min(1, 'SEO description is required.'),
+  nameEn: z.string().min(1, 'Name is required.'),
+  nameJa: z.string(),
+  shortDescriptionEn: z.string().min(1, 'Short description is required.'),
+  shortDescriptionJa: z.string(),
+  heroStatementEn: z.string().min(1, 'Hero statement is required.'),
+  heroStatementJa: z.string(),
+  overviewTextEn: z.string(),
+  overviewTextJa: z.string(),
+  highlightsEn: z.array(z.object({ title: z.string().min(1, 'Required'), description: z.string().min(1, 'Required') })),
+  highlightsJa: z.array(z.object({ title: z.string(), description: z.string() })),
+  seoTitleEn: z.string().min(1, 'SEO title is required.'),
+  seoTitleJa: z.string(),
+  seoDescriptionEn: z.string().min(1, 'SEO description is required.'),
+  seoDescriptionJa: z.string(),
   includedServiceIds: z.array(z.string()),
 })
 type FormValues = z.infer<typeof schema>
 
 const DEFAULT_VALUES: FormValues = {
   slug: '',
-  name: '',
-  shortDescription: '',
-  heroStatement: '',
-  overviewText: '',
-  highlights: [],
-  seoTitle: '',
-  seoDescription: '',
+  nameEn: '',
+  nameJa: '',
+  shortDescriptionEn: '',
+  shortDescriptionJa: '',
+  heroStatementEn: '',
+  heroStatementJa: '',
+  overviewTextEn: '',
+  overviewTextJa: '',
+  highlightsEn: [],
+  highlightsJa: [],
+  seoTitleEn: '',
+  seoTitleJa: '',
+  seoDescriptionEn: '',
+  seoDescriptionJa: '',
   includedServiceIds: [],
 }
 
@@ -60,6 +75,7 @@ export default function AdminSolutionFormPage() {
   const [loading, setLoading] = useState(isEditing)
   const [submitting, setSubmitting] = useState(false)
   const [autoSlug, setAutoSlug] = useState(!isEditing)
+  const [activeLang, setActiveLang] = useState<'en' | 'ja'>('en')
   const [serviceOptions, setServiceOptions] = useState<RelationOption[]>([])
 
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: DEFAULT_VALUES })
@@ -70,8 +86,8 @@ export default function AdminSolutionFormPage() {
   }, [id])
 
   async function load() {
-    const servicesRes = await supabase.from('services').select('id, name').order('name')
-    setServiceOptions((servicesRes.data ?? []).map((s) => ({ id: s.id, label: s.name })))
+    const servicesRes = await supabase.from('services').select('id, name_en').order('name_en')
+    setServiceOptions((servicesRes.data ?? []).map((s) => ({ id: s.id, label: s.name_en })))
 
     if (!id) {
       setLoading(false)
@@ -93,13 +109,20 @@ export default function AdminSolutionFormPage() {
     const s = solutionRes.data
     form.reset({
       slug: s.slug,
-      name: s.name,
-      shortDescription: s.short_description,
-      heroStatement: s.hero_statement,
-      overviewText: s.overview.join('\n'),
-      highlights: (s.highlights as unknown as { title: string; description: string }[]) ?? [],
-      seoTitle: s.seo_title,
-      seoDescription: s.seo_description,
+      nameEn: s.name_en,
+      nameJa: s.name_ja ?? '',
+      shortDescriptionEn: s.short_description_en,
+      shortDescriptionJa: s.short_description_ja ?? '',
+      heroStatementEn: s.hero_statement_en,
+      heroStatementJa: s.hero_statement_ja ?? '',
+      overviewTextEn: s.overview_en.join('\n'),
+      overviewTextJa: s.overview_ja.join('\n'),
+      highlightsEn: (s.highlights_en as unknown as { title: string; description: string }[]) ?? [],
+      highlightsJa: (s.highlights_ja as unknown as { title: string; description: string }[]) ?? [],
+      seoTitleEn: s.seo_title_en,
+      seoTitleJa: s.seo_title_ja ?? '',
+      seoDescriptionEn: s.seo_description_en,
+      seoDescriptionJa: s.seo_description_ja ?? '',
       includedServiceIds: (includedServicesRes.data ?? []).map((r) => r.service_id),
     })
   }
@@ -116,13 +139,20 @@ export default function AdminSolutionFormPage() {
     setSubmitting(true)
     const payload = {
       slug: values.slug,
-      name: values.name,
-      short_description: values.shortDescription,
-      hero_statement: values.heroStatement,
-      overview: linesToArray(values.overviewText),
-      highlights: values.highlights,
-      seo_title: values.seoTitle,
-      seo_description: values.seoDescription,
+      name_en: values.nameEn,
+      name_ja: values.nameJa || null,
+      short_description_en: values.shortDescriptionEn,
+      short_description_ja: values.shortDescriptionJa || null,
+      hero_statement_en: values.heroStatementEn,
+      hero_statement_ja: values.heroStatementJa || null,
+      overview_en: linesToArray(values.overviewTextEn),
+      overview_ja: linesToArray(values.overviewTextJa),
+      highlights_en: values.highlightsEn,
+      highlights_ja: values.highlightsJa,
+      seo_title_en: values.seoTitleEn,
+      seo_title_ja: values.seoTitleJa || null,
+      seo_description_en: values.seoDescriptionEn,
+      seo_description_ja: values.seoDescriptionJa || null,
     }
 
     try {
@@ -148,6 +178,8 @@ export default function AdminSolutionFormPage() {
     }
   }
 
+  const jaComplete = Boolean(form.watch('nameJa'))
+
   return (
     <>
       <Seo
@@ -164,10 +196,13 @@ export default function AdminSolutionFormPage() {
         >
           <ArrowLeft className="size-4" /> Back to Solutions
         </Link>
-        <AdminPageHeader
-          title={isEditing ? 'Edit Solution' : 'New Solution'}
-          description="Bundled service packages shown on /solutions."
-        />
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+          <AdminPageHeader
+            title={isEditing ? 'Edit Solution' : 'New Solution'}
+            description="Bundled service packages shown on /solutions."
+          />
+          <LangTabs active={activeLang} onChange={setActiveLang} jaComplete={jaComplete} />
+        </div>
       </Reveal>
 
       {loading ? (
@@ -183,16 +218,16 @@ export default function AdminSolutionFormPage() {
               <Section title="Basics">
                 <FormField
                   control={form.control}
-                  name="name"
+                  name={activeLang === 'en' ? 'nameEn' : 'nameJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Name {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           onChange={(e) => {
                             field.onChange(e)
-                            if (autoSlug) form.setValue('slug', slugify(e.target.value))
+                            if (autoSlug && activeLang === 'en') form.setValue('slug', slugify(e.target.value))
                           }}
                         />
                       </FormControl>
@@ -221,10 +256,10 @@ export default function AdminSolutionFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="shortDescription"
+                  name={activeLang === 'en' ? 'shortDescriptionEn' : 'shortDescriptionJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Short Description</FormLabel>
+                      <FormLabel>Short Description {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>
@@ -234,10 +269,10 @@ export default function AdminSolutionFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="heroStatement"
+                  name={activeLang === 'en' ? 'heroStatementEn' : 'heroStatementJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Hero Statement</FormLabel>
+                      <FormLabel>Hero Statement {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>
@@ -250,10 +285,10 @@ export default function AdminSolutionFormPage() {
               <Section title="Content">
                 <FormField
                   control={form.control}
-                  name="overviewText"
+                  name={activeLang === 'en' ? 'overviewTextEn' : 'overviewTextJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Overview</FormLabel>
+                      <FormLabel>Overview {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={4} {...field} />
                       </FormControl>
@@ -264,17 +299,30 @@ export default function AdminSolutionFormPage() {
                 />
               </Section>
 
-              <Section title="Highlights">
-                <ObjectListField
-                  form={form}
-                  name="highlights"
-                  fields={[
-                    { name: 'title', label: 'Title' },
-                    { name: 'description', label: 'Description', multiline: true },
-                  ]}
-                  emptyItem={{ title: '', description: '' }}
-                  addLabel="Add Highlight"
-                />
+              <Section title={`Highlights ${activeLang === 'ja' ? '(Japanese)' : ''}`}>
+                {activeLang === 'en' ? (
+                  <ObjectListField
+                    form={form}
+                    name="highlightsEn"
+                    fields={[
+                      { name: 'title', label: 'Title' },
+                      { name: 'description', label: 'Description', multiline: true },
+                    ]}
+                    emptyItem={{ title: '', description: '' }}
+                    addLabel="Add Highlight"
+                  />
+                ) : (
+                  <ObjectListField
+                    form={form}
+                    name="highlightsJa"
+                    fields={[
+                      { name: 'title', label: 'Title (Japanese)' },
+                      { name: 'description', label: 'Description (Japanese)', multiline: true },
+                    ]}
+                    emptyItem={{ title: '', description: '' }}
+                    addLabel="Add Highlight"
+                  />
+                )}
               </Section>
 
               <Section title="Included Services">
@@ -296,10 +344,10 @@ export default function AdminSolutionFormPage() {
               <Section title="SEO">
                 <FormField
                   control={form.control}
-                  name="seoTitle"
+                  name={activeLang === 'en' ? 'seoTitleEn' : 'seoTitleJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>SEO Title</FormLabel>
+                      <FormLabel>SEO Title {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -309,10 +357,10 @@ export default function AdminSolutionFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="seoDescription"
+                  name={activeLang === 'en' ? 'seoDescriptionEn' : 'seoDescriptionJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>SEO Description</FormLabel>
+                      <FormLabel>SEO Description {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>

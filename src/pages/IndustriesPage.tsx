@@ -1,26 +1,26 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getIndustries } from '@/lib/data'
 
 export default function IndustriesPage() {
-  const industries = getIndustries()
+  const { t } = useTranslation(['industries', 'common'])
+  const { locale } = useLocale()
+  const industries = getIndustries(locale)
 
   return (
     <>
-      <Seo
-        title="Industries We Serve"
-        description="TOTAL MEDIA works with international companies, Japanese corporations, government bodies, universities, hotels, MICE clients, and luxury brands across Japan."
-        path="/industries"
-      />
+      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/industries" />
       <PageHero
-        eyebrow="Industries"
-        title="Sector-Specific Experience, Not a Generic Template"
-        description="Different sectors bring different procurement cycles, protocol, and brand standards. We scope every engagement to the client in front of us."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Industries' }]}
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        description={t('description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
       />
 
       <section className="py-20 lg:py-28">
@@ -33,19 +33,19 @@ export default function IndustriesPage() {
                     <h2 className="text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
                       {industry.name}
                     </h2>
-                    <Link
+                    <LocalizedLink
                       to="/quote"
                       className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-signal hover:underline"
                     >
-                      Request a quote <ArrowRight className="size-4" />
-                    </Link>
+                      {t('requestQuote')} <ArrowRight className="size-4" />
+                    </LocalizedLink>
                   </div>
                   <div>
                     <p className="text-lg leading-relaxed text-muted-foreground">
                       {industry.description}
                     </p>
                     <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      Common Engagements
+                      {t('commonEngagements')}
                     </p>
                     <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                       {industry.useCases.map((useCase) => (
@@ -65,10 +65,7 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <CtaBand
-        title="Don't See Your Sector Listed?"
-        description="We work across far more contexts than any list can capture. Tell us what you're planning."
-      />
+      <CtaBand title={t('ctaTitle')} description={t('ctaDescription')} />
     </>
   )
 }

@@ -1,11 +1,13 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight, MapPin } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { getFeaturedProjects } from '@/lib/data'
 
 export function FeaturedProjects() {
+  const { t } = useTranslation('home')
   const projects = getFeaturedProjects(3)
 
   return (
@@ -13,22 +15,22 @@ export function FeaturedProjects() {
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Recent Work"
-            title="Featured Projects"
-            description="A sample of what these services look like when they come together on-site."
+            eyebrow={t('featuredProjects.eyebrow')}
+            title={t('featuredProjects.title')}
+            description={t('featuredProjects.description')}
           />
-          <Link
+          <LocalizedLink
             to="/portfolio"
             className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-signal hover:underline sm:flex"
           >
-            View full portfolio <ArrowRight className="size-4" />
-          </Link>
+            {t('featuredProjects.viewPortfolio')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {projects.map((project, i) => (
             <Reveal key={project.slug} delay={i * 0.08}>
-              <Link to={`/portfolio/${project.slug}`} className="group block">
+              <LocalizedLink to={`/portfolio/${project.slug}`} className="group block">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                   <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
                     <AbstractVisual seed={project.visualSeed} />
@@ -46,15 +48,15 @@ export function FeaturedProjects() {
                   </h3>
                   <p className="mt-1 text-sm text-muted-foreground">{project.client}</p>
                 </div>
-              </Link>
+              </LocalizedLink>
             </Reveal>
           ))}
         </div>
 
         <div className="mt-8 sm:hidden">
-          <Link to="/portfolio" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
-            View full portfolio <ArrowRight className="size-4" />
-          </Link>
+          <LocalizedLink to="/portfolio" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
+            {t('featuredProjects.viewPortfolio')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
       </div>
     </section>

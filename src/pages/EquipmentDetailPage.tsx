@@ -1,15 +1,18 @@
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import {
   getEquipmentItemBySlug,
   getEquipmentCategoryBySlug,
@@ -18,12 +21,6 @@ import {
 import type { EquipmentAvailability } from '@/content/types'
 import NotFoundPage from '@/pages/NotFoundPage'
 
-const AVAILABILITY_LABEL: Record<EquipmentAvailability, string> = {
-  'in-stock': 'In Stock',
-  limited: 'Limited Availability',
-  'made-to-order': 'Made to Order',
-}
-
 const AVAILABILITY_TONE: Record<EquipmentAvailability, string> = {
   'in-stock': 'bg-emerald-50 text-emerald-700',
   limited: 'bg-amber-50 text-amber-700',
@@ -31,9 +28,11 @@ const AVAILABILITY_TONE: Record<EquipmentAvailability, string> = {
 }
 
 export default function EquipmentDetailPage() {
+  const { t } = useTranslation(['equipment', 'common'])
+  const { locale } = useLocale()
   const { category = '', slug = '' } = useParams()
   const item = getEquipmentItemBySlug(slug)
-  const categoryData = getEquipmentCategoryBySlug(category)
+  const categoryData = getEquipmentCategoryBySlug(category, locale)
   const [activeImage, setActiveImage] = useState(0)
 
   if (!item || !categoryData || item.categorySlug !== category) return <NotFoundPage />
@@ -72,8 +71,8 @@ export default function EquipmentDetailPage() {
         description={item.summary}
         visualSeed={item.visualSeed}
         breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Equipment', to: '/equipment' },
+          { label: t('home', { ns: 'common' }), to: '/' },
+          { label: t('index.eyebrow'), to: '/equipment' },
           { label: categoryData.name, to: `/equipment/${categoryData.slug}` },
           { label: item.name },
         ]}
@@ -96,7 +95,7 @@ export default function EquipmentDetailPage() {
                       'aspect-square overflow-hidden rounded-lg ring-2 transition-all',
                       activeImage === i ? 'ring-signal' : 'ring-transparent hover:ring-border',
                     )}
-                    aria-label={`View image ${i + 1}`}
+                    aria-label={t('detail.viewImage', { n: i + 1 })}
                   >
                     <AbstractVisual seed={`${item.visualSeed}-${i}`} />
                   </button>
@@ -106,7 +105,7 @@ export default function EquipmentDetailPage() {
 
             <Reveal delay={0.1}>
               <div className="mt-10">
-                <h2 className="text-xl font-bold text-navy">Overview</h2>
+                <h2 className="text-xl font-bold text-navy">{t('detail.overview')}</h2>
                 <p className="mt-3 text-lg leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>
@@ -115,7 +114,7 @@ export default function EquipmentDetailPage() {
 
             <Reveal delay={0.15}>
               <div className="mt-10">
-                <h2 className="text-xl font-bold text-navy">Applications</h2>
+                <h2 className="text-xl font-bold text-navy">{t('detail.applications')}</h2>
                 <ul className="mt-4 grid gap-2 sm:grid-cols-2">
                   {item.applications.map((app) => (
                     <li key={app} className="rounded-md bg-mist px-3 py-2 text-sm text-navy">
@@ -131,23 +130,23 @@ export default function EquipmentDetailPage() {
             <div className="rounded-xl border border-border p-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  Availability
+                  {t('detail.availability')}
                 </h3>
                 <Badge className={cn('hover:bg-inherit', AVAILABILITY_TONE[item.availability])}>
-                  {AVAILABILITY_LABEL[item.availability]}
+                  {t(`availability.${item.availability}`)}
                 </Badge>
               </div>
               <Button asChild size="lg" className="mt-5 w-full bg-navy text-white hover:bg-navy-deep">
-                <Link to="/quote">
-                  Request a Quote
+                <LocalizedLink to="/quote">
+                  {t('buttons.getQuote', { ns: 'common' })}
                   <ArrowRight className="ml-1 size-4" />
-                </Link>
+                </LocalizedLink>
               </Button>
             </div>
 
             <div className="rounded-xl border border-border p-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                Specifications
+                {t('detail.specifications')}
               </h3>
               <dl className="mt-4 divide-y divide-border">
                 {item.specs.map((spec) => (
@@ -165,10 +164,10 @@ export default function EquipmentDetailPage() {
       {related.length > 0 && (
         <section className="bg-mist py-20 lg:py-24">
           <div className="container-page">
-            <SectionHeading eyebrow="Related" title="Related Equipment" />
+            <SectionHeading eyebrow={t('detail.related')} title={t('detail.relatedEquipment')} />
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               {related.map((relatedItem) => (
-                <Link
+                <LocalizedLink
                   key={relatedItem.slug}
                   to={`/equipment/${relatedItem.categorySlug}/${relatedItem.slug}`}
                   className="group overflow-hidden rounded-xl border border-border bg-white"
@@ -184,7 +183,7 @@ export default function EquipmentDetailPage() {
                     </h3>
                     <p className="mt-1.5 text-sm text-muted-foreground">{relatedItem.summary}</p>
                   </div>
-                </Link>
+                </LocalizedLink>
               ))}
             </div>
           </div>
@@ -192,8 +191,8 @@ export default function EquipmentDetailPage() {
       )}
 
       <CtaBand
-        title={`Ready to Book the ${item.name}?`}
-        description="We'll confirm availability, delivery logistics, and pricing within 1–2 business days."
+        title={t('detail.readyToBook', { name: item.name })}
+        description={t('detail.ctaDescription')}
       />
     </>
   )

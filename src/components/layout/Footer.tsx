@@ -1,58 +1,60 @@
-import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { Logo } from '@/components/brand/Logo'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentCategories } from '@/lib/data'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
-// Contact details below are placeholders — replace with the real
-// registered address, phone, and inbox before launch.
+// Phone/email are placeholders — replace with the real registered contact
+// details before launch. Address lines come from footer.json (translated),
+// not from here, since they differ by locale.
 const CONTACT = {
-  addressLines: ['TOTAL MEDIA Inc.', 'Shibuya-ku, Tokyo 150-0002, Japan'],
   phone: '+81 3-4567-8901',
   email: 'hello@totalmedia.co.jp',
 }
 
-function getFooterColumns() {
-  return [
+export function Footer() {
+  const { t } = useTranslation('footer')
+  const { locale } = useLocale()
+  const year = new Date().getFullYear()
+  const addressLines = t('address.lines', { returnObjects: true }) as string[]
+
+  const footerColumns = [
     {
-      title: 'Company',
+      title: t('columns.company'),
       links: [
-        { label: 'About', to: '/about' },
-        { label: 'Industries', to: '/industries' },
-        { label: 'Careers', to: '/careers' },
-        { label: 'Blog', to: '/blog' },
-        { label: 'Contact', to: '/contact' },
+        { label: t('links.about'), to: '/about' },
+        { label: t('links.industries'), to: '/industries' },
+        { label: t('links.careers'), to: '/careers' },
+        { label: t('links.blog'), to: '/blog' },
+        { label: t('links.contact'), to: '/contact' },
       ],
     },
     {
-      title: 'Services',
+      title: t('columns.services'),
       links: [
-        { label: 'All Services', to: '/services' },
-        { label: 'Solutions', to: '/solutions' },
-        { label: 'Equipment Rental', to: '/equipment' },
-        { label: 'Portfolio', to: '/portfolio' },
-        { label: 'Request a Quote', to: '/quote' },
+        { label: t('links.allServices'), to: '/services' },
+        { label: t('links.solutions'), to: '/solutions' },
+        { label: t('links.equipmentRental'), to: '/equipment' },
+        { label: t('links.portfolio'), to: '/portfolio' },
+        { label: t('links.requestQuote'), to: '/quote' },
       ],
     },
     {
-      title: 'Equipment',
-      links: getEquipmentCategories()
+      title: t('columns.equipment'),
+      links: getEquipmentCategories(locale)
         .slice(0, 5)
         .map((c) => ({ label: c.name, to: `/equipment/${c.slug}` })),
     },
     {
-      title: 'Support',
+      title: t('columns.support'),
       links: [
-        { label: 'FAQ', to: '/faq' },
-        { label: 'Privacy Policy', to: '/privacy-policy' },
-        { label: 'Terms & Conditions', to: '/terms-conditions' },
+        { label: t('links.faq'), to: '/faq' },
+        { label: t('links.privacyPolicy'), to: '/privacy-policy' },
+        { label: t('links.termsConditions'), to: '/terms-conditions' },
       ],
     },
   ]
-}
-
-export function Footer() {
-  const year = new Date().getFullYear()
-  const footerColumns = getFooterColumns()
 
   return (
     <footer className="bg-navy text-white">
@@ -60,12 +62,9 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
           <div>
             <Logo tone="white" />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
-              Full-service event production and technical solutions for
-              organizations operating across Japan.
-            </p>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">{t('tagline')}</p>
             <address className="mt-6 space-y-1 text-sm not-italic text-white/70">
-              {CONTACT.addressLines.map((line) => (
+              {addressLines.map((line) => (
                 <p key={line}>{line}</p>
               ))}
               <p>
@@ -85,7 +84,8 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white"
                 >
-                  WhatsApp: {WHATSAPP_DISPLAY_NUMBER}
+                  {t('whatsappPrefix')}
+                  {WHATSAPP_DISPLAY_NUMBER}
                 </a>
               </p>
             </address>
@@ -100,9 +100,9 @@ export function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link.to}>
-                      <Link to={link.to} className="text-sm text-white/80 hover:text-white">
+                      <LocalizedLink to={link.to} className="text-sm text-white/80 hover:text-white">
                         {link.label}
-                      </Link>
+                      </LocalizedLink>
                     </li>
                   ))}
                 </ul>
@@ -114,8 +114,8 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
-          <p>© {year} TOTAL MEDIA Inc. All rights reserved.</p>
-          <p>Creating Exceptional Events Across Japan.</p>
+          <p>{t('copyright', { year })}</p>
+          <p>{t('bottomTagline')}</p>
         </div>
       </div>
     </footer>

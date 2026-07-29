@@ -1,0 +1,106 @@
+{
+  "lastUpdated": "Last updated: July 22, 2026",
+  "privacy": {
+    "seoTitle": "Privacy Policy",
+    "seoDescription": "How TOTAL MEDIA collects, uses, and protects personal information submitted through this website.",
+    "title": "Privacy Policy",
+    "sections": [
+      {
+        "title": "1. Introduction",
+        "body": "TOTAL MEDIA Inc. (\"TOTAL MEDIA,\" \"we,\" \"us,\" or \"our\") respects your privacy and is committed to protecting personal information in accordance with Japan's Act on the Protection of Personal Information (APPI) and applicable international data protection standards. This policy explains what information we collect through this website, how we use it, and the choices available to you."
+      },
+      {
+        "title": "2. Information We Collect",
+        "intro": "We collect information you provide directly to us, including:",
+        "items": [
+          "Contact details submitted through our contact and quote request forms (name, company, email, phone number, country)",
+          "Event details submitted as part of a quote request (event type, venue, date, attendee count, budget range, requested services, uploaded files, and notes)",
+          "Career applications and related correspondence",
+          "Any other information you choose to provide when communicating with us"
+        ],
+        "outro": "We also collect limited technical information automatically, such as browser type, device information, and pages visited, to help us maintain and improve this website."
+      },
+      {
+        "title": "3. How We Use Your Information",
+        "intro": "We use the information we collect to:",
+        "items": [
+          "Respond to inquiries and prepare quotes and proposals",
+          "Plan, coordinate, and deliver contracted event and technical production services",
+          "Communicate with you about your event, request, or application",
+          "Improve our website, services, and internal operations",
+          "Comply with legal obligations"
+        ],
+        "outro": "We do not sell personal information to third parties."
+      },
+      {
+        "title": "4. Data Storage and Third-Party Services",
+        "body": "Information submitted through this website is stored using reputable third-party infrastructure providers engaged to operate our systems securely. We take reasonable administrative, technical, and physical measures to protect personal information against unauthorized access, loss, or misuse, consistent with APPI requirements."
+      },
+      {
+        "title": "5. Data Retention",
+        "body": "We retain personal information only as long as necessary to fulfill the purposes described in this policy, including any legal, accounting, or reporting requirements, after which it is securely deleted or anonymized."
+      },
+      {
+        "title": "6. Your Rights",
+        "body": "Subject to applicable law, you may request access to, correction of, or deletion of your personal information, or object to certain uses of it. To make a request, contact us using the details below."
+      },
+      {
+        "title": "7. Cookies",
+        "body": "This website may use cookies and similar technologies to support basic functionality and understand how the site is used. You can control cookie preferences through your browser settings."
+      },
+      {
+        "title": "8. Changes to This Policy",
+        "body": "We may update this policy from time to time. Material changes will be reflected by an updated \"Last updated\" date at the top of this page."
+      },
+      {
+        "title": "9. Contact Us",
+        "bodyPrefix": "Questions about this policy or how your information is handled can be directed to",
+        "email": "privacy@totalmedia.co.jp"
+      }
+    ]
+  },
+  "terms": {
+    "seoTitle": "Terms & Conditions",
+    "seoDescription": "The terms and conditions governing use of the TOTAL MEDIA website and quote request process.",
+    "title": "Terms & Conditions",
+    "sections": [
+      {
+        "title": "1. Acceptance of Terms",
+        "body": "By accessing or using this website, you agree to be bound by these Terms & Conditions. If you do not agree, please do not use this website."
+      },
+      {
+        "title": "2. Use of This Website",
+        "body": "This website is provided to share information about TOTAL MEDIA's services and to allow prospective clients to request quotes and contact us. You agree to use this website only for lawful purposes and not to submit false, misleading, or malicious information through any form on this site."
+      },
+      {
+        "title": "3. Quote Requests Are Not Binding Contracts",
+        "body": "Submitting a quote request or contact form does not create a contractual obligation between you and TOTAL MEDIA. A binding engagement is formed only upon mutual execution of a written services agreement or signed proposal."
+      },
+      {
+        "title": "4. Intellectual Property",
+        "body": "All content on this website — including text, graphics, the TOTAL MEDIA name and logo, and site design — is the property of TOTAL MEDIA Inc. or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works from this content without prior written permission."
+      },
+      {
+        "title": "5. Third-Party Links",
+        "body": "This website may contain links to third-party websites. TOTAL MEDIA is not responsible for the content, accuracy, or practices of any linked third-party site."
+      },
+      {
+        "title": "6. Limitation of Liability",
+        "body": "To the fullest extent permitted by law, TOTAL MEDIA shall not be liable for any indirect, incidental, or consequential damages arising from your use of this website. Nothing in these terms limits liability that cannot be limited under applicable law."
+      },
+      {
+        "title": "7. Governing Law",
+        "body": "These Terms & Conditions are governed by the laws of Japan. Any disputes arising from your use of this website shall be subject to the exclusive jurisdiction of the courts having jurisdiction over Tokyo, Japan."
+      },
+      {
+        "title": "8. Changes to These Terms",
+        "body": "We may revise these Terms & Conditions from time to time. Continued use of this website after changes are posted constitutes acceptance of the revised terms."
+      },
+      {
+        "title": "9. Contact Us",
+        "bodyPrefix": "Questions about these terms can be directed to",
+        "email": "legal@totalmedia.co.jp"
+      }
+    ]
+  }
+}

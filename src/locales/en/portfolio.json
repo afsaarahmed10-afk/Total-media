@@ -1,0 +1,30 @@
+{
+  "index": {
+    "seoTitle": "Portfolio",
+    "seoDescription": "Explore TOTAL MEDIA's portfolio of corporate events, conferences, exhibitions, hybrid productions, and outdoor ceremonies delivered across Japan.",
+    "eyebrow": "Portfolio",
+    "title": "Selected Work Across Japan",
+    "description": "A sample of the events our planning, technical design, and on-site teams have delivered — filter by format below.",
+    "noneFound": "No projects in this category yet.",
+    "ctaTitle": "Want Results Like These?",
+    "ctaDescription": "Tell us about your event and we'll show you how we'd approach it."
+  },
+  "categories": {
+    "All": "All",
+    "Conference": "Conference",
+    "Corporate": "Corporate",
+    "Exhibition": "Exhibition",
+    "Hybrid": "Hybrid",
+    "Virtual": "Virtual",
+    "Outdoor": "Outdoor"
+  },
+  "detail": {
+    "results": "Results",
+    "servicesUsed": "Services Used",
+    "equipmentUsed": "Equipment Used",
+    "moreWork": "More Work",
+    "moreProjects": "More {{category}} Projects",
+    "ctaTitle": "Have a Similar Event in Mind?",
+    "ctaDescription": "Tell us the details and we'll show you how we'd approach it."
+  }
+}

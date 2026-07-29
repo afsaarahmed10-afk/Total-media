@@ -1,21 +1,26 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { MapPin, Calendar, ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { getProjectBySlug, getServicesBySlugs, getProjects, getEquipmentItems } from '@/lib/data'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 export default function PortfolioDetailPage() {
+  const { t } = useTranslation(['portfolio', 'common'])
+  const { locale } = useLocale()
   const { slug = '' } = useParams()
   const project = getProjectBySlug(slug)
 
   if (!project) return <NotFoundPage />
 
-  const services = getServicesBySlugs(project.servicesUsed)
+  const services = getServicesBySlugs(project.servicesUsed, locale)
   const equipmentItems = getEquipmentItems()
   const equipmentUsed = project.equipmentUsed
     .map((eqSlug) => equipmentItems.find((e) => e.slug === eqSlug))
@@ -32,13 +37,13 @@ export default function PortfolioDetailPage() {
         path={`/portfolio/${project.slug}`}
       />
       <PageHero
-        eyebrow={project.category}
+        eyebrow={t(`categories.${project.category}`)}
         title={project.title}
         description={project.summary}
         visualSeed={project.visualSeed}
         breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Portfolio', to: '/portfolio' },
+          { label: t('home', { ns: 'common' }), to: '/' },
+          { label: t('index.eyebrow'), to: '/portfolio' },
           { label: project.title },
         ]}
       >
@@ -73,7 +78,7 @@ export default function PortfolioDetailPage() {
           <div className="space-y-8">
             <div className="rounded-xl border border-border p-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                Results
+                {t('detail.results')}
               </h3>
               <dl className="mt-4 space-y-4">
                 {project.stats.map((stat) => (
@@ -87,18 +92,18 @@ export default function PortfolioDetailPage() {
 
             <div className="rounded-xl border border-border p-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                Services Used
+                {t('detail.servicesUsed')}
               </h3>
               <ul className="mt-4 space-y-2">
                 {services.map((service) => (
                   <li key={service.slug}>
-                    <Link
+                    <LocalizedLink
                       to={`/services/${service.slug}`}
                       className="flex items-center justify-between text-sm text-charcoal hover:text-signal"
                     >
                       {service.name}
                       <ArrowRight className="size-3.5" />
-                    </Link>
+                    </LocalizedLink>
                   </li>
                 ))}
               </ul>
@@ -107,18 +112,18 @@ export default function PortfolioDetailPage() {
             {equipmentUsed.length > 0 && (
               <div className="rounded-xl border border-border p-6">
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  Equipment Used
+                  {t('detail.equipmentUsed')}
                 </h3>
                 <ul className="mt-4 space-y-2">
                   {equipmentUsed.map((eq) => (
                     <li key={eq.slug}>
-                      <Link
+                      <LocalizedLink
                         to={`/equipment/${eq.categorySlug}/${eq.slug}`}
                         className="flex items-center justify-between text-sm text-charcoal hover:text-signal"
                       >
                         {eq.name}
                         <ArrowRight className="size-3.5" />
-                      </Link>
+                      </LocalizedLink>
                     </li>
                   ))}
                 </ul>
@@ -131,10 +136,13 @@ export default function PortfolioDetailPage() {
       {otherProjects.length > 0 && (
         <section className="bg-mist py-20 lg:py-24">
           <div className="container-page">
-            <SectionHeading eyebrow="More Work" title={`More ${project.category} Projects`} />
+            <SectionHeading
+              eyebrow={t('detail.moreWork')}
+              title={t('detail.moreProjects', { category: t(`categories.${project.category}`) })}
+            />
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               {otherProjects.map((p) => (
-                <Link key={p.slug} to={`/portfolio/${p.slug}`} className="group block">
+                <LocalizedLink key={p.slug} to={`/portfolio/${p.slug}`} className="group block">
                   <div className="aspect-[4/3] overflow-hidden rounded-xl">
                     <div className="transition-transform duration-500 group-hover:scale-105">
                       <AbstractVisual seed={p.visualSeed} />
@@ -142,17 +150,14 @@ export default function PortfolioDetailPage() {
                   </div>
                   <h3 className="mt-3 font-semibold text-navy group-hover:text-signal">{p.title}</h3>
                   <p className="text-sm text-muted-foreground">{p.client}</p>
-                </Link>
+                </LocalizedLink>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      <CtaBand
-        title="Have a Similar Event in Mind?"
-        description="Tell us the details and we'll show you how we'd approach it."
-      />
+      <CtaBand title={t('detail.ctaTitle')} description={t('detail.ctaDescription')} />
     </>
   )
 }

@@ -1,0 +1,119 @@
+{
+  "seo": {
+    "title": "Event Production & Technical Solutions Across Japan",
+    "description": "TOTAL MEDIA plans, produces, and delivers corporate events, conferences, exhibitions, and hybrid broadcasts across Japan — LED, audio, lighting, staging, and streaming, end to end.",
+    "orgDescription": "Full-service event production and technical solutions company operating across Japan — event planning, technical production, and equipment rental."
+  },
+  "hero": {
+    "eyebrow": "Event Production & Technical Solutions",
+    "title": "Creating Exceptional Events Across Japan.",
+    "description": "We plan, produce, and engineer corporate events, conferences, exhibitions, and hybrid broadcasts — LED, audio, lighting, staging, and streaming, delivered as one accountable production from a single technical partner.",
+    "viewServices": "View Our Services"
+  },
+  "companyIntro": {
+    "eyebrow": "Who We Are",
+    "title": "Equipment rental is one part of what we do. It was never the whole business.",
+    "paragraph1": "TOTAL MEDIA is a complete event production and technical solutions company operating nationwide across Japan. We plan events, design technical production, manage exhibitions and conferences on-site, and operate the LED, audio, lighting, and camera systems ourselves — as one accountable team, not a coordination exercise across separate vendors.",
+    "paragraph2": "International companies, Japanese corporations, event agencies, government bodies, universities, and luxury brands come to us when the technical execution has to be right the first time, with no second take.",
+    "stats": [
+      { "value": "15+", "label": "Years producing events across Japan" },
+      { "value": "40+", "label": "Cities served nationwide" },
+      { "value": "10", "label": "Equipment categories in-house" },
+      { "value": "99.9%", "label": "Live streaming uptime record" }
+    ]
+  },
+  "coreServices": {
+    "eyebrow": "What We Do",
+    "title": "Core Services",
+    "description": "From full event production to individual technical disciplines — engaged together or on their own.",
+    "viewAll": "View all 15 services",
+    "learnMore": "Learn more"
+  },
+  "industriesServed": {
+    "eyebrow": "Who We Serve",
+    "title": "Industries We Work With",
+    "description": "Different sectors bring different constraints — procurement cycles, protocol, brand standards. We scope to the client, not a template."
+  },
+  "whyChooseUs": {
+    "eyebrow": "Why TOTAL MEDIA",
+    "title": "What Sets Us Apart",
+    "description": "These aren't marketing lines — they're the operational commitments every proposal is built on.",
+    "reasons": [
+      {
+        "title": "One Accountable Team",
+        "description": "Planning, technical design, and on-site execution from a single team — not a coordination exercise across separate vendors."
+      },
+      {
+        "title": "Nationwide Coverage",
+        "description": "Equipment and crew logistics built for events across Japan, from major convention centers to regional venues."
+      },
+      {
+        "title": "In-House Equipment",
+        "description": "LED, audio, lighting, and rigging maintained and calibrated on our own schedule — not subcontracted piecemeal."
+      },
+      {
+        "title": "Bilingual by Default",
+        "description": "Japanese/English project management and on-site coordination as standard for international stakeholders."
+      },
+      {
+        "title": "Redundant Technical Systems",
+        "description": "Dual circuits and backup paths for anything broadcast-critical, monitored by a dedicated technical director."
+      },
+      {
+        "title": "Transparent Pricing",
+        "description": "Every proposal itemizes equipment, labor, and production management separately — no bundled black-box pricing."
+      }
+    ]
+  },
+  "processSteps": {
+    "eyebrow": "How We Work",
+    "title": "Our Process",
+    "description": "The same five stages whether the event is a boardroom briefing or a two-day conference.",
+    "steps": [
+      { "number": "01", "title": "Consultation", "description": "We start with your objectives, audience, and constraints — not a standard package." },
+      { "number": "02", "title": "Proposal & Design", "description": "A detailed technical plan and transparent, itemized pricing within 1–2 business days." },
+      { "number": "03", "title": "Pre-Production", "description": "Venue coordination, equipment allocation, and technical rehearsal before event day." },
+      { "number": "04", "title": "Live Execution", "description": "On-site production management and technical operation by the team that designed it." },
+      { "number": "05", "title": "Post-Event Review", "description": "A structured report and asset handover — what worked, and what to refine next time." }
+    ]
+  },
+  "featuredProjects": {
+    "eyebrow": "Recent Work",
+    "title": "Featured Projects",
+    "description": "A sample of what these services look like when they come together on-site.",
+    "viewPortfolio": "View full portfolio"
+  },
+  "equipmentShowcase": {
+    "eyebrow": "Equipment Rental",
+    "title": "A Nationwide Technical Inventory",
+    "description": "Broadcast and touring-grade equipment, maintained on a fixed inspection schedule — available on its own or with our production team.",
+    "browseCatalogue": "Browse full catalogue"
+  },
+  "testimonials": {
+    "eyebrow": "Client Testimonials",
+    "title": "What Clients Say",
+    "showTestimonial": "Show testimonial {{n}}",
+    "previous": "Previous testimonial",
+    "next": "Next testimonial"
+  },
+  "trustedBy": {
+    "label": "Trusted By Organizations Across Industries"
+  },
+  "latestArticles": {
+    "eyebrow": "From the Blog",
+    "title": "Latest Articles",
+    "description": "Field notes on event planning, technical production, and what we've learned running events across Japan.",
+    "visitBlog": "Visit the blog",
+    "minRead": "min read"
+  },
+  "homeFaq": {
+    "eyebrow": "Common Questions",
+    "title": "Frequently Asked Questions",
+    "description": "A few of the questions we hear most often from new clients.",
+    "viewAll": "View all FAQs"
+  },
+  "cta": {
+    "title": "Ready to Plan Your Next Event?",
+    "description": "Tell us what you're planning and we'll respond with a detailed proposal within 1–2 business days."
+  }
+}

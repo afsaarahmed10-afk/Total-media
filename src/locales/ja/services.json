@@ -1,0 +1,35 @@
+{
+  "index": {
+    "seoTitle": "イベント制作サービス",
+    "seoDescription": "企業イベント・カンファレンスからLED・音響・照明ソリューションまで、TOTAL MEDIAが日本全国で提供するイベント制作・技術サービスの全体像をご紹介します。",
+    "eyebrow": "サービス",
+    "title": "イベントに必要なすべての専門分野",
+    "description": "個別にご依頼いただくことも、フル制作としてご依頼いただくことも可能です。企画・技術設計・当日運営を、責任を持つ単一のチームが担当します。",
+    "byEventType": "イベントの種類別",
+    "eventFormats": "対応可能なイベント形式",
+    "eventFormatsDescription": "社内向けタウンホールから大規模な一般公開展示会まで、固定テンプレートではなく形式に合わせてスコープを設計します。",
+    "byTechnicalDiscipline": "技術分野別",
+    "technicalServices": "対応可能な技術サービス",
+    "technicalServicesDescription": "個別分野単体でも、単一のテクニカルディレクターの下でまとめてでもご依頼いただけます。",
+    "learnMore": "詳しく見る",
+    "ctaTitle": "どのサービスが合うかお悩みですか？",
+    "ctaDescription": "ご検討中の内容をお聞かせください。最も高額なプランではなく、最適なスコープをご提案します。",
+    "exploreSolutions": "ソリューションを見る"
+  },
+  "detail": {
+    "eventType": "イベントの種類",
+    "technicalDiscipline": "技術分野",
+    "whatsIncluded": "対応内容",
+    "howItWorks": "進め方",
+    "step": "STEP {{n}}",
+    "idealFor": "こんな場面に",
+    "relatedEquipment": "関連機材",
+    "requestQuoteFor": "{{name}}の見積もりを依頼する",
+    "questions": "ご質問",
+    "frequentlyAsked": "よくある質問",
+    "related": "関連サービス",
+    "youMightAlsoNeed": "こちらもおすすめです",
+    "readyToPlan": "{{name}}についてご相談ください",
+    "ctaDescription": "詳細をお聞かせください。1〜2営業日以内にご提案をお送りします。"
+  }
+}

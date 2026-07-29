@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import { useLocale } from '@/lib/locale/LocaleContext'
 
 const SITE_NAME = 'TOTAL MEDIA'
 const SITE_URL = 'https://www.totalmedia.co.jp'
@@ -20,7 +21,11 @@ interface SeoProps {
 }
 
 export function Seo({ title, description, path, image, jsonLd, breadcrumbs, noindex }: SeoProps) {
-  const url = `${SITE_URL}${path}`
+  // `path` is always the canonical, unprefixed form (e.g. "/about") —
+  // callers never pass the `/en` prefix themselves. `isLocalized` is false
+  // on reserved (auth/dashboard/admin) routes, which have no ja/en variant.
+  const { locale, isLocalized, buildPath } = useLocale()
+  const url = `${SITE_URL}${isLocalized ? buildPath(path, locale) : path}`
   const ogImage = image ?? DEFAULT_OG_IMAGE
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
 
@@ -32,7 +37,7 @@ export function Seo({ title, description, path, image, jsonLd, breadcrumbs, noin
           '@type': 'ListItem',
           position: index + 1,
           name: item.name,
-          item: `${SITE_URL}${item.path}`,
+          item: `${SITE_URL}${isLocalized ? buildPath(item.path, locale) : item.path}`,
         })),
       }
     : null
@@ -43,10 +48,17 @@ export function Seo({ title, description, path, image, jsonLd, breadcrumbs, noin
   ]
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang: locale }}>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
+      {isLocalized && (
+        <>
+          <link rel="alternate" hrefLang="ja" href={`${SITE_URL}${buildPath(path, 'ja')}`} />
+          <link rel="alternate" hrefLang="en" href={`${SITE_URL}${buildPath(path, 'en')}`} />
+          <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${buildPath(path, 'ja')}`} />
+        </>
+      )}
       {noindex && <meta name="robots" content="noindex, nofollow" />}
 
       <meta property="og:type" content="website" />

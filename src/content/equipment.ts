@@ -1,23 +1,35 @@
-import type { EquipmentItem } from './types'
+import type { BilingualEquipmentItem } from './types'
 
-export const equipmentItems: EquipmentItem[] = [
+export const equipmentItems: BilingualEquipmentItem[] = [
   // Indoor LED
   {
     id: 'eq-led-in-p1-9',
     slug: 'indoor-led-p1-9-fine-pitch',
     categorySlug: 'indoor-led',
-    name: 'P1.9 Fine-Pitch Indoor LED',
-    summary: 'Ultra-fine pitch panel for close-viewing stage backdrops and broadcast-facing displays.',
-    description:
+    nameEn: 'P1.9 Fine-Pitch Indoor LED',
+    nameJa: 'P1.9 ファインピッチ屋内LED',
+    summaryEn: 'Ultra-fine pitch panel for close-viewing stage backdrops and broadcast-facing displays.',
+    summaryJa: '近距離視聴のステージ背景や放送向けディスプレイに適した超ファインピッチパネル。',
+    descriptionEn:
       'Our finest indoor pitch, specified for environments where the audience or camera sits close to the wall — broadcast backdrops, boardroom displays, and stage content viewed from the front rows. Seamless cabinet joins hold up under camera close-ups.',
-    specs: [
+    descriptionJa:
+      '自社最高精細の屋内ピッチで、オーディエンスやカメラがウォールに近い環境向けに仕様設計されています。放送背景、役員会議室のディスプレイ、前列から視聴されるステージコンテンツなどに適しています。継ぎ目のないキャビネット接合により、カメラのクローズアップにも耐えます。',
+    specsEn: [
       { label: 'Pixel Pitch', value: '1.9mm' },
       { label: 'Brightness', value: '800 nits' },
       { label: 'Cabinet Size', value: '500 x 500mm' },
       { label: 'Refresh Rate', value: '3840Hz' },
       { label: 'Recommended Viewing Distance', value: '2m+' },
     ],
-    applications: ['Broadcast backdrops', 'Boardroom and briefing room displays', 'Close-viewing stage content'],
+    specsJa: [
+      { label: 'ピクセルピッチ', value: '1.9mm' },
+      { label: '輝度', value: '800 nits' },
+      { label: 'キャビネットサイズ', value: '500 x 500mm' },
+      { label: 'リフレッシュレート', value: '3840Hz' },
+      { label: '推奨視聴距離', value: '2m以上' },
+    ],
+    applicationsEn: ['Broadcast backdrops', 'Boardroom and briefing room displays', 'Close-viewing stage content'],
+    applicationsJa: ['放送用背景', '役員会議室・ブリーフィングルームのディスプレイ', '近距離視聴のステージコンテンツ'],
     availability: 'limited',
     relatedItemSlugs: ['indoor-led-p2-6-standard', 'camera-broadcast-package'],
     visualSeed: 'indoor-led-p1-9-fine-pitch',
@@ -26,18 +38,30 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-led-in-p2-6',
     slug: 'indoor-led-p2-6-standard',
     categorySlug: 'indoor-led',
-    name: 'P2.6 Indoor LED Panel',
-    summary: 'Our most-deployed indoor pitch, balancing image quality and cost for standard stage backdrops.',
-    description:
+    nameEn: 'P2.6 Indoor LED Panel',
+    nameJa: 'P2.6 屋内LEDパネル',
+    summaryEn: 'Our most-deployed indoor pitch, balancing image quality and cost for standard stage backdrops.',
+    summaryJa: '最も導入実績の多い屋内ピッチ。標準的なステージ背景向けに画質とコストのバランスを取っています。',
+    descriptionEn:
       'The standard specification for keynote and conference stage backdrops, where viewing distance is typically beyond three meters. Lightweight cabinets and quick-lock rigging keep build time down without compromising image quality.',
-    specs: [
+    descriptionJa:
+      '視聴距離が通常3メートル以上となる基調講演・カンファレンスのステージ背景向けの標準仕様です。軽量キャビネットとクイックロック式リギングにより、画質を損なうことなく施工時間を短縮します。',
+    specsEn: [
       { label: 'Pixel Pitch', value: '2.6mm' },
       { label: 'Brightness', value: '1000 nits' },
       { label: 'Cabinet Size', value: '500 x 500mm' },
       { label: 'Refresh Rate', value: '3840Hz' },
       { label: 'Recommended Viewing Distance', value: '3m+' },
     ],
-    applications: ['Keynote and conference backdrops', 'Exhibition booth walls', 'Product launch stages'],
+    specsJa: [
+      { label: 'ピクセルピッチ', value: '2.6mm' },
+      { label: '輝度', value: '1000 nits' },
+      { label: 'キャビネットサイズ', value: '500 x 500mm' },
+      { label: 'リフレッシュレート', value: '3840Hz' },
+      { label: '推奨視聴距離', value: '3m以上' },
+    ],
+    applicationsEn: ['Keynote and conference backdrops', 'Exhibition booth walls', 'Product launch stages'],
+    applicationsJa: ['基調講演・カンファレンス背景', '展示会ブースウォール', '製品発表会ステージ'],
     availability: 'in-stock',
     relatedItemSlugs: ['indoor-led-p1-9-fine-pitch', 'indoor-led-p3-9-rental'],
     visualSeed: 'indoor-led-p2-6-standard',
@@ -46,18 +70,30 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-led-in-p3-9',
     slug: 'indoor-led-p3-9-rental',
     categorySlug: 'indoor-led',
-    name: 'P3.9 Indoor Rental Panel',
-    summary: 'High-volume rental panel for large-format indoor walls where distance allows a wider pitch.',
-    description:
+    nameEn: 'P3.9 Indoor Rental Panel',
+    nameJa: 'P3.9 屋内レンタルパネル',
+    summaryEn: 'High-volume rental panel for large-format indoor walls where distance allows a wider pitch.',
+    summaryJa: '視聴距離に余裕があり広めのピッチが許容される大型屋内ウォール向けの、高稼働率レンタルパネル。',
+    descriptionEn:
       'Specified for large indoor walls — exhibition hall centerpieces, gala backdrops — where viewing distance is generous enough that a wider pitch delivers the same perceived quality at lower cost and faster build time.',
-    specs: [
+    descriptionJa:
+      '展示ホールの目玉展示やガラディナーの背景など、視聴距離に余裕があり広めのピッチでも同等の視覚品質を低コスト・短工期で実現できる大型屋内ウォール向けに仕様設計されています。',
+    specsEn: [
       { label: 'Pixel Pitch', value: '3.9mm' },
       { label: 'Brightness', value: '1200 nits' },
       { label: 'Cabinet Size', value: '500 x 1000mm' },
       { label: 'Refresh Rate', value: '1920Hz' },
       { label: 'Recommended Viewing Distance', value: '4m+' },
     ],
-    applications: ['Large exhibition hall walls', 'Gala and ceremony backdrops', 'Multi-panel curved configurations'],
+    specsJa: [
+      { label: 'ピクセルピッチ', value: '3.9mm' },
+      { label: '輝度', value: '1200 nits' },
+      { label: 'キャビネットサイズ', value: '500 x 1000mm' },
+      { label: 'リフレッシュレート', value: '1920Hz' },
+      { label: '推奨視聴距離', value: '4m以上' },
+    ],
+    applicationsEn: ['Large exhibition hall walls', 'Gala and ceremony backdrops', 'Multi-panel curved configurations'],
+    applicationsJa: ['大型展示ホールウォール', 'ガラ・式典の背景', '複数パネルによる曲面構成'],
     availability: 'in-stock',
     relatedItemSlugs: ['indoor-led-p2-6-standard', 'truss-box-ground-support'],
     visualSeed: 'indoor-led-p3-9-rental',
@@ -68,18 +104,30 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-led-out-p3-9',
     slug: 'outdoor-led-p3-9-weatherproof',
     categorySlug: 'outdoor-led',
-    name: 'P3.9 Outdoor Weatherproof Panel',
-    summary: 'IP65-rated outdoor panel for daylight-visible ceremonies and activations.',
-    description:
+    nameEn: 'P3.9 Outdoor Weatherproof Panel',
+    nameJa: 'P3.9 屋外防水パネル',
+    summaryEn: 'IP65-rated outdoor panel for daylight-visible ceremonies and activations.',
+    summaryJa: '日中でも視認できる、式典・販促イベント向けのIP65防水屋外パネル。',
+    descriptionEn:
       'Sealed for weather and specified for daylight visibility, this panel is our standard for outdoor ceremonies, activations, and stages where the screen needs to hold up against sun, wind, and light rain without a service interruption.',
-    specs: [
+    descriptionJa:
+      '防水密閉構造で日中の視認性にも対応した、屋外式典・販促イベント・ステージ向けの標準パネルです。日差し・風・小雨の中でも中断なく稼働します。',
+    specsEn: [
       { label: 'Pixel Pitch', value: '3.9mm' },
       { label: 'Brightness', value: '5500 nits' },
       { label: 'IP Rating', value: 'IP65 (front & rear)' },
       { label: 'Cabinet Size', value: '500 x 500mm' },
       { label: 'Wind Load Rating', value: 'Engineered per structural review' },
     ],
-    applications: ['Outdoor ceremonies', 'Brand activations', 'Festival and public event stages'],
+    specsJa: [
+      { label: 'ピクセルピッチ', value: '3.9mm' },
+      { label: '輝度', value: '5500 nits' },
+      { label: '防水等級', value: 'IP65（前面・背面）' },
+      { label: 'キャビネットサイズ', value: '500 x 500mm' },
+      { label: '耐風荷重', value: '構造審査により個別設計' },
+    ],
+    applicationsEn: ['Outdoor ceremonies', 'Brand activations', 'Festival and public event stages'],
+    applicationsJa: ['屋外式典', 'ブランド販促イベント', 'フェスティバル・公開イベントのステージ'],
     availability: 'in-stock',
     relatedItemSlugs: ['outdoor-led-p4-8-screen', 'truss-tower-system'],
     visualSeed: 'outdoor-led-p3-9-weatherproof',
@@ -88,18 +136,30 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-led-out-p4-8',
     slug: 'outdoor-led-p4-8-screen',
     categorySlug: 'outdoor-led',
-    name: 'P4.8 Outdoor LED Screen',
-    summary: 'Large-format outdoor screen system for distant viewing and high-brightness daylight conditions.',
-    description:
+    nameEn: 'P4.8 Outdoor LED Screen',
+    nameJa: 'P4.8 屋外LEDスクリーン',
+    summaryEn: 'Large-format outdoor screen system for distant viewing and high-brightness daylight conditions.',
+    summaryJa: '遠距離視聴と高輝度の日中環境に対応する大型屋外スクリーンシステム。',
+    descriptionEn:
       'Built for large outdoor footprints where viewing distance runs long — outdoor ceremony backdrops, IMAG screens for large audiences, and public-facing brand walls that need to compete with direct sunlight.',
-    specs: [
+    descriptionJa:
+      '視聴距離が長くなる大規模屋外会場向けに構築されています。屋外式典の背景、大規模オーディエンス向けIMAGスクリーン、直射日光下でも視認できるブランドウォールなどに対応します。',
+    specsEn: [
       { label: 'Pixel Pitch', value: '4.8mm' },
       { label: 'Brightness', value: '6000 nits' },
       { label: 'IP Rating', value: 'IP65 (front & rear)' },
       { label: 'Cabinet Size', value: '500 x 1000mm' },
       { label: 'Recommended Viewing Distance', value: '6m+' },
     ],
-    applications: ['Large outdoor ceremonies', 'IMAG screens for large audiences', 'Outdoor brand activations'],
+    specsJa: [
+      { label: 'ピクセルピッチ', value: '4.8mm' },
+      { label: '輝度', value: '6000 nits' },
+      { label: '防水等級', value: 'IP65（前面・背面）' },
+      { label: 'キャビネットサイズ', value: '500 x 1000mm' },
+      { label: '推奨視聴距離', value: '6m以上' },
+    ],
+    applicationsEn: ['Large outdoor ceremonies', 'IMAG screens for large audiences', 'Outdoor brand activations'],
+    applicationsJa: ['大規模屋外式典', '大規模オーディエンス向けIMAGスクリーン', '屋外ブランド販促イベント'],
     availability: 'in-stock',
     relatedItemSlugs: ['outdoor-led-p3-9-weatherproof', 'camera-ptz-system'],
     visualSeed: 'outdoor-led-p4-8-screen',
@@ -108,18 +168,30 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-led-out-p6-6',
     slug: 'outdoor-led-p6-6-wall',
     categorySlug: 'outdoor-led',
-    name: 'P6.6 Outdoor LED Wall',
-    summary: 'Long-throw outdoor wall for stadium-scale distance and rapid multi-panel deployment.',
-    description:
+    nameEn: 'P6.6 Outdoor LED Wall',
+    nameJa: 'P6.6 屋外LEDウォール',
+    summaryEn: 'Long-throw outdoor wall for stadium-scale distance and rapid multi-panel deployment.',
+    summaryJa: 'スタジアム規模の視聴距離と迅速な複数パネル設営に対応する、長距離視認性の屋外ウォール。',
+    descriptionEn:
       'The widest outdoor pitch in our inventory, deployed for very large audiences and long viewing distances where rapid multi-panel build time matters as much as brightness — outdoor festivals, large ceremonies, and public gatherings.',
-    specs: [
+    descriptionJa:
+      '自社在庫の中で最も広い屋外ピッチです。非常に大規模なオーディエンスと長い視聴距離が想定され、輝度と同じくらい迅速な複数パネル施工が重要となる屋外フェスティバル、大規模式典、公開イベントに導入されます。',
+    specsEn: [
       { label: 'Pixel Pitch', value: '6.6mm' },
       { label: 'Brightness', value: '6500 nits' },
       { label: 'IP Rating', value: 'IP65 (front & rear)' },
       { label: 'Cabinet Size', value: '500 x 1000mm' },
       { label: 'Recommended Viewing Distance', value: '10m+' },
     ],
-    applications: ['Stadium-scale outdoor events', 'Large public ceremonies', 'Festival main stage screens'],
+    specsJa: [
+      { label: 'ピクセルピッチ', value: '6.6mm' },
+      { label: '輝度', value: '6500 nits' },
+      { label: '防水等級', value: 'IP65（前面・背面）' },
+      { label: 'キャビネットサイズ', value: '500 x 1000mm' },
+      { label: '推奨視聴距離', value: '10m以上' },
+    ],
+    applicationsEn: ['Stadium-scale outdoor events', 'Large public ceremonies', 'Festival main stage screens'],
+    applicationsJa: ['スタジアム規模の屋外イベント', '大規模公開式典', 'フェスティバルのメインステージスクリーン'],
     availability: 'limited',
     relatedItemSlugs: ['outdoor-led-p4-8-screen', 'stage-modular-deck'],
     visualSeed: 'outdoor-led-p6-6-wall',
@@ -130,17 +202,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-audio-line-array',
     slug: 'audio-line-array-pa',
     categorySlug: 'audio',
-    name: 'Line Array PA System',
-    summary: 'Scalable line array system for even coverage across conference and ceremony spaces.',
-    description:
+    nameEn: 'Line Array PA System',
+    nameJa: 'ラインアレイPAシステム',
+    summaryEn: 'Scalable line array system for even coverage across conference and ceremony spaces.',
+    summaryJa: 'カンファレンス・式典空間全体に均一な音圧をもたらす、スケーラブルなラインアレイシステム。',
+    descriptionEn:
       'Our primary PA system for mid-to-large rooms, configured per event to deliver even coverage front to back without the hot spots and dead zones of point-source speakers. Scales from a single hang to full stereo arrays for larger halls.',
-    specs: [
+    descriptionJa:
+      '中〜大規模会場向けの主力PAシステムです。ポイントソーススピーカーにありがちな音圧の偏りや死角なく、前方から後方まで均一なカバレッジをイベントごとに構成します。単一ハングから大規模ホール向けのフルステレオアレイまでスケール可能です。',
+    specsEn: [
       { label: 'Configuration', value: 'Modular line array, scalable per room' },
       { label: 'Frequency Response', value: '38Hz – 20kHz' },
       { label: 'Max SPL', value: '138dB (array dependent)' },
       { label: 'Rigging', value: 'Flown or ground-stacked' },
     ],
-    applications: ['Conference and keynote halls', 'Award ceremonies and galas', 'Multi-purpose venue spaces'],
+    specsJa: [
+      { label: '構成', value: 'モジュール式ラインアレイ、会場に合わせてスケール可能' },
+      { label: '周波数特性', value: '38Hz〜20kHz' },
+      { label: '最大音圧レベル', value: '138dB（アレイ構成により変動）' },
+      { label: 'リギング', value: 'フライングまたはグラウンドスタック' },
+    ],
+    applicationsEn: ['Conference and keynote halls', 'Award ceremonies and galas', 'Multi-purpose venue spaces'],
+    applicationsJa: ['カンファレンス・基調講演ホール', '授賞式・ガラディナー', '多目的会場空間'],
     availability: 'in-stock',
     relatedItemSlugs: ['audio-digital-mixing-console', 'truss-motorized-hoist'],
     visualSeed: 'audio-line-array-pa',
@@ -149,17 +232,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-audio-mixing-console',
     slug: 'audio-digital-mixing-console',
     categorySlug: 'audio',
-    name: 'Digital Mixing Console',
-    summary: 'Multi-channel digital console for live mixing, monitor mixes, and broadcast feeds.',
-    description:
+    nameEn: 'Digital Mixing Console',
+    nameJa: 'デジタルミキシングコンソール',
+    summaryEn: 'Multi-channel digital console for live mixing, monitor mixes, and broadcast feeds.',
+    summaryJa: 'ライブミキシング、モニターミックス、放送フィードに対応するマルチチャンネルデジタルコンソール。',
+    descriptionEn:
       'A digital console platform operated by a dedicated engineer for every event, supporting simultaneous front-of-house mixing, monitor mixes for presenters, and a clean, separate feed for broadcast or recording.',
-    specs: [
+    descriptionJa:
+      'すべてのイベントで専任エンジニアが操作するデジタルコンソールプラットフォームです。客席向けミキシング、登壇者向けモニターミックス、放送・収録用のクリーンな独立フィードを同時に対応できます。',
+    specsEn: [
       { label: 'Channel Count', value: 'Up to 64 input channels' },
       { label: 'Outputs', value: 'FOH, monitor, and broadcast feeds simultaneously' },
       { label: 'Redundancy', value: 'Dual power supply, backup console option' },
       { label: 'Recording', value: 'Multi-track session recording available' },
     ],
-    applications: ['Live event mixing', 'Multi-language interpretation routing', 'Broadcast and recording feeds'],
+    specsJa: [
+      { label: 'チャンネル数', value: '最大64入力チャンネル' },
+      { label: '出力', value: '客席・モニター・放送フィードを同時出力' },
+      { label: '冗長性', value: 'デュアル電源、バックアップコンソールオプション' },
+      { label: '収録', value: 'マルチトラックセッション収録対応' },
+    ],
+    applicationsEn: ['Live event mixing', 'Multi-language interpretation routing', 'Broadcast and recording feeds'],
+    applicationsJa: ['ライブイベントのミキシング', '多言語通訳ルーティング', '放送・収録用フィード'],
     availability: 'in-stock',
     relatedItemSlugs: ['audio-line-array-pa', 'audio-wireless-microphone-system'],
     visualSeed: 'audio-digital-mixing-console',
@@ -168,17 +262,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-audio-wireless-mic',
     slug: 'audio-wireless-microphone-system',
     categorySlug: 'audio',
-    name: 'Wireless Microphone System',
-    summary: 'RF-coordinated wireless handheld, lavalier, and headset microphones for speakers and panels.',
-    description:
+    nameEn: 'Wireless Microphone System',
+    nameJa: 'ワイヤレスマイクシステム',
+    summaryEn: 'RF-coordinated wireless handheld, lavalier, and headset microphones for speakers and panels.',
+    summaryJa: '登壇者・パネリスト向けの、電波調整済みワイヤレスハンドヘルド・ラベリア・ヘッドセットマイク。',
+    descriptionEn:
       'Wireless microphone systems coordinated channel-by-channel against the venue\'s RF environment, avoiding the dropouts and interference common in dense urban venues and multi-vendor events sharing the same spectrum.',
-    specs: [
+    descriptionJa:
+      '会場の電波環境に合わせてチャンネルごとに調整されたワイヤレスマイクシステムです。都市部の密集会場や、同じ周波数帯を共有する複数ベンダーが関わるイベントでよくある音切れ・干渉を防ぎます。',
+    specsEn: [
       { label: 'Channel Types', value: 'Handheld, lavalier, headset' },
       { label: 'RF Coordination', value: 'Frequency-coordinated per venue' },
       { label: 'Range', value: 'Up to 100m line-of-sight' },
       { label: 'Battery Management', value: 'Rechargeable with on-site charging station' },
     ],
-    applications: ['Panel discussions and Q&A', 'Keynote presentations', 'Award ceremony presenter mics'],
+    specsJa: [
+      { label: 'チャンネルタイプ', value: 'ハンドヘルド、ラベリア、ヘッドセット' },
+      { label: '電波調整', value: '会場ごとに周波数を調整' },
+      { label: '通信距離', value: '見通し最大100m' },
+      { label: 'バッテリー管理', value: '現地充電ステーション対応の充電式' },
+    ],
+    applicationsEn: ['Panel discussions and Q&A', 'Keynote presentations', 'Award ceremony presenter mics'],
+    applicationsJa: ['パネルディスカッション・Q&A', '基調講演', '授賞式のプレゼンターマイク'],
     availability: 'in-stock',
     relatedItemSlugs: ['audio-digital-mixing-console', 'audio-line-array-pa'],
     visualSeed: 'audio-wireless-microphone-system',
@@ -189,17 +294,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-lighting-moving-head',
     slug: 'lighting-moving-head-spot',
     categorySlug: 'lighting',
-    name: 'Moving Head Spot Fixture',
-    summary: 'Programmable moving spot fixture for stage lighting, gobos, and dynamic cueing.',
-    description:
+    nameEn: 'Moving Head Spot Fixture',
+    nameJa: 'ムービングヘッドスポットライト',
+    summaryEn: 'Programmable moving spot fixture for stage lighting, gobos, and dynamic cueing.',
+    summaryJa: 'ステージ照明、ゴボ投影、ダイナミックなキュー制御に対応するプログラム可能なムービングスポット。',
+    descriptionEn:
       'Our primary fixture for stage and keynote lighting design, capable of precise gobo projection, color changes, and cue-based movement synced to the run-of-show — used for everything from subtle key lighting to full production cueing.',
-    specs: [
+    descriptionJa:
+      'ステージ・基調講演の照明設計における主力機材です。精密なゴボ投影、カラーチェンジ、進行台本に同期したキューベースの動作に対応し、控えめなキー照明からフル制作のキュー演出まで幅広く使用されます。',
+    specsEn: [
       { label: 'Output', value: '800W LED engine' },
       { label: 'Color', value: 'Full CMY + color wheel' },
       { label: 'Gobo Wheels', value: '2 rotating + 1 fixed' },
       { label: 'Control Protocol', value: 'DMX / RDM' },
     ],
-    applications: ['Stage and keynote lighting', 'Product reveal cueing', 'Award ceremony presentation lighting'],
+    specsJa: [
+      { label: '出力', value: '800W LEDエンジン' },
+      { label: 'カラー', value: 'フルCMY + カラーホイール' },
+      { label: 'ゴボホイール', value: '回転式2基＋固定式1基' },
+      { label: '制御プロトコル', value: 'DMX / RDM' },
+    ],
+    applicationsEn: ['Stage and keynote lighting', 'Product reveal cueing', 'Award ceremony presentation lighting'],
+    applicationsJa: ['ステージ・基調講演照明', '製品お披露目の演出キュー', '授賞式のプレゼンテーション照明'],
     availability: 'in-stock',
     relatedItemSlugs: ['lighting-led-wash', 'lighting-console'],
     visualSeed: 'lighting-moving-head-spot',
@@ -208,17 +324,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-lighting-led-wash',
     slug: 'lighting-led-wash',
     categorySlug: 'lighting',
-    name: 'LED Wash Fixture',
-    summary: 'Wide-beam LED wash for ambient stage color and architectural venue lighting.',
-    description:
+    nameEn: 'LED Wash Fixture',
+    nameJa: 'LEDウォッシュライト',
+    summaryEn: 'Wide-beam LED wash for ambient stage color and architectural venue lighting.',
+    summaryJa: 'ステージの雰囲気カラーと会場の建築照明向けの、広角ビームLEDウォッシュ。',
+    descriptionEn:
       'Provides the broad, even color wash that grounds a stage or venue lighting design — set behind or beside moving spots for depth, or used on its own for ambient gala and reception lighting.',
-    specs: [
+    descriptionJa:
+      'ステージや会場の照明デザインの基礎となる、広く均一なカラーウォッシュを提供します。ムービングスポットの背後・脇に配置して奥行きを出すほか、単体でガラディナー・レセプションの雰囲気照明としても使用します。',
+    specsEn: [
       { label: 'Output', value: '300W RGBAL LED array' },
       { label: 'Beam Angle', value: '10°–60° zoom' },
       { label: 'Color', value: 'Full RGBAL mixing' },
       { label: 'Control Protocol', value: 'DMX / RDM' },
     ],
-    applications: ['Ambient stage wash', 'Architectural venue lighting', 'Gala and reception lighting'],
+    specsJa: [
+      { label: '出力', value: '300W RGBAL LEDアレイ' },
+      { label: 'ビーム角', value: '10°〜60°ズーム' },
+      { label: 'カラー', value: 'フルRGBALミキシング' },
+      { label: '制御プロトコル', value: 'DMX / RDM' },
+    ],
+    applicationsEn: ['Ambient stage wash', 'Architectural venue lighting', 'Gala and reception lighting'],
+    applicationsJa: ['ステージの雰囲気ウォッシュ', '会場の建築照明', 'ガラディナー・レセプション照明'],
     availability: 'in-stock',
     relatedItemSlugs: ['lighting-moving-head-spot', 'lighting-console'],
     visualSeed: 'lighting-led-wash',
@@ -227,17 +354,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-lighting-console',
     slug: 'lighting-console',
     categorySlug: 'lighting',
-    name: 'Lighting Console',
-    summary: 'Cue-based lighting control console operated live by a dedicated programmer.',
-    description:
+    nameEn: 'Lighting Console',
+    nameJa: '照明コンソール',
+    summaryEn: 'Cue-based lighting control console operated live by a dedicated programmer.',
+    summaryJa: '専任プログラマーが本番中操作する、キューベースの照明制御コンソール。',
+    descriptionEn:
       'The control hub for every lighting design we build — cues are programmed against your run-of-show in advance and operated live by a lighting technician who can adjust in real time as the event actually unfolds.',
-    specs: [
+    descriptionJa:
+      'すべての照明デザインの制御ハブです。事前に進行台本に沿ってキューをプログラムし、本番中は照明技術者がリアルタイムで進行に合わせて調整しながら操作します。',
+    specsEn: [
       { label: 'Control Capacity', value: 'Up to 4096 DMX channels' },
       { label: 'Cue Storage', value: 'Unlimited programmable cues' },
       { label: 'Backup', value: 'Redundant console failover available' },
       { label: 'Networking', value: 'Art-Net / sACN' },
     ],
-    applications: ['Cue-based stage lighting', 'Multi-fixture architectural control', 'Broadcast-synced lighting programs'],
+    specsJa: [
+      { label: '制御容量', value: '最大4096 DMXチャンネル' },
+      { label: 'キュー保存', value: '無制限のプログラム可能キュー' },
+      { label: 'バックアップ', value: '冗長コンソールフェイルオーバー対応' },
+      { label: 'ネットワーク', value: 'Art-Net / sACN' },
+    ],
+    applicationsEn: ['Cue-based stage lighting', 'Multi-fixture architectural control', 'Broadcast-synced lighting programs'],
+    applicationsJa: ['キューベースのステージ照明', '複数機材の建築照明制御', '放送同期照明プログラム'],
     availability: 'in-stock',
     relatedItemSlugs: ['lighting-moving-head-spot', 'lighting-led-wash'],
     visualSeed: 'lighting-console',
@@ -248,17 +386,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-stage-modular-deck',
     slug: 'stage-modular-deck',
     categorySlug: 'stage',
-    name: 'Modular Stage Deck System',
-    summary: 'Adjustable-height modular decking for stages of virtually any footprint.',
-    description:
+    nameEn: 'Modular Stage Deck System',
+    nameJa: 'モジュール式ステージデッキシステム',
+    summaryEn: 'Adjustable-height modular decking for stages of virtually any footprint.',
+    summaryJa: 'あらゆる規模のステージに対応する、高さ調整可能なモジュール式デッキ。',
+    descriptionEn:
       'Our standard stage decking system, configurable in height, footprint, and shape to match venue and program requirements — from a simple presentation platform to a full multi-level production stage.',
-    specs: [
+    descriptionJa:
+      '会場とプログラムの要件に合わせて高さ・面積・形状を構成できる標準ステージデッキシステムです。シンプルなプレゼンテーション台から本格的な多層構造の制作ステージまで対応します。',
+    specsEn: [
       { label: 'Deck Size', value: '2m x 1m modules' },
       { label: 'Height Range', value: '0.2m – 2.4m adjustable' },
       { label: 'Load Rating', value: '750kg/m² distributed' },
       { label: 'Surface', value: 'Non-slip, broadcast-black finish' },
     ],
-    applications: ['Keynote and conference stages', 'Award ceremony staging', 'Multi-level product launch sets'],
+    specsJa: [
+      { label: 'デッキサイズ', value: '2m x 1mモジュール' },
+      { label: '高さ範囲', value: '0.2m〜2.4m調整可能' },
+      { label: '積載荷重', value: '750kg/m²（分布荷重）' },
+      { label: '表面仕上げ', value: '滑り止め、放送用ブラック仕上げ' },
+    ],
+    applicationsEn: ['Keynote and conference stages', 'Award ceremony staging', 'Multi-level product launch sets'],
+    applicationsJa: ['基調講演・カンファレンスステージ', '授賞式のステージ', '多層構造の製品発表会セット'],
     availability: 'in-stock',
     relatedItemSlugs: ['stage-riser-platform', 'truss-box-ground-support'],
     visualSeed: 'stage-modular-deck',
@@ -267,17 +416,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-stage-riser',
     slug: 'stage-riser-platform',
     categorySlug: 'stage',
-    name: 'Stage Riser Platform',
-    summary: 'Freestanding riser platforms for panel discussions, VIP seating, and camera positions.',
-    description:
+    nameEn: 'Stage Riser Platform',
+    nameJa: 'ステージ雛壇プラットフォーム',
+    summaryEn: 'Freestanding riser platforms for panel discussions, VIP seating, and camera positions.',
+    summaryJa: 'パネルディスカッション、VIP席、カメラ位置向けの自立式雛壇プラットフォーム。',
+    descriptionEn:
       'Compact, freestanding platforms used to elevate panel seating, VIP tables, or camera positions above the main floor level — quick to deploy without the full structural planning a main stage requires.',
-    specs: [
+    descriptionJa:
+      'パネル登壇者席、VIPテーブル、カメラ位置をメインフロアより一段高くするための、コンパクトな自立式プラットフォームです。メインステージほどの構造計画を必要とせず、迅速に設営できます。',
+    specsEn: [
       { label: 'Platform Size', value: '2m x 1m, single or stacked' },
       { label: 'Height Options', value: '0.2m, 0.4m, 0.6m' },
       { label: 'Load Rating', value: '500kg/m² distributed' },
       { label: 'Setup Time', value: 'Under 30 minutes per unit' },
     ],
-    applications: ['Panel discussion seating', 'VIP and head-table elevation', 'Camera platform positions'],
+    specsJa: [
+      { label: 'プラットフォームサイズ', value: '2m x 1m、単体または積み重ね可能' },
+      { label: '高さオプション', value: '0.2m、0.4m、0.6m' },
+      { label: '積載荷重', value: '500kg/m²（分布荷重）' },
+      { label: '設営時間', value: '1台あたり30分未満' },
+    ],
+    applicationsEn: ['Panel discussion seating', 'VIP and head-table elevation', 'Camera platform positions'],
+    applicationsJa: ['パネルディスカッション席', 'VIP・ヘッドテーブルの段上げ', 'カメラ台の設置位置'],
     availability: 'in-stock',
     relatedItemSlugs: ['stage-modular-deck', 'stage-runway'],
     visualSeed: 'stage-riser-platform',
@@ -286,17 +446,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-stage-runway',
     slug: 'stage-runway',
     categorySlug: 'stage',
-    name: 'Runway / Catwalk Stage',
-    summary: 'Extended runway staging for product reveals, fashion-format presentations, and processional formats.',
-    description:
+    nameEn: 'Runway / Catwalk Stage',
+    nameJa: 'ランウェイ・キャットウォークステージ',
+    summaryEn: 'Extended runway staging for product reveals, fashion-format presentations, and processional formats.',
+    summaryJa: '製品お披露目、ファッション形式のプレゼンテーション、行進形式の演出向けの延長ランウェイステージ。',
+    descriptionEn:
       'Extended, narrow-format staging for events where movement through the space is part of the presentation — product reveal walks, fashion-format shows, and award ceremony processional entrances.',
-    specs: [
+    descriptionJa:
+      '空間内の移動そのものが演出の一部となるイベント向けの、細長い形状の延長ステージです。製品お披露目のウォーク、ファッションショー形式の演出、授賞式の入場行進などに使用します。',
+    specsEn: [
       { label: 'Standard Length', value: '8m, extendable in 2m sections' },
       { label: 'Width', value: '1.2m standard, 1.8m available' },
       { label: 'Height', value: '0.4m – 0.8m' },
       { label: 'Surface', value: 'Non-slip, camera-matte finish' },
     ],
-    applications: ['Product reveal walks', 'Fashion-format presentations', 'Award ceremony processional entrances'],
+    specsJa: [
+      { label: '標準長さ', value: '8m、2m単位で延長可能' },
+      { label: '幅', value: '標準1.2m、1.8mオプションあり' },
+      { label: '高さ', value: '0.4m〜0.8m' },
+      { label: '表面仕上げ', value: '滑り止め、カメラ映えするマット仕上げ' },
+    ],
+    applicationsEn: ['Product reveal walks', 'Fashion-format presentations', 'Award ceremony processional entrances'],
+    applicationsJa: ['製品お披露目のウォーク演出', 'ファッション形式のプレゼンテーション', '授賞式の入場行進'],
     availability: 'made-to-order',
     relatedItemSlugs: ['stage-riser-platform', 'lighting-moving-head-spot'],
     visualSeed: 'stage-runway',
@@ -307,17 +478,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-truss-box-ground',
     slug: 'truss-box-ground-support',
     categorySlug: 'truss',
-    name: 'Box Truss Ground Support',
-    summary: 'Self-supporting ground-based truss for LED, lighting, and speaker arrays without venue rigging points.',
-    description:
+    nameEn: 'Box Truss Ground Support',
+    nameJa: 'ボックストラス地上支持システム',
+    summaryEn: 'Self-supporting ground-based truss for LED, lighting, and speaker arrays without venue rigging points.',
+    summaryJa: '会場に吊り込みポイントがない場合の、LED・照明・スピーカーアレイ向け自立型地上支持トラス。',
+    descriptionEn:
       'Used when a venue has no overhead rigging points, or when structural sign-off favors a ground-supported solution — engineered box truss towers and spans that carry LED, lighting, and speaker loads independently.',
-    specs: [
+    descriptionJa:
+      '会場に天井吊り込みポイントがない場合や、構造承認上、地上支持型のソリューションが望ましい場合に使用します。LED・照明・スピーカーの荷重を独立して支える、エンジニアリング設計されたボックストラスタワーとスパンです。',
+    specsEn: [
       { label: 'Truss Profile', value: '400mm and 520mm box truss' },
       { label: 'Max Span', value: 'Engineered per load and configuration' },
       { label: 'Load Capacity', value: 'Calculated per structural review' },
       { label: 'Base Options', value: 'Weighted base plates or outrigger stabilizers' },
     ],
-    applications: ['Venues without overhead rigging', 'Outdoor stage structures', 'LED and speaker support towers'],
+    specsJa: [
+      { label: 'トラス断面', value: '400mmおよび520mmボックストラス' },
+      { label: '最大スパン', value: '荷重と構成に応じて個別設計' },
+      { label: '積載容量', value: '構造審査により算出' },
+      { label: 'ベースオプション', value: 'ウェイトベースプレートまたはアウトリガー式スタビライザー' },
+    ],
+    applicationsEn: ['Venues without overhead rigging', 'Outdoor stage structures', 'LED and speaker support towers'],
+    applicationsJa: ['天井吊り込み設備のない会場', '屋外ステージ構造', 'LED・スピーカー支持タワー'],
     availability: 'in-stock',
     relatedItemSlugs: ['truss-motorized-hoist', 'truss-tower-system'],
     visualSeed: 'truss-box-ground-support',
@@ -326,17 +508,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-truss-hoist',
     slug: 'truss-motorized-hoist',
     categorySlug: 'truss',
-    name: 'Motorized Chain Hoist',
-    summary: 'Motorized rigging hoists for flown LED, lighting, and speaker arrays with precise height control.',
-    description:
+    nameEn: 'Motorized Chain Hoist',
+    nameJa: '電動チェーンホイスト',
+    summaryEn: 'Motorized rigging hoists for flown LED, lighting, and speaker arrays with precise height control.',
+    summaryJa: '精密な高さ制御が可能な、吊り込みLED・照明・スピーカーアレイ向けの電動リギングホイスト。',
+    descriptionEn:
       'Motorized hoists used for flying LED walls, lighting trusses, and line array speakers from venue rigging points, with precision height control for load-in adjustments and safe, controlled strike.',
-    specs: [
+    descriptionJa:
+      '会場の吊り込みポイントからLEDウォール、照明トラス、ラインアレイスピーカーを吊り上げるための電動ホイストです。搬入時の高さ調整と、安全に制御された撤収を精密に行えます。',
+    specsEn: [
       { label: 'Load Capacity', value: '500kg – 1000kg per hoist' },
       { label: 'Control', value: 'Synchronized multi-hoist control system' },
       { label: 'Safety', value: 'Certified load limiters and secondary safety cables' },
       { label: 'Speed', value: 'Variable speed with fine adjustment' },
     ],
-    applications: ['Flown LED walls', 'Flown lighting trusses', 'Flown line array speaker systems'],
+    specsJa: [
+      { label: '積載容量', value: '1台あたり500kg〜1000kg' },
+      { label: '制御', value: '複数ホイスト同期制御システム' },
+      { label: '安全性', value: '認証済み荷重リミッターとセカンダリ安全ケーブル' },
+      { label: '速度', value: '微調整可能な可変速' },
+    ],
+    applicationsEn: ['Flown LED walls', 'Flown lighting trusses', 'Flown line array speaker systems'],
+    applicationsJa: ['吊り込みLEDウォール', '吊り込み照明トラス', '吊り込みラインアレイスピーカーシステム'],
     availability: 'limited',
     relatedItemSlugs: ['truss-box-ground-support', 'audio-line-array-pa'],
     visualSeed: 'truss-motorized-hoist',
@@ -345,17 +538,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-truss-tower',
     slug: 'truss-tower-system',
     categorySlug: 'truss',
-    name: 'Truss Tower System',
-    summary: 'Vertical truss towers for lighting positions, speaker delays, and outdoor screen support.',
-    description:
+    nameEn: 'Truss Tower System',
+    nameJa: 'トラスタワーシステム',
+    summaryEn: 'Vertical truss towers for lighting positions, speaker delays, and outdoor screen support.',
+    summaryJa: '照明位置、ディレイスピーカー、屋外スクリーン支持向けの垂直トラスタワー。',
+    descriptionEn:
       'Freestanding vertical towers used to position lighting fixtures, delay speakers, or support outdoor LED screens at height, independent of the main stage structure.',
-    specs: [
+    descriptionJa:
+      'メインステージ構造とは独立して、照明機材の配置、ディレイスピーカーの設置、屋外LEDスクリーンの高所支持に使用する自立式垂直タワーです。',
+    specsEn: [
       { label: 'Height Range', value: '3m – 12m, sectional' },
       { label: 'Base Footprint', value: 'Weighted or guy-wired, per site conditions' },
       { label: 'Load Capacity', value: 'Calculated per fixture load' },
       { label: 'Wind Rating', value: 'Engineered for outdoor deployment' },
     ],
-    applications: ['Outdoor lighting towers', 'Delay speaker positions', 'Outdoor LED screen support'],
+    specsJa: [
+      { label: '高さ範囲', value: '3m〜12m、セクション式' },
+      { label: '基礎形式', value: '現場条件に応じてウェイトまたはガイワイヤー式' },
+      { label: '積載容量', value: '搭載機材の荷重に応じて算出' },
+      { label: '耐風性能', value: '屋外設営向けに構造設計' },
+    ],
+    applicationsEn: ['Outdoor lighting towers', 'Delay speaker positions', 'Outdoor LED screen support'],
+    applicationsJa: ['屋外照明タワー', 'ディレイスピーカー設置位置', '屋外LEDスクリーンの支持'],
     availability: 'in-stock',
     relatedItemSlugs: ['truss-box-ground-support', 'outdoor-led-p3-9-weatherproof'],
     visualSeed: 'truss-tower-system',
@@ -366,17 +570,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-proj-20k',
     slug: 'projector-20000-lumen-laser',
     categorySlug: 'projectors',
-    name: '20,000 Lumen Laser Projector',
-    summary: 'High-lumen laser projector for large-venue backdrops and projection mapping.',
-    description:
+    nameEn: '20,000 Lumen Laser Projector',
+    nameJa: '20,000ルーメン レーザープロジェクター',
+    summaryEn: 'High-lumen laser projector for large-venue backdrops and projection mapping.',
+    summaryJa: '大規模会場の背景やプロジェクションマッピング向けの高輝度レーザープロジェクター。',
+    descriptionEn:
       'Our highest-output projector, specified for large venues with high ambient light, wide-format screens, or projection mapping onto set pieces and architecture that demands consistent brightness across an uneven surface.',
-    specs: [
+    descriptionJa:
+      '自社最高出力のプロジェクターです。環境光の強い大規模会場、大型スクリーン、または凹凸のある面でも均一な輝度が求められるセットや建築物へのプロジェクションマッピング向けに仕様設計されています。',
+    specsEn: [
       { label: 'Brightness', value: '20,000 lumens' },
       { label: 'Resolution', value: '4K UHD (3840 x 2160)' },
       { label: 'Light Source', value: 'Laser phosphor, 20,000hr rated life' },
       { label: 'Lens Options', value: 'Short-throw to long-throw available' },
     ],
-    applications: ['Large-venue stage backdrops', 'Projection mapping on set pieces', 'High-ambient-light environments'],
+    specsJa: [
+      { label: '輝度', value: '20,000ルーメン' },
+      { label: '解像度', value: '4K UHD（3840 x 2160）' },
+      { label: '光源', value: 'レーザー蛍光体方式、定格寿命20,000時間' },
+      { label: 'レンズオプション', value: '短焦点〜長焦点まで対応' },
+    ],
+    applicationsEn: ['Large-venue stage backdrops', 'Projection mapping on set pieces', 'High-ambient-light environments'],
+    applicationsJa: ['大規模会場のステージ背景', 'セットへのプロジェクションマッピング', '環境光の強い環境'],
     availability: 'limited',
     relatedItemSlugs: ['projector-10000-lumen-laser', 'stage-modular-deck'],
     visualSeed: 'projector-20000-lumen-laser',
@@ -385,17 +600,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-proj-10k',
     slug: 'projector-10000-lumen-laser',
     categorySlug: 'projectors',
-    name: '10,000 Lumen Laser Projector',
-    summary: 'Mid-output laser projector for standard conference and presentation environments.',
-    description:
+    nameEn: '10,000 Lumen Laser Projector',
+    nameJa: '10,000ルーメン レーザープロジェクター',
+    summaryEn: 'Mid-output laser projector for standard conference and presentation environments.',
+    summaryJa: '標準的なカンファレンス・プレゼンテーション環境向けの中出力レーザープロジェクター。',
+    descriptionEn:
       'A versatile mid-output projector suited to standard conference rooms and presentation stages with controlled ambient light — our most frequently deployed unit for content and presentation projection.',
-    specs: [
+    descriptionJa:
+      '環境光が制御された標準的な会議室やプレゼンテーションステージに適した、汎用性の高い中出力プロジェクターです。コンテンツ・プレゼンテーション投影で最も導入実績の多い機種です。',
+    specsEn: [
       { label: 'Brightness', value: '10,000 lumens' },
       { label: 'Resolution', value: '4K UHD (3840 x 2160)' },
       { label: 'Light Source', value: 'Laser phosphor, 20,000hr rated life' },
       { label: 'Lens Options', value: 'Standard zoom lens included' },
     ],
-    applications: ['Conference room presentations', 'Content and slide projection', 'Mid-size venue backdrops'],
+    specsJa: [
+      { label: '輝度', value: '10,000ルーメン' },
+      { label: '解像度', value: '4K UHD（3840 x 2160）' },
+      { label: '光源', value: 'レーザー蛍光体方式、定格寿命20,000時間' },
+      { label: 'レンズオプション', value: '標準ズームレンズ付属' },
+    ],
+    applicationsEn: ['Conference room presentations', 'Content and slide projection', 'Mid-size venue backdrops'],
+    applicationsJa: ['会議室でのプレゼンテーション', 'コンテンツ・スライド投影', '中規模会場の背景'],
     availability: 'in-stock',
     relatedItemSlugs: ['projector-20000-lumen-laser', 'projector-short-throw'],
     visualSeed: 'projector-10000-lumen-laser',
@@ -404,17 +630,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-proj-short-throw',
     slug: 'projector-short-throw',
     categorySlug: 'projectors',
-    name: 'Short-Throw Projector',
-    summary: 'Short-throw unit for tight venue spaces and stage-front projection without a long lens path.',
-    description:
+    nameEn: 'Short-Throw Projector',
+    nameJa: '短焦点プロジェクター',
+    summaryEn: 'Short-throw unit for tight venue spaces and stage-front projection without a long lens path.',
+    summaryJa: 'レンズの投影距離が確保できない狭い会場やステージ前方投影向けの短焦点機種。',
+    descriptionEn:
       'Deployed where floor space or ceiling height limits a standard lens throw distance — booth environments, tight stage-front content projection, or spaces where a projector stand can\'t sit far from the screen.',
-    specs: [
+    descriptionJa:
+      '床面積や天井高の制約で標準的なレンズ投影距離が確保できない環境に導入します。ブース環境、ステージ前方での近距離コンテンツ投影、プロジェクタースタンドをスクリーンから離せない空間などに対応します。',
+    specsEn: [
       { label: 'Brightness', value: '6,500 lumens' },
       { label: 'Resolution', value: 'WUXGA (1920 x 1200)' },
       { label: 'Throw Ratio', value: '0.38:1' },
       { label: 'Light Source', value: 'Laser phosphor' },
     ],
-    applications: ['Exhibition booth projection', 'Tight-space stage-front content', 'Low-ceiling venue environments'],
+    specsJa: [
+      { label: '輝度', value: '6,500ルーメン' },
+      { label: '解像度', value: 'WUXGA（1920 x 1200）' },
+      { label: '投影比', value: '0.38:1' },
+      { label: '光源', value: 'レーザー蛍光体方式' },
+    ],
+    applicationsEn: ['Exhibition booth projection', 'Tight-space stage-front content', 'Low-ceiling venue environments'],
+    applicationsJa: ['展示会ブースでの投影', '狭小空間でのステージ前方コンテンツ', '天井高の低い会場環境'],
     availability: 'in-stock',
     relatedItemSlugs: ['projector-10000-lumen-laser', 'displays-video-wall'],
     visualSeed: 'projector-short-throw',
@@ -425,17 +662,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-displays-signage',
     slug: 'displays-55-inch-signage',
     categorySlug: 'displays',
-    name: '55" Digital Signage Display',
-    summary: 'Freestanding or mounted digital signage display for wayfinding, registration, and information points.',
-    description:
+    nameEn: '55" Digital Signage Display',
+    nameJa: '55インチ デジタルサイネージディスプレイ',
+    summaryEn: 'Freestanding or mounted digital signage display for wayfinding, registration, and information points.',
+    summaryJa: '案内表示、受付、インフォメーションポイント向けの自立型・設置型デジタルサイネージ。',
+    descriptionEn:
       'Our standard signage display for registration desks, wayfinding points, and information stations — supplied with a floor stand or wall mount and content playback support.',
-    specs: [
+    descriptionJa:
+      '受付デスク、案内表示ポイント、インフォメーションステーション向けの標準サイネージディスプレイです。フロアスタンドまたは壁掛けと、コンテンツ再生サポート付きで提供します。',
+    specsEn: [
       { label: 'Screen Size', value: '55"' },
       { label: 'Resolution', value: '4K UHD' },
       { label: 'Brightness', value: '500 nits' },
       { label: 'Mounting', value: 'Floor stand or wall mount' },
     ],
-    applications: ['Registration and welcome desks', 'Wayfinding and directory signage', 'Sponsor and agenda displays'],
+    specsJa: [
+      { label: '画面サイズ', value: '55インチ' },
+      { label: '解像度', value: '4K UHD' },
+      { label: '輝度', value: '500 nits' },
+      { label: '設置方式', value: 'フロアスタンドまたは壁掛け' },
+    ],
+    applicationsEn: ['Registration and welcome desks', 'Wayfinding and directory signage', 'Sponsor and agenda displays'],
+    applicationsJa: ['受付・ウェルカムデスク', '案内表示・フロアガイド', 'スポンサー・アジェンダ表示'],
     availability: 'in-stock',
     relatedItemSlugs: ['displays-touch-kiosk', 'displays-video-wall'],
     visualSeed: 'displays-55-inch-signage',
@@ -444,17 +692,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-displays-kiosk',
     slug: 'displays-touch-kiosk',
     categorySlug: 'displays',
-    name: 'Freestanding Touch Kiosk',
-    summary: 'Interactive touchscreen kiosk for exhibition engagement and self-service registration.',
-    description:
+    nameEn: 'Freestanding Touch Kiosk',
+    nameJa: '自立型タッチキオスク',
+    summaryEn: 'Interactive touchscreen kiosk for exhibition engagement and self-service registration.',
+    summaryJa: '展示会での来場者エンゲージメントとセルフサービス受付向けのインタラクティブタッチスクリーンキオスク。',
+    descriptionEn:
       'An interactive kiosk used for exhibition booth engagement, self-service check-in, and interactive content — deployed standalone or networked across a show floor.',
-    specs: [
+    descriptionJa:
+      '展示ブースでのエンゲージメント、セルフサービスチェックイン、インタラクティブコンテンツ向けのキオスクです。単体でも、会場フロア全体でネットワーク接続しても運用できます。',
+    specsEn: [
       { label: 'Screen Size', value: '32" or 43" touch display' },
       { label: 'Touch Technology', value: 'Capacitive multi-touch' },
       { label: 'Connectivity', value: 'Wi-Fi / Ethernet, networkable' },
       { label: 'Housing', value: 'Freestanding, branded wrap available' },
     ],
-    applications: ['Exhibition booth engagement', 'Self-service check-in', 'Interactive product showcases'],
+    specsJa: [
+      { label: '画面サイズ', value: '32インチまたは43インチタッチディスプレイ' },
+      { label: 'タッチ技術', value: '静電容量式マルチタッチ' },
+      { label: '接続性', value: 'Wi-Fi / 有線LAN、ネットワーク対応' },
+      { label: '筐体', value: '自立型、ブランドラッピング対応可能' },
+    ],
+    applicationsEn: ['Exhibition booth engagement', 'Self-service check-in', 'Interactive product showcases'],
+    applicationsJa: ['展示ブースのエンゲージメント', 'セルフサービスチェックイン', 'インタラクティブ製品展示'],
     availability: 'in-stock',
     relatedItemSlugs: ['displays-55-inch-signage', 'displays-video-wall'],
     visualSeed: 'displays-touch-kiosk',
@@ -463,17 +722,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-displays-video-wall',
     slug: 'displays-video-wall',
     categorySlug: 'displays',
-    name: 'Video Wall Display',
-    summary: 'Modular LCD video wall for a screen-based (non-LED) large-format display option.',
-    description:
+    nameEn: 'Video Wall Display',
+    nameJa: 'ビデオウォールディスプレイ',
+    summaryEn: 'Modular LCD video wall for a screen-based (non-LED) large-format display option.',
+    summaryJa: 'LEDではなく液晶パネルベースの大型ディスプレイを求める場合のモジュール式ビデオウォール。',
+    descriptionEn:
       'A modular LCD video wall alternative to LED for indoor environments where a screen-based large display is preferred — content-rich exhibition centerpieces and lobby installations.',
-    specs: [
+    descriptionJa:
+      'LEDの代替として、画面ベースの大型ディスプレイが望ましい屋内環境向けのモジュール式液晶ビデオウォールです。コンテンツ豊富な展示の目玉展示やロビーインスタレーションに使用します。',
+    specsEn: [
       { label: 'Configuration', value: '2x2 to 5x5 modular array' },
       { label: 'Bezel Width', value: '3.5mm ultra-narrow' },
       { label: 'Resolution', value: '4K UHD per module, tiled' },
       { label: 'Mounting', value: 'Freestanding frame or wall-mounted' },
     ],
-    applications: ['Exhibition centerpiece displays', 'Lobby and reception installations', 'Content-rich indoor walls'],
+    specsJa: [
+      { label: '構成', value: '2x2〜5x5のモジュールアレイ' },
+      { label: 'ベゼル幅', value: '3.5mm 超狭額縁' },
+      { label: '解像度', value: 'モジュールごとに4K UHD、タイリング表示' },
+      { label: '設置方式', value: '自立フレームまたは壁掛け' },
+    ],
+    applicationsEn: ['Exhibition centerpiece displays', 'Lobby and reception installations', 'Content-rich indoor walls'],
+    applicationsJa: ['展示会の目玉ディスプレイ', 'ロビー・レセプションインスタレーション', 'コンテンツ豊富な屋内ウォール'],
     availability: 'in-stock',
     relatedItemSlugs: ['displays-55-inch-signage', 'indoor-led-p2-6-standard'],
     visualSeed: 'displays-video-wall',
@@ -484,17 +754,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-camera-ptz',
     slug: 'camera-ptz-system',
     categorySlug: 'cameras',
-    name: 'PTZ Camera System',
-    summary: 'Remote pan-tilt-zoom cameras for unobtrusive multi-angle coverage without a dedicated operator per camera.',
-    description:
+    nameEn: 'PTZ Camera System',
+    nameJa: 'PTZカメラシステム',
+    summaryEn: 'Remote pan-tilt-zoom cameras for unobtrusive multi-angle coverage without a dedicated operator per camera.',
+    summaryJa: 'カメラごとの専任オペレーターなしで目立たないマルチアングル撮影を実現する、リモートパン・チルト・ズームカメラ。',
+    descriptionEn:
       'Remotely controlled PTZ cameras used to add coverage angles — audience shots, wide stage shots, panel close-ups — without staffing a camera operator at every position. Controlled from a central vision panel.',
-    specs: [
+    descriptionJa:
+      'すべての撮影位置にオペレーターを配置することなく、オーディエンスショット、ステージ全体ショット、パネルのクローズアップなど撮影アングルを追加できるリモート制御PTZカメラです。中央のビジョンパネルから制御します。',
+    specsEn: [
       { label: 'Output', value: '4K UHD / 1080p60' },
       { label: 'Zoom', value: '20x optical' },
       { label: 'Control', value: 'Centralized PTZ control panel' },
       { label: 'Mounting', value: 'Ceiling, wall, or tripod mount' },
     ],
-    applications: ['Panel and audience coverage', 'Unobtrusive multi-angle shots', 'Hybrid and streaming productions'],
+    specsJa: [
+      { label: '出力', value: '4K UHD / 1080p60' },
+      { label: 'ズーム', value: '光学20倍' },
+      { label: '制御', value: '一元化されたPTZ制御パネル' },
+      { label: '設置方式', value: '天井・壁・三脚設置対応' },
+    ],
+    applicationsEn: ['Panel and audience coverage', 'Unobtrusive multi-angle shots', 'Hybrid and streaming productions'],
+    applicationsJa: ['パネル・オーディエンス撮影', '目立たないマルチアングル撮影', 'ハイブリッド・配信制作'],
     availability: 'in-stock',
     relatedItemSlugs: ['camera-broadcast-package', 'camera-vision-switcher-kit'],
     visualSeed: 'camera-ptz-system',
@@ -503,17 +784,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-camera-broadcast',
     slug: 'camera-broadcast-package',
     categorySlug: 'cameras',
-    name: 'Broadcast Camera Package',
-    summary: 'Operator-staffed broadcast cameras for award ceremonies, keynotes, and directed multi-camera productions.',
-    description:
+    nameEn: 'Broadcast Camera Package',
+    nameJa: '放送用カメラパッケージ',
+    summaryEn: 'Operator-staffed broadcast cameras for award ceremonies, keynotes, and directed multi-camera productions.',
+    summaryJa: '授賞式、基調講演、ディレクション付きマルチカメラ制作向けの、オペレーター配置の放送用カメラ。',
+    descriptionEn:
       'Full broadcast camera packages with dedicated operators, used for productions where composed, directed shots matter — award ceremonies, keynote coverage, and any event being recorded or streamed as a produced broadcast.',
-    specs: [
+    descriptionJa:
+      '専任オペレーター付きのフル放送用カメラパッケージです。構図やディレクションが重要となる制作、授賞式、基調講演の撮影、そして番組として収録・配信されるあらゆるイベントに使用します。',
+    specsEn: [
       { label: 'Output', value: '4K UHD broadcast cameras' },
       { label: 'Crew', value: 'Staffed by trained camera operators' },
       { label: 'Lens Kits', value: 'Zoom and prime lens options' },
       { label: 'Signal', value: 'SDI/fiber transmission to vision switcher' },
     ],
-    applications: ['Award ceremony coverage', 'Keynote and stage broadcast', 'Directed multi-camera productions'],
+    specsJa: [
+      { label: '出力', value: '4K UHD放送用カメラ' },
+      { label: 'クルー', value: '訓練されたカメラオペレーターが担当' },
+      { label: 'レンズキット', value: 'ズーム・単焦点レンズオプション' },
+      { label: '信号', value: 'SDI／光ファイバーでビジョンスイッチャーへ伝送' },
+    ],
+    applicationsEn: ['Award ceremony coverage', 'Keynote and stage broadcast', 'Directed multi-camera productions'],
+    applicationsJa: ['授賞式の撮影', '基調講演・ステージ放送', 'ディレクション付きマルチカメラ制作'],
     availability: 'in-stock',
     relatedItemSlugs: ['camera-ptz-system', 'camera-vision-switcher-kit'],
     visualSeed: 'camera-broadcast-package',
@@ -522,17 +814,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-camera-switcher',
     slug: 'camera-vision-switcher-kit',
     categorySlug: 'cameras',
-    name: 'Vision Switcher & Streaming Kit',
-    summary: 'Multi-camera vision switching and encoding kit for live production and streaming output.',
-    description:
+    nameEn: 'Vision Switcher & Streaming Kit',
+    nameJa: 'ビジョンスイッチャー・配信キット',
+    summaryEn: 'Multi-camera vision switching and encoding kit for live production and streaming output.',
+    summaryJa: 'ライブ制作と配信出力向けのマルチカメラ映像スイッチング・エンコードキット。',
+    descriptionEn:
       'The production hub for multi-camera events — switching between camera feeds, integrating graphics and lower-thirds, and encoding the final program for live streaming or broadcast delivery.',
-    specs: [
+    descriptionJa:
+      'マルチカメライベントの制作ハブです。カメラフィード間のスイッチング、グラフィックス・テロップの統合、ライブ配信・放送用の最終番組エンコードを行います。',
+    specsEn: [
       { label: 'Inputs', value: 'Up to 8 camera/source inputs' },
       { label: 'Output', value: 'Multi-platform streaming encode + program feed' },
       { label: 'Graphics', value: 'Live lower-thirds and overlay integration' },
       { label: 'Redundancy', value: 'Backup encoder and dual internet path' },
     ],
-    applications: ['Live streaming production', 'Multi-camera event direction', 'Hybrid event broadcast'],
+    specsJa: [
+      { label: '入力', value: '最大8系統のカメラ・ソース入力' },
+      { label: '出力', value: 'マルチプラットフォーム配信エンコード＋番組フィード' },
+      { label: 'グラフィックス', value: 'ライブテロップ・オーバーレイ統合' },
+      { label: '冗長性', value: 'バックアップエンコーダーとデュアル回線' },
+    ],
+    applicationsEn: ['Live streaming production', 'Multi-camera event direction', 'Hybrid event broadcast'],
+    applicationsJa: ['ライブ配信制作', 'マルチカメライベントディレクション', 'ハイブリッドイベント放送'],
     availability: 'in-stock',
     relatedItemSlugs: ['camera-broadcast-package', 'camera-ptz-system'],
     visualSeed: 'camera-vision-switcher-kit',
@@ -543,17 +846,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-acc-power',
     slug: 'accessories-power-distribution',
     categorySlug: 'accessories',
-    name: 'Power Distribution System',
-    summary: 'Certified power distribution and circuit management for technical loads of any scale.',
-    description:
+    nameEn: 'Power Distribution System',
+    nameJa: '電源分配システム',
+    summaryEn: 'Certified power distribution and circuit management for technical loads of any scale.',
+    summaryJa: 'あらゆる規模の技術負荷に対応する、認証済みの電源分配・回線管理。',
+    descriptionEn:
       'Power distribution engineered and installed to venue code, with redundant circuits allocated to anything broadcast-critical — the infrastructure layer underneath every LED, audio, lighting, and camera system we deploy.',
-    specs: [
+    descriptionJa:
+      '会場の規定に準拠して設計・施工される電源分配システムで、放送に関わる重要な機器には冗長回線を割り当てます。私たちが導入するすべてのLED・音響・照明・カメラシステムの基盤となるインフラ層です。',
+    specsEn: [
       { label: 'Distribution', value: 'Three-phase and single-phase distro boards' },
       { label: 'Circuit Protection', value: 'RCD-protected, code-compliant' },
       { label: 'Redundancy', value: 'Isolated backup circuits for critical loads' },
       { label: 'Cable Management', value: 'Rated cabling with full run documentation' },
     ],
-    applications: ['Full-event power infrastructure', 'Broadcast-critical redundant circuits', 'Multi-vendor shared power environments'],
+    specsJa: [
+      { label: '分配方式', value: '三相・単相分電盤' },
+      { label: '回路保護', value: '漏電遮断器保護、規定準拠' },
+      { label: '冗長性', value: '重要負荷向けの独立バックアップ回路' },
+      { label: 'ケーブル管理', value: '定格ケーブルと配線経路の完全記録' },
+    ],
+    applicationsEn: ['Full-event power infrastructure', 'Broadcast-critical redundant circuits', 'Multi-vendor shared power environments'],
+    applicationsJa: ['イベント全体の電源インフラ', '放送に関わる重要機器の冗長回路', '複数ベンダーが電源を共有する環境'],
     availability: 'in-stock',
     relatedItemSlugs: ['accessories-cable-management', 'truss-motorized-hoist'],
     visualSeed: 'accessories-power-distribution',
@@ -562,17 +876,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-acc-cable',
     slug: 'accessories-cable-management',
     categorySlug: 'accessories',
-    name: 'Cable Ramp & Management Kit',
-    summary: 'Cable ramps, dressing, and pathway management for safe, clean cable runs across public areas.',
-    description:
+    nameEn: 'Cable Ramp & Management Kit',
+    nameJa: 'ケーブルランプ・管理キット',
+    summaryEn: 'Cable ramps, dressing, and pathway management for safe, clean cable runs across public areas.',
+    summaryJa: '公共エリアを横断する配線を安全かつ美しく保つための、ケーブルランプ・配線処理・経路管理。',
+    descriptionEn:
       'Cable ramps and dressing systems used to route power and signal cable safely across public walkways and stage areas — a small detail that matters for both safety compliance and a clean production look.',
-    specs: [
+    descriptionJa:
+      '公共の通路やステージエリアを横断する電源・信号ケーブルを安全に配線するためのケーブルランプ・配線処理システムです。安全基準への準拠と、制作としての見た目の美しさの両方に関わる細部です。',
+    specsEn: [
       { label: 'Ramp Types', value: 'Single, dual, and 5-channel cable ramps' },
       { label: 'Load Rating', value: 'Pedestrian and light vehicle rated' },
       { label: 'Compliance', value: 'Meets venue and fire code walkway requirements' },
       { label: 'Finish', value: 'High-visibility and low-profile options' },
     ],
-    applications: ['Public walkway cable crossings', 'Backstage cable dressing', 'Exhibition floor cable management'],
+    specsJa: [
+      { label: 'ランプ種類', value: 'シングル、デュアル、5チャンネルケーブルランプ' },
+      { label: '耐荷重', value: '歩行者・軽車両対応' },
+      { label: '準拠基準', value: '会場・消防法の通路要件に適合' },
+      { label: '仕上げ', value: '高視認性・低背オプション' },
+    ],
+    applicationsEn: ['Public walkway cable crossings', 'Backstage cable dressing', 'Exhibition floor cable management'],
+    applicationsJa: ['公共通路の配線横断', '楽屋裏の配線処理', '展示会フロアの配線管理'],
     availability: 'in-stock',
     relatedItemSlugs: ['accessories-power-distribution', 'accessories-flight-cases'],
     visualSeed: 'accessories-cable-management',
@@ -581,17 +906,28 @@ export const equipmentItems: EquipmentItem[] = [
     id: 'eq-acc-cases',
     slug: 'accessories-flight-cases',
     categorySlug: 'accessories',
-    name: 'Flight Case & Transport Package',
-    summary: 'Road-rated flight cases and transport logistics for equipment moving between venues nationwide.',
-    description:
+    nameEn: 'Flight Case & Transport Package',
+    nameJa: 'フライトケース・輸送パッケージ',
+    summaryEn: 'Road-rated flight cases and transport logistics for equipment moving between venues nationwide.',
+    summaryJa: '全国の会場間を移動する機材向けの、輸送グレードフライトケースと輸送ロジスティクス。',
+    descriptionEn:
       'Road-rated cases and coordinated transport logistics for equipment moving between our facility and venues nationwide, or between multiple event sites on a multi-city program.',
-    specs: [
+    descriptionJa:
+      '自社施設と全国の会場間、または複数都市にまたがるプログラムの複数会場間を移動する機材向けの、輸送グレードケースと連携した輸送ロジスティクスです。',
+    specsEn: [
       { label: 'Case Rating', value: 'Road/flight-rated, foam-fitted per equipment set' },
       { label: 'Tracking', value: 'Inventory-tracked per case and event' },
       { label: 'Transport', value: 'Nationwide logistics coordination' },
       { label: 'Insurance', value: 'In-transit coverage included' },
     ],
-    applications: ['Multi-city event tours', 'Nationwide equipment logistics', 'Secure equipment transport and storage'],
+    specsJa: [
+      { label: 'ケース規格', value: '輸送グレード、機材セットごとにフォーム加工' },
+      { label: '追跡管理', value: 'ケース・イベントごとに在庫追跡' },
+      { label: '輸送', value: '全国規模のロジスティクス調整' },
+      { label: '保険', value: '輸送中の補償を含む' },
+    ],
+    applicationsEn: ['Multi-city event tours', 'Nationwide equipment logistics', 'Secure equipment transport and storage'],
+    applicationsJa: ['複数都市を巡るイベントツアー', '全国規模の機材ロジスティクス', '安全な機材輸送・保管'],
     availability: 'in-stock',
     relatedItemSlugs: ['accessories-cable-management', 'accessories-power-distribution'],
     visualSeed: 'accessories-flight-cases',

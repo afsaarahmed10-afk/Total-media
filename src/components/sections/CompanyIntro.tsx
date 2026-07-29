@@ -1,41 +1,31 @@
+import { useTranslation } from 'react-i18next'
 import { Reveal } from '@/components/shared/Reveal'
 
-const stats = [
-  { value: '15+', label: 'Years producing events across Japan' },
-  { value: '40+', label: 'Cities served nationwide' },
-  { value: '10', label: 'Equipment categories in-house' },
-  { value: '99.9%', label: 'Live streaming uptime record' },
-]
+interface Stat {
+  value: string
+  label: string
+}
 
 export function CompanyIntro() {
+  const { t } = useTranslation('home')
+  const stats = t('companyIntro.stats', { returnObjects: true }) as Stat[]
+
   return (
     <section className="py-20 lg:py-28">
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal">
-              Who We Are
+              {t('companyIntro.eyebrow')}
             </p>
             <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
-              Equipment rental is one part of what we do. It was never the whole business.
+              {t('companyIntro.title')}
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
-              <p>
-                TOTAL MEDIA is a complete event production and technical
-                solutions company operating nationwide across Japan. We plan
-                events, design technical production, manage exhibitions and
-                conferences on-site, and operate the LED, audio, lighting,
-                and camera systems ourselves — as one accountable team, not a
-                coordination exercise across separate vendors.
-              </p>
-              <p>
-                International companies, Japanese corporations, event
-                agencies, government bodies, universities, and luxury brands
-                come to us when the technical execution has to be right the
-                first time, with no second take.
-              </p>
+              <p>{t('companyIntro.paragraph1')}</p>
+              <p>{t('companyIntro.paragraph2')}</p>
             </div>
           </Reveal>
         </div>

@@ -1,0 +1,38 @@
+{
+  "seoTitle": "お問い合わせ",
+  "seoDescription": "次のイベントについてTOTAL MEDIAにご相談ください。東京を拠点に、日本全国のお客様に対応しています。",
+  "eyebrow": "お問い合わせ",
+  "title": "イベントについてご相談ください",
+  "description": "詳細なご提案をご希望の場合は「見積もりを依頼する」をご利用ください。それ以外のご質問、業務提携、報道関係のお問い合わせはこちらからどうぞ。",
+  "office": "オフィス",
+  "officeAddress": "〒150-0002 東京都渋谷区",
+  "phone": "電話番号",
+  "email": "メールアドレス",
+  "whatsapp": "WhatsApp",
+  "businessHours": "営業時間",
+  "businessHoursValue": "月曜〜金曜 9:00〜18:00（日本時間）",
+  "businessHoursNote": "現地イベントサポートは営業時間外にも対応しています。",
+  "form": {
+    "name": "お名前",
+    "namePlaceholder": "お名前をご入力ください",
+    "email": "メールアドレス",
+    "emailPlaceholder": "you@company.com",
+    "company": "会社名（任意）",
+    "companyPlaceholder": "会社名をご入力ください",
+    "subject": "件名",
+    "subjectPlaceholder": "お問い合わせ内容をご入力ください",
+    "message": "メッセージ",
+    "messagePlaceholder": "詳細をお聞かせください...",
+    "sending": "送信中…",
+    "send": "メッセージを送信"
+  },
+  "validation": {
+    "name": "お名前をご入力ください。",
+    "email": "有効なメールアドレスをご入力ください。",
+    "subject": "件名をご入力ください。",
+    "message": "対応できるよう、詳細をご記入ください。"
+  },
+  "submitError": "メッセージの送信中に問題が発生しました。再度お試しいただくか、hello@totalmedia.co.jp まで直接メールでご連絡ください。",
+  "successTitle": "メッセージを送信しました",
+  "successDescription": "お問い合わせいただきありがとうございます。1営業日以内にご返信します。"
+}

@@ -1,0 +1,35 @@
+{
+  "index": {
+    "seoTitle": "Event Production Services",
+    "seoDescription": "Explore TOTAL MEDIA's full range of event production and technical services across Japan — from corporate events and conferences to LED, audio, and lighting solutions.",
+    "eyebrow": "Services",
+    "title": "Every Discipline an Event Requires",
+    "description": "Engaged individually or as a full production — planning, technical design, and on-site execution from one accountable team.",
+    "byEventType": "By Event Type",
+    "eventFormats": "Event Formats We Produce",
+    "eventFormatsDescription": "From internal town halls to large public exhibitions, scoped to the format, not a fixed template.",
+    "byTechnicalDiscipline": "By Technical Discipline",
+    "technicalServices": "Technical Services We Provide",
+    "technicalServicesDescription": "Individual disciplines available on their own, or bundled under one technical director.",
+    "learnMore": "Learn more",
+    "ctaTitle": "Not Sure Which Service Fits?",
+    "ctaDescription": "Talk to us about what you're planning — we'll recommend the right scope, not the most expensive one.",
+    "exploreSolutions": "Explore Solutions"
+  },
+  "detail": {
+    "eventType": "Event Type",
+    "technicalDiscipline": "Technical Discipline",
+    "whatsIncluded": "What's Included",
+    "howItWorks": "How It Works",
+    "step": "STEP {{n}}",
+    "idealFor": "Ideal For",
+    "relatedEquipment": "Related Equipment",
+    "requestQuoteFor": "Request a Quote for {{name}}",
+    "questions": "Questions",
+    "frequentlyAsked": "Frequently Asked",
+    "related": "Related",
+    "youMightAlsoNeed": "You Might Also Need",
+    "readyToPlan": "Ready to Plan Your {{name}}?",
+    "ctaDescription": "Tell us the details and we'll respond with a proposal within 1–2 business days."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "index": {
+    "seoTitle": "Equipment Rental Catalogue",
+    "seoDescription": "Browse TOTAL MEDIA's nationwide equipment rental catalogue — LED walls, audio, lighting, staging, truss, projectors, displays, cameras, and accessories.",
+    "eyebrow": "Equipment Rental",
+    "title": "A Nationwide Technical Inventory",
+    "description": "Broadcast and touring-grade equipment, maintained on a fixed inspection schedule. Available on its own, or with our production and technical crews.",
+    "allCategories": "All Categories",
+    "viewSpecs": "View specs",
+    "noneFound": "No equipment found in this category yet.",
+    "ctaTitle": "Need Something Not Listed?",
+    "ctaDescription": "Our full inventory extends beyond this catalogue. Tell us what your event requires."
+  },
+  "category": {
+    "eyebrow": "Equipment Category",
+    "noneInCategory": "Equipment in this category is being catalogued — contact us for current availability.",
+    "readyToBook": "Ready to Book {{name}}?",
+    "ctaDescription": "Request a quote and we'll confirm availability, specification, and pricing."
+  },
+  "detail": {
+    "overview": "Overview",
+    "applications": "Applications",
+    "availability": "Availability",
+    "specifications": "Specifications",
+    "related": "Related",
+    "relatedEquipment": "Related Equipment",
+    "readyToBook": "Ready to Book the {{name}}?",
+    "ctaDescription": "We'll confirm availability, delivery logistics, and pricing within 1–2 business days.",
+    "viewImage": "View image {{n}}"
+  },
+  "availability": {
+    "in-stock": "In Stock",
+    "limited": "Limited Availability",
+    "made-to-order": "Made to Order"
+  }
+}

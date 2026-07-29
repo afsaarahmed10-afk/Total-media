@@ -1,18 +1,20 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices } from '@/lib/data'
 import type { Service } from '@/content/types'
 
-function ServiceCard({ service, delay }: { service: Service; delay: number }) {
+function ServiceCard({ service, delay, learnMore }: { service: Service; delay: number; learnMore: string }) {
   return (
     <Reveal delay={delay}>
-      <Link
+      <LocalizedLink
         to={`/services/${service.slug}`}
         className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition-all hover:-translate-y-1 hover:border-signal/30 hover:shadow-lg hover:shadow-navy/5"
       >
@@ -27,43 +29,41 @@ function ServiceCard({ service, delay }: { service: Service; delay: number }) {
             {service.shortDescription}
           </p>
           <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-signal opacity-0 transition-opacity group-hover:opacity-100">
-            Learn more <ArrowRight className="size-3.5" />
+            {learnMore} <ArrowRight className="size-3.5" />
           </span>
         </div>
-      </Link>
+      </LocalizedLink>
     </Reveal>
   )
 }
 
 export default function ServicesIndexPage() {
-  const services = getServices()
+  const { t } = useTranslation(['services', 'common'])
+  const { locale } = useLocale()
+  const services = getServices(locale)
   const eventServices = services.filter((s) => s.category === 'event-type')
   const technicalServices = services.filter((s) => s.category === 'technical')
 
   return (
     <>
-      <Seo
-        title="Event Production Services"
-        description="Explore TOTAL MEDIA's full range of event production and technical services across Japan — from corporate events and conferences to LED, audio, and lighting solutions."
-        path="/services"
-      />
+      <Seo title={t('index.seoTitle')} description={t('index.seoDescription')} path="/services" />
       <PageHero
-        eyebrow="Services"
-        title="Every Discipline an Event Requires"
-        description="Engaged individually or as a full production — planning, technical design, and on-site execution from one accountable team."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Services' }]}
+        eyebrow={t('index.eyebrow')}
+        title={t('index.title')}
+        description={t('index.description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]}
       />
 
       <section className="py-20 lg:py-24">
         <div className="container-page">
           <SectionHeading
-            eyebrow="By Event Type"
-            title="Event Formats We Produce"
-            description="From internal town halls to large public exhibitions, scoped to the format, not a fixed template."
+            eyebrow={t('index.byEventType')}
+            title={t('index.eventFormats')}
+            description={t('index.eventFormatsDescription')}
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {eventServices.map((service, i) => (
-              <ServiceCard key={service.slug} service={service} delay={(i % 3) * 0.08} />
+              <ServiceCard key={service.slug} service={service} delay={(i % 3) * 0.08} learnMore={t('index.learnMore')} />
             ))}
           </div>
         </div>
@@ -72,23 +72,22 @@ export default function ServicesIndexPage() {
       <section className="bg-mist py-20 lg:py-24">
         <div className="container-page">
           <SectionHeading
-            eyebrow="By Technical Discipline"
-            title="Technical Services We Provide"
-            description="Individual disciplines available on their own, or bundled under one technical director."
+            eyebrow={t('index.byTechnicalDiscipline')}
+            title={t('index.technicalServices')}
+            description={t('index.technicalServicesDescription')}
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {technicalServices.map((service, i) => (
-              <ServiceCard key={service.slug} service={service} delay={(i % 3) * 0.08} />
+              <ServiceCard key={service.slug} service={service} delay={(i % 3) * 0.08} learnMore={t('index.learnMore')} />
             ))}
           </div>
         </div>
       </section>
 
       <CtaBand
-        title="Not Sure Which Service Fits?"
-        description="Talk to us about what you're planning — we'll recommend the right scope, not the most expensive one."
-        primaryLabel="Request a Quote"
-        secondaryLabel="Explore Solutions"
+        title={t('index.ctaTitle')}
+        description={t('index.ctaDescription')}
+        secondaryLabel={t('index.exploreSolutions')}
         secondaryTo="/solutions"
       />
     </>

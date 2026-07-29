@@ -9,6 +9,7 @@ import { Reveal } from '@/components/shared/Reveal'
 import { Seo } from '@/components/layout/Seo'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { ObjectListField } from '@/components/admin/ObjectListField'
+import { LangTabs } from '@/components/admin/LangTabs'
 import { RelationPicker, type RelationOption } from '@/components/admin/RelationPicker'
 import { MediaPickerField } from '@/components/admin/MediaPickerField'
 import { Button } from '@/components/ui/button'
@@ -27,16 +28,21 @@ const AVAILABILITY_LABELS: Record<(typeof AVAILABILITY_OPTIONS)[number], string>
 }
 
 const schema = z.object({
-  name: z.string().min(1, 'Name is required.'),
+  nameEn: z.string().min(1, 'Name is required.'),
+  nameJa: z.string(),
   slug: z
     .string()
     .min(1, 'Slug is required.')
     .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, and hyphens only.'),
   categoryId: z.string().min(1, 'Category is required.'),
-  summary: z.string().min(1, 'Summary is required.'),
-  description: z.string().min(1, 'Description is required.'),
-  specs: z.array(z.object({ label: z.string().min(1, 'Required'), value: z.string().min(1, 'Required') })),
-  applicationsText: z.string(),
+  summaryEn: z.string().min(1, 'Summary is required.'),
+  summaryJa: z.string(),
+  descriptionEn: z.string().min(1, 'Description is required.'),
+  descriptionJa: z.string(),
+  specsEn: z.array(z.object({ label: z.string().min(1, 'Required'), value: z.string().min(1, 'Required') })),
+  specsJa: z.array(z.object({ label: z.string(), value: z.string() })),
+  applicationsTextEn: z.string(),
+  applicationsTextJa: z.string(),
   availability: z.enum(AVAILABILITY_OPTIONS),
   relatedItemIds: z.array(z.string()),
   images: z.array(z.object({ id: z.string(), storagePath: z.string(), fileName: z.string() })),
@@ -44,13 +50,18 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 const DEFAULT_VALUES: FormValues = {
-  name: '',
+  nameEn: '',
+  nameJa: '',
   slug: '',
   categoryId: '',
-  summary: '',
-  description: '',
-  specs: [],
-  applicationsText: '',
+  summaryEn: '',
+  summaryJa: '',
+  descriptionEn: '',
+  descriptionJa: '',
+  specsEn: [],
+  specsJa: [],
+  applicationsTextEn: '',
+  applicationsTextJa: '',
   availability: 'in-stock',
   relatedItemIds: [],
   images: [],
@@ -71,6 +82,7 @@ export default function AdminEquipmentFormPage() {
   const [loading, setLoading] = useState(isEditing)
   const [submitting, setSubmitting] = useState(false)
   const [autoSlug, setAutoSlug] = useState(!isEditing)
+  const [activeLang, setActiveLang] = useState<'en' | 'ja'>('en')
   const [categoryOptions, setCategoryOptions] = useState<RelationOption[]>([])
   const [itemOptions, setItemOptions] = useState<RelationOption[]>([])
 
@@ -83,11 +95,11 @@ export default function AdminEquipmentFormPage() {
 
   async function load() {
     const [categoriesRes, itemsRes] = await Promise.all([
-      supabase.from('equipment_categories').select('id, name').order('name'),
-      supabase.from('equipment_items').select('id, name').order('name'),
+      supabase.from('equipment_categories').select('id, name_en').order('name_en'),
+      supabase.from('equipment_items').select('id, name_en').order('name_en'),
     ])
-    setCategoryOptions((categoriesRes.data ?? []).map((c) => ({ id: c.id, label: c.name })))
-    setItemOptions((itemsRes.data ?? []).filter((i) => i.id !== id).map((i) => ({ id: i.id, label: i.name })))
+    setCategoryOptions((categoriesRes.data ?? []).map((c) => ({ id: c.id, label: c.name_en })))
+    setItemOptions((itemsRes.data ?? []).filter((i) => i.id !== id).map((i) => ({ id: i.id, label: i.name_en })))
 
     if (!id) {
       setLoading(false)
@@ -113,13 +125,18 @@ export default function AdminEquipmentFormPage() {
 
     const item = itemRes.data
     form.reset({
-      name: item.name,
+      nameEn: item.name_en,
+      nameJa: item.name_ja ?? '',
       slug: item.slug,
       categoryId: item.category_id,
-      summary: item.summary,
-      description: item.description,
-      specs: (item.specs as unknown as { label: string; value: string }[]) ?? [],
-      applicationsText: item.applications.join('\n'),
+      summaryEn: item.summary_en,
+      summaryJa: item.summary_ja ?? '',
+      descriptionEn: item.description_en,
+      descriptionJa: item.description_ja ?? '',
+      specsEn: (item.specs_en as unknown as { label: string; value: string }[]) ?? [],
+      specsJa: (item.specs_ja as unknown as { label: string; value: string }[]) ?? [],
+      applicationsTextEn: item.applications_en.join('\n'),
+      applicationsTextJa: item.applications_ja.join('\n'),
       availability: item.availability,
       relatedItemIds: (relatedRes.data ?? []).map((r) => r.related_item_id),
       images: (imagesRes.data ?? [])
@@ -159,13 +176,18 @@ export default function AdminEquipmentFormPage() {
   async function onSubmit(values: FormValues) {
     setSubmitting(true)
     const payload = {
-      name: values.name,
+      name_en: values.nameEn,
+      name_ja: values.nameJa || null,
       slug: values.slug,
       category_id: values.categoryId,
-      summary: values.summary,
-      description: values.description,
-      specs: values.specs,
-      applications: linesToArray(values.applicationsText),
+      summary_en: values.summaryEn,
+      summary_ja: values.summaryJa || null,
+      description_en: values.descriptionEn,
+      description_ja: values.descriptionJa || null,
+      specs_en: values.specsEn,
+      specs_ja: values.specsJa,
+      applications_en: linesToArray(values.applicationsTextEn),
+      applications_ja: linesToArray(values.applicationsTextJa),
       availability: values.availability,
       visual_seed: values.slug,
     }
@@ -196,6 +218,8 @@ export default function AdminEquipmentFormPage() {
     }
   }
 
+  const jaComplete = Boolean(form.watch('nameJa'))
+
   return (
     <>
       <Seo
@@ -212,10 +236,13 @@ export default function AdminEquipmentFormPage() {
         >
           <ArrowLeft className="size-4" /> Back to Equipment
         </Link>
-        <AdminPageHeader
-          title={isEditing ? 'Edit Equipment Item' : 'New Equipment Item'}
-          description="Shown on /equipment and linked from related services."
-        />
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+          <AdminPageHeader
+            title={isEditing ? 'Edit Equipment Item' : 'New Equipment Item'}
+            description="Shown on /equipment and linked from related services."
+          />
+          <LangTabs active={activeLang} onChange={setActiveLang} jaComplete={jaComplete} />
+        </div>
       </Reveal>
 
       {loading ? (
@@ -231,16 +258,16 @@ export default function AdminEquipmentFormPage() {
               <Section title="Basics">
                 <FormField
                   control={form.control}
-                  name="name"
+                  name={activeLang === 'en' ? 'nameEn' : 'nameJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Name {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           onChange={(e) => {
                             field.onChange(e)
-                            if (autoSlug) form.setValue('slug', slugify(e.target.value))
+                            if (autoSlug && activeLang === 'en') form.setValue('slug', slugify(e.target.value))
                           }}
                         />
                       </FormControl>
@@ -319,10 +346,10 @@ export default function AdminEquipmentFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="summary"
+                  name={activeLang === 'en' ? 'summaryEn' : 'summaryJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Summary</FormLabel>
+                      <FormLabel>Summary {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>
@@ -332,10 +359,10 @@ export default function AdminEquipmentFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="description"
+                  name={activeLang === 'en' ? 'descriptionEn' : 'descriptionJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel>Description {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={4} {...field} />
                       </FormControl>
@@ -345,10 +372,10 @@ export default function AdminEquipmentFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="applicationsText"
+                  name={activeLang === 'en' ? 'applicationsTextEn' : 'applicationsTextJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Applications</FormLabel>
+                      <FormLabel>Applications {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={3} {...field} />
                       </FormControl>
@@ -359,17 +386,30 @@ export default function AdminEquipmentFormPage() {
                 />
               </Section>
 
-              <Section title="Specs">
-                <ObjectListField
-                  form={form}
-                  name="specs"
-                  fields={[
-                    { name: 'label', label: 'Label' },
-                    { name: 'value', label: 'Value' },
-                  ]}
-                  emptyItem={{ label: '', value: '' }}
-                  addLabel="Add Spec"
-                />
+              <Section title={`Specs ${activeLang === 'ja' ? '(Japanese)' : ''}`}>
+                {activeLang === 'en' ? (
+                  <ObjectListField
+                    form={form}
+                    name="specsEn"
+                    fields={[
+                      { name: 'label', label: 'Label' },
+                      { name: 'value', label: 'Value' },
+                    ]}
+                    emptyItem={{ label: '', value: '' }}
+                    addLabel="Add Spec"
+                  />
+                ) : (
+                  <ObjectListField
+                    form={form}
+                    name="specsJa"
+                    fields={[
+                      { name: 'label', label: 'Label (Japanese)' },
+                      { name: 'value', label: 'Value (Japanese)' },
+                    ]}
+                    emptyItem={{ label: '', value: '' }}
+                    addLabel="Add Spec"
+                  />
+                )}
               </Section>
 
               <Section title="Images">

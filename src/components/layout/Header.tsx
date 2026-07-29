@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { Menu, LayoutDashboard, Settings, LogOut } from 'lucide-react'
 import { toast } from 'sonner'
+import { useTranslation } from 'react-i18next'
 import { Logo } from '@/components/brand/Logo'
 import { Button } from '@/components/ui/button'
 import {
@@ -29,28 +30,34 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { UserAvatar } from '@/components/shared/UserAvatar'
+import { LocalizedLink, LocalizedNavLink } from '@/components/shared/LocalizedLink'
+import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher'
+import { useLocalizedNavigate } from '@/lib/locale/useLocalizedNavigate'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices, getEquipmentCategories } from '@/lib/data'
 import { useAuth } from '@/lib/auth/AuthContext'
 import { cn } from '@/lib/utils'
 
-const primaryLinks = [
-  { label: 'Solutions', to: '/solutions' },
-  { label: 'Portfolio', to: '/portfolio' },
-  { label: 'Industries', to: '/industries' },
-  { label: 'About', to: '/about' },
-  { label: 'Blog', to: '/blog' },
-]
-
 export function Header() {
+  const { t } = useTranslation('header')
+  const { locale } = useLocale()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
-  const navigate = useNavigate()
+  const navigate = useLocalizedNavigate()
   const { user, profile, signOut } = useAuth()
+
+  const primaryLinks = [
+    { label: t('nav.solutions'), to: '/solutions' },
+    { label: t('nav.portfolio'), to: '/portfolio' },
+    { label: t('nav.industries'), to: '/industries' },
+    { label: t('nav.about'), to: '/about' },
+    { label: t('nav.blog'), to: '/blog' },
+  ]
 
   async function handleSignOut() {
     await signOut()
-    toast.success('Logout successful')
+    toast.success(t('logoutSuccess'))
     navigate('/')
   }
 
@@ -65,8 +72,8 @@ export function Header() {
     setMobileOpen(false)
   }, [location.pathname])
 
-  const services = getServices()
-  const equipmentCategories = getEquipmentCategories()
+  const services = getServices(locale)
+  const equipmentCategories = getEquipmentCategories(locale)
   const eventServices = services.filter((s) => s.category === 'event-type')
   const technicalServices = services.filter((s) => s.category === 'technical')
 
@@ -83,37 +90,37 @@ export function Header() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-white"
       >
-        Skip to content
+        {t('skipToContent')}
       </a>
 
       <div className="container-page flex h-16 items-center justify-between lg:h-20">
-        <Link to="/" aria-label="TOTAL MEDIA home">
+        <LocalizedLink to="/" aria-label={t('homeAriaLabel')}>
           <Logo />
-        </Link>
+        </LocalizedLink>
 
         <nav className="hidden lg:block" aria-label="Primary">
           <NavigationMenu viewport={false}>
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-[15px] font-medium text-charcoal">
-                  Services
+                  {t('servicesMenu')}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <div className="grid w-[640px] grid-cols-2 gap-6 p-6">
                     <div>
                       <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        By Event Type
+                        {t('byEventType')}
                       </p>
                       <ul className="space-y-1">
                         {eventServices.map((s) => (
                           <li key={s.slug}>
                             <NavigationMenuLink asChild>
-                              <Link
+                              <LocalizedLink
                                 to={`/services/${s.slug}`}
                                 className="block rounded-md px-2 py-1.5 text-sm text-charcoal hover:bg-accent hover:text-accent-foreground"
                               >
                                 {s.name}
-                              </Link>
+                              </LocalizedLink>
                             </NavigationMenuLink>
                           </li>
                         ))}
@@ -121,29 +128,29 @@ export function Header() {
                     </div>
                     <div>
                       <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        By Technical Discipline
+                        {t('byTechnicalDiscipline')}
                       </p>
                       <ul className="space-y-1">
                         {technicalServices.map((s) => (
                           <li key={s.slug}>
                             <NavigationMenuLink asChild>
-                              <Link
+                              <LocalizedLink
                                 to={`/services/${s.slug}`}
                                 className="block rounded-md px-2 py-1.5 text-sm text-charcoal hover:bg-accent hover:text-accent-foreground"
                               >
                                 {s.name}
-                              </Link>
+                              </LocalizedLink>
                             </NavigationMenuLink>
                           </li>
                         ))}
                       </ul>
                       <NavigationMenuLink asChild>
-                        <Link
+                        <LocalizedLink
                           to="/services"
                           className="mt-4 block rounded-md px-2 py-1.5 text-sm font-semibold text-signal hover:bg-accent"
                         >
-                          View all services →
-                        </Link>
+                          {t('viewAllServices')}
+                        </LocalizedLink>
                       </NavigationMenuLink>
                     </div>
                   </div>
@@ -152,34 +159,34 @@ export function Header() {
 
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-[15px] font-medium text-charcoal">
-                  Equipment
+                  {t('equipmentMenu')}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <div className="w-[480px] p-6">
                     <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      Rental Categories
+                      {t('rentalCategories')}
                     </p>
                     <ul className="grid grid-cols-2 gap-1">
                       {equipmentCategories.map((c) => (
                         <li key={c.slug}>
                           <NavigationMenuLink asChild>
-                            <Link
+                            <LocalizedLink
                               to={`/equipment/${c.slug}`}
                               className="block rounded-md px-2 py-1.5 text-sm text-charcoal hover:bg-accent hover:text-accent-foreground"
                             >
                               {c.name}
-                            </Link>
+                            </LocalizedLink>
                           </NavigationMenuLink>
                         </li>
                       ))}
                     </ul>
                     <NavigationMenuLink asChild>
-                      <Link
+                      <LocalizedLink
                         to="/equipment"
                         className="mt-4 block rounded-md px-2 py-1.5 text-sm font-semibold text-signal hover:bg-accent"
                       >
-                        View full catalogue →
-                      </Link>
+                        {t('viewFullCatalogue')}
+                      </LocalizedLink>
                     </NavigationMenuLink>
                   </div>
                 </NavigationMenuContent>
@@ -188,7 +195,7 @@ export function Header() {
               {primaryLinks.map((link) => (
                 <NavigationMenuItem key={link.to}>
                   <NavigationMenuLink asChild>
-                    <NavLink
+                    <LocalizedNavLink
                       to={link.to}
                       className={({ isActive }) =>
                         cn(
@@ -198,7 +205,7 @@ export function Header() {
                       }
                     >
                       {link.label}
-                    </NavLink>
+                    </LocalizedNavLink>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
@@ -206,9 +213,10 @@ export function Header() {
           </NavigationMenu>
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
+          <LanguageSwitcher />
           <Button asChild variant="ghost">
-            <Link to="/contact">Contact</Link>
+            <LocalizedLink to="/contact">{t('nav.contact')}</LocalizedLink>
           </Button>
           {user ? (
             <DropdownMenu>
@@ -226,37 +234,37 @@ export function Header() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/dashboard" className="flex items-center gap-2">
-                    <LayoutDashboard className="size-4" /> Dashboard
-                  </Link>
+                  <LocalizedLink to="/dashboard" className="flex items-center gap-2">
+                    <LayoutDashboard className="size-4" /> {t('dashboard')}
+                  </LocalizedLink>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/dashboard/settings" className="flex items-center gap-2">
-                    <Settings className="size-4" /> Profile Settings
-                  </Link>
+                  <LocalizedLink to="/dashboard/settings" className="flex items-center gap-2">
+                    <Settings className="size-4" /> {t('profileSettings')}
+                  </LocalizedLink>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={handleSignOut}
                   className="flex items-center gap-2 text-red-600 focus:text-red-600"
                 >
-                  <LogOut className="size-4" /> Sign Out
+                  <LogOut className="size-4" /> {t('signOut')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <Button asChild variant="ghost">
-              <Link to="/login">Log In</Link>
+              <LocalizedLink to="/login">{t('logIn')}</LocalizedLink>
             </Button>
           )}
           <Button asChild className="bg-navy text-white hover:bg-navy-deep">
-            <Link to="/quote">Request a Quote</Link>
+            <LocalizedLink to="/quote">{t('requestQuote')}</LocalizedLink>
           </Button>
         </div>
 
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
+            <Button variant="ghost" size="icon" className="lg:hidden" aria-label={t('openMenu')}>
               <Menu className="size-6" />
             </Button>
           </SheetTrigger>
@@ -267,57 +275,60 @@ export function Header() {
               </SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-1 px-4 pb-8" aria-label="Mobile">
-              <MobileSection title="Services">
+              <div className="border-b border-border py-3">
+                <LanguageSwitcher />
+              </div>
+              <MobileSection title={t('servicesMenu')}>
                 {services.map((s) => (
                   <SheetClose asChild key={s.slug}>
-                    <Link to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
+                    <LocalizedLink to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
                       {s.name}
-                    </Link>
+                    </LocalizedLink>
                   </SheetClose>
                 ))}
               </MobileSection>
-              <MobileSection title="Equipment">
+              <MobileSection title={t('equipmentMenu')}>
                 {equipmentCategories.map((c) => (
                   <SheetClose asChild key={c.slug}>
-                    <Link to={`/equipment/${c.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
+                    <LocalizedLink to={`/equipment/${c.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
                       {c.name}
-                    </Link>
+                    </LocalizedLink>
                   </SheetClose>
                 ))}
               </MobileSection>
               {[
                 ...primaryLinks,
-                { label: 'FAQ', to: '/faq' },
-                { label: 'Careers', to: '/careers' },
-                { label: 'Contact', to: '/contact' },
+                { label: t('nav.faq'), to: '/faq' },
+                { label: t('nav.careers'), to: '/careers' },
+                { label: t('nav.contact'), to: '/contact' },
               ].map((link) => (
                 <SheetClose asChild key={link.to}>
-                  <Link
+                  <LocalizedLink
                     to={link.to}
                     className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
                   >
                     {link.label}
-                  </Link>
+                  </LocalizedLink>
                 </SheetClose>
               ))}
               <div className="my-2 border-t border-border" />
               {user ? (
                 <>
                   <SheetClose asChild>
-                    <Link
+                    <LocalizedLink
                       to="/dashboard"
                       className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
                     >
-                      <LayoutDashboard className="size-4" /> Dashboard
-                    </Link>
+                      <LayoutDashboard className="size-4" /> {t('dashboard')}
+                    </LocalizedLink>
                   </SheetClose>
                   <SheetClose asChild>
-                    <Link
+                    <LocalizedLink
                       to="/dashboard/settings"
                       className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
                     >
-                      <Settings className="size-4" /> Profile Settings
-                    </Link>
+                      <Settings className="size-4" /> {t('profileSettings')}
+                    </LocalizedLink>
                   </SheetClose>
                   <SheetClose asChild>
                     <button
@@ -325,23 +336,23 @@ export function Header() {
                       onClick={handleSignOut}
                       className="flex items-center gap-2 rounded-md px-3 py-3 text-left text-base font-medium text-red-600 hover:bg-mist"
                     >
-                      <LogOut className="size-4" /> Sign Out
+                      <LogOut className="size-4" /> {t('signOut')}
                     </button>
                   </SheetClose>
                 </>
               ) : (
                 <SheetClose asChild>
-                  <Link
+                  <LocalizedLink
                     to="/login"
                     className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
                   >
-                    Log In
-                  </Link>
+                    {t('logIn')}
+                  </LocalizedLink>
                 </SheetClose>
               )}
               <SheetClose asChild>
                 <Button asChild className="mt-4 bg-navy text-white hover:bg-navy-deep">
-                  <Link to="/quote">Request a Quote</Link>
+                  <LocalizedLink to="/quote">{t('requestQuote')}</LocalizedLink>
                 </Button>
               </SheetClose>
             </nav>

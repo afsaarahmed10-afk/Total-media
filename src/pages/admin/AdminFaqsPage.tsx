@@ -9,6 +9,7 @@ import { Seo } from '@/components/layout/Seo'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { AdminDataTable, type AdminColumn } from '@/components/admin/AdminDataTable'
 import { ConfirmDeleteDialog } from '@/components/admin/ConfirmDeleteDialog'
+import { LangTabs } from '@/components/admin/LangTabs'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -33,8 +34,10 @@ const CATEGORY_LABELS: Record<FaqCategory, string> = {
 }
 
 const schema = z.object({
-  question: z.string().min(5, 'Question is required.'),
-  answer: z.string().min(5, 'Answer is required.'),
+  questionEn: z.string().min(5, 'Question is required.'),
+  questionJa: z.string(),
+  answerEn: z.string().min(5, 'Answer is required.'),
+  answerJa: z.string(),
   slug: z
     .string()
     .min(1, 'Slug is required.')
@@ -43,7 +46,14 @@ const schema = z.object({
 })
 type FormValues = z.infer<typeof schema>
 
-const DEFAULT_VALUES: FormValues = { question: '', answer: '', slug: '', category: 'none' }
+const DEFAULT_VALUES: FormValues = {
+  questionEn: '',
+  questionJa: '',
+  answerEn: '',
+  answerJa: '',
+  slug: '',
+  category: 'none',
+}
 
 export default function AdminFaqsPage() {
   const [rows, setRows] = useState<Faq[] | null>(null)
@@ -53,6 +63,7 @@ export default function AdminFaqsPage() {
   const [submitting, setSubmitting] = useState(false)
   const [deletingBusy, setDeletingBusy] = useState(false)
   const [autoSlug, setAutoSlug] = useState(true)
+  const [activeLang, setActiveLang] = useState<'en' | 'ja'>('en')
 
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: DEFAULT_VALUES })
 
@@ -61,7 +72,7 @@ export default function AdminFaqsPage() {
   }, [])
 
   async function load() {
-    const { data, error } = await supabase.from('faqs').select('*').order('question')
+    const { data, error } = await supabase.from('faqs').select('*').order('question_en')
     if (error) {
       toast.error('Failed to load FAQs.')
       return
@@ -72,6 +83,7 @@ export default function AdminFaqsPage() {
   function openCreate() {
     setEditing(null)
     setAutoSlug(true)
+    setActiveLang('en')
     form.reset(DEFAULT_VALUES)
     setDialogOpen(true)
   }
@@ -79,9 +91,12 @@ export default function AdminFaqsPage() {
   function openEdit(row: Faq) {
     setEditing(row)
     setAutoSlug(false)
+    setActiveLang('en')
     form.reset({
-      question: row.question,
-      answer: row.answer,
+      questionEn: row.question_en,
+      questionJa: row.question_ja ?? '',
+      answerEn: row.answer_en,
+      answerJa: row.answer_ja ?? '',
       slug: row.slug,
       category: row.category ?? 'none',
     })
@@ -91,8 +106,10 @@ export default function AdminFaqsPage() {
   async function onSubmit(values: FormValues) {
     setSubmitting(true)
     const payload = {
-      question: values.question,
-      answer: values.answer,
+      question_en: values.questionEn,
+      question_ja: values.questionJa || null,
+      answer_en: values.answerEn,
+      answer_ja: values.answerJa || null,
       slug: values.slug,
       category: values.category === 'none' ? null : (values.category as FaqCategory),
     }
@@ -125,7 +142,7 @@ export default function AdminFaqsPage() {
   }
 
   const columns: AdminColumn<Faq>[] = [
-    { key: 'question', header: 'Question', render: (r) => <span className="line-clamp-1 max-w-md font-medium text-navy">{r.question}</span> },
+    { key: 'question', header: 'Question', render: (r) => <span className="line-clamp-1 max-w-md font-medium text-navy">{r.question_en}</span> },
     {
       key: 'category',
       header: 'Category',
@@ -149,6 +166,8 @@ export default function AdminFaqsPage() {
     },
   ]
 
+  const jaComplete = Boolean(form.watch('questionJa'))
+
   return (
     <>
       <Seo title="FAQs" description="Manage frequently asked questions." path="/admin/faqs" noindex />
@@ -170,7 +189,7 @@ export default function AdminFaqsPage() {
           columns={columns}
           rows={rows}
           getRowId={(r) => r.id}
-          searchText={(r) => `${r.question} ${r.answer}`}
+          searchText={(r) => `${r.question_en} ${r.answer_en}`}
           searchPlaceholder="Search FAQs…"
           emptyMessage="No FAQs yet."
         />
@@ -179,22 +198,25 @@ export default function AdminFaqsPage() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>{editing ? 'Edit FAQ' : 'New FAQ'}</DialogTitle>
+            <div className="flex items-center justify-between gap-4">
+              <DialogTitle>{editing ? 'Edit FAQ' : 'New FAQ'}</DialogTitle>
+              <LangTabs active={activeLang} onChange={setActiveLang} jaComplete={jaComplete} />
+            </div>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="question"
+                name={activeLang === 'en' ? 'questionEn' : 'questionJa'}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Question</FormLabel>
+                    <FormLabel>Question {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         onChange={(e) => {
                           field.onChange(e)
-                          if (autoSlug) form.setValue('slug', slugify(e.target.value))
+                          if (autoSlug && activeLang === 'en') form.setValue('slug', slugify(e.target.value))
                         }}
                       />
                     </FormControl>
@@ -204,10 +226,10 @@ export default function AdminFaqsPage() {
               />
               <FormField
                 control={form.control}
-                name="answer"
+                name={activeLang === 'en' ? 'answerEn' : 'answerJa'}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Answer</FormLabel>
+                    <FormLabel>Answer {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                     <FormControl>
                       <Textarea rows={4} {...field} />
                     </FormControl>
@@ -277,7 +299,7 @@ export default function AdminFaqsPage() {
       <ConfirmDeleteDialog
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
-        description={`Delete "${deleting?.question}"? This can't be undone.`}
+        description={`Delete "${deleting?.question_en}"? This can't be undone.`}
         onConfirm={confirmDelete}
         loading={deletingBusy}
       />

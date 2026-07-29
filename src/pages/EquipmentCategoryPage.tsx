@@ -1,24 +1,22 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { Badge } from '@/components/ui/badge'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentByCategory, getEquipmentCategoryBySlug } from '@/lib/data'
-import type { EquipmentAvailability } from '@/content/types'
 import NotFoundPage from '@/pages/NotFoundPage'
 
-const AVAILABILITY_LABEL: Record<EquipmentAvailability, string> = {
-  'in-stock': 'In Stock',
-  limited: 'Limited Availability',
-  'made-to-order': 'Made to Order',
-}
-
 export default function EquipmentCategoryPage() {
+  const { t } = useTranslation(['equipment', 'common'])
+  const { locale } = useLocale()
   const { category = '' } = useParams()
-  const categoryData = getEquipmentCategoryBySlug(category)
+  const categoryData = getEquipmentCategoryBySlug(category, locale)
   const items = getEquipmentByCategory(category)
 
   if (!categoryData) return <NotFoundPage />
@@ -31,13 +29,13 @@ export default function EquipmentCategoryPage() {
         path={`/equipment/${categoryData.slug}`}
       />
       <PageHero
-        eyebrow="Equipment Category"
+        eyebrow={t('category.eyebrow')}
         title={categoryData.name}
         description={categoryData.description}
         visualSeed={categoryData.slug}
         breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Equipment', to: '/equipment' },
+          { label: t('home', { ns: 'common' }), to: '/' },
+          { label: t('index.eyebrow'), to: '/equipment' },
           { label: categoryData.name },
         ]}
       />
@@ -48,7 +46,7 @@ export default function EquipmentCategoryPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((item, i) => (
                 <Reveal key={item.slug} delay={(i % 6) * 0.05}>
-                  <Link
+                  <LocalizedLink
                     to={`/equipment/${item.categorySlug}/${item.slug}`}
                     className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white transition-all hover:-translate-y-1 hover:border-signal/30 hover:shadow-lg hover:shadow-navy/5"
                   >
@@ -57,31 +55,29 @@ export default function EquipmentCategoryPage() {
                         <AbstractVisual seed={item.visualSeed} />
                       </div>
                       <Badge className="absolute left-3 top-3 bg-white/90 text-navy hover:bg-white/90">
-                        {AVAILABILITY_LABEL[item.availability]}
+                        {t(`availability.${item.availability}`)}
                       </Badge>
                     </div>
                     <div className="flex flex-1 flex-col p-5">
                       <h3 className="font-semibold text-navy">{item.name}</h3>
                       <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{item.summary}</p>
                       <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-signal opacity-0 transition-opacity group-hover:opacity-100">
-                        View specs <ArrowRight className="size-3.5" />
+                        {t('index.viewSpecs')} <ArrowRight className="size-3.5" />
                       </span>
                     </div>
-                  </Link>
+                  </LocalizedLink>
                 </Reveal>
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted-foreground">
-              Equipment in this category is being catalogued — contact us for current availability.
-            </p>
+            <p className="text-center text-muted-foreground">{t('category.noneInCategory')}</p>
           )}
         </div>
       </section>
 
       <CtaBand
-        title={`Ready to Book ${categoryData.name}?`}
-        description="Request a quote and we'll confirm availability, specification, and pricing."
+        title={t('category.readyToBook', { name: categoryData.name })}
+        description={t('category.ctaDescription')}
       />
     </>
   )

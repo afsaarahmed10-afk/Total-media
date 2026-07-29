@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 
 export interface BreadcrumbItem {
   label: string
@@ -15,9 +15,9 @@ export function Breadcrumbs({ items, className }: { items: BreadcrumbItem[]; cla
           return (
             <li key={item.label} className="flex items-center gap-1.5">
               {item.to && !isLast ? (
-                <Link to={item.to} className="text-white/60 hover:text-white">
+                <LocalizedLink to={item.to} className="text-white/60 hover:text-white">
                   {item.label}
-                </Link>
+                </LocalizedLink>
               ) : (
                 <span aria-current={isLast ? 'page' : undefined} className="text-white/90">
                   {item.label}

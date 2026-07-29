@@ -1,32 +1,32 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getSolutions, getServicesBySlugs } from '@/lib/data'
 
 export default function SolutionsPage() {
-  const solutions = getSolutions()
+  const { t } = useTranslation(['solutions', 'common'])
+  const { locale } = useLocale()
+  const solutions = getSolutions(locale)
 
   return (
     <>
-      <Seo
-        title="Solutions"
-        description="TOTAL MEDIA's packaged solutions bundle multiple services together for hybrid events, large-format visuals, broadcast production, and full technical delivery."
-        path="/solutions"
-      />
+      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/solutions" />
       <PageHero
-        eyebrow="Solutions"
-        title="Multiple Disciplines, Packaged Around Your Use Case"
-        description="Where Services covers individual disciplines, Solutions bundles the ones that consistently work together — designed as one coordinated plan, not separate line items."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Solutions' }]}
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        description={t('description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
       />
 
       <div className="divide-y divide-border">
         {solutions.map((solution, index) => {
-          const includedServices = getServicesBySlugs(solution.includedServiceSlugs)
+          const includedServices = getServicesBySlugs(solution.includedServiceSlugs, locale)
           const isEven = index % 2 === 0
 
           return (
@@ -47,7 +47,7 @@ export default function SolutionsPage() {
 
                   <Reveal delay={0.1}>
                     <p className="text-sm font-semibold uppercase tracking-wider text-signal">
-                      Solution
+                      {t('solutionLabel')}
                     </p>
                     <h2 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
                       {solution.name}
@@ -73,22 +73,22 @@ export default function SolutionsPage() {
 
                     <div className="mt-8 flex flex-wrap gap-2">
                       {includedServices.map((service) => (
-                        <Link
+                        <LocalizedLink
                           key={service.slug}
                           to={`/services/${service.slug}`}
                           className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-charcoal hover:border-signal/40 hover:text-signal"
                         >
                           {service.name}
-                        </Link>
+                        </LocalizedLink>
                       ))}
                     </div>
 
-                    <Link
+                    <LocalizedLink
                       to="/quote"
                       className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-signal hover:underline"
                     >
-                      Request a quote for this solution <ArrowRight className="size-4" />
-                    </Link>
+                      {t('requestQuoteFor')} <ArrowRight className="size-4" />
+                    </LocalizedLink>
                   </Reveal>
                 </div>
               </div>
@@ -97,10 +97,7 @@ export default function SolutionsPage() {
         })}
       </div>
 
-      <CtaBand
-        title="Need a Custom Combination?"
-        description="If your event doesn't map cleanly onto one solution, we'll scope a custom plan around it."
-      />
+      <CtaBand title={t('ctaTitle')} description={t('ctaDescription')} />
     </>
   )
 }

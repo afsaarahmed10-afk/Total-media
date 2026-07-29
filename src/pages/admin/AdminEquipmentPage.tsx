@@ -40,15 +40,15 @@ export default function AdminEquipmentPage() {
 
   async function load() {
     const [itemsRes, categoriesRes] = await Promise.all([
-      supabase.from('equipment_items').select('*').order('name'),
-      supabase.from('equipment_categories').select('id, name'),
+      supabase.from('equipment_items').select('*').order('name_en'),
+      supabase.from('equipment_categories').select('id, name_en'),
     ])
     if (itemsRes.error) {
       toast.error('Failed to load equipment.')
       return
     }
     setRows(itemsRes.data)
-    setCategories(new Map((categoriesRes.data ?? []).map((c: Pick<EquipmentCategory, 'id' | 'name'>) => [c.id, c.name])))
+    setCategories(new Map((categoriesRes.data ?? []).map((c: Pick<EquipmentCategory, 'id' | 'name_en'>) => [c.id, c.name_en])))
   }
 
   async function confirmDelete() {
@@ -66,7 +66,7 @@ export default function AdminEquipmentPage() {
   }
 
   const columns: AdminColumn<EquipmentItem>[] = [
-    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name}</span> },
+    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name_en}</span> },
     { key: 'category', header: 'Category', render: (r) => categories.get(r.category_id) ?? '—' },
     {
       key: 'availability',
@@ -118,7 +118,7 @@ export default function AdminEquipmentPage() {
           columns={columns}
           rows={rows}
           getRowId={(r) => r.id}
-          searchText={(r) => `${r.name} ${r.summary}`}
+          searchText={(r) => `${r.name_en} ${r.summary_en}`}
           searchPlaceholder="Search equipment…"
           emptyMessage="No equipment items yet."
         />
@@ -127,7 +127,7 @@ export default function AdminEquipmentPage() {
       <ConfirmDeleteDialog
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
-        description={`Delete "${deleting?.name}"? This can't be undone.`}
+        description={`Delete "${deleting?.name_en}"? This can't be undone.`}
         onConfirm={confirmDelete}
         loading={deletingBusy}
       />

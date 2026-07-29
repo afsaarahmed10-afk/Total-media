@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { CheckCircle2, ChevronLeft, ChevronRight, UploadCloud, X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Button } from '@/components/ui/button'
@@ -26,65 +27,68 @@ import {
 } from '@/components/ui/form'
 import { cn } from '@/lib/utils'
 import { getServices } from '@/lib/data'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { supabase } from '@/lib/supabase/client'
-
-const EVENT_TYPES = [
-  'Corporate Event',
-  'Conference',
-  'Exhibition / Trade Show',
-  'Product Launch',
-  'Award Ceremony',
-  'Hybrid Event',
-  'Virtual Event',
-  'Live Streaming',
-  'Other',
-]
-
-const BUDGET_RANGES = [
-  'Under ¥1,000,000',
-  '¥1,000,000 – ¥3,000,000',
-  '¥3,000,000 – ¥10,000,000',
-  '¥10,000,000 – ¥30,000,000',
-  'Over ¥30,000,000',
-  'Not sure yet',
-]
 
 const MAX_FILE_SIZE = 15 * 1024 * 1024 // 15MB per file
 
-const quoteSchema = z.object({
-  name: z.string().min(2, 'Please enter your name.'),
-  company: z.string().min(1, 'Please enter your company name.'),
-  country: z.string().min(1, 'Please enter your country.'),
-  email: z.string().email('Please enter a valid email address.'),
-  phone: z.string().min(5, 'Please enter a valid phone number.'),
-  eventType: z.string().min(1, 'Please select an event type.'),
-  venue: z.string().optional(),
-  city: z.string().min(1, 'Please enter a city.'),
-  eventDate: z.string().optional(),
-  attendees: z.string().optional(),
-  budget: z.string().optional(),
-  services: z.array(z.string()).min(1, 'Select at least one service.'),
-  notes: z.string().optional(),
-  website: z.string().max(0).optional(),
-})
-
-type QuoteFormValues = z.infer<typeof quoteSchema>
-
-const STEPS = ['Contact', 'Event Details', 'Services & Notes', 'Review'] as const
-const STEP_FIELDS: (keyof QuoteFormValues)[][] = [
-  ['name', 'company', 'country', 'email', 'phone'],
-  ['eventType', 'venue', 'city', 'eventDate', 'attendees', 'budget'],
-  ['services', 'notes'],
-  [],
-]
+type QuoteFormValues = {
+  name: string
+  company: string
+  country: string
+  email: string
+  phone: string
+  eventType: string
+  venue?: string
+  city: string
+  eventDate?: string
+  attendees?: string
+  budget?: string
+  services: string[]
+  notes?: string
+  website?: string
+}
 
 export default function QuotePage() {
-  const services = getServices()
+  const { t } = useTranslation(['quote', 'common'])
+  const { locale } = useLocale()
+  const services = getServices(locale)
+  const EVENT_TYPES = t('eventTypes', { returnObjects: true }) as string[]
+  const BUDGET_RANGES = t('budgetRanges', { returnObjects: true }) as string[]
+  const STEPS = t('steps', { returnObjects: true }) as string[]
+  const STEP_FIELDS: (keyof QuoteFormValues)[][] = [
+    ['name', 'company', 'country', 'email', 'phone'],
+    ['eventType', 'venue', 'city', 'eventDate', 'attendees', 'budget'],
+    ['services', 'notes'],
+    [],
+  ]
+
   const [step, setStep] = useState(0)
   const [files, setFiles] = useState<File[]>([])
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+
+  const quoteSchema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, t('validation.name')),
+        company: z.string().min(1, t('validation.company')),
+        country: z.string().min(1, t('validation.country')),
+        email: z.string().email(t('validation.email')),
+        phone: z.string().min(5, t('validation.phone')),
+        eventType: z.string().min(1, t('validation.eventType')),
+        venue: z.string().optional(),
+        city: z.string().min(1, t('validation.city')),
+        eventDate: z.string().optional(),
+        attendees: z.string().optional(),
+        budget: z.string().optional(),
+        services: z.array(z.string()).min(1, t('validation.services')),
+        notes: z.string().optional(),
+        website: z.string().max(0).optional(),
+      }),
+    [t],
+  )
 
   const form = useForm<QuoteFormValues>({
     resolver: zodResolver(quoteSchema),
@@ -155,9 +159,7 @@ export default function QuotePage() {
     })
 
     if (insertError) {
-      setSubmitError(
-        'Something went wrong sending your request. Please try again, or email us directly at hello@totalmedia.co.jp.',
-      )
+      setSubmitError(t('submitError'))
       setIsSubmitting(false)
       return
     }
@@ -216,18 +218,14 @@ export default function QuotePage() {
   if (submitted) {
     return (
       <>
-        <Seo title="Request a Quote" description="Request a detailed event production quote from TOTAL MEDIA." path="/quote" />
+        <Seo title={t('seoTitle')} description={t('seoDescription')} path="/quote" />
         <section className="flex min-h-[70vh] items-center justify-center bg-mist">
           <div className="container-page flex max-w-lg flex-col items-center text-center">
             <CheckCircle2 className="size-14 text-signal" />
             <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-navy">
-              Quote Request Received
+              {t('successTitle')}
             </h1>
-            <p className="mt-3 text-lg text-muted-foreground">
-              Thank you — our team will review your request and respond with a detailed proposal
-              within 1–2 business days. Complex or multi-day productions may take up to 5 business
-              days.
-            </p>
+            <p className="mt-3 text-lg text-muted-foreground">{t('successDescription')}</p>
           </div>
         </section>
       </>
@@ -236,16 +234,12 @@ export default function QuotePage() {
 
   return (
     <>
-      <Seo
-        title="Request a Quote"
-        description="Request a detailed event production quote from TOTAL MEDIA. Tell us about your event and we'll respond within 1–2 business days."
-        path="/quote"
-      />
+      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/quote" />
       <PageHero
-        eyebrow="Request a Quote"
-        title="Tell Us About Your Event"
-        description="The more detail you provide, the more precise your proposal will be. Every field below feeds directly into the plan we send back."
-        breadcrumbs={[{ label: 'Home', to: '/' }, { label: 'Request a Quote' }]}
+        eyebrow={t('eyebrow')}
+        title={t('title')}
+        description={t('description')}
+        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
       />
 
       <section className="py-16 lg:py-20">
@@ -294,9 +288,9 @@ export default function QuotePage() {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Full Name</FormLabel>
+                            <FormLabel>{t('form.fullName')}</FormLabel>
                             <FormControl>
-                              <Input placeholder="Your full name" {...field} />
+                              <Input placeholder={t('form.fullNamePlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -307,9 +301,9 @@ export default function QuotePage() {
                         name="company"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Company</FormLabel>
+                            <FormLabel>{t('form.company')}</FormLabel>
                             <FormControl>
-                              <Input placeholder="Your company" {...field} />
+                              <Input placeholder={t('form.companyPlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -322,9 +316,9 @@ export default function QuotePage() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>{t('form.email')}</FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="you@company.com" {...field} />
+                              <Input type="email" placeholder={t('form.emailPlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -335,9 +329,9 @@ export default function QuotePage() {
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Phone</FormLabel>
+                            <FormLabel>{t('form.phone')}</FormLabel>
                             <FormControl>
-                              <Input type="tel" placeholder="+81 3-0000-0000" {...field} />
+                              <Input type="tel" placeholder={t('form.phonePlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -349,9 +343,9 @@ export default function QuotePage() {
                       name="country"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Country</FormLabel>
+                          <FormLabel>{t('form.country')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="e.g. Japan, United States, Singapore" {...field} />
+                            <Input placeholder={t('form.countryPlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -367,11 +361,11 @@ export default function QuotePage() {
                       name="eventType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Event Type</FormLabel>
+                          <FormLabel>{t('form.eventType')}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select an event type" />
+                                <SelectValue placeholder={t('form.eventTypePlaceholder')} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -392,9 +386,9 @@ export default function QuotePage() {
                         name="venue"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Venue (if known)</FormLabel>
+                            <FormLabel>{t('form.venue')}</FormLabel>
                             <FormControl>
-                              <Input placeholder="Venue name" {...field} />
+                              <Input placeholder={t('form.venuePlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -405,9 +399,9 @@ export default function QuotePage() {
                         name="city"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>City</FormLabel>
+                            <FormLabel>{t('form.city')}</FormLabel>
                             <FormControl>
-                              <Input placeholder="e.g. Tokyo, Osaka" {...field} />
+                              <Input placeholder={t('form.cityPlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -420,7 +414,7 @@ export default function QuotePage() {
                         name="eventDate"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Event Date (if known)</FormLabel>
+                            <FormLabel>{t('form.eventDate')}</FormLabel>
                             <FormControl>
                               <Input type="date" {...field} />
                             </FormControl>
@@ -433,9 +427,9 @@ export default function QuotePage() {
                         name="attendees"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Estimated Attendees</FormLabel>
+                            <FormLabel>{t('form.attendees')}</FormLabel>
                             <FormControl>
-                              <Input type="number" min={1} placeholder="e.g. 200" {...field} />
+                              <Input type="number" min={1} placeholder={t('form.attendeesPlaceholder')} {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -447,11 +441,11 @@ export default function QuotePage() {
                       name="budget"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Estimated Budget (optional)</FormLabel>
+                          <FormLabel>{t('form.budget')}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a budget range" />
+                                <SelectValue placeholder={t('form.budgetPlaceholder')} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -476,7 +470,7 @@ export default function QuotePage() {
                       name="services"
                       render={() => (
                         <FormItem>
-                          <FormLabel>Required Services</FormLabel>
+                          <FormLabel>{t('form.requiredServices')}</FormLabel>
                           <div className="grid gap-2.5 sm:grid-cols-2">
                             {services.map((service) => (
                               <FormField
@@ -518,15 +512,11 @@ export default function QuotePage() {
                     />
 
                     <div>
-                      <FormLabel>Attachments (optional)</FormLabel>
+                      <FormLabel>{t('form.attachments')}</FormLabel>
                       <label className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-border px-6 py-8 text-center hover:border-signal/40">
                         <UploadCloud className="size-6 text-muted-foreground" />
-                        <span className="mt-2 text-sm font-medium text-navy">
-                          Click to upload floor plans, RFPs, or reference files
-                        </span>
-                        <span className="mt-1 text-xs text-muted-foreground">
-                          PDF, DOC, XLS, JPG, PNG — up to 15MB per file
-                        </span>
+                        <span className="mt-2 text-sm font-medium text-navy">{t('form.uploadPrompt')}</span>
+                        <span className="mt-1 text-xs text-muted-foreground">{t('form.uploadHint')}</span>
                         <input type="file" multiple className="hidden" onChange={onFileChange} />
                       </label>
                       {files.length > 0 && (
@@ -540,7 +530,7 @@ export default function QuotePage() {
                               <button
                                 type="button"
                                 onClick={() => removeFile(file.name)}
-                                aria-label={`Remove ${file.name}`}
+                                aria-label={t('form.removeFile', { name: file.name })}
                                 className="text-muted-foreground hover:text-destructive"
                               >
                                 <X className="size-4" />
@@ -556,13 +546,9 @@ export default function QuotePage() {
                       name="notes"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Additional Notes</FormLabel>
+                          <FormLabel>{t('form.additionalNotes')}</FormLabel>
                           <FormControl>
-                            <Textarea
-                              rows={5}
-                              placeholder="Anything else that would help us scope this accurately..."
-                              {...field}
-                            />
+                            <Textarea rows={5} placeholder={t('form.notesPlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -588,24 +574,27 @@ export default function QuotePage() {
 
                 {step === 3 && (
                   <div className="space-y-6">
-                    <h2 className="text-lg font-bold text-navy">Review Your Request</h2>
-                    <ReviewRow label="Name" value={form.getValues('name')} />
-                    <ReviewRow label="Company" value={form.getValues('company')} />
-                    <ReviewRow label="Email" value={form.getValues('email')} />
-                    <ReviewRow label="Phone" value={form.getValues('phone')} />
-                    <ReviewRow label="Country" value={form.getValues('country')} />
-                    <ReviewRow label="Event Type" value={form.getValues('eventType')} />
+                    <h2 className="text-lg font-bold text-navy">{t('review.title')}</h2>
+                    <ReviewRow label={t('review.name')} value={form.getValues('name')} />
+                    <ReviewRow label={t('review.company')} value={form.getValues('company')} />
+                    <ReviewRow label={t('review.email')} value={form.getValues('email')} />
+                    <ReviewRow label={t('review.phone')} value={form.getValues('phone')} />
+                    <ReviewRow label={t('review.country')} value={form.getValues('country')} />
+                    <ReviewRow label={t('review.eventType')} value={form.getValues('eventType')} />
                     <ReviewRow
-                      label="Venue / City"
+                      label={t('review.venueCity')}
                       value={[form.getValues('venue'), form.getValues('city')].filter(Boolean).join(', ')}
                     />
-                    <ReviewRow label="Event Date" value={form.getValues('eventDate') || 'Not yet set'} />
-                    <ReviewRow label="Attendees" value={form.getValues('attendees') || '—'} />
-                    <ReviewRow label="Budget" value={form.getValues('budget') || 'Not specified'} />
-                    <ReviewRow label="Services" value={form.getValues('services').join(', ')} />
-                    <ReviewRow label="Attachments" value={files.length ? `${files.length} file(s)` : 'None'} />
+                    <ReviewRow label={t('review.eventDate')} value={form.getValues('eventDate') || t('review.notYetSet')} />
+                    <ReviewRow label={t('review.attendees')} value={form.getValues('attendees') || '—'} />
+                    <ReviewRow label={t('review.budget')} value={form.getValues('budget') || t('review.notSpecified')} />
+                    <ReviewRow label={t('review.services')} value={form.getValues('services').join(', ')} />
+                    <ReviewRow
+                      label={t('review.attachments')}
+                      value={files.length ? t('review.fileCount', { count: files.length }) : t('review.none')}
+                    />
                     {form.getValues('notes') && (
-                      <ReviewRow label="Notes" value={form.getValues('notes') ?? ''} />
+                      <ReviewRow label={t('review.notes')} value={form.getValues('notes') ?? ''} />
                     )}
                   </div>
                 )}
@@ -617,14 +606,14 @@ export default function QuotePage() {
                 <div className="flex items-center justify-between pt-4">
                   {step > 0 ? (
                     <Button type="button" variant="outline" onClick={goBack} disabled={isSubmitting}>
-                      <ChevronLeft className="mr-1 size-4" /> Back
+                      <ChevronLeft className="mr-1 size-4" /> {t('back')}
                     </Button>
                   ) : (
                     <span />
                   )}
                   {step < STEPS.length - 1 ? (
                     <Button type="button" onClick={goNext} className="bg-navy text-white hover:bg-navy-deep">
-                      Continue <ChevronRight className="ml-1 size-4" />
+                      {t('continue')} <ChevronRight className="ml-1 size-4" />
                     </Button>
                   ) : (
                     <Button
@@ -632,7 +621,7 @@ export default function QuotePage() {
                       disabled={isSubmitting}
                       className="bg-signal text-white hover:bg-signal/90"
                     >
-                      {isSubmitting ? 'Submitting…' : 'Submit Quote Request'}
+                      {isSubmitting ? t('submitting') : t('submit')}
                     </Button>
                   )}
                 </div>

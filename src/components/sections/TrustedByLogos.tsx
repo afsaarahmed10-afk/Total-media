@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import { getClients } from '@/lib/data'
 import { Reveal } from '@/components/shared/Reveal'
 
 export function TrustedByLogos() {
+  const { t } = useTranslation('home')
   const clients = getClients()
 
   return (
@@ -9,7 +11,7 @@ export function TrustedByLogos() {
       <div className="container-page">
         <Reveal>
           <p className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Trusted By Organizations Across Industries
+            {t('trustedBy.label')}
           </p>
         </Reveal>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">

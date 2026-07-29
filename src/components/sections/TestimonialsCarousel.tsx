@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Button } from '@/components/ui/button'
 import { getTestimonials } from '@/lib/data'
 
 export function TestimonialsCarousel() {
+  const { t } = useTranslation('home')
   const testimonials = getTestimonials()
   const [index, setIndex] = useState(0)
   const testimonial = testimonials[index]
@@ -16,7 +18,7 @@ export function TestimonialsCarousel() {
   return (
     <section className="py-20 lg:py-28">
       <div className="container-page">
-        <SectionHeading eyebrow="Client Testimonials" title="What Clients Say" align="center" />
+        <SectionHeading eyebrow={t('testimonials.eyebrow')} title={t('testimonials.title')} align="center" />
 
         <div className="mx-auto mt-12 max-w-3xl">
           <div className="relative rounded-2xl border border-border bg-white p-8 sm:p-12">
@@ -45,12 +47,12 @@ export function TestimonialsCarousel() {
 
             <div className="mt-8 flex items-center justify-between">
               <div className="flex gap-1.5">
-                {testimonials.map((t, i) => (
+                {testimonials.map((t2, i) => (
                   <button
-                    key={t.id}
+                    key={t2.id}
                     type="button"
                     onClick={() => setIndex(i)}
-                    aria-label={`Show testimonial ${i + 1}`}
+                    aria-label={t('testimonials.showTestimonial', { n: i + 1 })}
                     className={`h-1.5 rounded-full transition-all ${
                       i === index ? 'w-6 bg-signal' : 'w-1.5 bg-border'
                     }`}
@@ -58,10 +60,10 @@ export function TestimonialsCarousel() {
                 ))}
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="icon" onClick={prev} aria-label="Previous testimonial">
+                <Button variant="outline" size="icon" onClick={prev} aria-label={t('testimonials.previous')}>
                   <ChevronLeft className="size-4" />
                 </Button>
-                <Button variant="outline" size="icon" onClick={next} aria-label="Next testimonial">
+                <Button variant="outline" size="icon" onClick={next} aria-label={t('testimonials.next')}>
                   <ChevronRight className="size-4" />
                 </Button>
               </div>

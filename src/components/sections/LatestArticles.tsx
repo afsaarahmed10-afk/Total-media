@@ -1,59 +1,64 @@
-import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getLatestBlogPosts } from '@/lib/data'
 
 export function LatestArticles() {
+  const { t } = useTranslation('home')
+  const { locale } = useLocale()
   const posts = getLatestBlogPosts(3)
+  const dateLocale = locale === 'ja' ? 'ja-JP' : 'en-US'
 
   return (
     <section className="py-20 lg:py-28">
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="From the Blog"
-            title="Latest Articles"
-            description="Field notes on event planning, technical production, and what we've learned running events across Japan."
+            eyebrow={t('latestArticles.eyebrow')}
+            title={t('latestArticles.title')}
+            description={t('latestArticles.description')}
           />
-          <Link
+          <LocalizedLink
             to="/blog"
             className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-signal hover:underline sm:flex"
           >
-            Visit the blog <ArrowRight className="size-4" />
-          </Link>
+            {t('latestArticles.visitBlog')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {posts.map((post, i) => (
             <Reveal key={post.slug} delay={i * 0.08}>
-              <Link to={`/blog/${post.slug}`} className="group block">
+              <LocalizedLink to={`/blog/${post.slug}`} className="group block">
                 <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
                   <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
                     <AbstractVisual seed={post.visualSeed} />
                   </div>
                 </div>
                 <p className="mt-4 text-xs font-medium text-muted-foreground">
-                  {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                  {new Date(post.publishedAt).toLocaleDateString(dateLocale, {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}{' '}
-                  · {post.readMinutes} min read
+                  · {post.readMinutes} {t('latestArticles.minRead')}
                 </p>
                 <h3 className="mt-1.5 text-lg font-semibold leading-snug text-navy group-hover:text-signal">
                   {post.title}
                 </h3>
-              </Link>
+              </LocalizedLink>
             </Reveal>
           ))}
         </div>
 
         <div className="mt-8 sm:hidden">
-          <Link to="/blog" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
-            Visit the blog <ArrowRight className="size-4" />
-          </Link>
+          <LocalizedLink to="/blog" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
+            {t('latestArticles.visitBlog')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
       </div>
     </section>

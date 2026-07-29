@@ -1,19 +1,27 @@
-import type { Service } from './types'
+import type { BilingualService } from './types'
 
-export const services: Service[] = [
+export const services: BilingualService[] = [
   {
     id: 's-corporate-events',
     slug: 'corporate-events',
     category: 'event-type',
-    name: 'Corporate Events',
-    shortDescription:
+    nameEn: 'Corporate Events',
+    nameJa: '企業イベント',
+    shortDescriptionEn:
       'End-to-end planning and technical production for internal and client-facing corporate events of any scale.',
-    heroStatement: 'Corporate events, produced the way your organization needs to be seen.',
-    overview: [
+    shortDescriptionJa:
+      '社内向け・対クライアント向けを問わず、あらゆる規模の企業イベントの企画から技術制作までワンストップで対応します。',
+    heroStatementEn: 'Corporate events, produced the way your organization needs to be seen.',
+    heroStatementJa: '御社が伝えたい姿を、そのまま形にする企業イベント制作。',
+    overviewEn: [
       'Corporate events carry a brand and an internal culture at the same time — a town hall says as much about a company as a client dinner does. We plan and produce both, working from your objectives and audience rather than a fixed event template.',
       'Our teams handle logistics, venue coordination, technical production, and on-site management as one accountable service, so your internal stakeholders have a single point of contact instead of a coordination burden layered on top of their day job.',
     ],
-    capabilities: [
+    overviewJa: [
+      '企業イベントは、ブランドと社内文化を同時に映し出します。タウンホールミーティングもクライアント向けディナーも、その企業を語る場であることに変わりはありません。私たちは定型のイベントテンプレートではなく、貴社の目的とオーディエンスから出発して、その両方を企画・制作します。',
+      'ロジスティクス、会場調整、技術制作、当日運営を、責任を持つ単一のサービスとして担当します。社内のご担当者様には、日々の業務に上乗せされる調整の負担ではなく、単一の窓口をご用意します。',
+    ],
+    capabilitiesEn: [
       'Full event planning and project management from brief to strike',
       'Venue sourcing and technical site assessment',
       'Stage, AV, and lighting design suited to the room and audience',
@@ -21,33 +29,59 @@ export const services: Service[] = [
       'Bilingual (Japanese/English) coordination for international stakeholders',
       'Post-event reporting and asset handover',
     ],
-    process: [
+    capabilitiesJa: [
+      '要件定義から撤収まで、企画・プロジェクトマネジメントを一貫して対応',
+      '会場選定と技術面での現地調査',
+      '会場とオーディエンスに合わせたステージ・AV・照明設計',
+      '当日の現地運営とプログラム進行管理',
+      '海外関係者向けの日本語・英語バイリンガルコーディネーション',
+      'イベント後のレポーティングと資料の引き渡し',
+    ],
+    processEn: [
       { title: 'Brief & Objectives', description: 'We start with what the event needs to achieve for your organization, not a generic checklist.' },
       { title: 'Design & Proposal', description: 'A detailed technical and logistical plan with transparent, itemized pricing.' },
       { title: 'Production', description: 'Build, technical rehearsal, and event-day management by the same team that designed it.' },
       { title: 'Strike & Report', description: 'Clean teardown and a post-event summary covering what worked and what to refine next time.' },
     ],
-    idealFor: ['Town halls and internal announcements', 'Client appreciation events', 'Leadership offsites', 'Company milestone celebrations'],
+    processJa: [
+      { title: '要件定義', description: '定型チェックリストではなく、貴社にとってそのイベントが達成すべきことからヒアリングします。' },
+      { title: '設計・ご提案', description: '詳細な技術・ロジスティクスプランと、項目別に明示した透明な見積もりをご提示します。' },
+      { title: '制作', description: '設計を担当したチームがそのまま設営・技術リハーサル・当日運営まで担当します。' },
+      { title: '撤収・レポート', description: '丁寧な撤収作業と、成果および次回への改善点をまとめた事後レポートをお渡しします。' },
+    ],
+    idealForEn: ['Town halls and internal announcements', 'Client appreciation events', 'Leadership offsites', 'Company milestone celebrations'],
+    idealForJa: ['タウンホールミーティング・社内発表', 'クライアント向け謝恩イベント', '経営層のオフサイトミーティング', '会社の節目を祝う式典'],
     relatedServiceSlugs: ['event-consultation', 'technical-production', 'hybrid-events'],
     relatedEquipmentCategorySlugs: ['audio', 'lighting', 'displays'],
     faqIds: ['faq-lead-time', 'faq-quote-turnaround'],
-    seoTitle: 'Corporate Event Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Corporate Event Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内の企業イベント制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Full-service corporate event planning and production across Japan — venue sourcing, technical design, and on-site management from one accountable team.',
+    seoDescriptionJa:
+      '日本全国で企業イベントの企画・制作をワンストップで提供。会場選定、技術設計、当日運営まで責任を持つ単一のチームが担当します。',
   },
   {
     id: 's-conferences',
     slug: 'conferences',
     category: 'event-type',
-    name: 'Conferences',
-    shortDescription:
+    nameEn: 'Conferences',
+    nameJa: 'カンファレンス',
+    shortDescriptionEn:
       'Multi-session conference production with reliable AV, staging, and run-of-show discipline at scale.',
-    heroStatement: 'Conferences run on discipline as much as design — we bring both.',
-    overview: [
+    shortDescriptionJa:
+      '複数セッションから成るカンファレンスに対応。信頼性の高いAV、ステージ、進行管理を規模に応じて提供します。',
+    heroStatementEn: 'Conferences run on discipline as much as design — we bring both.',
+    heroStatementJa: 'カンファレンスの成否は設計力と運営規律の両方で決まります。私たちはその両方を提供します。',
+    overviewEn: [
       'A conference is a schedule under pressure: parallel sessions, speaker changeovers, and an audience that notices every delay. We build the technical infrastructure and the run-of-show discipline to keep that schedule intact.',
       'From single-track keynote conferences to multi-hall programs with breakout rooms, we scale crew, equipment, and stage management to match session count and audience size, not a one-size template.',
     ],
-    capabilities: [
+    overviewJa: [
+      'カンファレンスは常に時間との勝負です。並行セッション、登壇者の入れ替え、そしてわずかな遅延にも気づく参加者。私たちはそのスケジュールを守り抜くための技術基盤と進行管理体制を構築します。',
+      '単一トラックの基調講演型カンファレンスから、複数会場・ブレイクアウトルームを伴う大規模プログラムまで、セッション数とオーディエンス規模に応じてクルー・機材・ステージマネジメントをスケールさせます。画一的なテンプレートは使いません。',
+    ],
+    capabilitiesEn: [
       'Main stage and breakout room AV design',
       'Speaker management and presentation handling',
       'Stage management and run-of-show coordination',
@@ -55,33 +89,59 @@ export const services: Service[] = [
       'Registration and wayfinding signage integration',
       'Live streaming of keynote and breakout sessions',
     ],
-    process: [
+    capabilitiesJa: [
+      'メインステージ・ブレイクアウトルームのAV設計',
+      '登壇者対応とプレゼンテーション管理',
+      'ステージマネジメントと進行調整',
+      '同時通訳ブースの設営・運用サポート',
+      '受付・サイン計画の統合',
+      '基調講演・ブレイクアウトセッションのライブ配信',
+    ],
+    processEn: [
       { title: 'Program Mapping', description: 'We map your session schedule to technical requirements room by room.' },
       { title: 'Technical Design', description: 'Stage, AV, and interpretation infrastructure specified to each room\'s size and program.' },
       { title: 'Rehearsal', description: 'Full technical rehearsal with speakers and stage management before doors open.' },
       { title: 'Live Execution', description: 'On-site stage management holding every room to schedule in parallel.' },
     ],
-    idealFor: ['Industry and academic conferences', 'Multi-track corporate summits', 'Annual company conferences', 'Partner and dealer conferences'],
+    processJa: [
+      { title: 'プログラム設計', description: 'セッションスケジュールを会場ごとの技術要件に落とし込みます。' },
+      { title: '技術設計', description: '各会場の規模とプログラムに合わせて、ステージ・AV・通訳設備を仕様化します。' },
+      { title: 'リハーサル', description: '開場前に登壇者・ステージマネジメントを含めた本番同様のリハーサルを実施します。' },
+      { title: '本番運営', description: '複数会場を並行してスケジュール通りに進行させる現地ステージマネジメントを行います。' },
+    ],
+    idealForEn: ['Industry and academic conferences', 'Multi-track corporate summits', 'Annual company conferences', 'Partner and dealer conferences'],
+    idealForJa: ['業界カンファレンス・学術会議', '複数トラックの企業サミット', '年次カンファレンス', 'パートナー・代理店向けカンファレンス'],
     relatedServiceSlugs: ['hybrid-events', 'live-streaming', 'technical-production'],
     relatedEquipmentCategorySlugs: ['audio', 'lighting', 'cameras', 'displays'],
     faqIds: ['faq-staffing-scale', 'faq-international-language'],
-    seoTitle: 'Conference Production & Technical Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Conference Production & Technical Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のカンファレンス制作・技術サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Multi-session conference production across Japan — stage management, AV design, interpretation support, and live streaming for programs of any scale.',
+    seoDescriptionJa:
+      '日本全国でマルチセッション型カンファレンスの制作に対応。ステージマネジメント、AV設計、通訳サポート、ライブ配信まであらゆる規模に対応します。',
   },
   {
     id: 's-exhibitions',
     slug: 'exhibitions',
     category: 'event-type',
-    name: 'Exhibitions',
-    shortDescription:
+    nameEn: 'Exhibitions',
+    nameJa: '展示会',
+    shortDescriptionEn:
       'Exhibition and booth technical production built for compressed build/strike windows and hall logistics.',
-    heroStatement: 'Exhibitions live or die on the build window. We build to the clock.',
-    overview: [
+    shortDescriptionJa:
+      '限られた搬入出時間とホールのロジスティクスに対応した、展示会・ブースの技術制作。',
+    heroStatementEn: 'Exhibitions live or die on the build window. We build to the clock.',
+    heroStatementJa: '展示会の成否は搬入時間で決まります。私たちは時間に正確に施工します。',
+    overviewEn: [
       'Exhibition halls run on tight, non-negotiable build and strike schedules shared across every exhibitor on the floor. Our teams are built for that rhythm — fast, coordinated installs that still meet the technical and visual standard the exhibit deserves.',
       'We manage booth AV, LED, and lighting technical production, and can coordinate directly with hall organizers and general contractors so your team isn\'t chasing three vendors during load-in.',
     ],
-    capabilities: [
+    overviewJa: [
+      '展示会場は、すべての出展社が共有する厳格な搬入出スケジュールで運営されます。私たちのチームはそのリズムに合わせて、迅速かつ統率の取れた施工を、展示にふさわしい技術・ビジュアル品質を保ちながら実現します。',
+      'ブースのAV・LED・照明の技術制作を担当し、会場主催者やゼネコンとも直接調整可能です。搬入時に貴社が複数のベンダーを掛け持ちで管理する必要はありません。',
+    ],
+    capabilitiesEn: [
       'Booth and pavilion LED, AV, and lighting installation',
       'Hall logistics and general contractor coordination',
       'Rapid build/strike crews for compressed windows',
@@ -89,33 +149,59 @@ export const services: Service[] = [
       'On-site technical support for the duration of the show',
       'Power distribution and cable management to hall code',
     ],
-    process: [
+    capabilitiesJa: [
+      'ブース・パビリオンのLED・AV・照明施工',
+      '会場ロジスティクスとゼネコンとの調整',
+      '短時間搬入出に対応する迅速な施工クルー',
+      'インタラクティブディスプレイ・デジタルサイネージの統合',
+      '会期中の現地技術サポート',
+      '会場規定に準拠した電源分配・配線管理',
+    ],
+    processEn: [
       { title: 'Hall & Booth Review', description: 'We review floor plans, power allocation, and hall rules before design begins.' },
       { title: 'Technical Design', description: 'LED, lighting, and AV specified to booth size and sightlines.' },
       { title: 'Build', description: 'Coordinated install crews working the compressed load-in window.' },
       { title: 'Live Support', description: 'Technicians on the floor for the run of the show, not just the install.' },
     ],
-    idealFor: ['Trade show exhibitor booths', 'Brand pavilions', 'Public exhibitions and expos', 'Multi-day exhibition programs'],
+    processJa: [
+      { title: '会場・ブース確認', description: '設計前にフロアプラン、電源配分、会場規定を確認します。' },
+      { title: '技術設計', description: 'ブースサイズと視認性に合わせてLED・照明・AVを仕様化します。' },
+      { title: '施工', description: '限られた搬入時間の中で、統率の取れた施工クルーが作業します。' },
+      { title: '会期中サポート', description: '施工後も会期を通じて技術者が現場に常駐します。' },
+    ],
+    idealForEn: ['Trade show exhibitor booths', 'Brand pavilions', 'Public exhibitions and expos', 'Multi-day exhibition programs'],
+    idealForJa: ['見本市の出展ブース', 'ブランドパビリオン', '一般公開の展示会・博覧会', '複数日にわたる展示会プログラム'],
     relatedServiceSlugs: ['trade-shows', 'led-solutions', 'technical-production'],
     relatedEquipmentCategorySlugs: ['indoor-led', 'outdoor-led', 'displays', 'lighting'],
     faqIds: ['faq-lead-time', 'faq-venue-site-visit'],
-    seoTitle: 'Exhibition & Booth Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Exhibition & Booth Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内の展示会・ブース制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Exhibition and trade show booth technical production across Japan — LED, lighting, and AV installed to compressed build/strike schedules.',
+    seoDescriptionJa:
+      '日本全国で展示会・見本市ブースの技術制作に対応。限られた搬入出時間の中でLED・照明・AVを施工します。',
   },
   {
     id: 's-trade-shows',
     slug: 'trade-shows',
     category: 'event-type',
-    name: 'Trade Shows',
-    shortDescription:
+    nameEn: 'Trade Shows',
+    nameJa: '見本市',
+    shortDescriptionEn:
       'Large-scale trade show production covering exhibitor technical services and organizer-side infrastructure.',
-    heroStatement: 'Convention-scale trade shows, engineered for volume and repeatability.',
-    overview: [
+    shortDescriptionJa:
+      '大規模見本市に対応。出展社向け技術サービスと主催者側インフラの両方をカバーします。',
+    heroStatementEn: 'Convention-scale trade shows, engineered for volume and repeatability.',
+    heroStatementJa: 'コンベンション規模の見本市を、量と再現性に耐えるよう設計します。',
+    overviewEn: [
       'Trade shows multiply exhibition complexity across dozens or hundreds of booths, parallel programming, and thousands of attendees. We support both exhibitor-side technical production and, for organizers, show-wide infrastructure like main stage AV and hall-wide signage.',
       'Our staffing model scales to convention-center volume — repeatable booth builds, coordinated crews, and a single technical point of contact for organizers managing many moving parts at once.',
     ],
-    capabilities: [
+    overviewJa: [
+      '見本市では、数十から数百のブース、並行プログラム、数千人規模の来場者によって展示会の複雑さが何倍にも増します。私たちは出展社側の技術制作に加え、主催者側のメインステージAVや会場全体のサイン計画といったインフラも支援します。',
+      'コンベンションセンター規模に対応できる人員体制を整えており、再現性のあるブース施工、統率されたクルー、そして多くの変動要素を同時に管理する主催者様のための単一の技術窓口を提供します。',
+    ],
+    capabilitiesEn: [
       'Organizer-side main stage and show floor AV',
       'Exhibitor technical services at scale',
       'Multi-crew coordination across large hall footprints',
@@ -123,33 +209,59 @@ export const services: Service[] = [
       'Live streaming of main stage programming',
       'On-call technical support desk for the duration of the show',
     ],
-    process: [
+    capabilitiesJa: [
+      '主催者側のメインステージ・会場フロアAV',
+      '大規模対応の出展社向け技術サービス',
+      '広大な会場における複数クルーの統率',
+      '会場全体のデジタルサイネージ・案内サイン',
+      'メインステージプログラムのライブ配信',
+      '会期中常駐の技術サポートデスク',
+    ],
+    processEn: [
       { title: 'Show Scoping', description: 'We align on organizer infrastructure needs and exhibitor service packages.' },
       { title: 'Resource Planning', description: 'Crew, equipment, and logistics scheduled against the full show timeline.' },
       { title: 'Build & Show Days', description: 'Coordinated multi-crew execution across the hall footprint.' },
       { title: 'Strike', description: 'Structured teardown sequenced to hall move-out deadlines.' },
     ],
-    idealFor: ['Industry-wide trade shows', 'Consumer expos', 'Multi-hall convention center events', 'B2B trade fairs'],
+    processJa: [
+      { title: '要件整理', description: '主催者様のインフラ要件と出展社向けサービスパッケージをすり合わせます。' },
+      { title: 'リソース計画', description: '会期全体のタイムラインに合わせてクルー・機材・ロジスティクスを計画します。' },
+      { title: '施工・会期運営', description: '会場全体で複数クルーを統率し運営します。' },
+      { title: '撤収', description: '会場の搬出期限に合わせて計画的に撤収します。' },
+    ],
+    idealForEn: ['Industry-wide trade shows', 'Consumer expos', 'Multi-hall convention center events', 'B2B trade fairs'],
+    idealForJa: ['業界全体の見本市', '一般消費者向け博覧会', '複数ホールを使うコンベンションセンターイベント', 'B2B見本市'],
     relatedServiceSlugs: ['exhibitions', 'stage-production', 'technical-production'],
     relatedEquipmentCategorySlugs: ['stage', 'truss', 'audio', 'lighting'],
     faqIds: ['faq-staffing-scale', 'faq-lead-time'],
-    seoTitle: 'Trade Show Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Trade Show Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内の見本市制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Convention-scale trade show production across Japan — main stage AV, exhibitor technical services, and multi-crew logistics for large shows.',
+    seoDescriptionJa:
+      '日本全国でコンベンション規模の見本市制作に対応。メインステージAV、出展社向け技術サービス、複数クルーによるロジスティクスまで大規模イベントを支援します。',
   },
   {
     id: 's-product-launches',
     slug: 'product-launches',
     category: 'event-type',
-    name: 'Product Launches',
-    shortDescription:
+    nameEn: 'Product Launches',
+    nameJa: '製品発表会',
+    shortDescriptionEn:
       'High-impact product launch production where lighting, staging, and reveal mechanics carry the moment.',
-    heroStatement: 'A launch has one moment that matters. We build the production around it.',
-    overview: [
+    shortDescriptionJa:
+      '照明・ステージ・演出ギミックがその瞬間を支える、インパクトのある製品発表会制作。',
+    heroStatementEn: 'A launch has one moment that matters. We build the production around it.',
+    heroStatementJa: '発表会には決定的な瞬間が一つあります。私たちはその瞬間を中心に制作を組み立てます。',
+    overviewEn: [
       'A product launch succeeds or fails on a small number of seconds — the reveal, the first look, the photo that gets shared. We design lighting, staging, and technical sequencing around that moment specifically, then build everything else in support of it.',
       'From press-only previews to large public launches, we treat the reveal mechanics — timing, lighting cues, camera coverage — as the core engineering problem, not a decoration on top of a standard stage build.',
     ],
-    capabilities: [
+    overviewJa: [
+      '製品発表会の成否は、わずか数秒の「お披露目」「最初の一目」「拡散される写真」で決まります。私たちはその瞬間を中心に照明・ステージ・技術演出のタイミングを設計し、それ以外の要素はすべてその瞬間を支えるために構築します。',
+      'プレス限定のプレビューから大規模な一般公開発表会まで、タイミング・照明キュー・カメラワークといった演出ギミックを、通常のステージ施工に付随する装飾ではなく、中核となるエンジニアリング課題として扱います。',
+    ],
+    capabilitiesEn: [
       'Reveal staging and mechanical/lighting cue design',
       'Premium lighting design matched to brand and product',
       'Multi-camera coverage for press and social capture',
@@ -157,33 +269,59 @@ export const services: Service[] = [
       'Press and media logistics coordination',
       'Live streaming for remote press and audiences',
     ],
-    process: [
+    capabilitiesJa: [
+      'お披露目演出とメカニカル・照明キューの設計',
+      'ブランド・製品に合わせたプレミアム照明設計',
+      'プレス・SNS向けのマルチカメラ撮影',
+      'LED背景・プロジェクションの統合',
+      'プレス・メディア対応のロジスティクス調整',
+      'リモート参加のプレス・視聴者向けライブ配信',
+    ],
+    processEn: [
       { title: 'Moment Design', description: 'We define the reveal sequence first, then engineer the production around it.' },
       { title: 'Technical Build', description: 'Lighting, staging, and cue systems built and cued precisely.' },
       { title: 'Full Cue Rehearsal', description: 'The reveal is rehearsed to the second, multiple times, before the room fills.' },
       { title: 'Live Execution', description: 'Cue-perfect execution with camera coverage for press and social assets.' },
     ],
-    idealFor: ['Consumer and B2B product reveals', 'Flagship store and showroom openings', 'Press-only preview events', 'Automotive and technology launches'],
+    processJa: [
+      { title: '演出設計', description: 'まずお披露目のシーケンスを定義し、そこから制作全体を設計します。' },
+      { title: '技術施工', description: '照明・ステージ・キューシステムを精緻に構築します。' },
+      { title: '本番リハーサル', description: '開場前に、秒単位でお披露目シーンを複数回リハーサルします。' },
+      { title: '本番運営', description: 'プレス・SNS向け撮影も含め、キュー通りに正確に本番を運営します。' },
+    ],
+    idealForEn: ['Consumer and B2B product reveals', 'Flagship store and showroom openings', 'Press-only preview events', 'Automotive and technology launches'],
+    idealForJa: ['一般・B2B向け製品発表', '旗艦店・ショールームのオープニング', 'プレス限定プレビューイベント', '自動車・テクノロジー製品の発表会'],
     relatedServiceSlugs: ['award-ceremonies', 'lighting-solutions', 'stage-production'],
     relatedEquipmentCategorySlugs: ['lighting', 'indoor-led', 'cameras'],
     faqIds: ['faq-venue-site-visit', 'faq-quote-turnaround'],
-    seoTitle: 'Product Launch Event Production in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Product Launch Event Production in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内の製品発表会イベント制作 | TOTAL MEDIA',
+    seoDescriptionEn:
       'Product launch production across Japan — reveal staging, premium lighting design, and multi-camera coverage built around the moment that matters.',
+    seoDescriptionJa:
+      '日本全国で製品発表会の制作に対応。決定的な瞬間を中心に、お披露目演出、プレミアム照明設計、マルチカメラ撮影を構築します。',
   },
   {
     id: 's-award-ceremonies',
     slug: 'award-ceremonies',
     category: 'event-type',
-    name: 'Award Ceremonies',
-    shortDescription:
+    nameEn: 'Award Ceremonies',
+    nameJa: '授賞式',
+    shortDescriptionEn:
       'Broadcast-quality award ceremony production, from red carpet to stage to livestream.',
-    heroStatement: 'Award ceremonies ask for television-grade production in a live room.',
-    overview: [
+    shortDescriptionJa:
+      'レッドカーペットからステージ、ライブ配信まで、放送品質の授賞式制作。',
+    heroStatementEn: 'Award ceremonies ask for television-grade production in a live room.',
+    heroStatementJa: '授賞式には、生の会場でテレビ品質の制作が求められます。',
+    overviewEn: [
       'Award ceremonies combine formal programming, live presentation, and often broadcast or streaming distribution — closer to a television production than a standard corporate event. We bring the camera, lighting, and stage management discipline that format demands.',
       'We manage the full sequence: arrivals and red carpet, stage presentation with precise cueing for winners and presenters, and, where needed, a clean live broadcast or stream for audiences who aren\'t in the room.',
     ],
-    capabilities: [
+    overviewJa: [
+      '授賞式は、フォーマルなプログラム進行、生のプレゼンテーション、そして放送や配信を伴うことが多く、通常の企業イベントよりもテレビ番組制作に近い性質を持ちます。私たちはその形式が求めるカメラワーク・照明・ステージマネジメントの規律を提供します。',
+      '到着・レッドカーペットから、受賞者・プレゼンターの正確なキューに基づくステージ進行、そして必要に応じて会場外の視聴者向けのクリーンなライブ放送・配信まで、一連の流れを管理します。',
+    ],
+    capabilitiesEn: [
       'Stage design and presentation lighting',
       'Broadcast-style multi-camera direction and vision switching',
       'Winner and presenter cueing and stage management',
@@ -191,33 +329,59 @@ export const services: Service[] = [
       'Live streaming and broadcast delivery',
       'Orchestral or recorded music cue integration',
     ],
-    process: [
+    capabilitiesJa: [
+      'ステージデザインとプレゼンテーション照明',
+      '放送品質のマルチカメラディレクション・スイッチング',
+      '受賞者・プレゼンターのキュー出しとステージマネジメント',
+      'レッドカーペット・到着シーンのAVサポート',
+      'ライブ配信・放送素材の納品',
+      'オーケストラ演奏・収録音源のキュー統合',
+    ],
+    processEn: [
       { title: 'Program & Run-of-Show', description: 'We build a precise run-of-show against the award sequence and presenter list.' },
       { title: 'Technical Design', description: 'Camera, lighting, and stage cueing systems designed to the format.' },
       { title: 'Full Rehearsal', description: 'A complete run-through with stand-ins before the live ceremony.' },
       { title: 'Live Broadcast', description: 'Directed multi-camera execution with stream/broadcast delivery.' },
     ],
-    idealFor: ['Industry and corporate award ceremonies', 'Employee recognition galas', 'Academic and cultural award events', 'Televised or streamed ceremonies'],
+    processJa: [
+      { title: 'プログラム・進行台本', description: '受賞順序とプレゼンター一覧に基づき、精緻な進行台本を作成します。' },
+      { title: '技術設計', description: '式典の形式に合わせてカメラ・照明・ステージキューシステムを設計します。' },
+      { title: '本番リハーサル', description: '本番前に代役を立てた通し稽古を実施します。' },
+      { title: '本番放送', description: 'ディレクション付きマルチカメラ運営と配信・放送素材の納品を行います。' },
+    ],
+    idealForEn: ['Industry and corporate award ceremonies', 'Employee recognition galas', 'Academic and cultural award events', 'Televised or streamed ceremonies'],
+    idealForJa: ['業界・企業の授賞式', '社員表彰ガラ', '学術・文化系の表彰イベント', 'テレビ放送・配信を伴う式典'],
     relatedServiceSlugs: ['live-streaming', 'stage-production', 'product-launches'],
     relatedEquipmentCategorySlugs: ['cameras', 'lighting', 'audio'],
     faqIds: ['faq-hybrid-virtual-reliability'],
-    seoTitle: 'Award Ceremony Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Award Ceremony Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内の授賞式制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Broadcast-quality award ceremony production across Japan — stage design, multi-camera direction, and live streaming for formal presentation events.',
+    seoDescriptionJa:
+      '日本全国で放送品質の授賞式制作に対応。ステージデザイン、マルチカメラディレクション、ライブ配信までフォーマルな式典を支援します。',
   },
   {
     id: 's-virtual-events',
     slug: 'virtual-events',
     category: 'event-type',
-    name: 'Virtual Events',
-    shortDescription:
+    nameEn: 'Virtual Events',
+    nameJa: 'バーチャルイベント',
+    shortDescriptionEn:
       'Fully virtual event production with studio-grade presentation and platform integration.',
-    heroStatement: 'A virtual event is still a production — treat it like one.',
-    overview: [
+    shortDescriptionJa:
+      'スタジオ品質のプレゼンテーションとプラットフォーム統合による、完全バーチャルイベント制作。',
+    heroStatementEn: 'A virtual event is still a production — treat it like one.',
+    heroStatementJa: 'バーチャルイベントも、れっきとした制作物です。私たちはそのように扱います。',
+    overviewEn: [
       'Virtual events fail when they\'re run like a video call instead of a production. We build them like a broadcast: a real studio or set, professional lighting and camera work, and a technical director managing the platform separately from the on-camera talent.',
       'We integrate with the platform of your choice — webinar tools, virtual event platforms, or a custom stream — and manage speaker coordination, Q&A, and content playback so the live experience runs smoothly from the presenter\'s side and the viewer\'s side at once.',
     ],
-    capabilities: [
+    overviewJa: [
+      'バーチャルイベントは、単なるビデオ通話として運営すると失敗します。私たちは実際のスタジオやセット、プロによる照明・カメラワーク、そして出演者とは別にプラットフォームを管理するテクニカルディレクターを配置し、放送番組として制作します。',
+      'ウェビナーツール、バーチャルイベントプラットフォーム、カスタム配信など、貴社が選ぶプラットフォームに統合します。登壇者対応、Q&A、コンテンツ再生を管理し、登壇者側・視聴者側の双方でスムーズな体験を実現します。',
+    ],
+    capabilitiesEn: [
       'Studio and set design for virtual presentation',
       'Multi-camera, multi-speaker production switching',
       'Platform integration (webinar, virtual event, custom stream)',
@@ -225,33 +389,59 @@ export const services: Service[] = [
       'Live Q&A and audience interaction management',
       'Recording and on-demand asset delivery',
     ],
-    process: [
+    capabilitiesJa: [
+      'バーチャルプレゼンテーション向けスタジオ・セットデザイン',
+      'マルチカメラ・複数登壇者対応のスイッチング',
+      'プラットフォーム統合（ウェビナー、バーチャルイベント、カスタム配信）',
+      'リモート登壇者の調整と技術リハーサル',
+      'ライブQ&Aと視聴者インタラクション管理',
+      '収録・オンデマンド素材の納品',
+    ],
+    processEn: [
       { title: 'Platform & Format Planning', description: 'We confirm the platform, format, and speaker list before technical design.' },
       { title: 'Studio Build', description: 'Set, lighting, and camera production built to broadcast standard.' },
       { title: 'Speaker Rehearsal', description: 'Remote and in-studio speakers rehearsed on the live platform, not a placeholder.' },
       { title: 'Live Direction', description: 'Full production switching and platform monitoring through the live event.' },
     ],
-    idealFor: ['Global product announcements', 'Virtual town halls', 'Webinar series requiring production value', 'Remote press events'],
+    processJa: [
+      { title: 'プラットフォーム・形式確認', description: '技術設計前にプラットフォーム、形式、登壇者リストを確認します。' },
+      { title: 'スタジオ施工', description: '放送基準でセット・照明・カメラワークを構築します。' },
+      { title: '登壇者リハーサル', description: 'リモート・スタジオ内の登壇者を、仮のツールではなく本番プラットフォームでリハーサルします。' },
+      { title: '本番ディレクション', description: '本番を通じて制作スイッチングとプラットフォーム監視を行います。' },
+    ],
+    idealForEn: ['Global product announcements', 'Virtual town halls', 'Webinar series requiring production value', 'Remote press events'],
+    idealForJa: ['グローバル製品発表', 'バーチャルタウンホール', '制作品質が求められるウェビナーシリーズ', 'リモートプレスイベント'],
     relatedServiceSlugs: ['hybrid-events', 'live-streaming', 'technical-production'],
     relatedEquipmentCategorySlugs: ['cameras', 'lighting', 'audio'],
     faqIds: ['faq-hybrid-virtual-reliability'],
-    seoTitle: 'Virtual Event Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Virtual Event Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のバーチャルイベント制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Studio-grade virtual event production across Japan — multi-camera direction, platform integration, and speaker coordination for fully remote events.',
+    seoDescriptionJa:
+      '日本全国でスタジオ品質のバーチャルイベント制作に対応。マルチカメラディレクション、プラットフォーム統合、登壇者調整まで完全リモートイベントを支援します。',
   },
   {
     id: 's-hybrid-events',
     slug: 'hybrid-events',
     category: 'event-type',
-    name: 'Hybrid Events',
-    shortDescription:
+    nameEn: 'Hybrid Events',
+    nameJa: 'ハイブリッドイベント',
+    shortDescriptionEn:
       'In-room and remote audiences produced as one coherent event, not two separate ones.',
-    heroStatement: 'One event, two audiences — designed together, not bolted together.',
-    overview: [
+    shortDescriptionJa:
+      '会場参加者とリモート参加者を、別々のイベントではなく一つの体験として制作します。',
+    heroStatementEn: 'One event, two audiences — designed together, not bolted together.',
+    heroStatementJa: '一つのイベント、二つのオーディエンス。後付けではなく、最初から一体で設計します。',
+    overviewEn: [
       'Most hybrid events are designed for the room and the stream gets whatever\'s left over. We design for both audiences from the start — camera positions that don\'t block sightlines, audio mixed for the room and the broadcast separately, and content built to work on a screen as well as it works live.',
       'A dedicated technical director manages the remote broadcast independently of the in-room production team, so an issue on one side never becomes an issue on both.',
     ],
-    capabilities: [
+    overviewJa: [
+      '多くのハイブリッドイベントは会場向けに設計され、配信は残りのリソースで対応されがちです。私たちは最初から両方のオーディエンスのために設計します。視界を遮らないカメラ位置、会場と配信で別々にミックスする音声、そして画面越しでも会場と同じように機能するコンテンツ設計です。',
+      '専任のテクニカルディレクターが、会場運営チームとは独立してリモート配信を管理するため、一方でのトラブルがもう一方に波及することはありません。',
+    ],
+    capabilitiesEn: [
       'Dual-audience technical and content design',
       'Independent in-room and broadcast production teams',
       'Remote speaker and panel integration',
@@ -259,33 +449,59 @@ export const services: Service[] = [
       'Interactive tools for remote audience engagement',
       'Simultaneous interpretation for in-room and remote audiences',
     ],
-    process: [
+    capabilitiesJa: [
+      '会場・配信の両オーディエンス向け技術・コンテンツ設計',
+      '会場運営チームと配信チームの独立した体制',
+      'リモート登壇者・パネルディスカッションの統合',
+      '冗長化された配信インフラ',
+      'リモート参加者向けインタラクティブツール',
+      '会場・リモート双方向けの同時通訳',
+    ],
+    processEn: [
       { title: 'Dual-Audience Design', description: 'Content and technical plans built for the room and the stream together.' },
       { title: 'Infrastructure Build', description: 'Redundant broadcast paths and in-room AV built and tested independently.' },
       { title: 'Full Technical Rehearsal', description: 'A live rehearsal against the actual streaming platform, not a sound check.' },
       { title: 'Live Execution', description: 'Parallel in-room and broadcast direction managed by dedicated teams.' },
     ],
-    idealFor: ['Conferences with remote attendee tracks', 'Global town halls across time zones', 'Hybrid press events', 'Investor and shareholder meetings'],
+    processJa: [
+      { title: '両オーディエンス設計', description: '会場と配信の両方を前提にコンテンツと技術プランを構築します。' },
+      { title: 'インフラ構築', description: '冗長化された配信経路と会場内AVをそれぞれ独立して構築・テストします。' },
+      { title: '本番技術リハーサル', description: 'サウンドチェックではなく、実際の配信プラットフォームでの本番同様リハーサルを行います。' },
+      { title: '本番運営', description: '専任チームによる会場運営と配信ディレクションを並行して実施します。' },
+    ],
+    idealForEn: ['Conferences with remote attendee tracks', 'Global town halls across time zones', 'Hybrid press events', 'Investor and shareholder meetings'],
+    idealForJa: ['リモート参加トラックのあるカンファレンス', '複数タイムゾーンにまたがるグローバルタウンホール', 'ハイブリッド型プレスイベント', '株主・投資家向け説明会'],
     relatedServiceSlugs: ['virtual-events', 'live-streaming', 'conferences'],
     relatedEquipmentCategorySlugs: ['cameras', 'audio', 'displays'],
     faqIds: ['faq-hybrid-virtual-reliability', 'faq-international-language'],
-    seoTitle: 'Hybrid Event Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Hybrid Event Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のハイブリッドイベント制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Hybrid event production across Japan — in-room and remote audiences designed as one event, with redundant streaming and dedicated broadcast direction.',
+    seoDescriptionJa:
+      '日本全国でハイブリッドイベント制作に対応。会場とリモートの両オーディエンスを一つのイベントとして設計し、冗長化された配信と専任の配信ディレクションを提供します。',
   },
   {
     id: 's-live-streaming',
     slug: 'live-streaming',
     category: 'event-type',
-    name: 'Live Streaming',
-    shortDescription:
+    nameEn: 'Live Streaming',
+    nameJa: 'ライブ配信',
+    shortDescriptionEn:
       'Broadcast-grade live streaming with redundant infrastructure and dedicated technical direction.',
-    heroStatement: 'Streaming infrastructure that treats "live" as a hard requirement.',
-    overview: [
+    shortDescriptionJa:
+      '冗長化されたインフラと専任のテクニカルディレクションによる、放送品質のライブ配信。',
+    heroStatementEn: 'Streaming infrastructure that treats "live" as a hard requirement.',
+    heroStatementJa: '「ライブ」を絶対条件として扱う配信インフラ。',
+    overviewEn: [
       'A dropped stream is a visible failure in a way few other production issues are. We build streaming infrastructure around redundancy by default — dual internet circuits, backup encoding paths, and a technical director whose only job is watching the broadcast, separate from whoever is running the room.',
       'We support single-camera webcast setups through full multi-camera broadcast direction, and integrate with the platform your audience already uses rather than forcing a new one on them.',
     ],
-    capabilities: [
+    overviewJa: [
+      '配信の途切れは、他のどんな制作トラブルよりも明確に見えてしまう失敗です。私たちはデュアル回線、バックアップエンコードパス、そして会場運営とは別に配信のみを監視する専任テクニカルディレクターなど、冗長性を標準として配信インフラを構築します。',
+      'シングルカメラでのウェブキャストから本格的なマルチカメラ放送ディレクションまで対応し、視聴者が既に使い慣れたプラットフォームに統合します。新しいツールを強いることはありません。',
+    ],
+    capabilitiesEn: [
       'Multi-camera live production and vision switching',
       'Redundant internet circuits and encoding paths',
       'Platform integration (YouTube Live, Vimeo, custom RTMP, webinar tools)',
@@ -293,33 +509,59 @@ export const services: Service[] = [
       'Multi-language audio channel streaming',
       'Recording, editing, and on-demand delivery',
     ],
-    process: [
+    capabilitiesJa: [
+      'マルチカメラのライブ制作とスイッチング',
+      '冗長化されたインターネット回線・エンコードパス',
+      'プラットフォーム統合（YouTube Live、Vimeo、カスタムRTMP、ウェビナーツール）',
+      'ライブグラフィックス・テロップ・コンテンツオーバーレイ',
+      '多言語音声チャンネル配信',
+      '収録・編集・オンデマンド納品',
+    ],
+    processEn: [
       { title: 'Platform & Redundancy Plan', description: 'We confirm the delivery platform and build redundancy into the plan from the start.' },
       { title: 'Technical Build', description: 'Camera, encoding, and network infrastructure installed and load-tested.' },
       { title: 'Rehearsal on the Live Platform', description: 'A full rehearsal against the actual streaming destination, not a local test.' },
       { title: 'Live Broadcast', description: 'Dedicated technical direction monitoring the stream throughout the event.' },
     ],
-    idealFor: ['Conference and keynote streaming', 'Press conference broadcasts', 'Award ceremony and ceremony streaming', 'Multi-language broadcast programs'],
+    processJa: [
+      { title: 'プラットフォーム・冗長化計画', description: '配信先プラットフォームを確認し、計画段階から冗長性を組み込みます。' },
+      { title: '技術施工', description: 'カメラ・エンコード・ネットワークインフラを設営し、負荷テストを実施します。' },
+      { title: '本番プラットフォームでのリハーサル', description: 'ローカルテストではなく、実際の配信先でのリハーサルを行います。' },
+      { title: '本番配信', description: 'イベントを通じて専任のテクニカルディレクションが配信を監視します。' },
+    ],
+    idealForEn: ['Conference and keynote streaming', 'Press conference broadcasts', 'Award ceremony and ceremony streaming', 'Multi-language broadcast programs'],
+    idealForJa: ['カンファレンス・基調講演の配信', '記者会見の放送', '授賞式・式典の配信', '多言語放送プログラム'],
     relatedServiceSlugs: ['hybrid-events', 'virtual-events', 'award-ceremonies'],
     relatedEquipmentCategorySlugs: ['cameras', 'audio', 'accessories'],
     faqIds: ['faq-hybrid-virtual-reliability'],
-    seoTitle: 'Live Streaming & Broadcast Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Live Streaming & Broadcast Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のライブ配信・放送サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Broadcast-grade live streaming across Japan — redundant infrastructure, multi-camera direction, and dedicated technical monitoring for events of any scale.',
+    seoDescriptionJa:
+      '日本全国で放送品質のライブ配信に対応。冗長化されたインフラ、マルチカメラディレクション、専任の技術監視まであらゆる規模のイベントを支援します。',
   },
   {
     id: 's-led-solutions',
     slug: 'led-solutions',
     category: 'technical',
-    name: 'LED Solutions',
-    shortDescription:
+    nameEn: 'LED Solutions',
+    nameJa: 'LEDソリューション',
+    shortDescriptionEn:
       'Indoor and outdoor LED wall design, rigging, and content playback engineered to pitch and viewing distance.',
-    heroStatement: 'LED that\'s specified to the room, not just rented off a shelf.',
-    overview: [
+    shortDescriptionJa:
+      '視聴距離とピッチに合わせて設計する、屋内外LEDウォールの設計・リギング・コンテンツ再生。',
+    heroStatementEn: 'LED that\'s specified to the room, not just rented off a shelf.',
+    heroStatementJa: '棚から借りるだけのLEDではなく、会場に合わせて仕様設計するLED。',
+    overviewEn: [
       'The wrong pixel pitch or panel size is one of the most common — and most visible — mistakes in event production. We specify LED to your actual viewing distance, content, and venue rather than defaulting to whatever\'s available.',
       'From fine-pitch indoor walls for close-viewing stage backdrops to weatherproof outdoor screens for ceremonies and activations, we handle rigging, calibration, and content playback as one integrated service.',
     ],
-    capabilities: [
+    overviewJa: [
+      '不適切なピクセルピッチやパネルサイズの選定は、イベント制作において最もよくある、そして最も目につきやすい失敗の一つです。私たちは在庫にあるものをそのまま使うのではなく、実際の視聴距離、コンテンツ、会場に合わせてLEDを仕様設計します。',
+      '近距離で見るステージ背景用のファインピッチ屋内ウォールから、式典や販促イベント向けの防水屋外スクリーンまで、リギング・キャリブレーション・コンテンツ再生を一体のサービスとして提供します。',
+    ],
+    capabilitiesEn: [
       'Pixel-pitch specification matched to viewing distance',
       'Indoor and outdoor, weatherproof LED systems',
       'Curved, angled, and custom-shape LED configurations',
@@ -327,33 +569,59 @@ export const services: Service[] = [
       'Content playback and media server operation',
       'On-site calibration and color matching',
     ],
-    process: [
+    capabilitiesJa: [
+      '視聴距離に合わせたピクセルピッチの仕様設計',
+      '屋内外対応・防水LEDシステム',
+      '曲面・角度付き・カスタム形状のLED構成',
+      'リギングエンジニアリングと構造荷重の承認',
+      'コンテンツ再生とメディアサーバー運用',
+      '現地でのキャリブレーション・色調整',
+    ],
+    processEn: [
       { title: 'Viewing & Content Review', description: 'We assess sightlines, viewing distance, and content type to specify the right pitch.' },
       { title: 'Rigging Design', description: 'Structural rigging engineered and load-checked against venue and hardware limits.' },
       { title: 'Build & Calibration', description: 'Panels rigged, calibrated, and color-matched before doors open.' },
       { title: 'Live Operation', description: 'Media server and playback operated live by our technicians.' },
     ],
-    idealFor: ['Stage backdrops and keynote screens', 'Exhibition and booth walls', 'Outdoor ceremonies and activations', 'Broadcast and camera-facing displays'],
+    processJa: [
+      { title: '視認性・コンテンツ確認', description: '視界、視聴距離、コンテンツ種別を確認し適切なピッチを仕様化します。' },
+      { title: 'リギング設計', description: '会場と機材の制限に対して構造リギングを設計・荷重確認します。' },
+      { title: '施工・キャリブレーション', description: '開場前にパネルの設営、キャリブレーション、色調整を行います。' },
+      { title: '本番運用', description: '弊社の技術者がメディアサーバーと再生を本番中操作します。' },
+    ],
+    idealForEn: ['Stage backdrops and keynote screens', 'Exhibition and booth walls', 'Outdoor ceremonies and activations', 'Broadcast and camera-facing displays'],
+    idealForJa: ['ステージ背景・基調講演用スクリーン', '展示会・ブース用ウォール', '屋外式典・販促イベント', '放送・カメラ向けディスプレイ'],
     relatedServiceSlugs: ['stage-production', 'technical-production', 'exhibitions'],
     relatedEquipmentCategorySlugs: ['indoor-led', 'outdoor-led', 'truss'],
     faqIds: ['faq-equipment-brands', 'faq-venue-site-visit'],
-    seoTitle: 'LED Wall Rental & Solutions in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'LED Wall Rental & Solutions in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のLEDウォールレンタル・ソリューション | TOTAL MEDIA',
+    seoDescriptionEn:
       'Indoor and outdoor LED wall solutions across Japan — pitch specification, rigging engineering, and live content playback for stages, booths, and outdoor events.',
+    seoDescriptionJa:
+      '日本全国で屋内外LEDウォールソリューションを提供。ピッチ仕様設計、リギングエンジニアリング、本番中のコンテンツ再生までステージ・ブース・屋外イベントに対応します。',
   },
   {
     id: 's-audio-solutions',
     slug: 'audio-solutions',
     category: 'technical',
-    name: 'Audio Solutions',
-    shortDescription:
+    nameEn: 'Audio Solutions',
+    nameJa: '音響ソリューション',
+    shortDescriptionEn:
       'Line array PA, digital mixing, and interpretation audio designed to room acoustics and program type.',
-    heroStatement: 'Audio should disappear — you only notice it when it\'s wrong.',
-    overview: [
+    shortDescriptionJa:
+      '会場の音響特性とプログラム内容に合わせて設計する、ラインアレイPA・デジタルミキシング・通訳音声。',
+    heroStatementEn: 'Audio should disappear — you only notice it when it\'s wrong.',
+    heroStatementJa: '良い音響は気づかれません。問題があるときにだけ気づかれます。',
+    overviewEn: [
       'Good audio is invisible: even coverage, no feedback, clean intelligibility for speech and music alike. We design PA and mixing systems to the room\'s acoustics and the specific program — a keynote and a live band need genuinely different systems, not the same rig turned up or down.',
       'We also handle the audio infrastructure that\'s easy to overlook until it fails: interpretation channels, wireless microphone coordination in RF-dense venues, and clean feeds for broadcast and recording.',
     ],
-    capabilities: [
+    overviewJa: [
+      '良い音響は目立ちません。均一な音圧分布、ハウリングのない、スピーチにも音楽にもクリアに聞き取れる音です。私たちは会場の音響特性と具体的なプログラムに合わせてPA・ミキシングシステムを設計します。基調講演とライブバンドでは、同じシステムの音量を上下させるだけでは対応できません。本質的に異なるシステムが必要です。',
+      '失敗するまで見過ごされがちな音響インフラ、通訳チャンネル、電波の混雑する会場でのワイヤレスマイク調整、放送・収録用のクリーンな音声フィードにも対応します。',
+    ],
+    capabilitiesEn: [
       'Line array PA design matched to room acoustics',
       'Digital mixing and monitor systems',
       'Wireless microphone RF coordination',
@@ -361,33 +629,59 @@ export const services: Service[] = [
       'Broadcast and recording audio feeds',
       'Live sound engineering and mixing',
     ],
-    process: [
+    capabilitiesJa: [
+      '会場の音響特性に合わせたラインアレイPA設計',
+      'デジタルミキシング・モニターシステム',
+      'ワイヤレスマイクの電波調整',
+      '同時通訳音声の配信',
+      '放送・収録用の音声フィード',
+      'ライブサウンドエンジニアリング・ミキシング',
+    ],
+    processEn: [
       { title: 'Room & Program Assessment', description: 'We assess room acoustics and program type before specifying the system.' },
       { title: 'System Design', description: 'PA, mixing, and RF plan designed to avoid coverage gaps and interference.' },
       { title: 'Build & Tuning', description: 'System installed and acoustically tuned to the specific room.' },
       { title: 'Live Mixing', description: 'A dedicated engineer mixes live rather than leaving the system unattended.' },
     ],
-    idealFor: ['Conference and keynote audio', 'Multilingual events with interpretation', 'Live music and entertainment programs', 'Broadcast and recorded events'],
+    processJa: [
+      { title: '会場・プログラム確認', description: 'システム仕様設計前に会場の音響特性とプログラム内容を確認します。' },
+      { title: 'システム設計', description: '音圧の死角や電波干渉を避けるようPA・ミキシング・電波計画を設計します。' },
+      { title: '施工・チューニング', description: 'その会場に合わせてシステムを設営し、音響チューニングを行います。' },
+      { title: '本番ミキシング', description: 'システムを放置せず、専任エンジニアが本番中ライブでミキシングします。' },
+    ],
+    idealForEn: ['Conference and keynote audio', 'Multilingual events with interpretation', 'Live music and entertainment programs', 'Broadcast and recorded events'],
+    idealForJa: ['カンファレンス・基調講演の音響', '通訳を伴う多言語イベント', 'ライブ音楽・エンターテインメントプログラム', '放送・収録イベント'],
     relatedServiceSlugs: ['conferences', 'technical-production', 'live-streaming'],
     relatedEquipmentCategorySlugs: ['audio', 'accessories'],
     faqIds: ['faq-equipment-brands'],
-    seoTitle: 'Event Audio Systems & Solutions in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Event Audio Systems & Solutions in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のイベント音響システム・ソリューション | TOTAL MEDIA',
+    seoDescriptionEn:
       'Line array PA, digital mixing, and interpretation audio solutions across Japan, designed to room acoustics and engineered by live audio technicians.',
+    seoDescriptionJa:
+      '日本全国でラインアレイPA、デジタルミキシング、通訳音声ソリューションを提供。会場の音響特性に合わせてライブ音響技術者が設計します。',
   },
   {
     id: 's-lighting-solutions',
     slug: 'lighting-solutions',
     category: 'technical',
-    name: 'Lighting Solutions',
-    shortDescription:
+    nameEn: 'Lighting Solutions',
+    nameJa: '照明ソリューション',
+    shortDescriptionEn:
       'Stage, architectural, and ambient lighting design programmed to support the moment, not just illuminate it.',
-    heroStatement: 'Lighting sets the tone before a single word is spoken.',
-    overview: [
+    shortDescriptionJa:
+      'その瞬間を単に照らすだけでなく、演出として支えるステージ・空間・雰囲気照明の設計。',
+    heroStatementEn: 'Lighting sets the tone before a single word is spoken.',
+    heroStatementJa: '照明は、誰かが一言も話す前に、その場のトーンを決めます。',
+    overviewEn: [
       'Lighting is the fastest way to signal formality, energy, or intimacy to a room before anyone speaks — and one of the most under-specified elements in standard event packages. We design lighting as a storytelling tool, not a default wash.',
       'Our lighting designers program cues around your run-of-show, so transitions between segments — keynote to panel, presentation to reveal — are marked by light, not just a change of slide.',
     ],
-    capabilities: [
+    overviewJa: [
+      '照明は、誰かが話す前に、フォーマルさ・熱量・親密さを会場に伝える最も速い手段です。それでいて、標準的なイベントパッケージの中で最も仕様が軽視されがちな要素の一つでもあります。私たちは照明を単なる一様な明かりではなく、物語を伝えるツールとして設計します。',
+      '照明デザイナーが進行台本に沿ってキューをプログラムするため、基調講演からパネルディスカッションへ、プレゼンテーションからお披露目へといった場面転換が、スライドの切り替えだけでなく光によっても示されます。',
+    ],
+    capabilitiesEn: [
       'Stage and keynote lighting design',
       'Moving light and architectural wash programming',
       'Cue-based lighting synced to run-of-show',
@@ -395,33 +689,59 @@ export const services: Service[] = [
       'Ambient and wayfinding lighting for venue spaces',
       'Console programming and live operation',
     ],
-    process: [
+    capabilitiesJa: [
+      'ステージ・基調講演の照明設計',
+      'ムービングライト・建築照明のプログラミング',
+      '進行台本に連動したキューベースの照明',
+      '放送・配信向けのカメラマッチ照明',
+      '会場空間の雰囲気照明・案内照明',
+      'コンソールプログラミングと本番運用',
+    ],
+    processEn: [
       { title: 'Mood & Cue Planning', description: 'We map lighting cues to your run-of-show and the tone each segment needs.' },
       { title: 'Design & Fixture Plan', description: 'Fixture selection and rigging plan built to the venue and program.' },
       { title: 'Programming', description: 'Cues programmed and tested against the actual run-of-show before doors open.' },
       { title: 'Live Operation', description: 'A lighting operator runs the cues live, adjusting in real time as needed.' },
     ],
-    idealFor: ['Keynote and stage lighting', 'Product reveal and launch lighting', 'Award ceremony presentation lighting', 'Ambient venue and gala lighting'],
+    processJa: [
+      { title: 'ムード・キュー計画', description: '進行台本と各場面に必要なトーンに合わせて照明キューを設計します。' },
+      { title: '設計・機材計画', description: '会場とプログラムに合わせて機材選定とリギング計画を作成します。' },
+      { title: 'プログラミング', description: '開場前に、実際の進行台本に沿ってキューをプログラム・テストします。' },
+      { title: '本番運用', description: '照明オペレーターが本番中キューを操作し、必要に応じてリアルタイムで調整します。' },
+    ],
+    idealForEn: ['Keynote and stage lighting', 'Product reveal and launch lighting', 'Award ceremony presentation lighting', 'Ambient venue and gala lighting'],
+    idealForJa: ['基調講演・ステージ照明', '製品お披露目・発表会照明', '授賞式のプレゼンテーション照明', '会場の雰囲気照明・ガラディナー照明'],
     relatedServiceSlugs: ['product-launches', 'stage-production', 'award-ceremonies'],
     relatedEquipmentCategorySlugs: ['lighting', 'truss'],
     faqIds: ['faq-equipment-brands'],
-    seoTitle: 'Event Lighting Design & Solutions in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Event Lighting Design & Solutions in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のイベント照明デザイン・ソリューション | TOTAL MEDIA',
+    seoDescriptionEn:
       'Stage, architectural, and ambient lighting solutions across Japan — cue-based design programmed to your run-of-show by professional lighting operators.',
+    seoDescriptionJa:
+      '日本全国でステージ・空間・雰囲気照明ソリューションを提供。プロの照明オペレーターが進行台本に合わせてキューベースの照明を設計します。',
   },
   {
     id: 's-stage-production',
     slug: 'stage-production',
     category: 'technical',
-    name: 'Stage Production',
-    shortDescription:
+    nameEn: 'Stage Production',
+    nameJa: 'ステージ制作',
+    shortDescriptionEn:
       'Modular staging, set construction, and structural rigging engineered to venue and program requirements.',
-    heroStatement: 'The stage is the one piece of infrastructure everything else stands on.',
-    overview: [
+    shortDescriptionJa:
+      '会場とプログラムの要件に合わせて設計する、モジュール式ステージ・セット施工・構造リギング。',
+    heroStatementEn: 'The stage is the one piece of infrastructure everything else stands on.',
+    heroStatementJa: 'ステージは、他のすべてが乗るインフラそのものです。',
+    overviewEn: [
       'Every other technical element — LED, lighting, audio, cameras — depends on the stage being structurally sound, correctly sized, and built to the venue\'s actual constraints. We treat staging as engineering first, aesthetics second, though we don\'t compromise on either.',
       'We build modular stage decking, custom set elements, and rigging systems sized to your program, from a simple presentation platform to a multi-level set with integrated LED and rigging.',
     ],
-    capabilities: [
+    overviewJa: [
+      'LED、照明、音響、カメラといった他のあらゆる技術要素は、ステージが構造的に健全で、適切なサイズであり、会場の実際の制約に合わせて施工されていることが前提となります。私たちはステージ施工をまずエンジニアリングとして、次にデザインとして扱いますが、どちらも妥協しません。',
+      'シンプルなプレゼンテーション用プラットフォームから、LEDやリギングを統合した多層構造のセットまで、プログラムに合わせてモジュール式ステージデッキ、カスタムセット要素、リギングシステムを施工します。',
+    ],
+    capabilitiesEn: [
       'Modular stage decking and riser systems',
       'Custom set design and construction',
       'Structural rigging engineered to venue load limits',
@@ -429,33 +749,59 @@ export const services: Service[] = [
       'Backstage and quick-change infrastructure',
       'Fast build/strike crews for compressed schedules',
     ],
-    process: [
+    capabilitiesJa: [
+      'モジュール式ステージデッキ・雛壇システム',
+      'カスタムセットのデザイン・施工',
+      '会場の荷重制限に合わせた構造リギング',
+      '多層構造・ランウェイ型ステージ構成',
+      '楽屋・早着替え用インフラ',
+      '短納期対応の迅速な施工クルー',
+    ],
+    processEn: [
       { title: 'Venue & Load Assessment', description: 'We confirm venue floor load, rigging points, and access before design.' },
       { title: 'Structural Design', description: 'Stage and set engineered to program requirements and signed off structurally.' },
       { title: 'Build', description: 'Coordinated crews build to a schedule matched to your load-in window.' },
       { title: 'Strike', description: 'Structured teardown sequenced to venue move-out requirements.' },
     ],
-    idealFor: ['Keynote and conference staging', 'Award ceremony and gala staging', 'Product launch sets', 'Trade show main stages'],
+    processJa: [
+      { title: '会場・荷重確認', description: '設計前に会場の床荷重、リギングポイント、搬入経路を確認します。' },
+      { title: '構造設計', description: 'プログラム要件に合わせてステージ・セットを設計し、構造的に承認します。' },
+      { title: '施工', description: '搬入時間に合わせたスケジュールで統率されたクルーが施工します。' },
+      { title: '撤収', description: '会場の搬出要件に合わせて計画的に撤収します。' },
+    ],
+    idealForEn: ['Keynote and conference staging', 'Award ceremony and gala staging', 'Product launch sets', 'Trade show main stages'],
+    idealForJa: ['基調講演・カンファレンスステージ', '授賞式・ガラディナーのステージ', '製品発表会セット', '見本市のメインステージ'],
     relatedServiceSlugs: ['led-solutions', 'lighting-solutions', 'technical-production'],
     relatedEquipmentCategorySlugs: ['stage', 'truss'],
     faqIds: ['faq-venue-site-visit', 'faq-power-rigging-safety'],
-    seoTitle: 'Stage Production & Set Construction in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Stage Production & Set Construction in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のステージ制作・セット施工 | TOTAL MEDIA',
+    seoDescriptionEn:
       'Modular staging, custom set construction, and structural rigging across Japan, engineered to venue load limits and built for fast build/strike windows.',
+    seoDescriptionJa:
+      '日本全国でモジュール式ステージ、カスタムセット施工、構造リギングを提供。会場の荷重制限に合わせて設計し、短納期の搬入出にも対応します。',
   },
   {
     id: 's-technical-production',
     slug: 'technical-production',
     category: 'technical',
-    name: 'Technical Production',
-    shortDescription:
+    nameEn: 'Technical Production',
+    nameJa: '技術制作',
+    shortDescriptionEn:
       'Integrated technical direction across LED, audio, lighting, staging, and camera systems as one coordinated discipline.',
-    heroStatement: 'Someone has to own the whole technical picture. That\'s this service.',
-    overview: [
+    shortDescriptionJa:
+      'LED・音響・照明・ステージ・カメラシステムを、一つの統合された分野として技術ディレクションします。',
+    heroStatementEn: 'Someone has to own the whole technical picture. That\'s this service.',
+    heroStatementJa: '技術面の全体像に責任を持つ人が必要です。それがこのサービスです。',
+    overviewEn: [
       'Most technical failures at events happen at the seams between disciplines — lighting that clashes with camera exposure, audio that isn\'t synced with video delay, rigging that wasn\'t coordinated between the LED and lighting teams. Technical production is the discipline of owning those seams.',
       'We provide a technical director who coordinates every system — LED, audio, lighting, staging, cameras — as one integrated build, backed by our full equipment inventory and specialist crews for each discipline.',
     ],
-    capabilities: [
+    overviewJa: [
+      'イベントにおける技術的なトラブルの多くは、各分野の境目で発生します。カメラの露出と衝突する照明、映像の遅延と同期していない音声、LEDチームと照明チームの間で調整されていないリギングなどです。技術制作とは、その境目に責任を持つ分野です。',
+      'LED、音響、照明、ステージ、カメラといったすべてのシステムを一つの統合された施工として調整するテクニカルディレクターを配置し、自社の機材インベントリと各分野の専門クルーで支えます。',
+    ],
+    capabilitiesEn: [
       'Single technical director owning the full production',
       'Cross-discipline coordination (LED, audio, lighting, staging, camera)',
       'Power distribution and infrastructure planning',
@@ -463,33 +809,59 @@ export const services: Service[] = [
       'On-site technical troubleshooting and contingency management',
       'Post-event technical reporting',
     ],
-    process: [
+    capabilitiesJa: [
+      '制作全体に責任を持つ単一のテクニカルディレクター',
+      '分野横断の調整（LED、音響、照明、ステージ、カメラ）',
+      '電源分配・インフラ計画',
+      'システム横断の技術リハーサル・キュー統合',
+      '現地での技術トラブルシューティング・コンティンジェンシー管理',
+      'イベント後の技術レポート',
+    ],
+    processEn: [
       { title: 'Technical Scoping', description: 'We map every technical discipline your event requires into one plan.' },
       { title: 'Integrated Design', description: 'Systems designed together so cues, power, and rigging align across disciplines.' },
       { title: 'Full Technical Rehearsal', description: 'Every system tested together, not just individually.' },
       { title: 'Live Technical Direction', description: 'One technical director owns execution and contingency in real time.' },
     ],
-    idealFor: ['Multi-discipline productions of any format', 'Events with complex rigging or power needs', 'Broadcast-integrated live events', 'Clients who want one technical point of contact'],
+    processJa: [
+      { title: '技術要件整理', description: 'イベントに必要なすべての技術分野を一つの計画にまとめます。' },
+      { title: '統合設計', description: 'キュー・電源・リギングが分野を越えて整合するようシステムを一体で設計します。' },
+      { title: '本番技術リハーサル', description: '個別ではなく、すべてのシステムを統合してテストします。' },
+      { title: '本番技術ディレクション', description: '単一のテクニカルディレクターが実行とコンティンジェンシーをリアルタイムで統括します。' },
+    ],
+    idealForEn: ['Multi-discipline productions of any format', 'Events with complex rigging or power needs', 'Broadcast-integrated live events', 'Clients who want one technical point of contact'],
+    idealForJa: ['あらゆる形式の複数分野にまたがる制作', '複雑なリギング・電源要件のあるイベント', '放送を統合したライブイベント', '単一の技術窓口を求めるクライアント'],
     relatedServiceSlugs: ['event-consultation', 'stage-production', 'led-solutions'],
     relatedEquipmentCategorySlugs: ['stage', 'truss', 'audio', 'lighting', 'cameras'],
     faqIds: ['faq-power-rigging-safety', 'faq-what-makes-different'],
-    seoTitle: 'Technical Event Production Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Technical Event Production Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内の技術制作サービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Integrated technical production across Japan — one technical director coordinating LED, audio, lighting, staging, and camera systems as a single build.',
+    seoDescriptionJa:
+      '日本全国で統合技術制作を提供。単一のテクニカルディレクターがLED、音響、照明、ステージ、カメラシステムを一体の施工として調整します。',
   },
   {
     id: 's-event-consultation',
     slug: 'event-consultation',
     category: 'technical',
-    name: 'Event Consultation',
-    shortDescription:
+    nameEn: 'Event Consultation',
+    nameJa: 'イベントコンサルティング',
+    shortDescriptionEn:
       'Independent technical and production consultation for teams planning events without in-house AV expertise.',
-    heroStatement: 'Sometimes the most useful thing we can do is advise before you commit.',
-    overview: [
+    shortDescriptionJa:
+      '社内にAVの専門知識を持たないチーム向けの、独立した技術・制作コンサルティング。',
+    heroStatementEn: 'Sometimes the most useful thing we can do is advise before you commit.',
+    heroStatementJa: '本契約の前にアドバイスすることが、最も役に立つ場合もあります。',
+    overviewEn: [
       'Not every engagement needs to start with a full production build. When a team is early in planning — evaluating a venue, sizing a budget, or scoping what "hybrid" would actually require — we offer standalone consultation to get the technical picture right before commitments are made.',
       'This includes venue technical assessments, budget scoping, RFP and vendor-brief support, and second-opinion reviews of technical plans built by another vendor or an internal team.',
     ],
-    capabilities: [
+    overviewJa: [
+      'すべての案件が、フル制作の施工から始まる必要はありません。会場の評価、予算感の把握、「ハイブリッド」に実際何が必要かの検討など、企画の初期段階にあるチーム向けに、契約前に技術面を整理するための単独コンサルティングを提供します。',
+      '会場の技術評価、予算スコーピング、RFP・ベンダー選定資料の支援、そして他社ベンダーや社内チームが作成した技術プランのセカンドオピニオンレビューを含みます。',
+    ],
+    capabilitiesEn: [
       'Venue technical assessment and site walkthroughs',
       'Budget scoping and technical feasibility review',
       'RFP and vendor-brief technical input',
@@ -497,18 +869,36 @@ export const services: Service[] = [
       'Format guidance (in-person, hybrid, or virtual)',
       'Vendor coordination advice for multi-vendor events',
     ],
-    process: [
+    capabilitiesJa: [
+      '会場の技術評価・現地視察',
+      '予算スコーピング・技術的実現可能性のレビュー',
+      'RFP・ベンダー選定資料への技術的助言',
+      '既存の技術プランのセカンドオピニオンレビュー',
+      '形式（対面・ハイブリッド・バーチャル）に関するガイダンス',
+      '複数ベンダーが関わるイベントの調整アドバイス',
+    ],
+    processEn: [
       { title: 'Discovery Call', description: 'We understand your event, constraints, and what decision you\'re trying to make.' },
       { title: 'Assessment', description: 'Venue review, budget scoping, or plan review, depending on your need.' },
       { title: 'Written Recommendation', description: 'A clear, actionable recommendation — not a sales pitch for our own services.' },
       { title: 'Optional Follow-Through', description: 'If you\'d like us to execute, the consultation becomes the basis of the proposal.' },
     ],
-    idealFor: ['Teams planning their first hybrid event', 'Internal teams without dedicated AV staff', 'RFP and vendor selection processes', 'Second opinions on existing technical plans'],
+    processJa: [
+      { title: 'ヒアリング', description: 'イベント内容、制約条件、そして貴社が下そうとしている判断を理解します。' },
+      { title: '評価', description: 'ご要望に応じて会場レビュー、予算スコーピング、プランレビューを実施します。' },
+      { title: '書面での提言', description: '自社サービスの売り込みではなく、明確で実行可能な提言をお渡しします。' },
+      { title: '任意のフォローアップ', description: 'ご希望があれば、そのコンサルティング内容を提案のベースとして制作を実行します。' },
+    ],
+    idealForEn: ['Teams planning their first hybrid event', 'Internal teams without dedicated AV staff', 'RFP and vendor selection processes', 'Second opinions on existing technical plans'],
+    idealForJa: ['初めてハイブリッドイベントを企画するチーム', '専任のAV担当者がいない社内チーム', 'RFP・ベンダー選定プロセス', '既存の技術プランのセカンドオピニオン'],
     relatedServiceSlugs: ['technical-production', 'corporate-events', 'hybrid-events'],
     relatedEquipmentCategorySlugs: [],
     faqIds: ['faq-what-makes-different', 'faq-quote-turnaround'],
-    seoTitle: 'Event Technical Consultation Services in Japan | TOTAL MEDIA',
-    seoDescription:
+    seoTitleEn: 'Event Technical Consultation Services in Japan | TOTAL MEDIA',
+    seoTitleJa: '日本国内のイベント技術コンサルティングサービス | TOTAL MEDIA',
+    seoDescriptionEn:
       'Independent event technical consultation across Japan — venue assessments, budget scoping, and second-opinion reviews for teams planning without in-house AV expertise.',
+    seoDescriptionJa:
+      '日本全国で独立系イベント技術コンサルティングを提供。社内にAV専門知識のないチーム向けに、会場評価、予算スコーピング、セカンドオピニオンレビューを行います。',
   },
 ]

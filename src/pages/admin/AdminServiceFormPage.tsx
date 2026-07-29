@@ -9,6 +9,7 @@ import { Reveal } from '@/components/shared/Reveal'
 import { Seo } from '@/components/layout/Seo'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { ObjectListField } from '@/components/admin/ObjectListField'
+import { LangTabs } from '@/components/admin/LangTabs'
 import { RelationPicker, type RelationOption } from '@/components/admin/RelationPicker'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -24,15 +25,24 @@ const schema = z.object({
     .min(1, 'Slug is required.')
     .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, and hyphens only.'),
   category: z.enum(['event-type', 'technical']),
-  name: z.string().min(1, 'Name is required.'),
-  shortDescription: z.string().min(1, 'Short description is required.'),
-  heroStatement: z.string().min(1, 'Hero statement is required.'),
-  overviewText: z.string(),
-  capabilitiesText: z.string(),
-  process: z.array(z.object({ title: z.string().min(1, 'Required'), description: z.string().min(1, 'Required') })),
-  idealForText: z.string(),
-  seoTitle: z.string().min(1, 'SEO title is required.'),
-  seoDescription: z.string().min(1, 'SEO description is required.'),
+  nameEn: z.string().min(1, 'Name is required.'),
+  nameJa: z.string(),
+  shortDescriptionEn: z.string().min(1, 'Short description is required.'),
+  shortDescriptionJa: z.string(),
+  heroStatementEn: z.string().min(1, 'Hero statement is required.'),
+  heroStatementJa: z.string(),
+  overviewTextEn: z.string(),
+  overviewTextJa: z.string(),
+  capabilitiesTextEn: z.string(),
+  capabilitiesTextJa: z.string(),
+  processEn: z.array(z.object({ title: z.string().min(1, 'Required'), description: z.string().min(1, 'Required') })),
+  processJa: z.array(z.object({ title: z.string(), description: z.string() })),
+  idealForTextEn: z.string(),
+  idealForTextJa: z.string(),
+  seoTitleEn: z.string().min(1, 'SEO title is required.'),
+  seoTitleJa: z.string(),
+  seoDescriptionEn: z.string().min(1, 'SEO description is required.'),
+  seoDescriptionJa: z.string(),
   relatedServiceIds: z.array(z.string()),
   relatedEquipmentCategoryIds: z.array(z.string()),
   faqIds: z.array(z.string()),
@@ -42,15 +52,24 @@ type FormValues = z.infer<typeof schema>
 const DEFAULT_VALUES: FormValues = {
   slug: '',
   category: 'event-type',
-  name: '',
-  shortDescription: '',
-  heroStatement: '',
-  overviewText: '',
-  capabilitiesText: '',
-  process: [],
-  idealForText: '',
-  seoTitle: '',
-  seoDescription: '',
+  nameEn: '',
+  nameJa: '',
+  shortDescriptionEn: '',
+  shortDescriptionJa: '',
+  heroStatementEn: '',
+  heroStatementJa: '',
+  overviewTextEn: '',
+  overviewTextJa: '',
+  capabilitiesTextEn: '',
+  capabilitiesTextJa: '',
+  processEn: [],
+  processJa: [],
+  idealForTextEn: '',
+  idealForTextJa: '',
+  seoTitleEn: '',
+  seoTitleJa: '',
+  seoDescriptionEn: '',
+  seoDescriptionJa: '',
   relatedServiceIds: [],
   relatedEquipmentCategoryIds: [],
   faqIds: [],
@@ -71,6 +90,7 @@ export default function AdminServiceFormPage() {
   const [loading, setLoading] = useState(isEditing)
   const [submitting, setSubmitting] = useState(false)
   const [autoSlug, setAutoSlug] = useState(!isEditing)
+  const [activeLang, setActiveLang] = useState<'en' | 'ja'>('en')
   const [serviceOptions, setServiceOptions] = useState<RelationOption[]>([])
   const [equipmentCategoryOptions, setEquipmentCategoryOptions] = useState<RelationOption[]>([])
   const [faqOptions, setFaqOptions] = useState<RelationOption[]>([])
@@ -84,16 +104,16 @@ export default function AdminServiceFormPage() {
 
   async function load() {
     const [servicesRes, equipmentCategoriesRes, faqsRes] = await Promise.all([
-      supabase.from('services').select('id, name').order('name'),
-      supabase.from('equipment_categories').select('id, name').order('name'),
-      supabase.from('faqs').select('id, question').order('question'),
+      supabase.from('services').select('id, name_en').order('name_en'),
+      supabase.from('equipment_categories').select('id, name_en').order('name_en'),
+      supabase.from('faqs').select('id, question_en').order('question_en'),
     ])
 
     setServiceOptions(
-      (servicesRes.data ?? []).filter((s) => s.id !== id).map((s) => ({ id: s.id, label: s.name })),
+      (servicesRes.data ?? []).filter((s) => s.id !== id).map((s) => ({ id: s.id, label: s.name_en })),
     )
-    setEquipmentCategoryOptions((equipmentCategoriesRes.data ?? []).map((c) => ({ id: c.id, label: c.name })))
-    setFaqOptions((faqsRes.data ?? []).map((f) => ({ id: f.id, label: f.question })))
+    setEquipmentCategoryOptions((equipmentCategoriesRes.data ?? []).map((c) => ({ id: c.id, label: c.name_en })))
+    setFaqOptions((faqsRes.data ?? []).map((f) => ({ id: f.id, label: f.question_en })))
 
     if (!id) {
       setLoading(false)
@@ -126,15 +146,24 @@ export default function AdminServiceFormPage() {
     form.reset({
       slug: s.slug,
       category: s.category,
-      name: s.name,
-      shortDescription: s.short_description,
-      heroStatement: s.hero_statement,
-      overviewText: s.overview.join('\n'),
-      capabilitiesText: s.capabilities.join('\n'),
-      process: (s.process as unknown as { title: string; description: string }[]) ?? [],
-      idealForText: s.ideal_for.join('\n'),
-      seoTitle: s.seo_title,
-      seoDescription: s.seo_description,
+      nameEn: s.name_en,
+      nameJa: s.name_ja ?? '',
+      shortDescriptionEn: s.short_description_en,
+      shortDescriptionJa: s.short_description_ja ?? '',
+      heroStatementEn: s.hero_statement_en,
+      heroStatementJa: s.hero_statement_ja ?? '',
+      overviewTextEn: s.overview_en.join('\n'),
+      overviewTextJa: s.overview_ja.join('\n'),
+      capabilitiesTextEn: s.capabilities_en.join('\n'),
+      capabilitiesTextJa: s.capabilities_ja.join('\n'),
+      processEn: (s.process_en as unknown as { title: string; description: string }[]) ?? [],
+      processJa: (s.process_ja as unknown as { title: string; description: string }[]) ?? [],
+      idealForTextEn: s.ideal_for_en.join('\n'),
+      idealForTextJa: s.ideal_for_ja.join('\n'),
+      seoTitleEn: s.seo_title_en,
+      seoTitleJa: s.seo_title_ja ?? '',
+      seoDescriptionEn: s.seo_description_en,
+      seoDescriptionJa: s.seo_description_ja ?? '',
       relatedServiceIds: (relatedServicesRes.data ?? []).map((r) => r.related_service_id),
       relatedEquipmentCategoryIds: (relatedEquipRes.data ?? []).map((r) => r.equipment_category_id),
       faqIds: (faqLinksRes.data ?? []).map((r) => r.faq_id),
@@ -163,15 +192,24 @@ export default function AdminServiceFormPage() {
     const payload = {
       slug: values.slug,
       category: values.category,
-      name: values.name,
-      short_description: values.shortDescription,
-      hero_statement: values.heroStatement,
-      overview: linesToArray(values.overviewText),
-      capabilities: linesToArray(values.capabilitiesText),
-      process: values.process,
-      ideal_for: linesToArray(values.idealForText),
-      seo_title: values.seoTitle,
-      seo_description: values.seoDescription,
+      name_en: values.nameEn,
+      name_ja: values.nameJa || null,
+      short_description_en: values.shortDescriptionEn,
+      short_description_ja: values.shortDescriptionJa || null,
+      hero_statement_en: values.heroStatementEn,
+      hero_statement_ja: values.heroStatementJa || null,
+      overview_en: linesToArray(values.overviewTextEn),
+      overview_ja: linesToArray(values.overviewTextJa),
+      capabilities_en: linesToArray(values.capabilitiesTextEn),
+      capabilities_ja: linesToArray(values.capabilitiesTextJa),
+      process_en: values.processEn,
+      process_ja: values.processJa,
+      ideal_for_en: linesToArray(values.idealForTextEn),
+      ideal_for_ja: linesToArray(values.idealForTextJa),
+      seo_title_en: values.seoTitleEn,
+      seo_title_ja: values.seoTitleJa || null,
+      seo_description_en: values.seoDescriptionEn,
+      seo_description_ja: values.seoDescriptionJa || null,
     }
 
     try {
@@ -206,6 +244,8 @@ export default function AdminServiceFormPage() {
     }
   }
 
+  const jaComplete = Boolean(form.watch('nameJa'))
+
   return (
     <>
       <Seo
@@ -222,10 +262,13 @@ export default function AdminServiceFormPage() {
         >
           <ArrowLeft className="size-4" /> Back to Services
         </Link>
-        <AdminPageHeader
-          title={isEditing ? 'Edit Service' : 'New Service'}
-          description="Shown on /services and linked from solutions and portfolio projects."
-        />
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+          <AdminPageHeader
+            title={isEditing ? 'Edit Service' : 'New Service'}
+            description="Shown on /services and linked from solutions and portfolio projects."
+          />
+          <LangTabs active={activeLang} onChange={setActiveLang} jaComplete={jaComplete} />
+        </div>
       </Reveal>
 
       {loading ? (
@@ -241,16 +284,16 @@ export default function AdminServiceFormPage() {
               <Section title="Basics">
                 <FormField
                   control={form.control}
-                  name="name"
+                  name={activeLang === 'en' ? 'nameEn' : 'nameJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Name {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           onChange={(e) => {
                             field.onChange(e)
-                            if (autoSlug) form.setValue('slug', slugify(e.target.value))
+                            if (autoSlug && activeLang === 'en') form.setValue('slug', slugify(e.target.value))
                           }}
                         />
                       </FormControl>
@@ -302,10 +345,10 @@ export default function AdminServiceFormPage() {
                 </div>
                 <FormField
                   control={form.control}
-                  name="shortDescription"
+                  name={activeLang === 'en' ? 'shortDescriptionEn' : 'shortDescriptionJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Short Description</FormLabel>
+                      <FormLabel>Short Description {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>
@@ -315,10 +358,10 @@ export default function AdminServiceFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="heroStatement"
+                  name={activeLang === 'en' ? 'heroStatementEn' : 'heroStatementJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Hero Statement</FormLabel>
+                      <FormLabel>Hero Statement {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>
@@ -331,10 +374,10 @@ export default function AdminServiceFormPage() {
               <Section title="Content">
                 <FormField
                   control={form.control}
-                  name="overviewText"
+                  name={activeLang === 'en' ? 'overviewTextEn' : 'overviewTextJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Overview</FormLabel>
+                      <FormLabel>Overview {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={4} {...field} />
                       </FormControl>
@@ -345,10 +388,10 @@ export default function AdminServiceFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="capabilitiesText"
+                  name={activeLang === 'en' ? 'capabilitiesTextEn' : 'capabilitiesTextJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Capabilities</FormLabel>
+                      <FormLabel>Capabilities {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={4} {...field} />
                       </FormControl>
@@ -359,10 +402,10 @@ export default function AdminServiceFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="idealForText"
+                  name={activeLang === 'en' ? 'idealForTextEn' : 'idealForTextJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Ideal For</FormLabel>
+                      <FormLabel>Ideal For {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={3} {...field} />
                       </FormControl>
@@ -373,17 +416,30 @@ export default function AdminServiceFormPage() {
                 />
               </Section>
 
-              <Section title="Process Steps">
-                <ObjectListField
-                  form={form}
-                  name="process"
-                  fields={[
-                    { name: 'title', label: 'Title' },
-                    { name: 'description', label: 'Description', multiline: true },
-                  ]}
-                  emptyItem={{ title: '', description: '' }}
-                  addLabel="Add Process Step"
-                />
+              <Section title={`Process Steps ${activeLang === 'ja' ? '(Japanese)' : ''}`}>
+                {activeLang === 'en' ? (
+                  <ObjectListField
+                    form={form}
+                    name="processEn"
+                    fields={[
+                      { name: 'title', label: 'Title' },
+                      { name: 'description', label: 'Description', multiline: true },
+                    ]}
+                    emptyItem={{ title: '', description: '' }}
+                    addLabel="Add Process Step"
+                  />
+                ) : (
+                  <ObjectListField
+                    form={form}
+                    name="processJa"
+                    fields={[
+                      { name: 'title', label: 'Title (Japanese)' },
+                      { name: 'description', label: 'Description (Japanese)', multiline: true },
+                    ]}
+                    emptyItem={{ title: '', description: '' }}
+                    addLabel="Add Process Step"
+                  />
+                )}
               </Section>
 
               <Section title="Related Services">
@@ -437,10 +493,10 @@ export default function AdminServiceFormPage() {
               <Section title="SEO">
                 <FormField
                   control={form.control}
-                  name="seoTitle"
+                  name={activeLang === 'en' ? 'seoTitleEn' : 'seoTitleJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>SEO Title</FormLabel>
+                      <FormLabel>SEO Title {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -450,10 +506,10 @@ export default function AdminServiceFormPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="seoDescription"
+                  name={activeLang === 'en' ? 'seoDescriptionEn' : 'seoDescriptionJa'}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>SEO Description</FormLabel>
+                      <FormLabel>SEO Description {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                       <FormControl>
                         <Textarea rows={2} {...field} />
                       </FormControl>

@@ -82,11 +82,11 @@ export default function AdminPortfolioFormPage() {
 
   async function load() {
     const [servicesRes, equipmentRes] = await Promise.all([
-      supabase.from('services').select('id, name').order('name'),
-      supabase.from('equipment_items').select('id, name').order('name'),
+      supabase.from('services').select('id, name_en').order('name_en'),
+      supabase.from('equipment_items').select('id, name_en').order('name_en'),
     ])
-    setServiceOptions((servicesRes.data ?? []).map((s) => ({ id: s.id, label: s.name })))
-    setEquipmentOptions((equipmentRes.data ?? []).map((e) => ({ id: e.id, label: e.name })))
+    setServiceOptions((servicesRes.data ?? []).map((s) => ({ id: s.id, label: s.name_en })))
+    setEquipmentOptions((equipmentRes.data ?? []).map((e) => ({ id: e.id, label: e.name_en })))
 
     if (!id) {
       setLoading(false)

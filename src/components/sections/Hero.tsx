@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
 
 export function Hero() {
+  const { t } = useTranslation(['home', 'common'])
   return (
     <section className="relative overflow-hidden bg-navy text-white">
       <div className="pointer-events-none absolute inset-0">
@@ -35,7 +37,7 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-signal"
         >
-          Event Production &amp; Technical Solutions
+          {t('hero.eyebrow')}
         </motion.p>
 
         <motion.h1
@@ -44,7 +46,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
         >
-          Creating Exceptional Events Across Japan.
+          {t('hero.title')}
         </motion.h1>
 
         <motion.p
@@ -53,10 +55,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mt-7 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl"
         >
-          We plan, produce, and engineer corporate events, conferences,
-          exhibitions, and hybrid broadcasts — LED, audio, lighting, staging,
-          and streaming, delivered as one accountable production from a
-          single technical partner.
+          {t('hero.description')}
         </motion.p>
 
         <motion.div
@@ -66,10 +65,10 @@ export function Hero() {
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <Button asChild size="lg" className="bg-signal text-white hover:bg-signal/90">
-            <Link to="/quote">
-              Request a Quote
+            <LocalizedLink to="/quote">
+              {t('buttons.getQuote', { ns: 'common' })}
               <ArrowRight className="ml-1 size-4" />
-            </Link>
+            </LocalizedLink>
           </Button>
           <Button
             asChild
@@ -77,7 +76,7 @@ export function Hero() {
             variant="outline"
             className="border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white"
           >
-            <Link to="/services">View Our Services</Link>
+            <LocalizedLink to="/services">{t('hero.viewServices')}</LocalizedLink>
           </Button>
         </motion.div>
       </div>

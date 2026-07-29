@@ -1,0 +1,16 @@
+{
+  "seoTitle": "よくある質問",
+  "seoDescription": "見積もり、料金、機材、企画のスケジュール、技術的な安全性についてTOTAL MEDIAへよく寄せられるご質問への回答です。",
+  "eyebrow": "サポート",
+  "title": "よくある質問",
+  "description": "お探しの情報が見つからない場合は、直接お問い合わせください。1営業日以内にご返信します。",
+  "categories": {
+    "general": "全般",
+    "quotes-pricing": "見積もり・料金",
+    "equipment": "機材",
+    "planning": "企画・スケジュール",
+    "technical": "技術・安全性"
+  },
+  "ctaTitle": "まだご質問がありますか？",
+  "ctaDescription": "ご検討中の内容の詳細をお送りください。直接ご返信いたします。"
+}

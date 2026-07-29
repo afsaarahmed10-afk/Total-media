@@ -1,0 +1,38 @@
+{
+  "seoTitle": "Contact Us",
+  "seoDescription": "Get in touch with TOTAL MEDIA to discuss your next event. Based in Tokyo, serving clients nationwide across Japan.",
+  "eyebrow": "Contact",
+  "title": "Let's Talk About Your Event",
+  "description": "For a detailed proposal, use Request a Quote. For anything else — general questions, partnership inquiries, press — reach out here.",
+  "office": "Office",
+  "officeAddress": "Shibuya-ku, Tokyo 150-0002, Japan",
+  "phone": "Phone",
+  "email": "Email",
+  "whatsapp": "WhatsApp",
+  "businessHours": "Business Hours",
+  "businessHoursValue": "Monday – Friday, 9:00 – 18:00 JST",
+  "businessHoursNote": "On-site event support available outside these hours.",
+  "form": {
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@company.com",
+    "company": "Company (optional)",
+    "companyPlaceholder": "Your company",
+    "subject": "Subject",
+    "subjectPlaceholder": "What's this about?",
+    "message": "Message",
+    "messagePlaceholder": "Tell us a bit more...",
+    "sending": "Sending…",
+    "send": "Send Message"
+  },
+  "validation": {
+    "name": "Please enter your name.",
+    "email": "Please enter a valid email address.",
+    "subject": "Please enter a subject.",
+    "message": "Please include a few details so we can help."
+  },
+  "submitError": "Something went wrong sending your message. Please try again, or email us directly at hello@totalmedia.co.jp.",
+  "successTitle": "Message Sent",
+  "successDescription": "Thanks for reaching out — we'll get back to you within one business day."
+}

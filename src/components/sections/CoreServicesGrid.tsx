@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import {
   Building2,
   Presentation,
@@ -10,8 +9,11 @@ import {
   Settings2,
   ArrowRight,
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
+import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices } from '@/lib/data'
 
 const FEATURED_SLUGS = [
@@ -37,7 +39,9 @@ const ICONS: Record<string, typeof Building2> = {
 }
 
 export function CoreServicesGrid() {
-  const services = getServices()
+  const { t } = useTranslation('home')
+  const { locale } = useLocale()
+  const services = getServices(locale)
   const featured = FEATURED_SLUGS.map((slug) => services.find((s) => s.slug === slug)).filter(
     (s): s is (typeof services)[number] => Boolean(s),
   )
@@ -47,16 +51,16 @@ export function CoreServicesGrid() {
       <div className="container-page">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="What We Do"
-            title="Core Services"
-            description="From full event production to individual technical disciplines — engaged together or on their own."
+            eyebrow={t('coreServices.eyebrow')}
+            title={t('coreServices.title')}
+            description={t('coreServices.description')}
           />
-          <Link
+          <LocalizedLink
             to="/services"
             className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-signal hover:underline sm:flex"
           >
-            View all 15 services <ArrowRight className="size-4" />
-          </Link>
+            {t('coreServices.viewAll')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -64,7 +68,7 @@ export function CoreServicesGrid() {
             const Icon = ICONS[service.slug] ?? Sparkles
             return (
               <Reveal key={service.slug} delay={(i % 4) * 0.06}>
-                <Link
+                <LocalizedLink
                   to={`/services/${service.slug}`}
                   className="group flex h-full flex-col rounded-xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:border-signal/30 hover:shadow-lg hover:shadow-navy/5"
                 >
@@ -76,18 +80,18 @@ export function CoreServicesGrid() {
                     {service.shortDescription}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-signal opacity-0 transition-opacity group-hover:opacity-100">
-                    Learn more <ArrowRight className="size-3.5" />
+                    {t('coreServices.learnMore')} <ArrowRight className="size-3.5" />
                   </span>
-                </Link>
+                </LocalizedLink>
               </Reveal>
             )
           })}
         </div>
 
         <div className="mt-8 sm:hidden">
-          <Link to="/services" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
-            View all 15 services <ArrowRight className="size-4" />
-          </Link>
+          <LocalizedLink to="/services" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
+            {t('coreServices.viewAll')} <ArrowRight className="size-4" />
+          </LocalizedLink>
         </div>
       </div>
     </section>

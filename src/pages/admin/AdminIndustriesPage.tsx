@@ -9,6 +9,7 @@ import { Seo } from '@/components/layout/Seo'
 import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { AdminDataTable, type AdminColumn } from '@/components/admin/AdminDataTable'
 import { ConfirmDeleteDialog } from '@/components/admin/ConfirmDeleteDialog'
+import { LangTabs } from '@/components/admin/LangTabs'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -21,17 +22,35 @@ import type { Database } from '@/lib/supabase/database.types'
 type Industry = Database['public']['Tables']['industries']['Row']
 
 const schema = z.object({
-  name: z.string().min(1, 'Name is required.'),
+  nameEn: z.string().min(1, 'Name is required.'),
+  nameJa: z.string(),
   slug: z
     .string()
     .min(1, 'Slug is required.')
     .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, and hyphens only.'),
-  description: z.string().min(10, 'Description is required.'),
-  useCasesText: z.string(),
+  descriptionEn: z.string().min(10, 'Description is required.'),
+  descriptionJa: z.string(),
+  useCasesTextEn: z.string(),
+  useCasesTextJa: z.string(),
 })
 type FormValues = z.infer<typeof schema>
 
-const DEFAULT_VALUES: FormValues = { name: '', slug: '', description: '', useCasesText: '' }
+const DEFAULT_VALUES: FormValues = {
+  nameEn: '',
+  nameJa: '',
+  slug: '',
+  descriptionEn: '',
+  descriptionJa: '',
+  useCasesTextEn: '',
+  useCasesTextJa: '',
+}
+
+function linesToArray(text: string): string[] {
+  return text
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+}
 
 export default function AdminIndustriesPage() {
   const [rows, setRows] = useState<Industry[] | null>(null)
@@ -41,6 +60,7 @@ export default function AdminIndustriesPage() {
   const [submitting, setSubmitting] = useState(false)
   const [deletingBusy, setDeletingBusy] = useState(false)
   const [autoSlug, setAutoSlug] = useState(true)
+  const [activeLang, setActiveLang] = useState<'en' | 'ja'>('en')
 
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: DEFAULT_VALUES })
 
@@ -49,7 +69,7 @@ export default function AdminIndustriesPage() {
   }, [])
 
   async function load() {
-    const { data, error } = await supabase.from('industries').select('*').order('name')
+    const { data, error } = await supabase.from('industries').select('*').order('name_en')
     if (error) {
       toast.error('Failed to load industries.')
       return
@@ -60,6 +80,7 @@ export default function AdminIndustriesPage() {
   function openCreate() {
     setEditing(null)
     setAutoSlug(true)
+    setActiveLang('en')
     form.reset(DEFAULT_VALUES)
     setDialogOpen(true)
   }
@@ -67,11 +88,15 @@ export default function AdminIndustriesPage() {
   function openEdit(row: Industry) {
     setEditing(row)
     setAutoSlug(false)
+    setActiveLang('en')
     form.reset({
-      name: row.name,
+      nameEn: row.name_en,
+      nameJa: row.name_ja ?? '',
       slug: row.slug,
-      description: row.description,
-      useCasesText: row.use_cases.join('\n'),
+      descriptionEn: row.description_en,
+      descriptionJa: row.description_ja ?? '',
+      useCasesTextEn: row.use_cases_en.join('\n'),
+      useCasesTextJa: row.use_cases_ja.join('\n'),
     })
     setDialogOpen(true)
   }
@@ -79,13 +104,13 @@ export default function AdminIndustriesPage() {
   async function onSubmit(values: FormValues) {
     setSubmitting(true)
     const payload = {
-      name: values.name,
+      name_en: values.nameEn,
+      name_ja: values.nameJa || null,
       slug: values.slug,
-      description: values.description,
-      use_cases: values.useCasesText
-        .split('\n')
-        .map((line) => line.trim())
-        .filter(Boolean),
+      description_en: values.descriptionEn,
+      description_ja: values.descriptionJa || null,
+      use_cases_en: linesToArray(values.useCasesTextEn),
+      use_cases_ja: linesToArray(values.useCasesTextJa),
     }
     const { error } = editing
       ? await supabase.from('industries').update(payload).eq('id', editing.id)
@@ -116,9 +141,9 @@ export default function AdminIndustriesPage() {
   }
 
   const columns: AdminColumn<Industry>[] = [
-    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name}</span> },
+    { key: 'name', header: 'Name', render: (r) => <span className="font-medium text-navy">{r.name_en}</span> },
     { key: 'slug', header: 'Slug', render: (r) => <code className="text-xs text-muted-foreground">{r.slug}</code> },
-    { key: 'use_cases', header: 'Use Cases', render: (r) => r.use_cases.length },
+    { key: 'use_cases', header: 'Use Cases', render: (r) => r.use_cases_en.length },
     {
       key: 'actions',
       header: '',
@@ -135,6 +160,8 @@ export default function AdminIndustriesPage() {
       ),
     },
   ]
+
+  const jaComplete = Boolean(form.watch('nameJa'))
 
   return (
     <>
@@ -157,7 +184,7 @@ export default function AdminIndustriesPage() {
           columns={columns}
           rows={rows}
           getRowId={(r) => r.id}
-          searchText={(r) => `${r.name} ${r.description}`}
+          searchText={(r) => `${r.name_en} ${r.description_en}`}
           searchPlaceholder="Search industries…"
           emptyMessage="No industries yet."
         />
@@ -166,22 +193,25 @@ export default function AdminIndustriesPage() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>{editing ? 'Edit Industry' : 'New Industry'}</DialogTitle>
+            <div className="flex items-center justify-between gap-4">
+              <DialogTitle>{editing ? 'Edit Industry' : 'New Industry'}</DialogTitle>
+              <LangTabs active={activeLang} onChange={setActiveLang} jaComplete={jaComplete} />
+            </div>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="name"
+                name={activeLang === 'en' ? 'nameEn' : 'nameJa'}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Name {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         onChange={(e) => {
                           field.onChange(e)
-                          if (autoSlug) form.setValue('slug', slugify(e.target.value))
+                          if (autoSlug && activeLang === 'en') form.setValue('slug', slugify(e.target.value))
                         }}
                       />
                     </FormControl>
@@ -210,10 +240,10 @@ export default function AdminIndustriesPage() {
               />
               <FormField
                 control={form.control}
-                name="description"
+                name={activeLang === 'en' ? 'descriptionEn' : 'descriptionJa'}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Description {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                     <FormControl>
                       <Textarea rows={3} {...field} />
                     </FormControl>
@@ -223,10 +253,10 @@ export default function AdminIndustriesPage() {
               />
               <FormField
                 control={form.control}
-                name="useCasesText"
+                name={activeLang === 'en' ? 'useCasesTextEn' : 'useCasesTextJa'}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Use Cases</FormLabel>
+                    <FormLabel>Use Cases {activeLang === 'ja' && '(Japanese)'}</FormLabel>
                     <FormControl>
                       <Textarea rows={4} {...field} />
                     </FormControl>
@@ -251,7 +281,7 @@ export default function AdminIndustriesPage() {
       <ConfirmDeleteDialog
         open={deleting !== null}
         onOpenChange={(open) => !open && setDeleting(null)}
-        description={`Delete "${deleting?.name}"? This can't be undone.`}
+        description={`Delete "${deleting?.name_en}"? This can't be undone.`}
         onConfirm={confirmDelete}
         loading={deletingBusy}
       />

@@ -72,8 +72,8 @@ export default function AdminBlogFormPage() {
   }, [id])
 
   async function load() {
-    const categoriesRes = await supabase.from('blog_categories').select('id, name').order('name')
-    setCategoryOptions((categoriesRes.data ?? []).map((c) => ({ id: c.id, label: c.name })))
+    const categoriesRes = await supabase.from('blog_categories').select('id, name_en').order('name_en')
+    setCategoryOptions((categoriesRes.data ?? []).map((c) => ({ id: c.id, label: c.name_en })))
 
     if (!id) {
       setLoading(false)
