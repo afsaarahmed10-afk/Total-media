@@ -11,6 +11,7 @@ import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { ObjectListField } from '@/components/admin/ObjectListField'
 import { LangTabs } from '@/components/admin/LangTabs'
 import { RelationPicker, type RelationOption } from '@/components/admin/RelationPicker'
+import { MediaPickerField } from '@/components/admin/MediaPickerField'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -46,6 +47,7 @@ const schema = z.object({
   relatedServiceIds: z.array(z.string()),
   relatedEquipmentCategoryIds: z.array(z.string()),
   faqIds: z.array(z.string()),
+  cover: z.array(z.object({ id: z.string(), storagePath: z.string(), fileName: z.string() })),
 })
 type FormValues = z.infer<typeof schema>
 
@@ -73,6 +75,7 @@ const DEFAULT_VALUES: FormValues = {
   relatedServiceIds: [],
   relatedEquipmentCategoryIds: [],
   faqIds: [],
+  cover: [],
 }
 
 function linesToArray(text: string): string[] {
@@ -143,6 +146,16 @@ export default function AdminServiceFormPage() {
     }
 
     const s = serviceRes.data
+    let cover: FormValues['cover'] = []
+    if (s.cover_media_id) {
+      const { data: media } = await supabase
+        .from('media')
+        .select('id, storage_path, file_name')
+        .eq('id', s.cover_media_id)
+        .single()
+      if (media) cover = [{ id: media.id, storagePath: media.storage_path, fileName: media.file_name }]
+    }
+
     form.reset({
       slug: s.slug,
       category: s.category,
@@ -167,6 +180,7 @@ export default function AdminServiceFormPage() {
       relatedServiceIds: (relatedServicesRes.data ?? []).map((r) => r.related_service_id),
       relatedEquipmentCategoryIds: (relatedEquipRes.data ?? []).map((r) => r.equipment_category_id),
       faqIds: (faqLinksRes.data ?? []).map((r) => r.faq_id),
+      cover,
     })
   }
 
@@ -210,6 +224,7 @@ export default function AdminServiceFormPage() {
       seo_title_ja: values.seoTitleJa || null,
       seo_description_en: values.seoDescriptionEn,
       seo_description_ja: values.seoDescriptionJa || null,
+      cover_media_id: values.cover[0]?.id ?? null,
     }
 
     try {
@@ -367,6 +382,16 @@ export default function AdminServiceFormPage() {
                       </FormControl>
                       <FormMessage />
                     </FormItem>
+                  )}
+                />
+              </Section>
+
+              <Section title="Cover Image">
+                <FormField
+                  control={form.control}
+                  name="cover"
+                  render={({ field }) => (
+                    <MediaPickerField value={field.value} onChange={field.onChange} multiple={false} />
                   )}
                 />
               </Section>

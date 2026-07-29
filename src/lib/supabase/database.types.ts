@@ -259,6 +259,7 @@ export type Database = {
       }
       equipment_categories: {
         Row: {
+          cover_media_id: string | null
           created_at: string
           description_en: string
           description_ja: string | null
@@ -269,6 +270,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          cover_media_id?: string | null
           created_at?: string
           description_en: string
           description_ja?: string | null
@@ -279,6 +281,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          cover_media_id?: string | null
           created_at?: string
           description_en?: string
           description_ja?: string | null
@@ -288,7 +291,15 @@ export type Database = {
           slug?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "equipment_categories_cover_media_id_fkey"
+            columns: ["cover_media_id"]
+            isOneToOne: false
+            referencedRelation: "media"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       equipment_images: {
         Row: {
@@ -909,6 +920,7 @@ export type Database = {
           capabilities_en: string[]
           capabilities_ja: string[]
           category: Database["public"]["Enums"]["service_category"]
+          cover_media_id: string | null
           created_at: string
           hero_statement_en: string
           hero_statement_ja: string | null
@@ -934,6 +946,7 @@ export type Database = {
           capabilities_en?: string[]
           capabilities_ja?: string[]
           category: Database["public"]["Enums"]["service_category"]
+          cover_media_id?: string | null
           created_at?: string
           hero_statement_en: string
           hero_statement_ja?: string | null
@@ -959,6 +972,7 @@ export type Database = {
           capabilities_en?: string[]
           capabilities_ja?: string[]
           category?: Database["public"]["Enums"]["service_category"]
+          cover_media_id?: string | null
           created_at?: string
           hero_statement_en?: string
           hero_statement_ja?: string | null
@@ -980,7 +994,15 @@ export type Database = {
           slug?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "services_cover_media_id_fkey"
+            columns: ["cover_media_id"]
+            isOneToOne: false
+            referencedRelation: "media"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       site_settings: {
         Row: {
@@ -1035,6 +1057,7 @@ export type Database = {
       }
       solutions: {
         Row: {
+          cover_media_id: string | null
           created_at: string
           hero_statement_en: string
           hero_statement_ja: string | null
@@ -1055,6 +1078,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          cover_media_id?: string | null
           created_at?: string
           hero_statement_en: string
           hero_statement_ja?: string | null
@@ -1075,6 +1099,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          cover_media_id?: string | null
           created_at?: string
           hero_statement_en?: string
           hero_statement_ja?: string | null
@@ -1094,7 +1119,15 @@ export type Database = {
           slug?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "solutions_cover_media_id_fkey"
+            columns: ["cover_media_id"]
+            isOneToOne: false
+            referencedRelation: "media"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       testimonials: {
         Row: {

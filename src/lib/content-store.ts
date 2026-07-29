@@ -124,6 +124,7 @@ function resolveService(s: BilingualService, lang: Locale): Service {
     faqIds: s.faqIds,
     seoTitle: (ja && s.seoTitleJa) || s.seoTitleEn,
     seoDescription: (ja && s.seoDescriptionJa) || s.seoDescriptionEn,
+    imageUrl: s.imageUrl,
   }
 }
 
@@ -140,6 +141,7 @@ function resolveSolution(s: BilingualSolution, lang: Locale): Solution {
     includedServiceSlugs: s.includedServiceSlugs,
     seoTitle: (ja && s.seoTitleJa) || s.seoTitleEn,
     seoDescription: (ja && s.seoDescriptionJa) || s.seoDescriptionEn,
+    imageUrl: s.imageUrl,
   }
 }
 
@@ -150,6 +152,7 @@ function resolveEquipmentCategory(c: BilingualEquipmentCategory, lang: Locale): 
     slug: c.slug,
     name: (ja && c.nameJa) || c.nameEn,
     description: (ja && c.descriptionJa) || c.descriptionEn,
+    imageUrl: c.imageUrl,
   }
 }
 
@@ -167,6 +170,7 @@ function resolveEquipmentItem(item: BilingualEquipmentItem, lang: Locale): Equip
     availability: item.availability,
     relatedItemSlugs: item.relatedItemSlugs,
     visualSeed: item.visualSeed,
+    galleryUrls: item.galleryUrls,
   }
 }
 
@@ -251,6 +255,13 @@ async function loadStaticBundle(): Promise<RawContentBundle> {
   }
 }
 
+/** Public URL for a `media` row's storage object — same bucket/helper the
+ * admin MediaPickerField uses, inlined here so public content loading
+ * doesn't import from `lib/admin`. */
+function mediaUrl(storagePath: string): string {
+  return supabase.storage.from('media').getPublicUrl(storagePath).data.publicUrl
+}
+
 async function fetchAndStitch(): Promise<RawContentBundle> {
   const [
     servicesRes,
@@ -271,6 +282,9 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     equipmentRelatedItemsRes,
     projectServicesRes,
     projectEquipmentRes,
+    equipmentImagesRes,
+    projectImagesRes,
+    mediaRes,
   ] = await Promise.all([
     supabase.from('services').select('*'),
     supabase.from('solutions').select('*'),
@@ -290,6 +304,9 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     supabase.from('equipment_related_items').select('*').order('sort_order'),
     supabase.from('project_services').select('*').order('sort_order'),
     supabase.from('project_equipment').select('*').order('sort_order'),
+    supabase.from('equipment_images').select('equipment_item_id, media_id, sort_order').order('sort_order'),
+    supabase.from('project_images').select('project_id, media_id, sort_order').order('sort_order'),
+    supabase.from('media').select('id, storage_path'),
   ])
 
   for (const res of [
@@ -297,6 +314,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     blogCategoriesRes, blogPostsRes, testimonialsRes, clientsRes, faqsRes, industriesRes,
     serviceRelatedServicesRes, serviceRelatedEquipmentCategoriesRes, serviceFaqsRes,
     solutionServicesRes, equipmentRelatedItemsRes, projectServicesRes, projectEquipmentRes,
+    equipmentImagesRes, projectImagesRes, mediaRes,
   ]) {
     if (res.error) throw res.error
   }
@@ -312,6 +330,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
   const equipmentCategorySlugById = new Map(equipmentCategories.map((c) => [c.id, c.slug]))
   const equipmentItemSlugById = new Map(equipmentItems.map((e) => [e.id, e.slug]))
   const blogCategorySlugById = new Map(blogCategories.map((c) => [c.id, c.slug]))
+  const mediaUrlById = new Map(mediaRes.data!.map((m) => [m.id, mediaUrl(m.storage_path)]))
 
   function groupBy<T, K>(rows: T[], key: (row: T) => K): Map<K, T[]> {
     const map = new Map<K, T[]>()
@@ -334,6 +353,8 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
   const relatedItemsByEquipment = groupBy(equipmentRelatedItemsRes.data!, (r) => r.equipment_item_id)
   const servicesByProject = groupBy(projectServicesRes.data!, (r) => r.project_id)
   const equipmentByProject = groupBy(projectEquipmentRes.data!, (r) => r.project_id)
+  const imagesByEquipmentItem = groupBy(equipmentImagesRes.data!, (r) => r.equipment_item_id)
+  const imagesByProject = groupBy(projectImagesRes.data!, (r) => r.project_id)
 
   const stitchedServices: BilingualService[] = services.map((s) => ({
     id: s.id,
@@ -364,6 +385,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     seoTitleJa: s.seo_title_ja,
     seoDescriptionEn: s.seo_description_en,
     seoDescriptionJa: s.seo_description_ja,
+    imageUrl: s.cover_media_id ? (mediaUrlById.get(s.cover_media_id) ?? null) : null,
   }))
 
   const stitchedSolutions: BilingualSolution[] = solutionsRes.data!.map((s) => ({
@@ -386,6 +408,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     seoTitleJa: s.seo_title_ja,
     seoDescriptionEn: s.seo_description_en,
     seoDescriptionJa: s.seo_description_ja,
+    imageUrl: s.cover_media_id ? (mediaUrlById.get(s.cover_media_id) ?? null) : null,
   }))
 
   const stitchedEquipmentCategories: BilingualEquipmentCategory[] = equipmentCategories.map((c) => ({
@@ -395,6 +418,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     nameJa: c.name_ja,
     descriptionEn: c.description_en,
     descriptionJa: c.description_ja,
+    imageUrl: c.cover_media_id ? (mediaUrlById.get(c.cover_media_id) ?? null) : null,
   }))
 
   const stitchedEquipmentItems: BilingualEquipmentItem[] = equipmentItems.map((item) => ({
@@ -416,27 +440,36 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
       .map((r) => equipmentItemSlugById.get(r.related_item_id))
       .filter((slug): slug is string => Boolean(slug)),
     visualSeed: item.visual_seed,
+    galleryUrls: (imagesByEquipmentItem.get(item.id) ?? [])
+      .map((r) => mediaUrlById.get(r.media_id))
+      .filter((url): url is string => Boolean(url)),
   }))
 
-  const stitchedProjects: Project[] = projectsRes.data!.map((p) => ({
-    id: p.id,
-    slug: p.slug,
-    title: p.title,
-    client: p.client,
-    location: p.location,
-    year: p.year,
-    category: p.category,
-    summary: p.summary,
-    description: p.description,
-    servicesUsed: (servicesByProject.get(p.id) ?? [])
-      .map((r) => serviceSlugById.get(r.service_id))
-      .filter((slug): slug is string => Boolean(slug)),
-    equipmentUsed: (equipmentByProject.get(p.id) ?? [])
-      .map((r) => equipmentItemSlugById.get(r.equipment_item_id))
-      .filter((slug): slug is string => Boolean(slug)),
-    stats: p.stats as unknown as Project['stats'],
-    visualSeed: p.visual_seed,
-  }))
+  const stitchedProjects: Project[] = projectsRes.data!.map((p) => {
+    const images = (imagesByProject.get(p.id) ?? [])
+      .map((r) => mediaUrlById.get(r.media_id))
+      .filter((url): url is string => Boolean(url))
+    return {
+      id: p.id,
+      slug: p.slug,
+      title: p.title,
+      client: p.client,
+      location: p.location,
+      year: p.year,
+      category: p.category,
+      summary: p.summary,
+      description: p.description,
+      servicesUsed: (servicesByProject.get(p.id) ?? [])
+        .map((r) => serviceSlugById.get(r.service_id))
+        .filter((slug): slug is string => Boolean(slug)),
+      equipmentUsed: (equipmentByProject.get(p.id) ?? [])
+        .map((r) => equipmentItemSlugById.get(r.equipment_item_id))
+        .filter((slug): slug is string => Boolean(slug)),
+      stats: p.stats as unknown as Project['stats'],
+      visualSeed: p.visual_seed,
+      imageUrl: images[0] ?? null,
+    }
+  })
 
   const stitchedBlogPosts: BlogPost[] = blogPostsRes.data!.map((post) => ({
     id: post.id,
@@ -450,6 +483,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     publishedAt: post.published_at,
     readMinutes: post.read_minutes,
     visualSeed: post.visual_seed,
+    imageUrl: post.cover_media_id ? (mediaUrlById.get(post.cover_media_id) ?? null) : null,
   }))
 
   const stitchedTestimonials: Testimonial[] = testimonialsRes.data!.map((t) => ({

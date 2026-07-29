@@ -55,6 +55,9 @@ export interface Service {
   faqIds: string[]
   seoTitle: string
   seoDescription: string
+  /** Real uploaded photo, if one exists — undefined/null falls back to
+   * AbstractVisual. Not bilingual: images aren't language-specific. */
+  imageUrl?: string | null
 }
 
 /** Raw bilingual shape — matches the `_ja`/`_en` twin-column DB convention.
@@ -86,6 +89,7 @@ export interface BilingualService {
   seoTitleEn: string
   seoDescriptionJa: string | null
   seoDescriptionEn: string
+  imageUrl?: string | null
 }
 
 export interface SolutionHighlight {
@@ -104,6 +108,7 @@ export interface Solution {
   includedServiceSlugs: string[]
   seoTitle: string
   seoDescription: string
+  imageUrl?: string | null
 }
 
 export interface BilingualSolution {
@@ -124,6 +129,7 @@ export interface BilingualSolution {
   seoTitleEn: string
   seoDescriptionJa: string | null
   seoDescriptionEn: string
+  imageUrl?: string | null
 }
 
 export interface EquipmentCategory {
@@ -131,6 +137,7 @@ export interface EquipmentCategory {
   slug: string
   name: string
   description: string
+  imageUrl?: string | null
 }
 
 export interface BilingualEquipmentCategory {
@@ -140,6 +147,7 @@ export interface BilingualEquipmentCategory {
   nameEn: string
   descriptionJa: string | null
   descriptionEn: string
+  imageUrl?: string | null
 }
 
 export type EquipmentAvailability = 'in-stock' | 'limited' | 'made-to-order'
@@ -161,6 +169,9 @@ export interface EquipmentItem {
   availability: EquipmentAvailability
   relatedItemSlugs: string[]
   visualSeed: string
+  /** Ordered real photos from equipment_images, if any exist — falls back
+   * to AbstractVisual (repeated per thumbnail via visualSeed) when empty. */
+  galleryUrls?: string[]
 }
 
 export interface BilingualEquipmentItem {
@@ -180,6 +191,7 @@ export interface BilingualEquipmentItem {
   availability: EquipmentAvailability
   relatedItemSlugs: string[]
   visualSeed: string
+  galleryUrls?: string[]
 }
 
 export type ProjectCategory =
@@ -209,6 +221,8 @@ export interface Project {
   equipmentUsed: string[]
   stats: ProjectStat[]
   visualSeed: string
+  /** First real photo from project_images, if any exist. */
+  imageUrl?: string | null
 }
 
 export interface BlogCategory {
@@ -236,6 +250,7 @@ export interface BlogPost {
   publishedAt: string
   readMinutes: number
   visualSeed: string
+  imageUrl?: string | null
 }
 
 export interface BilingualBlogPost {

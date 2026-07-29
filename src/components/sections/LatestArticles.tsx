@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getLatestBlogPosts } from '@/lib/data'
@@ -36,7 +36,7 @@ export function LatestArticles() {
               <LocalizedLink to={`/blog/${post.slug}`} className="group block">
                 <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
                   <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                    <AbstractVisual seed={post.visualSeed} />
+                    <ContentVisual imageUrl={post.imageUrl} seed={post.visualSeed} alt={post.title} />
                   </div>
                 </div>
                 <p className="mt-4 text-xs font-medium text-muted-foreground">

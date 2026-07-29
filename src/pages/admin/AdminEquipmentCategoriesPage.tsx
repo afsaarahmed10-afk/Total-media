@@ -10,6 +10,7 @@ import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { AdminDataTable, type AdminColumn } from '@/components/admin/AdminDataTable'
 import { ConfirmDeleteDialog } from '@/components/admin/ConfirmDeleteDialog'
 import { LangTabs } from '@/components/admin/LangTabs'
+import { MediaPickerField } from '@/components/admin/MediaPickerField'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -30,10 +31,18 @@ const schema = z.object({
     .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, and hyphens only.'),
   descriptionEn: z.string().min(1, 'Description is required.'),
   descriptionJa: z.string(),
+  cover: z.array(z.object({ id: z.string(), storagePath: z.string(), fileName: z.string() })),
 })
 type FormValues = z.infer<typeof schema>
 
-const DEFAULT_VALUES: FormValues = { nameEn: '', nameJa: '', slug: '', descriptionEn: '', descriptionJa: '' }
+const DEFAULT_VALUES: FormValues = {
+  nameEn: '',
+  nameJa: '',
+  slug: '',
+  descriptionEn: '',
+  descriptionJa: '',
+  cover: [],
+}
 
 export default function AdminEquipmentCategoriesPage() {
   const [rows, setRows] = useState<EquipmentCategory[] | null>(null)
@@ -68,16 +77,28 @@ export default function AdminEquipmentCategoriesPage() {
     setDialogOpen(true)
   }
 
-  function openEdit(row: EquipmentCategory) {
+  async function openEdit(row: EquipmentCategory) {
     setEditing(row)
     setAutoSlug(false)
     setActiveLang('en')
+
+    let cover: FormValues['cover'] = []
+    if (row.cover_media_id) {
+      const { data: media } = await supabase
+        .from('media')
+        .select('id, storage_path, file_name')
+        .eq('id', row.cover_media_id)
+        .single()
+      if (media) cover = [{ id: media.id, storagePath: media.storage_path, fileName: media.file_name }]
+    }
+
     form.reset({
       nameEn: row.name_en,
       nameJa: row.name_ja ?? '',
       slug: row.slug,
       descriptionEn: row.description_en,
       descriptionJa: row.description_ja ?? '',
+      cover,
     })
     setDialogOpen(true)
   }
@@ -90,6 +111,7 @@ export default function AdminEquipmentCategoriesPage() {
       slug: values.slug,
       description_en: values.descriptionEn,
       description_ja: values.descriptionJa || null,
+      cover_media_id: values.cover[0]?.id ?? null,
     }
     const { error } = editing
       ? await supabase.from('equipment_categories').update(payload).eq('id', editing.id)
@@ -236,6 +258,16 @@ export default function AdminEquipmentCategoriesPage() {
                       <Textarea rows={3} {...field} />
                     </FormControl>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="cover"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Cover Image</FormLabel>
+                    <MediaPickerField value={field.value} onChange={field.onChange} multiple={false} />
                   </FormItem>
                 )}
               />

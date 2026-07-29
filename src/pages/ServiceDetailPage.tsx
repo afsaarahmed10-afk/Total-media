@@ -7,7 +7,7 @@ import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { FaqAccordion } from '@/components/sections/FaqAccordion'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import {
@@ -106,7 +106,12 @@ export default function ServiceDetailPage() {
           <div className="space-y-8">
             <div className="overflow-hidden rounded-xl">
               <div className="aspect-[4/3]">
-                <AbstractVisual seed={`${service.slug}-detail`} variant="facet" />
+                <ContentVisual
+                  imageUrl={service.imageUrl}
+                  seed={`${service.slug}-detail`}
+                  variant="facet"
+                  alt={service.name}
+                />
               </div>
             </div>
 

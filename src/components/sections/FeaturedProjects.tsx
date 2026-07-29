@@ -2,7 +2,7 @@ import { ArrowRight, MapPin } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { getFeaturedProjects } from '@/lib/data'
 
@@ -33,7 +33,7 @@ export function FeaturedProjects() {
               <LocalizedLink to={`/portfolio/${project.slug}`} className="group block">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                   <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                    <AbstractVisual seed={project.visualSeed} />
+                    <ContentVisual imageUrl={project.imageUrl} seed={project.visualSeed} alt={project.title} />
                   </div>
                   <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy">
                     {project.category}

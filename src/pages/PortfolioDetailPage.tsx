@@ -6,7 +6,7 @@ import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { getProjectBySlug, getServicesBySlugs, getProjects, getEquipmentItems } from '@/lib/data'
 import { useLocale } from '@/lib/locale/LocaleContext'
@@ -63,7 +63,11 @@ export default function PortfolioDetailPage() {
           <div>
             <Reveal>
               <div className="aspect-[16/9] overflow-hidden rounded-xl">
-                <AbstractVisual seed={`${project.visualSeed}-hero`} />
+                <ContentVisual
+                  imageUrl={project.imageUrl}
+                  seed={`${project.visualSeed}-hero`}
+                  alt={project.title}
+                />
               </div>
             </Reveal>
             <Reveal delay={0.1}>
@@ -145,7 +149,7 @@ export default function PortfolioDetailPage() {
                 <LocalizedLink key={p.slug} to={`/portfolio/${p.slug}`} className="group block">
                   <div className="aspect-[4/3] overflow-hidden rounded-xl">
                     <div className="transition-transform duration-500 group-hover:scale-105">
-                      <AbstractVisual seed={p.visualSeed} />
+                      <ContentVisual imageUrl={p.imageUrl} seed={p.visualSeed} alt={p.title} />
                     </div>
                   </div>
                   <h3 className="mt-3 font-semibold text-navy group-hover:text-signal">{p.title}</h3>

@@ -7,7 +7,7 @@ import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -38,7 +38,9 @@ export default function EquipmentDetailPage() {
   if (!item || !categoryData || item.categorySlug !== category) return <NotFoundPage />
 
   const related = getRelatedEquipment(item)
-  const galleryCount = 4
+  const galleryUrls = item.galleryUrls ?? []
+  const hasGallery = galleryUrls.length > 0
+  const galleryCount = hasGallery ? galleryUrls.length : 4
 
   const productSchema = {
     '@context': 'https://schema.org',
@@ -83,7 +85,11 @@ export default function EquipmentDetailPage() {
           <div>
             <Reveal>
               <div className="aspect-[4/3] overflow-hidden rounded-xl">
-                <AbstractVisual seed={`${item.visualSeed}-${activeImage}`} />
+                <ContentVisual
+                  imageUrl={hasGallery ? galleryUrls[activeImage] : null}
+                  seed={`${item.visualSeed}-${activeImage}`}
+                  alt={item.name}
+                />
               </div>
               <div className="mt-3 grid grid-cols-4 gap-3">
                 {Array.from({ length: galleryCount }).map((_, i) => (
@@ -97,7 +103,11 @@ export default function EquipmentDetailPage() {
                     )}
                     aria-label={t('detail.viewImage', { n: i + 1 })}
                   >
-                    <AbstractVisual seed={`${item.visualSeed}-${i}`} />
+                    <ContentVisual
+                      imageUrl={hasGallery ? galleryUrls[i] : null}
+                      seed={`${item.visualSeed}-${i}`}
+                      alt={item.name}
+                    />
                   </button>
                 ))}
               </div>
@@ -174,7 +184,11 @@ export default function EquipmentDetailPage() {
                 >
                   <div className="aspect-[4/3] overflow-hidden">
                     <div className="transition-transform duration-500 group-hover:scale-105">
-                      <AbstractVisual seed={relatedItem.visualSeed} />
+                      <ContentVisual
+                        imageUrl={relatedItem.galleryUrls?.[0]}
+                        seed={relatedItem.visualSeed}
+                        alt={relatedItem.name}
+                      />
                     </div>
                   </div>
                   <div className="p-5">

@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentCategories } from '@/lib/data'
@@ -38,7 +38,7 @@ export function EquipmentShowcase() {
               >
                 <div className="relative aspect-square overflow-hidden">
                   <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                    <AbstractVisual seed={category.slug} />
+                    <ContentVisual imageUrl={category.imageUrl} seed={category.slug} alt={category.name} />
                   </div>
                 </div>
                 <p className="px-3 py-3 text-sm font-semibold text-navy group-hover:text-signal">

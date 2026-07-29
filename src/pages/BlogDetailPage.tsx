@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
@@ -73,7 +73,7 @@ export default function BlogDetailPage() {
       <article className="py-20 lg:py-24">
         <div className="container-page mx-auto max-w-3xl">
           <div className="aspect-[16/9] overflow-hidden rounded-xl">
-            <AbstractVisual seed={`${post.visualSeed}-hero`} />
+            <ContentVisual imageUrl={post.imageUrl} seed={`${post.visualSeed}-hero`} alt={post.title} />
           </div>
           <div className="mt-10 space-y-6 text-lg leading-relaxed text-charcoal">
             {post.content.map((paragraph, i) => (
@@ -91,7 +91,7 @@ export default function BlogDetailPage() {
               <LocalizedLink key={p.slug} to={`/blog/${p.slug}`} className="group block">
                 <div className="aspect-[16/10] overflow-hidden rounded-xl">
                   <div className="transition-transform duration-500 group-hover:scale-105">
-                    <AbstractVisual seed={p.visualSeed} />
+                    <ContentVisual imageUrl={p.imageUrl} seed={p.visualSeed} alt={p.title} />
                   </div>
                 </div>
                 <h3 className="mt-3 font-semibold leading-snug text-navy group-hover:text-signal">

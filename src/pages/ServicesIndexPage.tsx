@@ -5,7 +5,7 @@ import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices } from '@/lib/data'
@@ -20,7 +20,7 @@ function ServiceCard({ service, delay, learnMore }: { service: Service; delay: n
       >
         <div className="relative aspect-[16/9] overflow-hidden">
           <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-            <AbstractVisual seed={service.slug} />
+            <ContentVisual imageUrl={service.imageUrl} seed={service.slug} alt={service.name} />
           </div>
         </div>
         <div className="flex flex-1 flex-col p-6">

@@ -4,7 +4,7 @@ import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getSolutions, getServicesBySlugs } from '@/lib/data'
@@ -40,7 +40,11 @@ export default function SolutionsPage() {
                   <Reveal>
                     <div className="overflow-hidden rounded-2xl">
                       <div className="aspect-[4/3]">
-                        <AbstractVisual seed={solution.slug} />
+                        <ContentVisual
+                          imageUrl={solution.imageUrl}
+                          seed={solution.slug}
+                          alt={solution.name}
+                        />
                       </div>
                     </div>
                   </Reveal>

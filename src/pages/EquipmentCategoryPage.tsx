@@ -5,7 +5,7 @@ import { Seo } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
+import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { Badge } from '@/components/ui/badge'
 import { useLocale } from '@/lib/locale/LocaleContext'
@@ -52,7 +52,11 @@ export default function EquipmentCategoryPage() {
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-                        <AbstractVisual seed={item.visualSeed} />
+                        <ContentVisual
+                          imageUrl={item.galleryUrls?.[0]}
+                          seed={item.visualSeed}
+                          alt={item.name}
+                        />
                       </div>
                       <Badge className="absolute left-3 top-3 bg-white/90 text-navy hover:bg-white/90">
                         {t(`availability.${item.availability}`)}
