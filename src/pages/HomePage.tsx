@@ -6,7 +6,6 @@ import { CoreServicesGrid } from '@/components/sections/CoreServicesGrid'
 import { IndustriesServed } from '@/components/sections/IndustriesServed'
 import { WhyChooseUs } from '@/components/sections/WhyChooseUs'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
-import { FeaturedProjects } from '@/components/sections/FeaturedProjects'
 import { EquipmentShowcase } from '@/components/sections/EquipmentShowcase'
 import { TestimonialsCarousel } from '@/components/sections/TestimonialsCarousel'
 import { LatestArticles } from '@/components/sections/LatestArticles'
@@ -40,7 +39,6 @@ export default function HomePage() {
       <IndustriesServed />
       <WhyChooseUs />
       <ProcessSteps />
-      <FeaturedProjects />
       <EquipmentShowcase />
       <TestimonialsCarousel />
       <LatestArticles />

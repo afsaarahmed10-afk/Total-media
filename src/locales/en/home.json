@@ -77,12 +77,6 @@
       { "number": "05", "title": "Post-Event Review", "description": "A structured report and asset handover — what worked, and what to refine next time." }
     ]
   },
-  "featuredProjects": {
-    "eyebrow": "Recent Work",
-    "title": "Featured Projects",
-    "description": "A sample of what these services look like when they come together on-site.",
-    "viewPortfolio": "View full portfolio"
-  },
   "equipmentShowcase": {
     "eyebrow": "Equipment Rental",
     "title": "A Nationwide Technical Inventory",

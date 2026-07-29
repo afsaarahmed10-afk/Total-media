@@ -83,10 +83,6 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return getContentBundle(UNTRANSLATED).projects.find((p) => p.slug === slug)
 }
 
-export function getFeaturedProjects(count = 3): Project[] {
-  return getContentBundle(UNTRANSLATED).projects.slice(0, count)
-}
-
 export function getBlogCategories(lang: Locale) {
   return getContentBundle(lang).blogCategories
 }

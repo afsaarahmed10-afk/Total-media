@@ -77,12 +77,6 @@
       { "number": "05", "title": "事後レビュー", "description": "構造化されたレポートと資料の引き渡しを行い、成果と次回への改善点を共有します。" }
     ]
   },
-  "featuredProjects": {
-    "eyebrow": "最近の実績",
-    "title": "実績紹介",
-    "description": "これらのサービスが現場でどのように組み合わさるか、その一例をご紹介します。",
-    "viewPortfolio": "実績一覧を見る"
-  },
   "equipmentShowcase": {
     "eyebrow": "機材レンタル",
     "title": "全国対応の技術機材インベントリ",
