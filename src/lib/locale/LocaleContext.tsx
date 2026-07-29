@@ -60,7 +60,10 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     () => ({
       locale,
       isLocalized: !reserved,
-      localizePath: (path: string) => (reserved ? path : buildLocalizedPath(path, locale)),
+      // Checks the DESTINATION path, not the current page — a link to
+      // /login rendered while browsing /en/services must stay unprefixed,
+      // since login/dashboard/admin are never mounted under /en.
+      localizePath: (path: string) => (isReservedPath(path) ? path : buildLocalizedPath(path, locale)),
       buildPath: buildLocalizedPath,
     }),
     [locale, reserved],
