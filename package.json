@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "brand:generate": "node scripts/generate-brand-assets.mjs",
-    "sitemap:generate": "node scripts/generate-sitemap.ts"
+    "sitemap:generate": "node scripts/generate-sitemap.ts",
+    "image:generate": "node scripts/generate-image.mjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
@@ -32,6 +33,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@huggingface/inference": "^4.13.23",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
