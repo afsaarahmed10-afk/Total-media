@@ -120,8 +120,8 @@ export default function ContactPage() {
               <Phone className="size-5 shrink-0 text-signal" />
               <div>
                 <p className="font-semibold text-navy">{t('phone')}</p>
-                <a href="tel:+81345678901" className="text-sm text-muted-foreground hover:text-signal">
-                  +81 3-4567-8901
+                <a href="tel:+818055002929" className="text-sm text-muted-foreground hover:text-signal">
+                  +81 80-5500-2929
                 </a>
               </div>
             </div>

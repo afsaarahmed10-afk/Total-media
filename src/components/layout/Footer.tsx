@@ -5,11 +5,11 @@ import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentCategories } from '@/lib/data'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
-// Phone is a placeholder — replace with the real registered contact
-// details before launch. Office addresses come from footer.json (translated),
+// Phone matches WHATSAPP_DISPLAY_NUMBER (lib/whatsapp.ts) — same number for
+// calls and WhatsApp. Office addresses come from footer.json (translated),
 // not from here, since they differ by locale.
 const CONTACT = {
-  phone: '+81 3-4567-8901',
+  phone: '+81 80-5500-2929',
   email: 'uno@nippon-group.com',
 }
 

@@ -27,7 +27,7 @@ type FormValues = z.infer<typeof schema>
 const FALLBACK: FormValues = {
   tokyoAddressLines: '4-18-13 Ojima, Koto-ku\nTokyo 136-0072, Japan',
   ibarakiAddressLines: '571-1 Katsuke Shinden\nBando-shi, Ibaraki-ken 306-0603, Japan',
-  phone: '+81 3-4567-8901',
+  phone: '+81 80-5500-2929',
   email: 'uno@nippon-group.com',
   notificationEmail: 'uno@nippon-group.com',
   siteUrl: 'https://www.totalmedia.co.jp',
