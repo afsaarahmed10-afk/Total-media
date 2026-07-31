@@ -13,7 +13,8 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { supabase } from '@/lib/supabase/client'
 
 const schema = z.object({
-  addressLines: z.string().min(1, 'Address is required.'),
+  tokyoAddressLines: z.string().min(1, 'Address is required.'),
+  ibarakiAddressLines: z.string().min(1, 'Address is required.'),
   phone: z.string().min(1, 'Phone is required.'),
   email: z.string().email('Enter a valid email.'),
   notificationEmail: z.string().email('Enter a valid email.'),
@@ -24,10 +25,11 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>
 
 const FALLBACK: FormValues = {
-  addressLines: 'TOTAL MEDIA Inc.\nShibuya-ku, Tokyo 150-0002, Japan',
+  tokyoAddressLines: '4-18-13 Ojima, Koto-ku\nTokyo 136-0072, Japan',
+  ibarakiAddressLines: '571-1 Katsuke Shinden\nBando-shi, Ibaraki-ken 306-0603, Japan',
   phone: '+81 3-4567-8901',
-  email: 'hello@totalmedia.co.jp',
-  notificationEmail: 'hello@totalmedia.co.jp',
+  email: 'uno@nippon-group.com',
+  notificationEmail: 'uno@nippon-group.com',
   siteUrl: 'https://www.totalmedia.co.jp',
   standardDays: '2',
   complexDays: '5',
@@ -51,11 +53,16 @@ export default function AdminSettingsPage() {
       return
     }
     const byKey = new Map(data.map((row) => [row.key, row.value]))
-    const address = byKey.get('contact_address') as { lines?: string[] } | undefined
+    const address = byKey.get('contact_address') as
+      | { offices?: { name: string; lines: string[] }[] }
+      | undefined
+    const tokyo = address?.offices?.find((o) => o.name === 'Tokyo Office')
+    const ibaraki = address?.offices?.find((o) => o.name === 'Ibaraki Office')
     const sla = byKey.get('quote_response_sla') as { standard_days?: number; complex_days?: number } | undefined
 
     form.reset({
-      addressLines: address?.lines?.join('\n') ?? FALLBACK.addressLines,
+      tokyoAddressLines: tokyo?.lines?.join('\n') ?? FALLBACK.tokyoAddressLines,
+      ibarakiAddressLines: ibaraki?.lines?.join('\n') ?? FALLBACK.ibarakiAddressLines,
       phone: (byKey.get('contact_phone') as string | undefined) ?? FALLBACK.phone,
       email: (byKey.get('contact_email') as string | undefined) ?? FALLBACK.email,
       notificationEmail:
@@ -72,10 +79,22 @@ export default function AdminSettingsPage() {
       {
         key: 'contact_address',
         value: {
-          lines: values.addressLines
-            .split('\n')
-            .map((line) => line.trim())
-            .filter(Boolean),
+          offices: [
+            {
+              name: 'Tokyo Office',
+              lines: values.tokyoAddressLines
+                .split('\n')
+                .map((line) => line.trim())
+                .filter(Boolean),
+            },
+            {
+              name: 'Ibaraki Office',
+              lines: values.ibarakiAddressLines
+                .split('\n')
+                .map((line) => line.trim())
+                .filter(Boolean),
+            },
+          ],
         },
       },
       { key: 'contact_phone', value: values.phone },
@@ -118,20 +137,36 @@ export default function AdminSettingsPage() {
           ) : (
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                <FormField
-                  control={form.control}
-                  name="addressLines"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Contact Address</FormLabel>
-                      <FormControl>
-                        <Textarea rows={2} {...field} />
-                      </FormControl>
-                      <FormDescription>One line per address line.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="tokyoAddressLines"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tokyo Office Address</FormLabel>
+                        <FormControl>
+                          <Textarea rows={2} {...field} />
+                        </FormControl>
+                        <FormDescription>One line per address line.</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="ibarakiAddressLines"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Ibaraki Office Address</FormLabel>
+                        <FormControl>
+                          <Textarea rows={2} {...field} />
+                        </FormControl>
+                        <FormDescription>One line per address line.</FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <FormField
                     control={form.control}

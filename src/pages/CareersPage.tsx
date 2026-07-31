@@ -72,7 +72,7 @@ export default function CareersPage() {
                 <div className="flex items-center gap-3">
                   <Badge variant="secondary">{role.type}</Badge>
                   <Button asChild size="sm" className="bg-navy text-white hover:bg-navy-deep">
-                    <a href={`mailto:careers@totalmedia.co.jp?subject=${encodeURIComponent(`Application: ${role.title}`)}`}>
+                    <a href={`mailto:uno@nippon-group.com?subject=${encodeURIComponent(`Application: ${role.title}`)}`}>
                       {t('apply')}
                     </a>
                   </Button>
@@ -82,8 +82,8 @@ export default function CareersPage() {
           </div>
           <p className="mt-8 text-sm text-muted-foreground">
             {t('noRoleText')}{' '}
-            <a href="mailto:careers@totalmedia.co.jp" className="font-semibold text-signal hover:underline">
-              careers@totalmedia.co.jp
+            <a href="mailto:uno@nippon-group.com" className="font-semibold text-signal hover:underline">
+              uno@nippon-group.com
             </a>{' '}
             {t('noRoleSuffix')}
           </p>

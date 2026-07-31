@@ -20,8 +20,14 @@ import {
 import { supabase } from '@/lib/supabase/client'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
+interface ContactOffice {
+  name: string
+  address: string
+}
+
 export default function ContactPage() {
   const { t } = useTranslation(['contact', 'common'])
+  const offices = t('offices', { returnObjects: true }) as ContactOffice[]
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -101,9 +107,13 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="flex gap-4">
               <MapPin className="size-5 shrink-0 text-signal" />
-              <div>
-                <p className="font-semibold text-navy">{t('office')}</p>
-                <p className="text-sm text-muted-foreground">{t('officeAddress')}</p>
+              <div className="space-y-3">
+                {offices.map((office) => (
+                  <div key={office.name}>
+                    <p className="font-semibold text-navy">{office.name}</p>
+                    <p className="text-sm text-muted-foreground">{office.address}</p>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="flex gap-4">
@@ -120,10 +130,10 @@ export default function ContactPage() {
               <div>
                 <p className="font-semibold text-navy">{t('email')}</p>
                 <a
-                  href="mailto:hello@totalmedia.co.jp"
+                  href="mailto:uno@nippon-group.com"
                   className="text-sm text-muted-foreground hover:text-signal"
                 >
-                  hello@totalmedia.co.jp
+                  uno@nippon-group.com
                 </a>
               </div>
             </div>

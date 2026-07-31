@@ -25,6 +25,15 @@
   "copyright": "© {{year}} TOTAL MEDIA Inc. All rights reserved.",
   "bottomTagline": "日本全国で、記憶に残るイベントを。",
   "address": {
-    "lines": ["株式会社TOTAL MEDIA", "〒150-0002 東京都渋谷区"]
+    "offices": [
+      {
+        "name": "東京オフィス",
+        "lines": ["〒136-0072 東京都江東区大島4-18-13"]
+      },
+      {
+        "name": "茨城オフィス",
+        "lines": ["〒306-0603 茨城県坂東市 Katsuke Shinden 571-1"]
+      }
+    ]
   }
 }

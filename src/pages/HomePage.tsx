@@ -24,7 +24,9 @@ export default function HomePage() {
     description: t('seo.orgDescription'),
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Shibuya-ku, Tokyo',
+      streetAddress: '4-18-13 Ojima',
+      addressLocality: 'Koto-ku, Tokyo',
+      postalCode: '136-0072',
       addressCountry: 'JP',
     },
     areaServed: 'JP',

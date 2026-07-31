@@ -25,6 +25,15 @@
   "copyright": "© {{year}} TOTAL MEDIA Inc. All rights reserved.",
   "bottomTagline": "Creating Exceptional Events Across Japan.",
   "address": {
-    "lines": ["TOTAL MEDIA Inc.", "Shibuya-ku, Tokyo 150-0002, Japan"]
+    "offices": [
+      {
+        "name": "Tokyo Office",
+        "lines": ["4-18-13 Ojima, Koto-ku", "Tokyo 136-0072, Japan"]
+      },
+      {
+        "name": "Ibaraki Office",
+        "lines": ["571-1 Katsuke Shinden", "Bando-shi, Ibaraki-ken 306-0603, Japan"]
+      }
+    ]
   }
 }

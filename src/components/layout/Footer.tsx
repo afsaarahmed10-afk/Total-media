@@ -5,19 +5,24 @@ import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentCategories } from '@/lib/data'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
 
-// Phone/email are placeholders — replace with the real registered contact
-// details before launch. Address lines come from footer.json (translated),
+// Phone is a placeholder — replace with the real registered contact
+// details before launch. Office addresses come from footer.json (translated),
 // not from here, since they differ by locale.
 const CONTACT = {
   phone: '+81 3-4567-8901',
-  email: 'hello@totalmedia.co.jp',
+  email: 'uno@nippon-group.com',
+}
+
+interface FooterOffice {
+  name: string
+  lines: string[]
 }
 
 export function Footer() {
   const { t } = useTranslation('footer')
   const { locale } = useLocale()
   const year = new Date().getFullYear()
-  const addressLines = t('address.lines', { returnObjects: true }) as string[]
+  const offices = t('address.offices', { returnObjects: true }) as FooterOffice[]
 
   const footerColumns = [
     {
@@ -63,10 +68,17 @@ export function Footer() {
           <div>
             <Logo tone="white" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">{t('tagline')}</p>
-            <address className="mt-6 space-y-1 text-sm not-italic text-white/70">
-              {addressLines.map((line) => (
-                <p key={line}>{line}</p>
-              ))}
+            <address className="mt-6 space-y-4 text-sm not-italic text-white/70">
+              <div className="space-y-3">
+                {offices.map((office) => (
+                  <div key={office.name}>
+                    <p className="font-semibold text-white/90">{office.name}</p>
+                    {office.lines.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                ))}
+              </div>
               <p>
                 <a href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white">
                   {CONTACT.phone}
