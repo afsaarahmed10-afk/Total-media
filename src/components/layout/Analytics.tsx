@@ -12,12 +12,45 @@ declare global {
   }
 }
 
-/** GA4 pageview on every client-side route change — gtag's own history
- * listener doesn't fire for React Router navigation since the document
- * never reloads. No-ops entirely when VITE_GA_MEASUREMENT_ID is unset, so
- * local/dev/preview builds never send traffic to a real property. */
+let gaBootstrapped = false
+
+/** Loads gtag.js and defines window.gtag once for the app's lifetime.
+ * Deliberately NOT done via an injected <script> tag through Helmet:
+ * react-helmet-async's tag reconciliation renders the element into the DOM
+ * but doesn't reliably execute its inline JS (confirmed — the tag was
+ * present with correct content, but window.gtag stayed undefined after
+ * load). The bootstrap logic itself needs zero DOM injection at all since
+ * this function IS already running JS in the browser; only the external
+ * gtag.js file needs an actual <script> element, appended directly rather
+ * than through Helmet. `gaBootstrapped` guards against React StrictMode's
+ * double-invoke in dev re-running this and loading the script twice. */
+function loadGoogleAnalytics() {
+  if (gaBootstrapped || !GA_MEASUREMENT_ID) return
+  gaBootstrapped = true
+
+  const script = document.createElement('script')
+  script.async = true
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`
+  document.head.appendChild(script)
+
+  window.dataLayer = window.dataLayer || []
+  window.gtag = function gtag(...args: unknown[]) {
+    window.dataLayer!.push(args)
+  }
+  window.gtag('js', new Date())
+  // send_page_view disabled here — useGaPageviews below sends the initial
+  // and every subsequent page_view explicitly, since gtag's own history
+  // listener never fires for React Router's client-side navigation.
+  window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false })
+}
+
 function useGaPageviews() {
   const location = useLocation()
+
+  useEffect(() => {
+    loadGoogleAnalytics()
+  }, [])
+
   useEffect(() => {
     if (!GA_MEASUREMENT_ID || !window.gtag) return
     window.gtag('event', 'page_view', {
@@ -30,23 +63,11 @@ function useGaPageviews() {
 export function Analytics() {
   useGaPageviews()
 
+  if (!GOOGLE_SITE_VERIFICATION) return null
+
   return (
     <Helmet>
-      {GOOGLE_SITE_VERIFICATION && (
-        <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
-      )}
-      {GA_MEASUREMENT_ID && (
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-      )}
-      {GA_MEASUREMENT_ID && (
-        <script>{`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
-          window.gtag = gtag;
-        `}</script>
-      )}
+      <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
     </Helmet>
   )
 }
