@@ -1,11 +1,3 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.totalmedia.jp" }],
-      "destination": "https://totalmedia.jp/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [{ "source": "/((?!.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }]
 }
