@@ -29,14 +29,22 @@ export default function FaqPage() {
     })),
   }
 
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/faq" jsonLd={faqSchema} />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/faq"
+        jsonLd={faqSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">

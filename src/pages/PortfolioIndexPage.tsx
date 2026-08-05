@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { MapPin } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Seo } from '@/components/layout/Seo'
+import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
@@ -31,14 +31,38 @@ export default function PortfolioIndexPage() {
     [active, projects],
   )
 
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]
+
+  const portfolioSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('index.title'),
+    description: t('index.seoDescription'),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: projects.map((project, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: project.title,
+        url: `${SITE_URL}/portfolio/${project.slug}`,
+      })),
+    },
+  }
+
   return (
     <>
-      <Seo title={t('index.seoTitle')} description={t('index.seoDescription')} path="/portfolio" />
+      <Seo
+        title={t('index.seoTitle')}
+        description={t('index.seoDescription')}
+        path="/portfolio"
+        jsonLd={portfolioSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow={t('index.eyebrow')}
         title={t('index.title')}
         description={t('index.description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-16 lg:py-20">

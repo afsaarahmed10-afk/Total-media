@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Seo } from '@/components/layout/Seo'
+import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { ContentVisual } from '@/components/shared/ContentVisual'
@@ -22,14 +22,35 @@ export default function BlogIndexPage() {
     [active, posts],
   )
 
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]
+
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: t('index.title'),
+    description: t('index.seoDescription'),
+    blogPost: posts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      url: `${SITE_URL}/blog/${post.slug}`,
+      datePublished: post.publishedAt,
+    })),
+  }
+
   return (
     <>
-      <Seo title={t('index.seoTitle')} description={t('index.seoDescription')} path="/blog" />
+      <Seo
+        title={t('index.seoTitle')}
+        description={t('index.seoDescription')}
+        path="/blog"
+        jsonLd={blogSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow={t('index.eyebrow')}
         title={t('index.title')}
         description={t('index.description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-16 lg:py-20">

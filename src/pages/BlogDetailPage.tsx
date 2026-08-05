@@ -24,6 +24,12 @@ export default function BlogDetailPage() {
     .slice(0, 3)
   const dateLocale = locale === 'ja' ? 'ja-JP' : 'en-US'
 
+  const breadcrumbs = [
+    { label: t('home', { ns: 'common' }), to: '/' },
+    { label: t('index.eyebrow'), to: '/blog' },
+    { label: post.title },
+  ]
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -31,7 +37,14 @@ export default function BlogDetailPage() {
     description: post.excerpt,
     datePublished: post.publishedAt,
     author: { '@type': 'Person', name: post.author },
-    publisher: { '@type': 'Organization', name: 'TOTAL MEDIA', url: SITE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'TOTAL MEDIA',
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/icon-512.png` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+    ...(post.imageUrl ? { image: post.imageUrl } : {}),
   }
 
   return (
@@ -41,17 +54,17 @@ export default function BlogDetailPage() {
         description={post.excerpt}
         path={`/blog/${post.slug}`}
         jsonLd={articleSchema}
+        breadcrumbs={breadcrumbs}
+        ogType="article"
+        publishedTime={post.publishedAt}
+        image={post.imageUrl ?? undefined}
       />
       <PageHero
         eyebrow={category?.name ?? t('detail.article')}
         title={post.title}
         description={post.excerpt}
         visualSeed={post.visualSeed}
-        breadcrumbs={[
-          { label: t('home', { ns: 'common' }), to: '/' },
-          { label: t('index.eyebrow'), to: '/blog' },
-          { label: post.title },
-        ]}
+        breadcrumbs={breadcrumbs}
       >
         <div className="mt-8 flex items-center gap-3 text-sm text-white/80">
           <span className="font-medium text-white">{post.author}</span>

@@ -92,14 +92,35 @@ export default function ContactPage() {
     setSubmitted(true)
   }
 
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
+  const contactPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: t('title'),
+    description: t('seoDescription'),
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'TOTAL MEDIA',
+      email: 'uno@nippon-group.com',
+      telephone: '+81-80-5500-2929',
+    },
+  }
+
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/contact" />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/contact"
+        jsonLd={contactPageSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">

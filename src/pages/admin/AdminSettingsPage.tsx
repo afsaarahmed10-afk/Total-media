@@ -30,7 +30,7 @@ const FALLBACK: FormValues = {
   phone: '+81 80-5500-2929',
   email: 'uno@nippon-group.com',
   notificationEmail: 'uno@nippon-group.com',
-  siteUrl: 'https://www.totalmedia.co.jp',
+  siteUrl: 'https://totalmedia.jp',
   standardDays: '2',
   complexDays: '5',
 }

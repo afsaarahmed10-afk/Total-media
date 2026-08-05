@@ -24,14 +24,30 @@ export default function CareersPage() {
   const benefits = t('benefits', { returnObjects: true }) as Benefit[]
   const openRoles = t('roles', { returnObjects: true }) as Role[]
 
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
+  const careersSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('title'),
+    description: t('seoDescription'),
+    about: { '@type': 'Organization', name: 'TOTAL MEDIA' },
+  }
+
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/careers" />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/careers"
+        jsonLd={careersSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">

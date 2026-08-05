@@ -16,15 +16,31 @@ interface Value {
 export default function AboutPage() {
   const { t } = useTranslation(['about', 'common'])
   const values = t('values', { returnObjects: true }) as Value[]
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: t('title'),
+    description: t('seoDescription'),
+    about: { '@type': 'Organization', name: 'TOTAL MEDIA' },
+  }
 
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/about" />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/about"
+        jsonLd={aboutSchema}
+        breadcrumbs={breadcrumbs}
+        keywords={['Premium Event Company Japan', 'Event Management Japan']}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">

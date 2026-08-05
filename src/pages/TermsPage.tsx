@@ -16,15 +16,29 @@ interface Section {
 export default function TermsPage() {
   const { t } = useTranslation(['legal', 'common'])
   const sections = t('terms.sections', { returnObjects: true }) as Section[]
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('terms.title') }]
+
+  const termsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('terms.title'),
+    description: t('terms.seoDescription'),
+  }
 
   return (
     <>
-      <Seo title={t('terms.seoTitle')} description={t('terms.seoDescription')} path="/terms-conditions" />
+      <Seo
+        title={t('terms.seoTitle')}
+        description={t('terms.seoDescription')}
+        path="/terms-conditions"
+        jsonLd={termsSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow="Legal"
         title={t('terms.title')}
         description={t('lastUpdated')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('terms.title') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">

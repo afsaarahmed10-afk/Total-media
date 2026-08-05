@@ -1,6 +1,11 @@
 User-agent: *
 Allow: /
-Disallow: /dashboard/
 Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /auth/
 
-Sitemap: https://www.totalmedia.co.jp/sitemap.xml
+Sitemap: https://totalmedia.jp/sitemap.xml

@@ -32,6 +32,12 @@ export default function ServiceDetailPage() {
     .map((s) => getEquipmentCategoryBySlug(s, locale))
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
 
+  const breadcrumbs = [
+    { label: t('home', { ns: 'common' }), to: '/' },
+    { label: t('index.eyebrow'), to: '/services' },
+    { label: service.name },
+  ]
+
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -49,17 +55,14 @@ export default function ServiceDetailPage() {
         description={service.seoDescription}
         path={`/services/${service.slug}`}
         jsonLd={serviceSchema}
+        breadcrumbs={breadcrumbs}
       />
       <PageHero
         eyebrow={service.category === 'event-type' ? t('detail.eventType') : t('detail.technicalDiscipline')}
         title={service.heroStatement}
         description={service.shortDescription}
         visualSeed={service.slug}
-        breadcrumbs={[
-          { label: t('home', { ns: 'common' }), to: '/' },
-          { label: t('index.eyebrow'), to: '/services' },
-          { label: service.name },
-        ]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-24">

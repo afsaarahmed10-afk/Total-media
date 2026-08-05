@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Seo } from '@/components/layout/Seo'
+import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
@@ -13,15 +13,39 @@ export default function SolutionsPage() {
   const { t } = useTranslation(['solutions', 'common'])
   const { locale } = useLocale()
   const solutions = getSolutions(locale)
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
+  const solutionsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('title'),
+    description: t('seoDescription'),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: solutions.map((solution, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: solution.name,
+        url: `${SITE_URL}/solutions#${solution.slug}`,
+      })),
+    },
+  }
 
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/solutions" />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/solutions"
+        jsonLd={solutionsSchema}
+        breadcrumbs={breadcrumbs}
+        keywords={['MICE Events Japan', 'Event Production Japan']}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <div className="divide-y divide-border">

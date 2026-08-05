@@ -29,23 +29,37 @@ export default function PortfolioDetailPage() {
     .filter((p) => p.slug !== project.slug && p.category === project.category)
     .slice(0, 3)
 
+  const breadcrumbs = [
+    { label: t('home', { ns: 'common' }), to: '/' },
+    { label: t('index.eyebrow'), to: '/portfolio' },
+    { label: project.title },
+  ]
+
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: project.summary,
+    about: t(`categories.${project.category}`),
+    creator: { '@type': 'Organization', name: 'TOTAL MEDIA' },
+    ...(project.imageUrl ? { image: project.imageUrl } : {}),
+  }
+
   return (
     <>
       <Seo
         title={`${project.title} — ${project.client}`}
         description={project.summary}
         path={`/portfolio/${project.slug}`}
+        jsonLd={projectSchema}
+        breadcrumbs={breadcrumbs}
       />
       <PageHero
         eyebrow={t(`categories.${project.category}`)}
         title={project.title}
         description={project.summary}
         visualSeed={project.visualSeed}
-        breadcrumbs={[
-          { label: t('home', { ns: 'common' }), to: '/' },
-          { label: t('index.eyebrow'), to: '/portfolio' },
-          { label: project.title },
-        ]}
+        breadcrumbs={breadcrumbs}
       >
         <div className="mt-8 flex flex-wrap gap-6 text-sm text-white/80">
           <span className="flex items-center gap-1.5">

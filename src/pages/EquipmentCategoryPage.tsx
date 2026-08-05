@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Seo } from '@/components/layout/Seo'
+import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
@@ -21,23 +21,43 @@ export default function EquipmentCategoryPage() {
 
   if (!categoryData) return <NotFoundPage />
 
+  const breadcrumbs = [
+    { label: t('home', { ns: 'common' }), to: '/' },
+    { label: t('index.eyebrow'), to: '/equipment' },
+    { label: categoryData.name },
+  ]
+
+  const categorySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${categoryData.name} Rental`,
+    description: categoryData.description,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: `${SITE_URL}/equipment/${categoryData.slug}/${item.slug}`,
+      })),
+    },
+  }
+
   return (
     <>
       <Seo
         title={`${categoryData.name} Rental`}
         description={`${categoryData.description} Browse specifications and request a quote from TOTAL MEDIA.`}
         path={`/equipment/${categoryData.slug}`}
+        jsonLd={categorySchema}
+        breadcrumbs={breadcrumbs}
       />
       <PageHero
         eyebrow={t('category.eyebrow')}
         title={categoryData.name}
         description={categoryData.description}
         visualSeed={categoryData.slug}
-        breadcrumbs={[
-          { label: t('home', { ns: 'common' }), to: '/' },
-          { label: t('index.eyebrow'), to: '/equipment' },
-          { label: categoryData.name },
-        ]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-24">

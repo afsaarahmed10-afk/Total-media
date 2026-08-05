@@ -63,6 +63,16 @@ export default function QuotePage() {
     [],
   ]
 
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
+  const quotePageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('title'),
+    description: t('seoDescription'),
+    about: { '@type': 'Organization', name: 'TOTAL MEDIA' },
+  }
+
   const [step, setStep] = useState(0)
   const [files, setFiles] = useState<File[]>([])
   const [submitted, setSubmitted] = useState(false)
@@ -218,7 +228,12 @@ export default function QuotePage() {
   if (submitted) {
     return (
       <>
-        <Seo title={t('seoTitle')} description={t('seoDescription')} path="/quote" />
+        <Seo
+          title={t('seoTitle')}
+          description={t('seoDescription')}
+          path="/quote"
+          breadcrumbs={breadcrumbs}
+        />
         <section className="flex min-h-[70vh] items-center justify-center bg-mist">
           <div className="container-page flex max-w-lg flex-col items-center text-center">
             <CheckCircle2 className="size-14 text-signal" />
@@ -234,12 +249,18 @@ export default function QuotePage() {
 
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/quote" />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/quote"
+        jsonLd={quotePageSchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-16 lg:py-20">

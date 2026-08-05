@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Seo, SITE_URL } from '@/components/layout/Seo'
+import { Seo } from '@/components/layout/Seo'
 import { Hero } from '@/components/sections/Hero'
 import { CompanyIntro } from '@/components/sections/CompanyIntro'
 import { CoreServicesGrid } from '@/components/sections/CoreServicesGrid'
@@ -12,29 +12,26 @@ import { LatestArticles } from '@/components/sections/LatestArticles'
 import { HomeFaqSection } from '@/components/sections/HomeFaqSection'
 import { CtaBand } from '@/components/shared/CtaBand'
 
+const HOME_KEYWORDS = [
+  'Event Management Japan',
+  'Corporate Events Japan',
+  'Conference Organizer Japan',
+  'Exhibition Management Japan',
+  'MICE Events Japan',
+  'Premium Event Company Japan',
+]
+
 export default function HomePage() {
   const { t } = useTranslation('home')
 
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'TOTAL MEDIA',
-    url: SITE_URL,
-    logo: `${SITE_URL}/icon-512.png`,
-    description: t('seo.orgDescription'),
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '4-18-13 Ojima',
-      addressLocality: 'Koto-ku, Tokyo',
-      postalCode: '136-0072',
-      addressCountry: 'JP',
-    },
-    areaServed: 'JP',
-  }
-
   return (
     <>
-      <Seo title={t('seo.title')} description={t('seo.description')} path="/" jsonLd={organizationSchema} />
+      <Seo
+        title={t('seo.title')}
+        description={t('seo.description')}
+        path="/"
+        keywords={HOME_KEYWORDS}
+      />
       <Hero />
       <CompanyIntro />
       <CoreServicesGrid />

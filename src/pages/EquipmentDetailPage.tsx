@@ -42,6 +42,13 @@ export default function EquipmentDetailPage() {
   const hasGallery = galleryUrls.length > 0
   const galleryCount = hasGallery ? galleryUrls.length : 4
 
+  const breadcrumbs = [
+    { label: t('home', { ns: 'common' }), to: '/' },
+    { label: t('index.eyebrow'), to: '/equipment' },
+    { label: categoryData.name, to: `/equipment/${categoryData.slug}` },
+    { label: item.name },
+  ]
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -66,18 +73,14 @@ export default function EquipmentDetailPage() {
         description={item.summary}
         path={`/equipment/${category}/${slug}`}
         jsonLd={productSchema}
+        breadcrumbs={breadcrumbs}
       />
       <PageHero
         eyebrow={categoryData.name}
         title={item.name}
         description={item.summary}
         visualSeed={item.visualSeed}
-        breadcrumbs={[
-          { label: t('home', { ns: 'common' }), to: '/' },
-          { label: t('index.eyebrow'), to: '/equipment' },
-          { label: categoryData.name, to: `/equipment/${categoryData.slug}` },
-          { label: item.name },
-        ]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-24">

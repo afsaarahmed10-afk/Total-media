@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Seo } from '@/components/layout/Seo'
+import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
@@ -43,15 +43,44 @@ export default function ServicesIndexPage() {
   const services = getServices(locale)
   const eventServices = services.filter((s) => s.category === 'event-type')
   const technicalServices = services.filter((s) => s.category === 'technical')
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]
+
+  const servicesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('index.title'),
+    description: t('index.seoDescription'),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: services.map((service, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: service.name,
+        url: `${SITE_URL}/services/${service.slug}`,
+      })),
+    },
+  }
 
   return (
     <>
-      <Seo title={t('index.seoTitle')} description={t('index.seoDescription')} path="/services" />
+      <Seo
+        title={t('index.seoTitle')}
+        description={t('index.seoDescription')}
+        path="/services"
+        jsonLd={servicesSchema}
+        breadcrumbs={breadcrumbs}
+        keywords={[
+          'Corporate Events Japan',
+          'Conference Organizer Japan',
+          'Exhibition Management Japan',
+          'Product Launch Events Japan',
+        ]}
+      />
       <PageHero
         eyebrow={t('index.eyebrow')}
         title={t('index.title')}
         description={t('index.description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('index.eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-24">

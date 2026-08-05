@@ -7,20 +7,45 @@ import { CtaBand } from '@/components/shared/CtaBand'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getIndustries } from '@/lib/data'
+import { SITE_URL } from '@/components/layout/Seo'
 
 export default function IndustriesPage() {
   const { t } = useTranslation(['industries', 'common'])
   const { locale } = useLocale()
   const industries = getIndustries(locale)
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]
+
+  const industriesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('title'),
+    description: t('seoDescription'),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: industries.map((industry, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: industry.name,
+        url: `${SITE_URL}/industries#${industry.slug}`,
+      })),
+    },
+  }
 
   return (
     <>
-      <Seo title={t('seoTitle')} description={t('seoDescription')} path="/industries" />
+      <Seo
+        title={t('seoTitle')}
+        description={t('seoDescription')}
+        path="/industries"
+        jsonLd={industriesSchema}
+        breadcrumbs={breadcrumbs}
+        keywords={['International Event Management', 'Business Event Planning Japan']}
+      />
       <PageHero
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('eyebrow') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">

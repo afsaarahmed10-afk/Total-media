@@ -1,512 +1,1532 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.totalmedia.co.jp/</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/about</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/about</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/about" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/about" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/solutions</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.totalmedia.co.jp/equipment</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/industries</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/industries</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/industries" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/industries" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/industries" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/industries</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/industries" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/industries" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/industries" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/faq</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/faq</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/faq" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/careers</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/faq" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/careers</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/careers" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/careers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/careers" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/contact</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/careers</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/careers" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/careers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/careers" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/contact" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/quote</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/contact" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/quote</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/quote" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/quote" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/quote" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/privacy-policy</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/quote</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/quote" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/quote" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/quote" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/privacy-policy" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/terms-conditions</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/privacy-policy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/privacy-policy" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/corporate-events</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/terms-conditions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/terms-conditions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/terms-conditions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/terms-conditions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/terms-conditions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/terms-conditions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/terms-conditions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/terms-conditions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/corporate-events</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/corporate-events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/corporate-events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/corporate-events" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/conferences</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/corporate-events</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/corporate-events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/corporate-events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/corporate-events" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/exhibitions</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/conferences</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/conferences" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/conferences" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/conferences" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/trade-shows</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/conferences</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/conferences" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/conferences" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/conferences" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/product-launches</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/exhibitions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/exhibitions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/exhibitions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/exhibitions" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/award-ceremonies</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/exhibitions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/exhibitions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/exhibitions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/exhibitions" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/virtual-events</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/trade-shows</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/trade-shows" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/trade-shows" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/trade-shows" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/hybrid-events</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/trade-shows</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/trade-shows" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/trade-shows" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/trade-shows" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/live-streaming</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/product-launches</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/product-launches" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/product-launches" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/product-launches" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/led-solutions</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/product-launches</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/product-launches" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/product-launches" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/product-launches" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/audio-solutions</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/award-ceremonies</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/award-ceremonies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/award-ceremonies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/award-ceremonies" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/lighting-solutions</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/award-ceremonies</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/award-ceremonies" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/award-ceremonies" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/award-ceremonies" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/stage-production</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/virtual-events</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/virtual-events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/virtual-events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/virtual-events" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/technical-production</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/virtual-events</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/virtual-events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/virtual-events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/virtual-events" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/services/event-consultation</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/services/hybrid-events</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/hybrid-events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/hybrid-events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/hybrid-events" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/indoor-led</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/services/hybrid-events</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/hybrid-events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/hybrid-events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/hybrid-events" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/live-streaming</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/live-streaming" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/live-streaming" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/live-streaming" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/live-streaming</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/live-streaming" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/live-streaming" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/live-streaming" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/led-solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/led-solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/led-solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/led-solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/led-solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/led-solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/led-solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/led-solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/audio-solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/audio-solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/audio-solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/audio-solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/audio-solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/audio-solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/audio-solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/audio-solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/lighting-solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/lighting-solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/lighting-solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/lighting-solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/lighting-solutions</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/lighting-solutions" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/lighting-solutions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/lighting-solutions" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/stage-production</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/stage-production" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/stage-production" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/stage-production" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/stage-production</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/stage-production" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/stage-production" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/stage-production" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/technical-production</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/technical-production" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/technical-production" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/technical-production" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/technical-production</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/technical-production" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/technical-production" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/technical-production" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/services/event-consultation</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/event-consultation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/event-consultation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/event-consultation" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/services/event-consultation</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/services/event-consultation" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/services/event-consultation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/services/event-consultation" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/indoor-led</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/outdoor-led</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/indoor-led</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/audio</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/outdoor-led</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/lighting</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/outdoor-led</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/stage</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/audio</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/truss</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/audio</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/projectors</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/lighting</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/displays</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/lighting</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/cameras</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/stage</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/accessories</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/stage</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/indoor-led/indoor-led-p1-9-fine-pitch</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/truss</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/truss</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/projectors</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/projectors</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/displays</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/displays</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/cameras</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/cameras</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/accessories</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/indoor-led/indoor-led-p1-9-fine-pitch</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p1-9-fine-pitch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p1-9-fine-pitch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p1-9-fine-pitch" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/indoor-led/indoor-led-p2-6-standard</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p1-9-fine-pitch</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p1-9-fine-pitch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p1-9-fine-pitch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p1-9-fine-pitch" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/indoor-led/indoor-led-p3-9-rental</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/indoor-led/indoor-led-p2-6-standard</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p2-6-standard" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p2-6-standard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p2-6-standard" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/outdoor-led/outdoor-led-p3-9-weatherproof</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p2-6-standard</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p2-6-standard" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p2-6-standard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p2-6-standard" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/outdoor-led/outdoor-led-p4-8-screen</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/indoor-led/indoor-led-p3-9-rental</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p3-9-rental" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p3-9-rental" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p3-9-rental" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/outdoor-led/outdoor-led-p6-6-wall</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p3-9-rental</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p3-9-rental" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/indoor-led/indoor-led-p3-9-rental" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/indoor-led/indoor-led-p3-9-rental" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/audio/audio-line-array-pa</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p3-9-weatherproof</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p3-9-weatherproof" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p3-9-weatherproof" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p3-9-weatherproof" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/audio/audio-digital-mixing-console</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p3-9-weatherproof</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p3-9-weatherproof" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p3-9-weatherproof" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p3-9-weatherproof" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/audio/audio-wireless-microphone-system</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p4-8-screen</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p4-8-screen" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p4-8-screen" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p4-8-screen" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/lighting/lighting-moving-head-spot</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p4-8-screen</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p4-8-screen" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p4-8-screen" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p4-8-screen" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/lighting/lighting-led-wash</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p6-6-wall</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p6-6-wall" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p6-6-wall" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p6-6-wall" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/lighting/lighting-console</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p6-6-wall</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p6-6-wall" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/outdoor-led/outdoor-led-p6-6-wall" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/outdoor-led/outdoor-led-p6-6-wall" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/stage/stage-modular-deck</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/audio/audio-line-array-pa</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio/audio-line-array-pa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio/audio-line-array-pa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio/audio-line-array-pa" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/stage/stage-riser-platform</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/audio/audio-line-array-pa</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio/audio-line-array-pa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio/audio-line-array-pa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio/audio-line-array-pa" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/stage/stage-runway</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/audio/audio-digital-mixing-console</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio/audio-digital-mixing-console" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio/audio-digital-mixing-console" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio/audio-digital-mixing-console" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/truss/truss-box-ground-support</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/audio/audio-digital-mixing-console</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio/audio-digital-mixing-console" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio/audio-digital-mixing-console" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio/audio-digital-mixing-console" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/truss/truss-motorized-hoist</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/audio/audio-wireless-microphone-system</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio/audio-wireless-microphone-system" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio/audio-wireless-microphone-system" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio/audio-wireless-microphone-system" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/truss/truss-tower-system</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/audio/audio-wireless-microphone-system</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/audio/audio-wireless-microphone-system" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/audio/audio-wireless-microphone-system" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/audio/audio-wireless-microphone-system" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/projectors/projector-20000-lumen-laser</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/lighting/lighting-moving-head-spot</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting/lighting-moving-head-spot" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting/lighting-moving-head-spot" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting/lighting-moving-head-spot" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/projectors/projector-10000-lumen-laser</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/lighting/lighting-moving-head-spot</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting/lighting-moving-head-spot" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting/lighting-moving-head-spot" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting/lighting-moving-head-spot" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/projectors/projector-short-throw</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/lighting/lighting-led-wash</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting/lighting-led-wash" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting/lighting-led-wash" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting/lighting-led-wash" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/displays/displays-55-inch-signage</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/lighting/lighting-led-wash</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting/lighting-led-wash" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting/lighting-led-wash" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting/lighting-led-wash" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/displays/displays-touch-kiosk</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/lighting/lighting-console</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting/lighting-console" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting/lighting-console" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting/lighting-console" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/displays/displays-video-wall</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/lighting/lighting-console</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/lighting/lighting-console" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/lighting/lighting-console" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/lighting/lighting-console" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/cameras/camera-ptz-system</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/stage/stage-modular-deck</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage/stage-modular-deck" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage/stage-modular-deck" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage/stage-modular-deck" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/cameras/camera-broadcast-package</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/stage/stage-modular-deck</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage/stage-modular-deck" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage/stage-modular-deck" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage/stage-modular-deck" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/cameras/camera-vision-switcher-kit</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/stage/stage-riser-platform</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage/stage-riser-platform" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage/stage-riser-platform" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage/stage-riser-platform" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/accessories/accessories-power-distribution</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/stage/stage-riser-platform</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage/stage-riser-platform" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage/stage-riser-platform" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage/stage-riser-platform" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/accessories/accessories-cable-management</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/stage/stage-runway</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage/stage-runway" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage/stage-runway" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage/stage-runway" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/equipment/accessories/accessories-flight-cases</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/equipment/stage/stage-runway</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/stage/stage-runway" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/stage/stage-runway" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/stage/stage-runway" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/meridian-robotics-apac-summit</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/equipment/truss/truss-box-ground-support</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss/truss-box-ground-support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss/truss-box-ground-support" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss/truss-box-ground-support" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/truss/truss-box-ground-support</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss/truss-box-ground-support" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss/truss-box-ground-support" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss/truss-box-ground-support" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/truss/truss-motorized-hoist</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss/truss-motorized-hoist" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss/truss-motorized-hoist" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss/truss-motorized-hoist" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/truss/truss-motorized-hoist</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss/truss-motorized-hoist" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss/truss-motorized-hoist" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss/truss-motorized-hoist" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/truss/truss-tower-system</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss/truss-tower-system" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss/truss-tower-system" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss/truss-tower-system" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/truss/truss-tower-system</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/truss/truss-tower-system" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/truss/truss-tower-system" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/truss/truss-tower-system" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/projectors/projector-20000-lumen-laser</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors/projector-20000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors/projector-20000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors/projector-20000-lumen-laser" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/projectors/projector-20000-lumen-laser</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors/projector-20000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors/projector-20000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors/projector-20000-lumen-laser" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/projectors/projector-10000-lumen-laser</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors/projector-10000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors/projector-10000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors/projector-10000-lumen-laser" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/projectors/projector-10000-lumen-laser</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors/projector-10000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors/projector-10000-lumen-laser" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors/projector-10000-lumen-laser" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/projectors/projector-short-throw</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors/projector-short-throw" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors/projector-short-throw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors/projector-short-throw" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/projectors/projector-short-throw</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/projectors/projector-short-throw" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/projectors/projector-short-throw" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/projectors/projector-short-throw" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/displays/displays-55-inch-signage</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays/displays-55-inch-signage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays/displays-55-inch-signage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays/displays-55-inch-signage" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/displays/displays-55-inch-signage</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays/displays-55-inch-signage" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays/displays-55-inch-signage" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays/displays-55-inch-signage" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/displays/displays-touch-kiosk</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays/displays-touch-kiosk" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays/displays-touch-kiosk" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays/displays-touch-kiosk" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/displays/displays-touch-kiosk</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays/displays-touch-kiosk" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays/displays-touch-kiosk" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays/displays-touch-kiosk" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/displays/displays-video-wall</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays/displays-video-wall" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays/displays-video-wall" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays/displays-video-wall" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/displays/displays-video-wall</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/displays/displays-video-wall" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/displays/displays-video-wall" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/displays/displays-video-wall" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/cameras/camera-ptz-system</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras/camera-ptz-system" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras/camera-ptz-system" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras/camera-ptz-system" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/cameras/camera-ptz-system</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras/camera-ptz-system" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras/camera-ptz-system" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras/camera-ptz-system" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/cameras/camera-broadcast-package</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras/camera-broadcast-package" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras/camera-broadcast-package" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras/camera-broadcast-package" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/cameras/camera-broadcast-package</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras/camera-broadcast-package" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras/camera-broadcast-package" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras/camera-broadcast-package" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/cameras/camera-vision-switcher-kit</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras/camera-vision-switcher-kit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras/camera-vision-switcher-kit" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras/camera-vision-switcher-kit" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/cameras/camera-vision-switcher-kit</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/cameras/camera-vision-switcher-kit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/cameras/camera-vision-switcher-kit" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/cameras/camera-vision-switcher-kit" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/accessories/accessories-power-distribution</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories/accessories-power-distribution" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories/accessories-power-distribution" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories/accessories-power-distribution" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/accessories/accessories-power-distribution</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories/accessories-power-distribution" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories/accessories-power-distribution" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories/accessories-power-distribution" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/accessories/accessories-cable-management</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories/accessories-cable-management" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories/accessories-cable-management" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories/accessories-cable-management" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/accessories/accessories-cable-management</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories/accessories-cable-management" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories/accessories-cable-management" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories/accessories-cable-management" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/equipment/accessories/accessories-flight-cases</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories/accessories-flight-cases" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories/accessories-flight-cases" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories/accessories-flight-cases" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/equipment/accessories/accessories-flight-cases</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/equipment/accessories/accessories-flight-cases" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/equipment/accessories/accessories-flight-cases" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/equipment/accessories/accessories-flight-cases" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/portfolio/meridian-robotics-apac-summit</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/meridian-robotics-apac-summit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/meridian-robotics-apac-summit" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/meridian-robotics-apac-summit" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/ridgeline-semiconductor-tech-expo</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/meridian-robotics-apac-summit</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/meridian-robotics-apac-summit" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/meridian-robotics-apac-summit" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/meridian-robotics-apac-summit" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/sakura-financial-annual-meeting</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/ridgeline-semiconductor-tech-expo</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/ridgeline-semiconductor-tech-expo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/ridgeline-semiconductor-tech-expo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/ridgeline-semiconductor-tech-expo" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/lumen-cosmetics-flagship-launch</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/ridgeline-semiconductor-tech-expo</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/ridgeline-semiconductor-tech-expo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/ridgeline-semiconductor-tech-expo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/ridgeline-semiconductor-tech-expo" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/nordholm-pharmaceuticals-research-symposium</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/sakura-financial-annual-meeting</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/sakura-financial-annual-meeting" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/sakura-financial-annual-meeting" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/sakura-financial-annual-meeting" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/orbit-mobility-outdoor-groundbreaking</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/sakura-financial-annual-meeting</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/sakura-financial-annual-meeting" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/sakura-financial-annual-meeting" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/sakura-financial-annual-meeting" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/vantage-capital-investor-briefing</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/lumen-cosmetics-flagship-launch</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/lumen-cosmetics-flagship-launch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/lumen-cosmetics-flagship-launch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/lumen-cosmetics-flagship-launch" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/portfolio/tsukiyo-hospitality-anniversary-gala</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/lumen-cosmetics-flagship-launch</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/lumen-cosmetics-flagship-launch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/lumen-cosmetics-flagship-launch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/lumen-cosmetics-flagship-launch" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/choosing-the-right-led-pixel-pitch</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/nordholm-pharmaceuticals-research-symposium</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/nordholm-pharmaceuticals-research-symposium" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/nordholm-pharmaceuticals-research-symposium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/nordholm-pharmaceuticals-research-symposium" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/planning-events-in-japan-what-international-teams-miss</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/nordholm-pharmaceuticals-research-symposium</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/nordholm-pharmaceuticals-research-symposium" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/nordholm-pharmaceuticals-research-symposium" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/nordholm-pharmaceuticals-research-symposium" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/why-hybrid-events-need-two-production-teams</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/orbit-mobility-outdoor-groundbreaking</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/orbit-mobility-outdoor-groundbreaking" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/orbit-mobility-outdoor-groundbreaking" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/orbit-mobility-outdoor-groundbreaking" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/a-practical-timeline-for-booking-event-production</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/orbit-mobility-outdoor-groundbreaking</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/orbit-mobility-outdoor-groundbreaking" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/orbit-mobility-outdoor-groundbreaking" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/orbit-mobility-outdoor-groundbreaking" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/inside-a-trade-show-build-nine-hour-load-in</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/vantage-capital-investor-briefing</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/vantage-capital-investor-briefing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/vantage-capital-investor-briefing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/vantage-capital-investor-briefing" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/simultaneous-interpretation-what-planners-need-to-know</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/vantage-capital-investor-briefing</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/vantage-capital-investor-briefing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/vantage-capital-investor-briefing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/vantage-capital-investor-briefing" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/total-media-expands-nationwide-equipment-inventory</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/portfolio/tsukiyo-hospitality-anniversary-gala</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/tsukiyo-hospitality-anniversary-gala" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/tsukiyo-hospitality-anniversary-gala" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/tsukiyo-hospitality-anniversary-gala" />
+    <lastmod>2026-08-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.totalmedia.co.jp/blog/why-redundancy-is-the-most-underrated-streaming-line-item</loc>
-    <lastmod>2026-07-28</lastmod>
+    <loc>https://totalmedia.jp/en/portfolio/tsukiyo-hospitality-anniversary-gala</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/portfolio/tsukiyo-hospitality-anniversary-gala" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/portfolio/tsukiyo-hospitality-anniversary-gala" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/portfolio/tsukiyo-hospitality-anniversary-gala" />
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/choosing-the-right-led-pixel-pitch</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/choosing-the-right-led-pixel-pitch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/choosing-the-right-led-pixel-pitch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/choosing-the-right-led-pixel-pitch" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/choosing-the-right-led-pixel-pitch</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/choosing-the-right-led-pixel-pitch" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/choosing-the-right-led-pixel-pitch" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/choosing-the-right-led-pixel-pitch" />
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/planning-events-in-japan-what-international-teams-miss</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/planning-events-in-japan-what-international-teams-miss" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/planning-events-in-japan-what-international-teams-miss" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/planning-events-in-japan-what-international-teams-miss" />
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/planning-events-in-japan-what-international-teams-miss</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/planning-events-in-japan-what-international-teams-miss" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/planning-events-in-japan-what-international-teams-miss" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/planning-events-in-japan-what-international-teams-miss" />
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/why-hybrid-events-need-two-production-teams</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/why-hybrid-events-need-two-production-teams" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/why-hybrid-events-need-two-production-teams" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/why-hybrid-events-need-two-production-teams" />
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/why-hybrid-events-need-two-production-teams</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/why-hybrid-events-need-two-production-teams" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/why-hybrid-events-need-two-production-teams" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/why-hybrid-events-need-two-production-teams" />
+    <lastmod>2025-12-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/a-practical-timeline-for-booking-event-production</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/a-practical-timeline-for-booking-event-production" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/a-practical-timeline-for-booking-event-production" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/a-practical-timeline-for-booking-event-production" />
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/a-practical-timeline-for-booking-event-production</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/a-practical-timeline-for-booking-event-production" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/a-practical-timeline-for-booking-event-production" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/a-practical-timeline-for-booking-event-production" />
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/inside-a-trade-show-build-nine-hour-load-in</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/inside-a-trade-show-build-nine-hour-load-in" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/inside-a-trade-show-build-nine-hour-load-in" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/inside-a-trade-show-build-nine-hour-load-in" />
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/inside-a-trade-show-build-nine-hour-load-in</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/inside-a-trade-show-build-nine-hour-load-in" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/inside-a-trade-show-build-nine-hour-load-in" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/inside-a-trade-show-build-nine-hour-load-in" />
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/simultaneous-interpretation-what-planners-need-to-know</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/simultaneous-interpretation-what-planners-need-to-know" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/simultaneous-interpretation-what-planners-need-to-know" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/simultaneous-interpretation-what-planners-need-to-know" />
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/simultaneous-interpretation-what-planners-need-to-know</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/simultaneous-interpretation-what-planners-need-to-know" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/simultaneous-interpretation-what-planners-need-to-know" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/simultaneous-interpretation-what-planners-need-to-know" />
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/total-media-expands-nationwide-equipment-inventory</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/total-media-expands-nationwide-equipment-inventory" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/total-media-expands-nationwide-equipment-inventory" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/total-media-expands-nationwide-equipment-inventory" />
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/total-media-expands-nationwide-equipment-inventory</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/total-media-expands-nationwide-equipment-inventory" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/total-media-expands-nationwide-equipment-inventory" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/total-media-expands-nationwide-equipment-inventory" />
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/blog/why-redundancy-is-the-most-underrated-streaming-line-item</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/why-redundancy-is-the-most-underrated-streaming-line-item" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/why-redundancy-is-the-most-underrated-streaming-line-item" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/why-redundancy-is-the-most-underrated-streaming-line-item" />
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://totalmedia.jp/en/blog/why-redundancy-is-the-most-underrated-streaming-line-item</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://totalmedia.jp/blog/why-redundancy-is-the-most-underrated-streaming-line-item" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://totalmedia.jp/en/blog/why-redundancy-is-the-most-underrated-streaming-line-item" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://totalmedia.jp/blog/why-redundancy-is-the-most-underrated-streaming-line-item" />
+    <lastmod>2025-08-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -21,15 +21,29 @@ interface Section {
 export default function PrivacyPolicyPage() {
   const { t } = useTranslation(['legal', 'common'])
   const sections = t('privacy.sections', { returnObjects: true }) as Section[]
+  const breadcrumbs = [{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('privacy.title') }]
+
+  const privacySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('privacy.title'),
+    description: t('privacy.seoDescription'),
+  }
 
   return (
     <>
-      <Seo title={t('privacy.seoTitle')} description={t('privacy.seoDescription')} path="/privacy-policy" />
+      <Seo
+        title={t('privacy.seoTitle')}
+        description={t('privacy.seoDescription')}
+        path="/privacy-policy"
+        jsonLd={privacySchema}
+        breadcrumbs={breadcrumbs}
+      />
       <PageHero
         eyebrow="Legal"
         title={t('privacy.title')}
         description={t('lastUpdated')}
-        breadcrumbs={[{ label: t('home', { ns: 'common' }), to: '/' }, { label: t('privacy.title') }]}
+        breadcrumbs={breadcrumbs}
       />
 
       <section className="py-20 lg:py-28">
