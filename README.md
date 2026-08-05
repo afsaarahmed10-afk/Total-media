@@ -94,7 +94,7 @@ real business details and legal review before launch:
 
 - Office address, phone, and email in `src/components/layout/Footer.tsx` and `src/pages/ContactPage.tsx`
 - Privacy Policy and Terms & Conditions (`src/pages/PrivacyPolicyPage.tsx`, `src/pages/TermsPage.tsx`)
-- The canonical domain `https://totalmedia.jp` used throughout `Seo.tsx`, `index.html`, and the sitemap script
+- The canonical domain `https://www.totalmedia.jp` used throughout `Seo.tsx`, `index.html`, and the sitemap script
 
 ## SEO
 

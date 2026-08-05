@@ -9,7 +9,7 @@ import { equipmentItems } from '../src/content/equipment.ts'
 import { projects } from '../src/content/projects.ts'
 import { blogPosts } from '../src/content/blog-posts.ts'
 
-const SITE_URL = 'https://totalmedia.jp'
+const SITE_URL = 'https://www.totalmedia.jp'
 const root = path.resolve(import.meta.dirname, '..')
 
 interface RouteDef {

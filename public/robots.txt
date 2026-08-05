@@ -8,4 +8,4 @@ Disallow: /forgot-password
 Disallow: /reset-password
 Disallow: /auth/
 
-Sitemap: https://totalmedia.jp/sitemap.xml
+Sitemap: https://www.totalmedia.jp/sitemap.xml

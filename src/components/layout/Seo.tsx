@@ -3,7 +3,7 @@ import { useLocale } from '@/lib/locale/LocaleContext'
 import { useHreflangLinks } from '@/lib/seo/useHreflangLinks'
 
 const SITE_NAME = 'TOTAL MEDIA'
-const SITE_URL = 'https://totalmedia.jp'
+const SITE_URL = 'https://www.totalmedia.jp'
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.png`
 
 const OG_LOCALE: Record<'ja' | 'en', string> = { ja: 'ja_JP', en: 'en_US' }
