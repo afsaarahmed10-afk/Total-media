@@ -669,8 +669,8 @@ export type Database = {
           created_at: string
           date_label: string | null
           description: string[]
-          event_end_date: string | null
-          event_start_date: string | null
+          event_end: string | null
+          event_start: string | null
           id: string
           location: string
           slug: string
@@ -689,8 +689,8 @@ export type Database = {
           created_at?: string
           date_label?: string | null
           description?: string[]
-          event_end_date?: string | null
-          event_start_date?: string | null
+          event_end?: string | null
+          event_start?: string | null
           id?: string
           location: string
           slug: string
@@ -709,8 +709,8 @@ export type Database = {
           created_at?: string
           date_label?: string | null
           description?: string[]
-          event_end_date?: string | null
-          event_start_date?: string | null
+          event_end?: string | null
+          event_start?: string | null
           id?: string
           location?: string
           slug?: string
@@ -731,38 +731,45 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
-          poster_url: string | null
+          poster_media_id: string | null
           project_id: string
           sort_order: number
+          storage_path: string
           title: string
           updated_at: string
-          video_url: string
         }
         Insert: {
           category?: string | null
           created_at?: string
           description?: string | null
           id?: string
-          poster_url?: string | null
+          poster_media_id?: string | null
           project_id: string
           sort_order?: number
+          storage_path: string
           title: string
           updated_at?: string
-          video_url: string
         }
         Update: {
           category?: string | null
           created_at?: string
           description?: string | null
           id?: string
-          poster_url?: string | null
+          poster_media_id?: string | null
           project_id?: string
           sort_order?: number
+          storage_path?: string
           title?: string
           updated_at?: string
-          video_url?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "project_videos_poster_media_id_fkey"
+            columns: ["poster_media_id"]
+            isOneToOne: false
+            referencedRelation: "media"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "project_videos_project_id_fkey"
             columns: ["project_id"]

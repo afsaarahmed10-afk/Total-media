@@ -10,7 +10,22 @@ import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { getProjectBySlug, getServicesBySlugs, getProjects, getEquipmentItems } from '@/lib/data'
 import { useLocale } from '@/lib/locale/LocaleContext'
+import type { ProjectImage } from '@/content/types'
 import NotFoundPage from '@/pages/NotFoundPage'
+
+/** Groups a project's gallery by `category`, preserving first-appearance
+ * order (images already arrive sorted by sortOrder) — uncategorized
+ * images (empty string) render as a single unlabeled group. */
+function groupImagesByCategory(images: ProjectImage[]): [string, ProjectImage[]][] {
+  const groups = new Map<string, ProjectImage[]>()
+  for (const image of images) {
+    const key = image.category || ''
+    const list = groups.get(key)
+    if (list) list.push(image)
+    else groups.set(key, [image])
+  }
+  return Array.from(groups.entries())
+}
 
 export default function PortfolioDetailPage() {
   const { t } = useTranslation(['portfolio', 'common'])
@@ -181,13 +196,25 @@ export default function PortfolioDetailPage() {
         <section className="py-20 lg:py-24">
           <div className="container-page">
             <SectionHeading eyebrow={t('detail.gallery')} title={project.title} />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.images.map((image) => (
-                <Reveal key={image.id}>
-                  <div className="aspect-[4/3] overflow-hidden rounded-xl">
-                    <img src={image.url} alt={image.alt} className="h-full w-full object-cover" loading="lazy" />
+            <div className="mt-10 space-y-12">
+              {groupImagesByCategory(project.images).map(([category, images]) => (
+                <div key={category || 'uncategorized'}>
+                  {category && <h3 className="mb-4 text-lg font-semibold text-navy">{category}</h3>}
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {images.map((image) => (
+                      <Reveal key={image.id}>
+                        <div className="aspect-[4/3] overflow-hidden rounded-xl">
+                          <img
+                            src={image.url}
+                            alt={image.alt}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      </Reveal>
+                    ))}
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </div>

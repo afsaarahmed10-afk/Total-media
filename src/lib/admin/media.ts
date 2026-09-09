@@ -59,6 +59,16 @@ export async function uploadMediaFile(
   return { data, error: null }
 }
 
+/** Uploads a video file to the `media` bucket without a `media` table row
+ * — `project_videos.storage_path` references it directly, the same
+ * convention used for every video already in that table. */
+export async function uploadProjectVideoFile(file: File): Promise<{ storagePath: string | null; error: string | null }> {
+  const path = `project-videos/${crypto.randomUUID()}-${file.name}`
+  const { error } = await supabase.storage.from('media').upload(path, file)
+  if (error) return { storagePath: null, error: error.message }
+  return { storagePath: path, error: null }
+}
+
 /** Removes the Storage object then the `media` row. Safe to call even if
  * the row is referenced elsewhere — join tables cascade and
  * `blog_posts.cover_media_id` is nullable (`on delete set null`). */

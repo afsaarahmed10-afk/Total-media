@@ -11,6 +11,7 @@ import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 import { ObjectListField } from '@/components/admin/ObjectListField'
 import { RelationPicker, type RelationOption } from '@/components/admin/RelationPicker'
 import { MediaPickerField } from '@/components/admin/MediaPickerField'
+import { ProjectVideosField } from '@/components/admin/ProjectVideosField'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -51,8 +52,9 @@ const schema = z.object({
   storyTheResultText: z.string(),
   videos: z.array(
     z.object({
-      url: z.string().min(1, 'Required'),
-      posterUrl: z.string(),
+      storagePath: z.string().min(1, 'Upload a video file.'),
+      fileName: z.string(),
+      poster: z.object({ id: z.string(), storagePath: z.string(), fileName: z.string() }).nullable(),
       title: z.string().min(1, 'Required'),
       description: z.string(),
       category: z.string(),
@@ -132,7 +134,11 @@ export default function AdminPortfolioFormPage() {
         .select('media_id, category, media(id, storage_path, file_name)')
         .eq('project_id', id)
         .order('sort_order'),
-      supabase.from('project_videos').select('*').eq('project_id', id).order('sort_order'),
+      supabase
+        .from('project_videos')
+        .select('storage_path, title, description, category, poster:media(id, storage_path, file_name)')
+        .eq('project_id', id)
+        .order('sort_order'),
     ])
 
     setLoading(false)
@@ -169,19 +175,23 @@ export default function AdminPortfolioFormPage() {
         .filter((v) => v !== null),
       dateLabel: p.date_label ?? '',
       venue: p.venue ?? '',
-      eventStartDate: p.event_start_date ?? '',
-      eventEndDate: p.event_end_date ?? '',
+      eventStartDate: p.event_start ?? '',
+      eventEndDate: p.event_end ?? '',
       storyTheEventText: ((p.story as { theEvent?: string[] } | null)?.theEvent ?? []).join('\n'),
       storyOurRoleText: ((p.story as { ourRole?: string[] } | null)?.ourRole ?? []).join('\n'),
       storyTheExperienceText: ((p.story as { theExperience?: string[] } | null)?.theExperience ?? []).join('\n'),
       storyTheResultText: ((p.story as { theResult?: string[] } | null)?.theResult ?? []).join('\n'),
-      videos: (videosRes.data ?? []).map((v) => ({
-        url: v.video_url,
-        posterUrl: v.poster_url ?? '',
-        title: v.title,
-        description: v.description ?? '',
-        category: v.category ?? '',
-      })),
+      videos: (videosRes.data ?? []).map((v) => {
+        const poster = v.poster as unknown as { id: string; storage_path: string; file_name: string } | null
+        return {
+          storagePath: v.storage_path,
+          fileName: v.storage_path.split('/').pop() ?? v.storage_path,
+          poster: poster ? { id: poster.id, storagePath: poster.storage_path, fileName: poster.file_name } : null,
+          title: v.title,
+          description: v.description ?? '',
+          category: v.category ?? '',
+        }
+      }),
     })
   }
 
@@ -223,8 +233,8 @@ export default function AdminPortfolioFormPage() {
     if (videos.length === 0) return
     const rows = videos.map((video, index) => ({
       project_id: projectId,
-      video_url: video.url,
-      poster_url: video.posterUrl || null,
+      storage_path: video.storagePath,
+      poster_media_id: video.poster?.id ?? null,
       title: video.title,
       description: video.description || null,
       category: video.category || null,
@@ -255,8 +265,8 @@ export default function AdminPortfolioFormPage() {
       visual_seed: values.slug,
       date_label: values.dateLabel || null,
       venue: values.venue || null,
-      event_start_date: values.eventStartDate || null,
-      event_end_date: values.eventEndDate || null,
+      event_start: values.eventStartDate || null,
+      event_end: values.eventEndDate || null,
       story: hasStory
         ? {
             theEvent: linesToArray(values.storyTheEventText),
@@ -603,18 +613,10 @@ export default function AdminPortfolioFormPage() {
               </Section>
 
               <Section title="Videos (optional)">
-                <ObjectListField
-                  form={form}
+                <FormField
+                  control={form.control}
                   name="videos"
-                  fields={[
-                    { name: 'url', label: 'Video URL' },
-                    { name: 'posterUrl', label: 'Poster Image URL' },
-                    { name: 'title', label: 'Title' },
-                    { name: 'description', label: 'Description', multiline: true },
-                    { name: 'category', label: 'Category' },
-                  ]}
-                  emptyItem={{ url: '', posterUrl: '', title: '', description: '', category: '' }}
-                  addLabel="Add Video"
+                  render={({ field }) => <ProjectVideosField value={field.value} onChange={field.onChange} />}
                 />
               </Section>
 

@@ -470,8 +470,8 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
       .filter((image): image is ProjectImage => image !== null)
     const videos: ProjectVideo[] = (videosByProject.get(p.id) ?? []).map((v) => ({
       id: v.id,
-      url: v.video_url,
-      posterUrl: v.poster_url ?? '',
+      url: mediaUrl(v.storage_path),
+      posterUrl: v.poster_media_id ? (mediaUrlById.get(v.poster_media_id) ?? '') : '',
       title: v.title,
       description: v.description ?? undefined,
       category: v.category ?? undefined,
@@ -498,8 +498,8 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
       imageUrl: images[0]?.url ?? null,
       dateLabel: p.date_label ?? undefined,
       venue: p.venue ?? undefined,
-      eventStartDate: p.event_start_date ?? undefined,
-      eventEndDate: p.event_end_date ?? undefined,
+      eventStartDate: p.event_start ?? undefined,
+      eventEndDate: p.event_end ?? undefined,
       story: (p.story as unknown as ProjectStory | null) ?? undefined,
       images: images.length > 0 ? images : undefined,
       videos: videos.length > 0 ? videos : undefined,

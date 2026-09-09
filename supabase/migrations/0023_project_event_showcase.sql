@@ -5,19 +5,23 @@
 
 alter table projects add column date_label text;
 alter table projects add column venue text;
-alter table projects add column event_start_date date;
-alter table projects add column event_end_date date;
+alter table projects add column event_start date;
+alter table projects add column event_end date;
 -- Shape: { theEvent: string[], ourRole: string[], theExperience: string[], theResult: string[] }
 alter table projects add column story jsonb;
 
--- Lets the showcase group gallery photos (e.g. "setup", "event", "aftermath").
+-- Lets the showcase group gallery photos (e.g. "Stage & Keynotes", "Exhibition Floor").
 alter table project_images add column category text;
 
+-- Videos reference the `media` Storage bucket directly via `storage_path`
+-- (not the `media` table — these files aren't part of the curated media
+-- library, just admin uploads scoped to one project). `poster_media_id`
+-- *does* point at the `media` table, reusing the existing picker.
 create table project_videos (
   id uuid primary key default gen_random_uuid(),
   project_id uuid not null references projects (id) on delete cascade,
-  video_url text not null,
-  poster_url text,
+  storage_path text not null,
+  poster_media_id uuid references media (id) on delete set null,
   title text not null,
   description text,
   category text,
