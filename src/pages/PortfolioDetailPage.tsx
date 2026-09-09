@@ -109,19 +109,21 @@ export default function PortfolioDetailPage() {
           </div>
 
           <div className="space-y-8">
-            <div className="rounded-xl border border-border p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                {t('detail.results')}
-              </h3>
-              <dl className="mt-4 space-y-4">
-                {project.stats.map((stat) => (
-                  <div key={stat.label}>
-                    <dt className="text-xs text-muted-foreground">{stat.label}</dt>
-                    <dd className="text-xl font-bold text-navy">{stat.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+            {project.stats.length > 0 && (
+              <div className="rounded-xl border border-border p-6">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t('detail.results')}
+                </h3>
+                <dl className="mt-4 space-y-4">
+                  {project.stats.map((stat) => (
+                    <div key={stat.label}>
+                      <dt className="text-xs text-muted-foreground">{stat.label}</dt>
+                      <dd className="text-xl font-bold text-navy">{stat.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
 
             <div className="rounded-xl border border-border p-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
