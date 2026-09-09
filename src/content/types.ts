@@ -207,6 +207,33 @@ export interface ProjectStat {
   value: string
 }
 
+export interface ProjectImage {
+  id: string
+  url: string
+  alt: string
+  width: number
+  height: number
+  category: string
+  sortOrder: number
+}
+
+export interface ProjectVideo {
+  id: string
+  url: string
+  posterUrl: string
+  title: string
+  description?: string
+  category?: string
+  sortOrder: number
+}
+
+export interface ProjectStory {
+  theEvent: string[]
+  ourRole: string[]
+  theExperience: string[]
+  theResult: string[]
+}
+
 export interface Project {
   id: string
   slug: string
@@ -223,6 +250,16 @@ export interface Project {
   visualSeed: string
   /** First real photo from project_images, if any exist. */
   imageUrl?: string | null
+  /** Present only for projects with a full real-media event showcase (see
+   * PortfolioDetailPage) — everything else keeps the standard case-study
+   * layout driven by visualSeed/imageUrl alone. */
+  dateLabel?: string
+  venue?: string
+  eventStartDate?: string
+  eventEndDate?: string
+  story?: ProjectStory
+  images?: ProjectImage[]
+  videos?: ProjectVideo[]
 }
 
 export interface BlogCategory {

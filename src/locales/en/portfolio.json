@@ -25,6 +25,12 @@
     "moreWork": "More Work",
     "moreProjects": "More {{category}} Projects",
     "ctaTitle": "Have a Similar Event in Mind?",
-    "ctaDescription": "Tell us the details and we'll show you how we'd approach it."
+    "ctaDescription": "Tell us the details and we'll show you how we'd approach it.",
+    "theEvent": "The Event",
+    "ourRole": "Our Role",
+    "theExperience": "The Experience",
+    "theResult": "The Result",
+    "gallery": "Gallery",
+    "videos": "Videos"
   }
 }

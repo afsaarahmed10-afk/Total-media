@@ -36,7 +36,28 @@ const schema = z.object({
   stats: z.array(z.object({ label: z.string().min(1, 'Required'), value: z.string().min(1, 'Required') })),
   servicesUsedIds: z.array(z.string()),
   equipmentUsedIds: z.array(z.string()),
-  images: z.array(z.object({ id: z.string(), storagePath: z.string(), fileName: z.string() })),
+  images: z.array(
+    z.object({ id: z.string(), storagePath: z.string(), fileName: z.string(), category: z.string().optional() }),
+  ),
+  // Event showcase — every field below is optional; a project with none of
+  // them keeps the standard case-study layout (see PortfolioDetailPage).
+  dateLabel: z.string(),
+  venue: z.string(),
+  eventStartDate: z.string(),
+  eventEndDate: z.string(),
+  storyTheEventText: z.string(),
+  storyOurRoleText: z.string(),
+  storyTheExperienceText: z.string(),
+  storyTheResultText: z.string(),
+  videos: z.array(
+    z.object({
+      url: z.string().min(1, 'Required'),
+      posterUrl: z.string(),
+      title: z.string().min(1, 'Required'),
+      description: z.string(),
+      category: z.string(),
+    }),
+  ),
 })
 type FormValues = z.infer<typeof schema>
 
@@ -53,6 +74,15 @@ const DEFAULT_VALUES: FormValues = {
   servicesUsedIds: [],
   equipmentUsedIds: [],
   images: [],
+  dateLabel: '',
+  venue: '',
+  eventStartDate: '',
+  eventEndDate: '',
+  storyTheEventText: '',
+  storyOurRoleText: '',
+  storyTheExperienceText: '',
+  storyTheResultText: '',
+  videos: [],
 }
 
 function linesToArray(text: string): string[] {
@@ -93,15 +123,16 @@ export default function AdminPortfolioFormPage() {
       return
     }
 
-    const [projectRes, servicesUsedRes, equipmentUsedRes, imagesRes] = await Promise.all([
+    const [projectRes, servicesUsedRes, equipmentUsedRes, imagesRes, videosRes] = await Promise.all([
       supabase.from('projects').select('*').eq('id', id).single(),
       supabase.from('project_services').select('service_id').eq('project_id', id).order('sort_order'),
       supabase.from('project_equipment').select('equipment_item_id').eq('project_id', id).order('sort_order'),
       supabase
         .from('project_images')
-        .select('media_id, media(id, storage_path, file_name)')
+        .select('media_id, category, media(id, storage_path, file_name)')
         .eq('project_id', id)
         .order('sort_order'),
+      supabase.from('project_videos').select('*').eq('project_id', id).order('sort_order'),
     ])
 
     setLoading(false)
@@ -125,12 +156,32 @@ export default function AdminPortfolioFormPage() {
       servicesUsedIds: (servicesUsedRes.data ?? []).map((r) => r.service_id),
       equipmentUsedIds: (equipmentUsedRes.data ?? []).map((r) => r.equipment_item_id),
       images: (imagesRes.data ?? [])
-        .map((row) => {
+        .map((row): FormValues['images'][number] | null => {
           const media = row.media as unknown as { id: string; storage_path: string; file_name: string } | null
           if (!media) return null
-          return { id: media.id, storagePath: media.storage_path, fileName: media.file_name }
+          return {
+            id: media.id,
+            storagePath: media.storage_path,
+            fileName: media.file_name,
+            category: row.category ?? undefined,
+          }
         })
-        .filter((v): v is FormValues['images'][number] => v !== null),
+        .filter((v) => v !== null),
+      dateLabel: p.date_label ?? '',
+      venue: p.venue ?? '',
+      eventStartDate: p.event_start_date ?? '',
+      eventEndDate: p.event_end_date ?? '',
+      storyTheEventText: ((p.story as { theEvent?: string[] } | null)?.theEvent ?? []).join('\n'),
+      storyOurRoleText: ((p.story as { ourRole?: string[] } | null)?.ourRole ?? []).join('\n'),
+      storyTheExperienceText: ((p.story as { theExperience?: string[] } | null)?.theExperience ?? []).join('\n'),
+      storyTheResultText: ((p.story as { theResult?: string[] } | null)?.theResult ?? []).join('\n'),
+      videos: (videosRes.data ?? []).map((v) => ({
+        url: v.video_url,
+        posterUrl: v.poster_url ?? '',
+        title: v.title,
+        description: v.description ?? '',
+        category: v.category ?? '',
+      })),
     })
   }
 
@@ -157,13 +208,40 @@ export default function AdminPortfolioFormPage() {
   async function saveImages(projectId: string, images: FormValues['images']) {
     await supabase.from('project_images').delete().eq('project_id', projectId)
     if (images.length === 0) return
-    const rows = images.map((image, index) => ({ project_id: projectId, media_id: image.id, sort_order: index }))
+    const rows = images.map((image, index) => ({
+      project_id: projectId,
+      media_id: image.id,
+      sort_order: index,
+      category: image.category || null,
+    }))
     const { error } = await supabase.from('project_images').insert(rows)
+    if (error) throw error
+  }
+
+  async function saveVideos(projectId: string, videos: FormValues['videos']) {
+    await supabase.from('project_videos').delete().eq('project_id', projectId)
+    if (videos.length === 0) return
+    const rows = videos.map((video, index) => ({
+      project_id: projectId,
+      video_url: video.url,
+      poster_url: video.posterUrl || null,
+      title: video.title,
+      description: video.description || null,
+      category: video.category || null,
+      sort_order: index,
+    }))
+    const { error } = await supabase.from('project_videos').insert(rows)
     if (error) throw error
   }
 
   async function onSubmit(values: FormValues) {
     setSubmitting(true)
+    const hasStory = [
+      values.storyTheEventText,
+      values.storyOurRoleText,
+      values.storyTheExperienceText,
+      values.storyTheResultText,
+    ].some((text) => text.trim().length > 0)
     const payload = {
       title: values.title,
       slug: values.slug,
@@ -175,6 +253,18 @@ export default function AdminPortfolioFormPage() {
       description: linesToArray(values.descriptionText),
       stats: values.stats,
       visual_seed: values.slug,
+      date_label: values.dateLabel || null,
+      venue: values.venue || null,
+      event_start_date: values.eventStartDate || null,
+      event_end_date: values.eventEndDate || null,
+      story: hasStory
+        ? {
+            theEvent: linesToArray(values.storyTheEventText),
+            ourRole: linesToArray(values.storyOurRoleText),
+            theExperience: linesToArray(values.storyTheExperienceText),
+            theResult: linesToArray(values.storyTheResultText),
+          }
+        : null,
     }
 
     try {
@@ -193,6 +283,7 @@ export default function AdminPortfolioFormPage() {
         saveServicesUsed(projectId, values.servicesUsedIds),
         saveEquipmentUsed(projectId, values.equipmentUsedIds),
         saveImages(projectId, values.images),
+        saveVideos(projectId, values.videos),
       ])
 
       toast.success(isEditing ? 'Project updated.' : 'Project created.')
@@ -388,7 +479,142 @@ export default function AdminPortfolioFormPage() {
                 <FormField
                   control={form.control}
                   name="images"
-                  render={({ field }) => <MediaPickerField value={field.value} onChange={field.onChange} />}
+                  render={({ field }) => (
+                    <MediaPickerField value={field.value} onChange={field.onChange} showCategory />
+                  )}
+                />
+              </Section>
+
+              <Section title="Event Showcase (optional)">
+                <p className="text-sm text-muted-foreground">
+                  Fill these in for a project with a full real-media event write-up. Leave blank to keep the
+                  standard case-study layout.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="dateLabel"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Date Label</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. March 14–16, 2025" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="venue"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Venue</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="eventStartDate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Event Start Date</FormLabel>
+                        <FormControl>
+                          <Input type="date" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="eventEndDate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Event End Date</FormLabel>
+                        <FormControl>
+                          <Input type="date" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="storyTheEventText"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>The Event</FormLabel>
+                      <FormControl>
+                        <Textarea rows={3} {...field} />
+                      </FormControl>
+                      <FormDescription>One paragraph per line.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="storyOurRoleText"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Our Role</FormLabel>
+                      <FormControl>
+                        <Textarea rows={3} {...field} />
+                      </FormControl>
+                      <FormDescription>One paragraph per line.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="storyTheExperienceText"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>The Experience</FormLabel>
+                      <FormControl>
+                        <Textarea rows={3} {...field} />
+                      </FormControl>
+                      <FormDescription>One paragraph per line.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="storyTheResultText"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>The Result</FormLabel>
+                      <FormControl>
+                        <Textarea rows={3} {...field} />
+                      </FormControl>
+                      <FormDescription>One paragraph per line.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </Section>
+
+              <Section title="Videos (optional)">
+                <ObjectListField
+                  form={form}
+                  name="videos"
+                  fields={[
+                    { name: 'url', label: 'Video URL' },
+                    { name: 'posterUrl', label: 'Poster Image URL' },
+                    { name: 'title', label: 'Title' },
+                    { name: 'description', label: 'Description', multiline: true },
+                    { name: 'category', label: 'Category' },
+                  ]}
+                  emptyItem={{ url: '', posterUrl: '', title: '', description: '', category: '' }}
+                  addLabel="Add Video"
                 />
               </Section>
 

@@ -13,6 +13,9 @@ export interface MediaPickerItem {
   id: string
   storagePath: string
   fileName: string
+  /** Only read/edited when `showCategory` is set — free-text grouping label
+   * (e.g. "setup", "event", "aftermath") for a project's event-showcase gallery. */
+  category?: string
 }
 
 interface MediaPickerFieldProps {
@@ -22,6 +25,8 @@ interface MediaPickerFieldProps {
    * closes the dialog immediately, and the "Add" tile hides once one is
    * selected. Defaults to true (a reorderable multi-image gallery). */
   multiple?: boolean
+  /** Shows a small category text input under each selected thumbnail. */
+  showCategory?: boolean
 }
 
 /** Reusable image field: current selection as removable/reorderable
@@ -29,7 +34,7 @@ interface MediaPickerFieldProps {
  * from the existing media library or upload new files inline. Used for
  * every domain that attaches images via a join table (Equipment, Portfolio)
  * as a gallery, and single-select for a Blog post's cover image. */
-export function MediaPickerField({ value, onChange, multiple = true }: MediaPickerFieldProps) {
+export function MediaPickerField({ value, onChange, multiple = true, showCategory = false }: MediaPickerFieldProps) {
   const { user } = useAuth()
   const [dialogOpen, setDialogOpen] = useState(false)
   const [library, setLibrary] = useState<MediaRow[] | null>(null)
@@ -68,6 +73,10 @@ export function MediaPickerField({ value, onChange, multiple = true }: MediaPick
 
   function remove(id: string) {
     onChange(value.filter((v) => v.id !== id))
+  }
+
+  function setCategory(id: string, category: string) {
+    onChange(value.map((v) => (v.id === id ? { ...v, category } : v)))
   }
 
   function move(index: number, direction: -1 | 1) {
@@ -113,40 +122,50 @@ export function MediaPickerField({ value, onChange, multiple = true }: MediaPick
     <div>
       <div className="flex flex-wrap gap-3">
         {value.map((item, index) => (
-          <div key={item.id} className="group relative size-20 shrink-0 overflow-hidden rounded-lg border border-border">
-            <img
-              src={publicMediaUrl(item.storagePath)}
-              alt={item.fileName}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center gap-0.5 bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
-              <button
-                type="button"
-                onClick={() => move(index, -1)}
-                disabled={index === 0}
-                aria-label="Move earlier"
-                className="flex size-6 items-center justify-center rounded-full text-white disabled:opacity-30"
-              >
-                <ChevronLeft className="size-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => remove(item.id)}
-                aria-label={`Remove ${item.fileName}`}
-                className="flex size-6 items-center justify-center rounded-full text-white"
-              >
-                <X className="size-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => move(index, 1)}
-                disabled={index === value.length - 1}
-                aria-label="Move later"
-                className="flex size-6 items-center justify-center rounded-full text-white disabled:opacity-30"
-              >
-                <ChevronRight className="size-4" />
-              </button>
+          <div key={item.id} className="flex w-20 shrink-0 flex-col gap-1">
+            <div className="group relative size-20 overflow-hidden rounded-lg border border-border">
+              <img
+                src={publicMediaUrl(item.storagePath)}
+                alt={item.fileName}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 flex items-center justify-center gap-0.5 bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                <button
+                  type="button"
+                  onClick={() => move(index, -1)}
+                  disabled={index === 0}
+                  aria-label="Move earlier"
+                  className="flex size-6 items-center justify-center rounded-full text-white disabled:opacity-30"
+                >
+                  <ChevronLeft className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => remove(item.id)}
+                  aria-label={`Remove ${item.fileName}`}
+                  className="flex size-6 items-center justify-center rounded-full text-white"
+                >
+                  <X className="size-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => move(index, 1)}
+                  disabled={index === value.length - 1}
+                  aria-label="Move later"
+                  className="flex size-6 items-center justify-center rounded-full text-white disabled:opacity-30"
+                >
+                  <ChevronRight className="size-4" />
+                </button>
+              </div>
             </div>
+            {showCategory && (
+              <Input
+                value={item.category ?? ''}
+                onChange={(e) => setCategory(item.id, e.target.value)}
+                placeholder="Category"
+                className="h-6 px-1.5 text-xs"
+              />
+            )}
           </div>
         ))}
 

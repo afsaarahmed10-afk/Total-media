@@ -63,10 +63,10 @@ export default function PortfolioDetailPage() {
       >
         <div className="mt-8 flex flex-wrap gap-6 text-sm text-white/80">
           <span className="flex items-center gap-1.5">
-            <MapPin className="size-4 text-signal" /> {project.location}
+            <MapPin className="size-4 text-signal" /> {project.venue || project.location}
           </span>
           <span className="flex items-center gap-1.5">
-            <Calendar className="size-4 text-signal" /> {project.year}
+            <Calendar className="size-4 text-signal" /> {project.dateLabel || project.year}
           </span>
           <span className="font-medium text-white">{project.client}</span>
         </div>
@@ -150,6 +150,73 @@ export default function PortfolioDetailPage() {
           </div>
         </div>
       </section>
+
+      {project.story && (
+        <section className="bg-mist py-20 lg:py-24">
+          <div className="container-page grid gap-10 sm:grid-cols-2">
+            {(
+              [
+                ['theEvent', project.story.theEvent],
+                ['ourRole', project.story.ourRole],
+                ['theExperience', project.story.theExperience],
+                ['theResult', project.story.theResult],
+              ] as const
+            )
+              .filter(([, paragraphs]) => paragraphs.length > 0)
+              .map(([key, paragraphs], i) => (
+                <Reveal key={key} delay={i * 0.05}>
+                  <h3 className="text-lg font-semibold text-navy">{t(`detail.${key}`)}</h3>
+                  <div className="mt-3 space-y-3 text-muted-foreground">
+                    {paragraphs.map((paragraph, j) => (
+                      <p key={j}>{paragraph}</p>
+                    ))}
+                  </div>
+                </Reveal>
+              ))}
+          </div>
+        </section>
+      )}
+
+      {project.images && project.images.length > 0 && (
+        <section className="py-20 lg:py-24">
+          <div className="container-page">
+            <SectionHeading eyebrow={t('detail.gallery')} title={project.title} />
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {project.images.map((image) => (
+                <Reveal key={image.id}>
+                  <div className="aspect-[4/3] overflow-hidden rounded-xl">
+                    <img src={image.url} alt={image.alt} className="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {project.videos && project.videos.length > 0 && (
+        <section className="bg-mist py-20 lg:py-24">
+          <div className="container-page">
+            <SectionHeading eyebrow={t('detail.videos')} title={project.title} />
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {project.videos.map((video) => (
+                <Reveal key={video.id}>
+                  <div className="overflow-hidden rounded-xl bg-black">
+                    <video
+                      controls
+                      poster={video.posterUrl || undefined}
+                      src={video.url}
+                      className="aspect-video w-full"
+                    />
+                  </div>
+                  <h3 className="mt-3 font-semibold text-navy">{video.title}</h3>
+                  {video.description && <p className="text-sm text-muted-foreground">{video.description}</p>}
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {otherProjects.length > 0 && (
         <section className="bg-mist py-20 lg:py-24">

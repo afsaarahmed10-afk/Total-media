@@ -24,6 +24,9 @@ import type {
   Industry,
   Locale,
   Project,
+  ProjectImage,
+  ProjectStory,
+  ProjectVideo,
   Service,
   Solution,
   Testimonial,
@@ -285,6 +288,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     equipmentImagesRes,
     projectImagesRes,
     mediaRes,
+    projectVideosRes,
   ] = await Promise.all([
     supabase.from('services').select('*'),
     supabase.from('solutions').select('*'),
@@ -305,8 +309,9 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     supabase.from('project_services').select('*').order('sort_order'),
     supabase.from('project_equipment').select('*').order('sort_order'),
     supabase.from('equipment_images').select('equipment_item_id, media_id, sort_order').order('sort_order'),
-    supabase.from('project_images').select('project_id, media_id, sort_order').order('sort_order'),
-    supabase.from('media').select('id, storage_path'),
+    supabase.from('project_images').select('project_id, media_id, sort_order, category').order('sort_order'),
+    supabase.from('media').select('id, storage_path, alt_text, width, height'),
+    supabase.from('project_videos').select('*').order('sort_order'),
   ])
 
   for (const res of [
@@ -314,7 +319,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
     blogCategoriesRes, blogPostsRes, testimonialsRes, clientsRes, faqsRes, industriesRes,
     serviceRelatedServicesRes, serviceRelatedEquipmentCategoriesRes, serviceFaqsRes,
     solutionServicesRes, equipmentRelatedItemsRes, projectServicesRes, projectEquipmentRes,
-    equipmentImagesRes, projectImagesRes, mediaRes,
+    equipmentImagesRes, projectImagesRes, mediaRes, projectVideosRes,
   ]) {
     if (res.error) throw res.error
   }
@@ -330,6 +335,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
   const equipmentCategorySlugById = new Map(equipmentCategories.map((c) => [c.id, c.slug]))
   const equipmentItemSlugById = new Map(equipmentItems.map((e) => [e.id, e.slug]))
   const blogCategorySlugById = new Map(blogCategories.map((c) => [c.id, c.slug]))
+  const mediaById = new Map(mediaRes.data!.map((m) => [m.id, m]))
   const mediaUrlById = new Map(mediaRes.data!.map((m) => [m.id, mediaUrl(m.storage_path)]))
 
   function groupBy<T, K>(rows: T[], key: (row: T) => K): Map<K, T[]> {
@@ -355,6 +361,7 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
   const equipmentByProject = groupBy(projectEquipmentRes.data!, (r) => r.project_id)
   const imagesByEquipmentItem = groupBy(equipmentImagesRes.data!, (r) => r.equipment_item_id)
   const imagesByProject = groupBy(projectImagesRes.data!, (r) => r.project_id)
+  const videosByProject = groupBy(projectVideosRes.data!, (r) => r.project_id)
 
   const stitchedServices: BilingualService[] = services.map((s) => ({
     id: s.id,
@@ -446,9 +453,30 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
   }))
 
   const stitchedProjects: Project[] = projectsRes.data!.map((p) => {
-    const images = (imagesByProject.get(p.id) ?? [])
-      .map((r) => mediaUrlById.get(r.media_id))
-      .filter((url): url is string => Boolean(url))
+    const images: ProjectImage[] = (imagesByProject.get(p.id) ?? [])
+      .map((r) => {
+        const media = mediaById.get(r.media_id)
+        if (!media) return null
+        return {
+          id: media.id,
+          url: mediaUrl(media.storage_path),
+          alt: media.alt_text ?? p.title,
+          width: media.width ?? 0,
+          height: media.height ?? 0,
+          category: r.category ?? '',
+          sortOrder: r.sort_order,
+        }
+      })
+      .filter((image): image is ProjectImage => image !== null)
+    const videos: ProjectVideo[] = (videosByProject.get(p.id) ?? []).map((v) => ({
+      id: v.id,
+      url: v.video_url,
+      posterUrl: v.poster_url ?? '',
+      title: v.title,
+      description: v.description ?? undefined,
+      category: v.category ?? undefined,
+      sortOrder: v.sort_order,
+    }))
     return {
       id: p.id,
       slug: p.slug,
@@ -467,7 +495,14 @@ async function fetchAndStitch(): Promise<RawContentBundle> {
         .filter((slug): slug is string => Boolean(slug)),
       stats: p.stats as unknown as Project['stats'],
       visualSeed: p.visual_seed,
-      imageUrl: images[0] ?? null,
+      imageUrl: images[0]?.url ?? null,
+      dateLabel: p.date_label ?? undefined,
+      venue: p.venue ?? undefined,
+      eventStartDate: p.event_start_date ?? undefined,
+      eventEndDate: p.event_end_date ?? undefined,
+      story: (p.story as unknown as ProjectStory | null) ?? undefined,
+      images: images.length > 0 ? images : undefined,
+      videos: videos.length > 0 ? videos : undefined,
     }
   })
 

@@ -25,6 +25,12 @@
     "moreWork": "その他の実績",
     "moreProjects": "その他の{{category}}実績",
     "ctaTitle": "同じようなイベントをご検討中ですか？",
-    "ctaDescription": "詳細をお聞かせいただければ、私たちのアプローチをご紹介します。"
+    "ctaDescription": "詳細をお聞かせいただければ、私たちのアプローチをご紹介します。",
+    "theEvent": "イベント概要",
+    "ourRole": "私たちの役割",
+    "theExperience": "体験",
+    "theResult": "成果",
+    "gallery": "ギャラリー",
+    "videos": "動画"
   }
 }
