@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { MapPin, Calendar, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Seo } from '@/components/layout/Seo'
+import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
@@ -56,23 +56,51 @@ export default function PortfolioDetailPage() {
     { label: project.title },
   ]
 
+  // Real, already-published facts only — no invented attendance, pricing,
+  // or performer data. `description` falls back to the (also real,
+  // already-rendered-on-page) story intro when `summary` isn't filled in,
+  // rather than shipping an empty string into either schema.
+  const schemaDescription =
+    project.summary || project.story?.theEvent?.[0] || project.title
+
   const projectSchema = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: project.title,
-    description: project.summary,
+    description: schemaDescription,
     about: t(`categories.${project.category}`),
     creator: { '@type': 'Organization', name: 'TOTAL MEDIA' },
     ...(project.imageUrl ? { image: project.imageUrl } : {}),
   }
 
+  // Event schema only for projects that actually carry real event dates —
+  // most projects won't, and CreativeWork above already covers those.
+  const eventSchema = project.eventStartDate
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Event',
+        name: project.title,
+        description: schemaDescription,
+        startDate: project.eventStartDate,
+        ...(project.eventEndDate ? { endDate: project.eventEndDate } : {}),
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: {
+          '@type': 'Place',
+          name: project.venue || project.location,
+          address: project.location,
+        },
+        organizer: { '@type': 'Organization', name: 'TOTAL MEDIA', url: SITE_URL },
+        ...(project.imageUrl ? { image: [project.imageUrl] } : {}),
+      }
+    : null
+
   return (
     <>
       <Seo
         title={`${project.title} — ${project.client}`}
-        description={project.summary}
+        description={schemaDescription}
         path={`/portfolio/${project.slug}`}
-        jsonLd={projectSchema}
+        jsonLd={eventSchema ? [projectSchema, eventSchema] : projectSchema}
         breadcrumbs={breadcrumbs}
       />
       <PageHero
