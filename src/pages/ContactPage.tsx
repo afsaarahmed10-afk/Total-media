@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/form'
 import { supabase } from '@/lib/supabase/client'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
+import { trackEvent } from '@/lib/analytics'
 
 interface ContactOffice {
   name: string
@@ -31,6 +32,13 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const hasStartedRef = useRef(false)
+
+  function handleFormStart() {
+    if (hasStartedRef.current) return
+    hasStartedRef.current = true
+    trackEvent('form_start', { form_name: 'contact' })
+  }
 
   const contactSchema = useMemo(
     () =>
@@ -68,8 +76,11 @@ export default function ContactPage() {
 
     if (error) {
       setSubmitError(t('submitError'))
+      trackEvent('form_error', { form_name: 'contact' })
       return
     }
+
+    trackEvent('form_submit', { form_name: 'contact' })
 
     // Best-effort admin alert — the message is already saved and visible in
     // /admin regardless, so a notification failure shouldn't affect the
@@ -194,7 +205,11 @@ export default function ContactPage() {
               </div>
             ) : (
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  onChangeCapture={handleFormStart}
+                  className="space-y-6"
+                >
                   <div className="grid gap-6 sm:grid-cols-2">
                     <FormField
                       control={form.control}

@@ -36,6 +36,7 @@ import { useLocalizedNavigate } from '@/lib/locale/useLocalizedNavigate'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices, getEquipmentCategories } from '@/lib/data'
 import { useAuth } from '@/lib/auth/AuthContext'
+import { trackEvent } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 export function Header() {
@@ -216,7 +217,12 @@ export function Header() {
         <div className="hidden items-center gap-1.5 lg:flex">
           <LanguageSwitcher />
           <Button asChild variant="ghost">
-            <LocalizedLink to="/contact">{t('nav.contact')}</LocalizedLink>
+            <LocalizedLink
+              to="/contact"
+              onClick={() => trackEvent('contact_click', { location: 'header' })}
+            >
+              {t('nav.contact')}
+            </LocalizedLink>
           </Button>
           {user ? (
             <DropdownMenu>
@@ -258,7 +264,12 @@ export function Header() {
             </Button>
           )}
           <Button asChild className="bg-navy text-white hover:bg-navy-deep">
-            <LocalizedLink to="/quote">{t('requestQuote')}</LocalizedLink>
+            <LocalizedLink
+              to="/quote"
+              onClick={() => trackEvent('request_quote_click', { location: 'header_desktop' })}
+            >
+              {t('requestQuote')}
+            </LocalizedLink>
           </Button>
         </div>
 
@@ -351,7 +362,12 @@ export function Header() {
                 )}
                 <SheetClose asChild>
                   <Button asChild className="mt-4 bg-navy text-white hover:bg-navy-deep">
-                    <LocalizedLink to="/quote">{t('requestQuote')}</LocalizedLink>
+                    <LocalizedLink
+                      to="/quote"
+                      onClick={() => trackEvent('request_quote_click', { location: 'header_mobile' })}
+                    >
+                      {t('requestQuote')}
+                    </LocalizedLink>
                   </Button>
                 </SheetClose>
               </nav>

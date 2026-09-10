@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useLocale, type Locale } from '@/lib/locale/LocaleContext'
 import { useTranslation } from 'react-i18next'
+import { trackEvent } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 /** Strips a leading `/en` prefix so the current path can be rebuilt for the
@@ -42,6 +43,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             <Link
               to={buildPath(canonicalPath, opt.locale)}
               className="text-muted-foreground hover:text-signal"
+              onClick={() => trackEvent('language_switch', { to_locale: opt.locale })}
             >
               {opt.label}
             </Link>

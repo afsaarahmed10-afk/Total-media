@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -29,6 +29,7 @@ import { cn } from '@/lib/utils'
 import { getServices } from '@/lib/data'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { supabase } from '@/lib/supabase/client'
+import { trackEvent } from '@/lib/analytics'
 
 const MAX_FILE_SIZE = 15 * 1024 * 1024 // 15MB per file
 
@@ -75,6 +76,14 @@ export default function QuotePage() {
 
   const [step, setStep] = useState(0)
   const [files, setFiles] = useState<File[]>([])
+  const hasStartedRef = useRef(false)
+
+  function handleFormStart() {
+    if (hasStartedRef.current) return
+    hasStartedRef.current = true
+    trackEvent('form_start', { form_name: 'quote' })
+  }
+
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
@@ -171,6 +180,7 @@ export default function QuotePage() {
     if (insertError) {
       setSubmitError(t('submitError'))
       setIsSubmitting(false)
+      trackEvent('form_error', { form_name: 'quote' })
       return
     }
 
@@ -223,6 +233,7 @@ export default function QuotePage() {
 
     setIsSubmitting(false)
     setSubmitted(true)
+    trackEvent('form_submit', { form_name: 'quote' })
   }
 
   if (submitted) {
@@ -300,7 +311,11 @@ export default function QuotePage() {
 
           <div className="rounded-2xl border border-border bg-white p-6 sm:p-10">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                onChangeCapture={handleFormStart}
+                className="space-y-6"
+              >
                 {step === 0 && (
                   <div className="space-y-6">
                     <div className="grid gap-6 sm:grid-cols-2">

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { MapPin, Calendar, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +11,7 @@ import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { getProjectBySlug, getServicesBySlugs, getProjects, getEquipmentItems } from '@/lib/data'
 import { useLocale } from '@/lib/locale/LocaleContext'
+import { trackEvent } from '@/lib/analytics'
 import type { ProjectImage } from '@/content/types'
 import NotFoundPage from '@/pages/NotFoundPage'
 
@@ -32,6 +34,10 @@ export default function PortfolioDetailPage() {
   const { locale } = useLocale()
   const { slug = '' } = useParams()
   const project = getProjectBySlug(slug)
+
+  useEffect(() => {
+    if (project) trackEvent('project_view', { project_slug: project.slug })
+  }, [project])
 
   if (!project) return <NotFoundPage />
 
@@ -233,6 +239,7 @@ export default function PortfolioDetailPage() {
                   <div className="overflow-hidden rounded-xl bg-black">
                     <video
                       controls
+                      preload="none"
                       poster={video.posterUrl || undefined}
                       src={video.url}
                       className="aspect-video w-full"

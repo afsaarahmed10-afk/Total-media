@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +11,7 @@ import { FaqAccordion } from '@/components/sections/FaqAccordion'
 import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { useLocale } from '@/lib/locale/LocaleContext'
+import { trackEvent } from '@/lib/analytics'
 import {
   getServiceBySlug,
   getServicesBySlugs,
@@ -23,6 +25,10 @@ export default function ServiceDetailPage() {
   const { locale } = useLocale()
   const { slug = '' } = useParams()
   const service = getServiceBySlug(slug, locale)
+
+  useEffect(() => {
+    if (service) trackEvent('service_view', { service_slug: service.slug })
+  }, [service])
 
   if (!service) return <NotFoundPage />
 
