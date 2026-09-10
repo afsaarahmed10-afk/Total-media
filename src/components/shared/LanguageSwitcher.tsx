@@ -25,7 +25,10 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   ]
 
   return (
-    <div className={cn('flex items-center gap-1 text-sm', className)} aria-label={t('language')}>
+    <div
+      className={cn('flex shrink-0 items-center gap-1 whitespace-nowrap text-sm', className)}
+      aria-label={t('language')}
+    >
       {options.map((opt, i) => (
         <span key={opt.locale} className="flex items-center gap-1">
           {i > 0 && <span className="text-muted-foreground/40">/</span>}

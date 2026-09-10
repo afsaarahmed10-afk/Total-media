@@ -102,7 +102,7 @@ export function Header() {
           <NavigationMenu viewport={false}>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-[15px] font-medium text-charcoal">
+                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-medium text-charcoal">
                   {t('servicesMenu')}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -158,7 +158,7 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-[15px] font-medium text-charcoal">
+                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-medium text-charcoal">
                   {t('equipmentMenu')}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -199,7 +199,7 @@ export function Header() {
                       to={link.to}
                       className={({ isActive }) =>
                         cn(
-                          'inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-[15px] font-medium text-charcoal hover:bg-accent hover:text-accent-foreground',
+                          'inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-3 py-2 text-[15px] font-medium whitespace-nowrap text-charcoal hover:bg-accent hover:text-accent-foreground',
                           isActive && 'text-signal',
                         )
                       }
@@ -213,7 +213,7 @@ export function Header() {
           </NavigationMenu>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-1.5 lg:flex">
           <LanguageSwitcher />
           <Button asChild variant="ghost">
             <LocalizedLink to="/contact">{t('nav.contact')}</LocalizedLink>
