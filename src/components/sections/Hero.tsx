@@ -35,7 +35,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-signal"
+          className="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-signal-light"
         >
           {t('hero.eyebrow')}
         </motion.p>

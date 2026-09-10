@@ -32,7 +32,7 @@ export function PageHero({
       <div className="container-page relative py-16 lg:py-24">
         {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-6" />}
         {eyebrow && (
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal-light">
             {eyebrow}
           </p>
         )}

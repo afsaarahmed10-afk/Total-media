@@ -14,7 +14,7 @@ export default function NotFoundPage() {
           <AbstractVisual seed="404-not-found" variant="grid" />
         </div>
         <div className="container-page relative text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-signal">{t('errorLabel')}</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-signal-light">{t('errorLabel')}</p>
           <h1 className="mt-3 text-5xl font-extrabold tracking-tight sm:text-6xl">
             {t('title')}
           </h1>

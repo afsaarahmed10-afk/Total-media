@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <AbstractVisual seed="error-boundary" variant="grid" />
           </div>
           <div className="container-page relative text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-signal">Error</p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-signal-light">Error</p>
             <h1 className="mt-3 text-5xl font-extrabold tracking-tight sm:text-6xl">
               Something went wrong
             </h1>

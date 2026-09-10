@@ -37,7 +37,7 @@ export function CtaBand({
         <AbstractVisual seed={title} variant="radial" />
       </div>
       <div className="container-page relative text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal-light">
           {eyebrow ?? t('ctaBand.letsTalk')}
         </p>
         <h2 className="mx-auto max-w-2xl text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">

@@ -14,8 +14,21 @@
   --color-mist: #f4f6f8;
   --color-mist-dark: #e7eaee;
   --color-charcoal: #1c1f24;
-  --color-signal: #2f6fea;
+  /* Darkened ~4% from the brand's documented #2f6fea — WCAG AA requires
+     4.5:1 for normal-weight text, and the eyebrow-label pattern used across
+     the site (SectionHeading, PageHero) sits on the mist background at
+     only 4.22:1 with the exact brand hex. This shift is visually
+     imperceptible but clears the threshold (4.51:1 on mist, 4.88:1 on
+     white). See TOTAL_MEDIA_PHASE_4_IMPLEMENTATION.md's accessibility
+     audit for the full contrast numbers. */
+  --color-signal: #2d6be1;
   --color-signal-soft: #eaf0fe;
+  /* Lighter variant for signal-colored text on navy/dark backgrounds only
+     (e.g. PageHero's eyebrow, which is always on bg-navy) — the base
+     --color-signal above is too dark to hit 4.5:1 against navy (3.6:1),
+     and a single flat color can't satisfy both a light and a dark
+     background at once. Not used for icons/buttons/borders, only text. */
+  --color-signal-light: #3885ff;
 
   --background: var(--color-white);
   --foreground: var(--color-charcoal);
@@ -49,6 +62,7 @@
   --color-charcoal: var(--color-charcoal);
   --color-signal: var(--color-signal);
   --color-signal-soft: var(--color-signal-soft);
+  --color-signal-light: var(--color-signal-light);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

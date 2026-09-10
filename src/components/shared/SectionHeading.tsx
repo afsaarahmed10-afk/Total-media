@@ -29,7 +29,12 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal">
+        <p
+          className={cn(
+            'mb-3 text-sm font-semibold uppercase tracking-wider',
+            isDark ? 'text-signal-light' : 'text-signal',
+          )}
+        >
           {eyebrow}
         </p>
       )}

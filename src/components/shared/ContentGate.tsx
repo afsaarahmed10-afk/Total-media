@@ -42,7 +42,7 @@ export function ContentGate({ children }: { children: ReactNode }) {
           <AbstractVisual seed="content-load-error" variant="grid" />
         </div>
         <div className="container-page relative text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-signal">
+          <p className="text-sm font-semibold uppercase tracking-wider text-signal-light">
             Connection Problem
           </p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
