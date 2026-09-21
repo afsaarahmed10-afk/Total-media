@@ -8,7 +8,24 @@
     "eyebrow": "Event Production & Technical Solutions",
     "title": "Creating Exceptional Events Across Japan.",
     "description": "We plan, produce, and engineer corporate events, conferences, exhibitions, and hybrid broadcasts — LED, audio, lighting, staging, and streaming, delivered as one accountable production from a single technical partner.",
-    "viewServices": "View Our Services"
+    "viewServices": "View Our Services",
+    "titleAccent": "Across Japan.",
+    "scroll": "Scroll",
+    "latestWork": "Latest work"
+  },
+  "band": {
+    "eyebrow": "Our Work",
+    "stalls": "Stalls & Exhibitions",
+    "stageHall": "Stage & Hall",
+    "explore": "Explore"
+  },
+  "featured": {
+    "eyebrow": "Featured Work",
+    "viewProject": "View project",
+    "viewAllWork": "View all work",
+    "client": "Client",
+    "venue": "Venue",
+    "date": "Date"
   },
   "companyIntro": {
     "eyebrow": "Who We Are",

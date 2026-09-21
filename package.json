@@ -13,6 +13,7 @@
     "image:generate": "node scripts/generate-image.mjs"
   },
   "dependencies": {
+    "@fontsource/instrument-serif": "^5.3.0",
     "@fontsource/inter": "^5.3.0",
     "@hookform/resolvers": "^5.4.0",
     "@supabase/supabase-js": "^2.110.8",

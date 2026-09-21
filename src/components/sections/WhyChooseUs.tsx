@@ -1,46 +1,40 @@
-import { ShieldCheck, MapPinned, Warehouse, Languages, Radio, Receipt } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { SectionHeading } from '@/components/shared/SectionHeading'
+import { Section } from '@/components/cinematic/Section'
 import { Reveal } from '@/components/shared/Reveal'
-
-const ICONS = [ShieldCheck, MapPinned, Warehouse, Languages, Radio, Receipt]
+import { SectionHeading } from '@/components/shared/SectionHeading'
 
 interface Reason {
   title: string
   description: string
 }
 
+/** Six operational commitments as a numbered hairline grid — no icons, no
+ * cards; the numerals and rules carry the structure. */
 export function WhyChooseUs() {
   const { t } = useTranslation('home')
   const reasons = t('whyChooseUs.reasons', { returnObjects: true }) as Reason[]
 
   return (
-    <section className="bg-navy py-20 text-white lg:py-28">
-      <div className="container-page">
-        <SectionHeading
-          eyebrow={t('whyChooseUs.eyebrow')}
-          title={t('whyChooseUs.title')}
-          description={t('whyChooseUs.description')}
-          tone="dark"
-        />
+    <Section tone="paper" space="lg">
+      <SectionHeading
+        eyebrow={t('whyChooseUs.eyebrow')}
+        title={t('whyChooseUs.title')}
+        description={t('whyChooseUs.description')}
+      />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {reasons.map((reason, i) => {
-            const Icon = ICONS[i] ?? ShieldCheck
-            return (
-              <Reveal key={reason.title} delay={(i % 3) * 0.08}>
-                <div className="h-full rounded-xl border border-white/10 bg-white/[0.03] p-6">
-                  <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-signal/15 text-signal">
-                    <Icon className="size-5" />
-                  </div>
-                  <h3 className="text-base font-semibold">{reason.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/65">{reason.description}</p>
-                </div>
-              </Reveal>
-            )
-          })}
-        </div>
+      <div className="mt-16 grid border-t border-ink sm:grid-cols-2 lg:mt-24 lg:grid-cols-3">
+        {reasons.map((reason, i) => (
+          <Reveal
+            key={reason.title}
+            delay={(i % 3) * 0.07}
+            className="border-b border-line py-10 sm:pr-10 lg:min-h-[15rem] lg:pr-12"
+          >
+            <p className="eyebrow tnum mb-8 text-blue">{String(i + 1).padStart(2, '0')}</p>
+            <h3 className="text-xl font-medium leading-snug tracking-[-0.02em] lg:text-2xl">{reason.title}</h3>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">{reason.description}</p>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   )
 }

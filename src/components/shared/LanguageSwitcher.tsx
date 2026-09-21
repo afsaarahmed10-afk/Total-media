@@ -12,7 +12,14 @@ function toCanonicalPath(pathname: string): string {
   return pathname
 }
 
-export function LanguageSwitcher({ className }: { className?: string }) {
+export function LanguageSwitcher({
+  className,
+  tone = 'light',
+}: {
+  className?: string
+  /** `dark` for use on ink surfaces (header, menu overlay). */
+  tone?: 'light' | 'dark'
+}) {
   const { locale, buildPath, isLocalized } = useLocale()
   const location = useLocation()
   const { t } = useTranslation('common')
@@ -24,6 +31,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
     { locale: 'ja', label: t('languageJa') },
     { locale: 'en', label: t('languageEn') },
   ]
+  const dark = tone === 'dark'
 
   return (
     <div
@@ -32,9 +40,11 @@ export function LanguageSwitcher({ className }: { className?: string }) {
     >
       {options.map((opt, i) => (
         <span key={opt.locale} className="flex items-center gap-1">
-          {i > 0 && <span className="text-muted-foreground/40">/</span>}
+          {i > 0 && <span className={dark ? 'text-white/30' : 'text-muted-foreground/40'}>/</span>}
           {opt.locale === locale ? (
-            <span className="font-semibold text-navy">{opt.label}</span>
+            <span aria-current="true" className={cn('font-semibold', dark ? 'text-white' : 'text-navy')}>
+              {opt.label}
+            </span>
           ) : (
             // Plain Link, not LocalizedLink: buildPath already resolves the
             // FULL path for the target locale, so re-running it through
@@ -42,7 +52,11 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             // wrong when switching away from /en.
             <Link
               to={buildPath(canonicalPath, opt.locale)}
-              className="text-muted-foreground hover:text-signal"
+              lang={opt.locale}
+              className={cn(
+                'transition-colors',
+                dark ? 'text-white/65 hover:text-white' : 'text-muted-foreground hover:text-signal',
+              )}
               onClick={() => trackEvent('language_switch', { to_locale: opt.locale })}
             >
               {opt.label}

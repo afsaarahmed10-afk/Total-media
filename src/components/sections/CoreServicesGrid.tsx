@@ -1,99 +1,63 @@
-import {
-  Building2,
-  Presentation,
-  LayoutGrid,
-  Radio,
-  Sparkles,
-  Video,
-  Cast,
-  Settings2,
-  ArrowRight,
-} from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { SectionHeading } from '@/components/shared/SectionHeading'
-import { Reveal } from '@/components/shared/Reveal'
+import { Display } from '@/components/cinematic/Display'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
+import { Section } from '@/components/cinematic/Section'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { ServiceIndexRow } from '@/components/sections/ServiceIndexRow'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices } from '@/lib/data'
 
-const FEATURED_SLUGS = [
+// Six pillars, each pointing at the closest existing service page. Names,
+// descriptions and images all come from the live service records, so both
+// languages stay in sync with the admin CMS.
+const PILLAR_SLUGS = [
   'corporate-events',
   'conferences',
   'exhibitions',
-  'hybrid-events',
-  'live-streaming',
+  'stage-production',
   'led-solutions',
-  'lighting-solutions',
-  'technical-production',
+  'hybrid-events',
 ]
 
-const ICONS: Record<string, typeof Building2> = {
-  'corporate-events': Building2,
-  conferences: Presentation,
-  exhibitions: LayoutGrid,
-  'hybrid-events': Radio,
-  'live-streaming': Cast,
-  'led-solutions': Sparkles,
-  'lighting-solutions': Video,
-  'technical-production': Settings2,
-}
-
+/** "Our expertise" — numbered hairline rows with a hover image preview. */
 export function CoreServicesGrid() {
   const { t } = useTranslation('home')
   const { locale } = useLocale()
   const services = getServices(locale)
-  const featured = FEATURED_SLUGS.map((slug) => services.find((s) => s.slug === slug)).filter(
+  const pillars = PILLAR_SLUGS.map((slug) => services.find((s) => s.slug === slug)).filter(
     (s): s is (typeof services)[number] => Boolean(s),
   )
 
   return (
-    <section className="bg-mist py-20 lg:py-28">
-      <div className="container-page">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading
-            eyebrow={t('coreServices.eyebrow')}
-            title={t('coreServices.title')}
-            description={t('coreServices.description')}
-          />
-          <LocalizedLink
-            to="/services"
-            className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-signal hover:underline sm:flex"
-          >
-            {t('coreServices.viewAll')} <ArrowRight className="size-4" />
-          </LocalizedLink>
+    <Section tone="paper" space="md" className="border-t border-line">
+      <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-7">
+          <Eyebrow className="mb-6">{t('coreServices.eyebrow')}</Eyebrow>
+          <Display as="h2" size="sec">
+            {t('coreServices.title')}
+          </Display>
         </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((service, i) => {
-            const Icon = ICONS[service.slug] ?? Sparkles
-            return (
-              <Reveal key={service.slug} delay={(i % 4) * 0.06}>
-                <LocalizedLink
-                  to={`/services/${service.slug}`}
-                  className="group flex h-full flex-col rounded-xl border border-border bg-white p-6 transition-all hover:-translate-y-1 hover:border-signal/30 hover:shadow-lg hover:shadow-navy/5"
-                >
-                  <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-signal-soft text-signal">
-                    <Icon className="size-5" />
-                  </div>
-                  <h3 className="text-base font-semibold text-navy">{service.name}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {service.shortDescription}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-signal opacity-0 transition-opacity group-hover:opacity-100">
-                    {t('coreServices.learnMore')} <ArrowRight className="size-3.5" />
-                  </span>
-                </LocalizedLink>
-              </Reveal>
-            )
-          })}
-        </div>
-
-        <div className="mt-8 sm:hidden">
-          <LocalizedLink to="/services" className="flex items-center gap-1.5 text-sm font-semibold text-signal">
-            {t('coreServices.viewAll')} <ArrowRight className="size-4" />
-          </LocalizedLink>
-        </div>
+        <p className="text-base leading-relaxed text-muted-foreground lg:col-span-4 lg:col-start-9 lg:text-lg">
+          {t('coreServices.description')}
+        </p>
       </div>
-    </section>
+
+      <ol className="mt-14 border-t border-ink lg:mt-20">
+        {pillars.map((service, i) => (
+          <ServiceIndexRow key={service.slug} service={service} index={i + 1} delay={(i % 6) * 0.04} />
+        ))}
+      </ol>
+
+      <div className="mt-10">
+        <LocalizedLink
+          to="/services"
+          className="group inline-flex items-center gap-2 border-b border-ink/30 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.14em] transition-colors hover:border-ink"
+        >
+          {t('coreServices.viewAll')}
+          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </LocalizedLink>
+      </div>
+    </Section>
   )
 }

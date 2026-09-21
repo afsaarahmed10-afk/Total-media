@@ -8,7 +8,24 @@
     "eyebrow": "イベントプロダクション&技術ソリューション",
     "title": "日本全国で、記憶に残るイベントを。",
     "description": "企業イベント、カンファレンス、展示会、ハイブリッド配信の企画・制作・技術設計を行っています。LED、音響、照明、舞台美術、配信まで、単一の技術パートナーが責任を持って一貫対応します。",
-    "viewServices": "サービス一覧を見る"
+    "viewServices": "サービス一覧を見る",
+    "titleAccent": "記憶に残るイベントを。",
+    "scroll": "スクロール",
+    "latestWork": "最新の実績"
+  },
+  "band": {
+    "eyebrow": "実績",
+    "stalls": "ブース・展示会",
+    "stageHall": "ステージ・会場",
+    "explore": "詳しく見る"
+  },
+  "featured": {
+    "eyebrow": "注目の実績",
+    "viewProject": "プロジェクトを見る",
+    "viewAllWork": "実績一覧を見る",
+    "client": "クライアント",
+    "venue": "会場",
+    "date": "開催日"
   },
   "companyIntro": {
     "eyebrow": "私たちについて",

@@ -1,35 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Menu, LayoutDashboard, Settings, LogOut } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { ArrowUpRight, LayoutDashboard, LogOut, Settings } from 'lucide-react'
+import { Dialog } from 'radix-ui'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { Logo } from '@/components/brand/Logo'
-import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetClose,
-} from '@/components/ui/sheet'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { UserAvatar } from '@/components/shared/UserAvatar'
+import { CineButton } from '@/components/cinematic/CineButton'
 import { LocalizedLink, LocalizedNavLink } from '@/components/shared/LocalizedLink'
 import { LanguageSwitcher } from '@/components/shared/LanguageSwitcher'
 import { useLocalizedNavigate } from '@/lib/locale/useLocalizedNavigate'
@@ -37,362 +14,343 @@ import { useLocale } from '@/lib/locale/LocaleContext'
 import { getServices, getEquipmentCategories } from '@/lib/data'
 import { useAuth } from '@/lib/auth/AuthContext'
 import { trackEvent } from '@/lib/analytics'
+import { CONTACT } from '@/lib/contact'
 import { cn } from '@/lib/utils'
 
+const EASE = [0.22, 1, 0.36, 1] as const
+
 export function Header() {
-  const { t } = useTranslation('header')
-  const { locale } = useLocale()
+  const { t } = useTranslation(['header', 'common'])
   const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-  const navigate = useLocalizedNavigate()
-  const { user, profile, signOut } = useAuth()
+
+  // The homepage hero is a full-bleed photograph, so the header floats over
+  // it (transparent, hairline underneath) and turns solid on scroll. Every
+  // other page opens with a dark hero of its own, so the header is solid ink
+  // there and the two read as one surface.
+  const isHome = /^\/(en\/?)?$/.test(location.pathname)
+  const solid = !isHome || scrolled || menuOpen
 
   const primaryLinks = [
-    { label: t('nav.solutions'), to: '/solutions' },
+    { label: t('servicesMenu'), to: '/services' },
     { label: t('nav.portfolio'), to: '/portfolio' },
-    { label: t('nav.industries'), to: '/industries' },
+    { label: t('equipmentMenu'), to: '/equipment' },
     { label: t('nav.about'), to: '/about' },
-    { label: t('nav.blog'), to: '/blog' },
+    { label: t('nav.contact'), to: '/contact', track: 'contact_click' as const },
   ]
 
-  async function handleSignOut() {
-    await signOut()
-    toast.success(t('logoutSuccess'))
-    navigate('/')
-  }
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    setMobileOpen(false)
+    setMenuOpen(false)
   }, [location.pathname])
-
-  const services = getServices(locale)
-  const equipmentCategories = getEquipmentCategories(locale)
-  const eventServices = services.filter((s) => s.category === 'event-type')
-  const technicalServices = services.filter((s) => s.category === 'technical')
 
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full border-b transition-colors',
-        scrolled
-          ? 'border-border bg-white/90 backdrop-blur-md'
-          : 'border-transparent bg-white',
+        'on-dark z-50 w-full border-b text-white transition-colors duration-300',
+        isHome ? 'fixed inset-x-0 top-0' : 'sticky top-0',
+        solid ? 'border-white/10 bg-ink' : 'border-white/15 bg-transparent',
       )}
     >
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:bg-blue focus:px-4 focus:py-3 focus:text-white"
       >
         {t('skipToContent')}
       </a>
 
-      <div className="container-page flex h-16 items-center justify-between lg:h-20">
-        <LocalizedLink to="/" aria-label={t('homeAriaLabel')}>
-          <Logo />
+      <div className="container-page flex h-16 items-center justify-between gap-6 lg:h-20">
+        <LocalizedLink to="/" aria-label={t('homeAriaLabel')} className="shrink-0">
+          <Logo tone="white" />
         </LocalizedLink>
 
-        <nav className="hidden lg:block" aria-label="Primary">
-          <NavigationMenu viewport={false}>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-medium text-charcoal">
-                  {t('servicesMenu')}
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="grid w-[640px] grid-cols-2 gap-6 p-6">
-                    <div>
-                      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        {t('byEventType')}
-                      </p>
-                      <ul className="space-y-1">
-                        {eventServices.map((s) => (
-                          <li key={s.slug}>
-                            <NavigationMenuLink asChild>
-                              <LocalizedLink
-                                to={`/services/${s.slug}`}
-                                className="block rounded-md px-2 py-1.5 text-sm text-charcoal hover:bg-accent hover:text-accent-foreground"
-                              >
-                                {s.name}
-                              </LocalizedLink>
-                            </NavigationMenuLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        {t('byTechnicalDiscipline')}
-                      </p>
-                      <ul className="space-y-1">
-                        {technicalServices.map((s) => (
-                          <li key={s.slug}>
-                            <NavigationMenuLink asChild>
-                              <LocalizedLink
-                                to={`/services/${s.slug}`}
-                                className="block rounded-md px-2 py-1.5 text-sm text-charcoal hover:bg-accent hover:text-accent-foreground"
-                              >
-                                {s.name}
-                              </LocalizedLink>
-                            </NavigationMenuLink>
-                          </li>
-                        ))}
-                      </ul>
-                      <NavigationMenuLink asChild>
-                        <LocalizedLink
-                          to="/services"
-                          className="mt-4 block rounded-md px-2 py-1.5 text-sm font-semibold text-signal hover:bg-accent"
-                        >
-                          {t('viewAllServices')}
-                        </LocalizedLink>
-                      </NavigationMenuLink>
-                    </div>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent px-3 text-[15px] font-medium text-charcoal">
-                  {t('equipmentMenu')}
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="w-[480px] p-6">
-                    <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      {t('rentalCategories')}
-                    </p>
-                    <ul className="grid grid-cols-2 gap-1">
-                      {equipmentCategories.map((c) => (
-                        <li key={c.slug}>
-                          <NavigationMenuLink asChild>
-                            <LocalizedLink
-                              to={`/equipment/${c.slug}`}
-                              className="block rounded-md px-2 py-1.5 text-sm text-charcoal hover:bg-accent hover:text-accent-foreground"
-                            >
-                              {c.name}
-                            </LocalizedLink>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                    <NavigationMenuLink asChild>
-                      <LocalizedLink
-                        to="/equipment"
-                        className="mt-4 block rounded-md px-2 py-1.5 text-sm font-semibold text-signal hover:bg-accent"
-                      >
-                        {t('viewFullCatalogue')}
-                      </LocalizedLink>
-                    </NavigationMenuLink>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {primaryLinks.map((link) => (
-                <NavigationMenuItem key={link.to}>
-                  <NavigationMenuLink asChild>
-                    <LocalizedNavLink
-                      to={link.to}
-                      className={({ isActive }) =>
-                        cn(
-                          'inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-3 py-2 text-[15px] font-medium whitespace-nowrap text-charcoal hover:bg-accent hover:text-accent-foreground',
-                          isActive && 'text-signal',
-                        )
-                      }
-                    >
-                      {link.label}
-                    </LocalizedNavLink>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+        <nav className="hidden xl:block" aria-label="Primary">
+          <ul className="flex items-center gap-9">
+            {primaryLinks.map((link) => (
+              <li key={link.to}>
+                <LocalizedNavLink
+                  to={link.to}
+                  onClick={() => link.track && trackEvent(link.track, { location: 'header' })}
+                  className={({ isActive }) =>
+                    cn(
+                      'relative inline-block py-2 text-[0.75rem] font-semibold uppercase tracking-[0.14em] whitespace-nowrap transition-colors',
+                      'after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-left after:bg-white after:transition-transform after:duration-300',
+                      isActive
+                        ? 'text-white after:scale-x-100'
+                        : 'text-white/70 after:scale-x-0 hover:text-white hover:after:scale-x-100',
+                    )
+                  }
+                >
+                  {link.label}
+                </LocalizedNavLink>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        <div className="hidden items-center gap-1.5 lg:flex">
-          <LanguageSwitcher />
-          <Button asChild variant="ghost">
-            <LocalizedLink
-              to="/contact"
-              onClick={() => trackEvent('contact_click', { location: 'header' })}
-            >
-              {t('nav.contact')}
-            </LocalizedLink>
-          </Button>
-          {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                <UserAvatar
-                  name={profile?.full_name ?? ''}
-                  email={user.email ?? ''}
-                  avatarUrl={profile?.avatar_url}
-                  className="size-9"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel className="truncate">
-                  {profile?.full_name || user.email}
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <LocalizedLink to="/dashboard" className="flex items-center gap-2">
-                    <LayoutDashboard className="size-4" /> {t('dashboard')}
-                  </LocalizedLink>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <LocalizedLink to="/dashboard/settings" className="flex items-center gap-2">
-                    <Settings className="size-4" /> {t('profileSettings')}
-                  </LocalizedLink>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={handleSignOut}
-                  className="flex items-center gap-2 text-red-600 focus:text-red-600"
-                >
-                  <LogOut className="size-4" /> {t('signOut')}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Button asChild variant="ghost">
-              <LocalizedLink to="/login">{t('logIn')}</LocalizedLink>
-            </Button>
-          )}
-          <Button asChild className="bg-navy text-white hover:bg-navy-deep">
-            <LocalizedLink
+        <div className="flex items-center gap-4 lg:gap-6">
+          <LanguageSwitcher tone="dark" className="hidden sm:flex" />
+          <div className="hidden md:block">
+            <CineButton
               to="/quote"
+              className="min-h-10 px-5"
               onClick={() => trackEvent('request_quote_click', { location: 'header_desktop' })}
             >
               {t('requestQuote')}
-            </LocalizedLink>
-          </Button>
-        </div>
-
-        <div className="flex items-center gap-3 lg:hidden">
-          <LanguageSwitcher />
-          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label={t('openMenu')}>
-                <Menu className="size-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-sm overflow-y-auto">
-              <SheetHeader>
-                <SheetTitle>
-                  <Logo />
-                </SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-1 px-4 pb-8" aria-label="Mobile">
-                <MobileSection title={t('servicesMenu')}>
-                  {services.map((s) => (
-                    <SheetClose asChild key={s.slug}>
-                      <LocalizedLink to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
-                        {s.name}
-                      </LocalizedLink>
-                    </SheetClose>
-                  ))}
-                </MobileSection>
-                <MobileSection title={t('equipmentMenu')}>
-                  {equipmentCategories.map((c) => (
-                    <SheetClose asChild key={c.slug}>
-                      <LocalizedLink to={`/equipment/${c.slug}`} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-mist">
-                        {c.name}
-                      </LocalizedLink>
-                    </SheetClose>
-                  ))}
-                </MobileSection>
-                {[
-                  ...primaryLinks,
-                  { label: t('nav.faq'), to: '/faq' },
-                  { label: t('nav.careers'), to: '/careers' },
-                  { label: t('nav.contact'), to: '/contact' },
-                ].map((link) => (
-                  <SheetClose asChild key={link.to}>
-                    <LocalizedLink
-                      to={link.to}
-                      className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                    >
-                      {link.label}
-                    </LocalizedLink>
-                  </SheetClose>
-                ))}
-                <div className="my-2 border-t border-border" />
-                {user ? (
-                  <>
-                    <SheetClose asChild>
-                      <LocalizedLink
-                        to="/dashboard"
-                        className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                      >
-                        <LayoutDashboard className="size-4" /> {t('dashboard')}
-                      </LocalizedLink>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <LocalizedLink
-                        to="/dashboard/settings"
-                        className="flex items-center gap-2 rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                      >
-                        <Settings className="size-4" /> {t('profileSettings')}
-                      </LocalizedLink>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <button
-                        type="button"
-                        onClick={handleSignOut}
-                        className="flex items-center gap-2 rounded-md px-3 py-3 text-left text-base font-medium text-red-600 hover:bg-mist"
-                      >
-                        <LogOut className="size-4" /> {t('signOut')}
-                      </button>
-                    </SheetClose>
-                  </>
-                ) : (
-                  <SheetClose asChild>
-                    <LocalizedLink
-                      to="/login"
-                      className="block rounded-md px-3 py-3 text-base font-medium text-charcoal hover:bg-mist"
-                    >
-                      {t('logIn')}
-                    </LocalizedLink>
-                  </SheetClose>
-                )}
-                <SheetClose asChild>
-                  <Button asChild className="mt-4 bg-navy text-white hover:bg-navy-deep">
-                    <LocalizedLink
-                      to="/quote"
-                      onClick={() => trackEvent('request_quote_click', { location: 'header_mobile' })}
-                    >
-                      {t('requestQuote')}
-                    </LocalizedLink>
-                  </Button>
-                </SheetClose>
-              </nav>
-            </SheetContent>
-          </Sheet>
+            </CineButton>
+          </div>
+          <MenuOverlay open={menuOpen} onOpenChange={setMenuOpen} />
         </div>
       </div>
     </header>
   )
 }
 
-function MobileSection({ title, children }: { title: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false)
+function MenuOverlay({
+  open,
+  onOpenChange,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}) {
+  const { t } = useTranslation(['header', 'common'])
+  const { locale } = useLocale()
+  const reduce = useReducedMotion()
+  const navigate = useLocalizedNavigate()
+  const { user, profile, signOut } = useAuth()
+
+  const services = getServices(locale)
+  const equipmentCategories = getEquipmentCategories(locale)
+  const eventServices = services.filter((s) => s.category === 'event-type')
+  const technicalServices = services.filter((s) => s.category === 'technical')
+
+  const bigLinks = [
+    { label: t('servicesMenu'), to: '/services' },
+    { label: t('nav.portfolio'), to: '/portfolio' },
+    { label: t('equipmentMenu'), to: '/equipment' },
+    { label: t('nav.about'), to: '/about' },
+    { label: t('nav.contact'), to: '/contact' },
+  ]
+  const moreLinks = [
+    { label: t('nav.solutions'), to: '/solutions' },
+    { label: t('nav.industries'), to: '/industries' },
+    { label: t('nav.blog'), to: '/blog' },
+    { label: t('nav.faq'), to: '/faq' },
+    { label: t('nav.careers'), to: '/careers' },
+  ]
+
+  async function handleSignOut() {
+    await signOut()
+    toast.success(t('logoutSuccess'))
+    onOpenChange(false)
+    navigate('/')
+  }
+
+  const close = () => onOpenChange(false)
+  const dur = reduce ? 0 : 0.6
+
   return (
-    <div className="border-b border-border py-1">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between rounded-md px-3 py-3 text-base font-medium text-charcoal"
-        aria-expanded={open}
-      >
-        {title}
-        <span className={cn('transition-transform', open && 'rotate-180')}>⌄</span>
-      </button>
-      {open && <div className="flex flex-col gap-0.5 pb-2">{children}</div>}
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Trigger asChild>
+        <button
+          type="button"
+          className="group/menu flex h-10 items-center gap-3 border border-white/30 px-4 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:border-white hover:bg-white hover:text-ink"
+        >
+          <span>{t('menu')}</span>
+          <span aria-hidden="true" className="flex w-4 flex-col gap-[5px]">
+            <span className="h-px w-full bg-current" />
+            <span className="h-px w-full bg-current transition-[width] duration-300 group-hover/menu:w-2/3" />
+          </span>
+        </button>
+      </Dialog.Trigger>
+
+      <AnimatePresence>
+        {open && (
+          <Dialog.Portal forceMount>
+            <Dialog.Content asChild forceMount aria-describedby={undefined}>
+              <motion.div
+                className="cinematic on-dark fixed inset-0 z-[60] overflow-y-auto bg-ink text-white"
+                initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                animate={{ clipPath: 'inset(0 0 0% 0)' }}
+                exit={{ clipPath: 'inset(0 0 100% 0)' }}
+                transition={{ duration: dur, ease: EASE }}
+              >
+                <Dialog.Title className="sr-only">{t('menuTitle')}</Dialog.Title>
+
+                <div className="border-b border-white/10">
+                  <div className="container-page flex h-16 items-center justify-between lg:h-20">
+                    <LocalizedLink to="/" onClick={close} aria-label={t('homeAriaLabel')}>
+                      <Logo tone="white" />
+                    </LocalizedLink>
+                    <Dialog.Close asChild>
+                      <button
+                        type="button"
+                        aria-label={t('closeMenu')}
+                        className="group/menu flex h-10 items-center gap-3 border border-white/30 px-4 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:border-white hover:bg-white hover:text-ink"
+                      >
+                        <span>{t('buttons.close', { ns: 'common' })}</span>
+                        <span aria-hidden="true" className="relative block size-4">
+                          <span className="absolute left-0 top-1/2 h-px w-full rotate-45 bg-current" />
+                          <span className="absolute left-0 top-1/2 h-px w-full -rotate-45 bg-current" />
+                        </span>
+                      </button>
+                    </Dialog.Close>
+                  </div>
+                </div>
+
+                <div className="container-page grid gap-14 pb-16 pt-10 lg:grid-cols-[1.15fr_1fr] lg:gap-24 lg:pt-16">
+                  <nav aria-label={t('menuTitle')}>
+                    <ol className="border-t border-white/10">
+                      {bigLinks.map((link, i) => (
+                        <motion.li
+                          key={link.to}
+                          initial={reduce ? false : { opacity: 0, y: 28 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.7, ease: EASE, delay: reduce ? 0 : 0.25 + i * 0.06 }}
+                          className="border-b border-white/10"
+                        >
+                          <LocalizedLink
+                            to={link.to}
+                            onClick={close}
+                            className="group flex items-baseline gap-5 py-4 lg:gap-8 lg:py-6"
+                          >
+                            <span className="eyebrow tnum w-6 shrink-0 text-white/40">
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <span className="text-[clamp(2rem,1rem+3.4vw,4rem)] font-medium leading-none tracking-[-0.035em] transition-colors duration-300 group-hover:text-blue-tint">
+                              {link.label}
+                            </span>
+                            <ArrowUpRight
+                              aria-hidden="true"
+                              className="ml-auto size-6 shrink-0 -translate-x-2 self-center text-blue-tint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                            />
+                          </LocalizedLink>
+                        </motion.li>
+                      ))}
+                    </ol>
+
+                    <p className="eyebrow mt-10 text-white/40">{t('menuMore')}</p>
+                    <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+                      {moreLinks.map((link) => (
+                        <li key={link.to}>
+                          <LocalizedLink
+                            to={link.to}
+                            onClick={close}
+                            className="text-base text-white/75 transition-colors hover:text-white"
+                          >
+                            {link.label}
+                          </LocalizedLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+
+                  <div className="grid content-start gap-10 sm:grid-cols-2 lg:gap-12">
+                    <MenuList title={t('byEventType')} onNavigate={close}>
+                      {eventServices.map((s) => ({ label: s.name, to: `/services/${s.slug}` }))}
+                    </MenuList>
+                    <MenuList title={t('byTechnicalDiscipline')} onNavigate={close}>
+                      {technicalServices.map((s) => ({ label: s.name, to: `/services/${s.slug}` }))}
+                    </MenuList>
+                    <div className="sm:col-span-2">
+                      <MenuList title={t('rentalCategories')} onNavigate={close} columns>
+                        {equipmentCategories.map((c) => ({ label: c.name, to: `/equipment/${c.slug}` }))}
+                      </MenuList>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-white/10">
+                  <div className="container-page flex flex-col gap-8 py-8 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="space-y-1 text-sm text-white/70">
+                      <p className="eyebrow mb-3 text-white/40">{t('getInTouch')}</p>
+                      <a href={`mailto:${CONTACT.email}`} className="block hover:text-white">
+                        {CONTACT.email}
+                      </a>
+                      <a href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} className="block hover:text-white">
+                        {CONTACT.phone}
+                      </a>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+                      <LanguageSwitcher tone="dark" />
+                      {user ? (
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/75">
+                          <span className="truncate text-white/50">{profile?.full_name || user.email}</span>
+                          <LocalizedLink to="/dashboard" onClick={close} className="flex items-center gap-2 hover:text-white">
+                            <LayoutDashboard className="size-4" /> {t('dashboard')}
+                          </LocalizedLink>
+                          <LocalizedLink
+                            to="/dashboard/settings"
+                            onClick={close}
+                            className="flex items-center gap-2 hover:text-white"
+                          >
+                            <Settings className="size-4" /> {t('profileSettings')}
+                          </LocalizedLink>
+                          <button type="button" onClick={handleSignOut} className="flex items-center gap-2 hover:text-white">
+                            <LogOut className="size-4" /> {t('signOut')}
+                          </button>
+                        </div>
+                      ) : (
+                        <LocalizedLink to="/login" onClick={close} className="text-sm text-white/75 hover:text-white">
+                          {t('logIn')}
+                        </LocalizedLink>
+                      )}
+                      <CineButton
+                        to="/quote"
+                        onClick={() => {
+                          trackEvent('request_quote_click', { location: 'header_mobile' })
+                          close()
+                        }}
+                      >
+                        {t('requestQuote')}
+                      </CineButton>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        )}
+      </AnimatePresence>
+    </Dialog.Root>
+  )
+}
+
+function MenuList({
+  title,
+  children,
+  onNavigate,
+  columns = false,
+}: {
+  title: string
+  children: { label: string; to: string }[]
+  onNavigate: () => void
+  columns?: boolean
+}) {
+  return (
+    <div>
+      <p className="eyebrow mb-4 border-b border-white/10 pb-4 text-white/40">{title}</p>
+      <ul className={cn('space-y-2.5', columns && 'sm:columns-2 sm:gap-8 sm:space-y-0 [&>li]:mb-2.5')}>
+        {children.map((item) => (
+          <li key={item.to} className="break-inside-avoid">
+            <LocalizedLink
+              to={item.to}
+              onClick={onNavigate}
+              className="text-[0.9375rem] text-white/75 transition-colors hover:text-white"
+            >
+              {item.label}
+            </LocalizedLink>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
