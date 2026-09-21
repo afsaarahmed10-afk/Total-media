@@ -40,7 +40,7 @@ export function FeaturedProject() {
           <dl className="mt-10 max-w-md border-t border-white/15">
             {facts.map((fact) => (
               <div key={fact.label} className="grid grid-cols-[6rem_1fr] gap-4 border-b border-white/15 py-4 text-sm">
-                <dt className="eyebrow pt-1 text-white/45">{fact.label}</dt>
+                <dt className="eyebrow pt-1 text-white/60">{fact.label}</dt>
                 <dd className="text-white/90">{fact.value}</dd>
               </div>
             ))}

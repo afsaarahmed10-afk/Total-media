@@ -60,7 +60,7 @@ export default function BlogIndexPage() {
               type="button"
               onClick={() => setActive('all')}
               className={cn(
-                'rounded-full border px-4 py-2 text-sm font-medium transition-colors',
+                'border px-4 py-2 text-[0.75rem] font-semibold uppercase tracking-[0.1em] transition-colors',
                 active === 'all'
                   ? 'border-navy bg-navy text-white'
                   : 'border-border text-charcoal hover:border-navy/30',
@@ -74,7 +74,7 @@ export default function BlogIndexPage() {
                 type="button"
                 onClick={() => setActive(cat.slug)}
                 className={cn(
-                  'rounded-full border px-4 py-2 text-sm font-medium transition-colors',
+                  'border px-4 py-2 text-[0.75rem] font-semibold uppercase tracking-[0.1em] transition-colors',
                   active === cat.slug
                     ? 'border-navy bg-navy text-white'
                     : 'border-border text-charcoal hover:border-navy/30',

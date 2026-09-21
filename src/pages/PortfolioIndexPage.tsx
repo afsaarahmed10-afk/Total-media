@@ -35,7 +35,7 @@ function ProjectFigure({ project, featured, delay = 0 }: { project: Project; fea
         <div className="mt-6 grid gap-x-8 gap-y-3 lg:grid-cols-12">
           <p className="eyebrow tnum text-blue lg:col-span-12">
             {t(`categories.${project.category}`)}
-            <span className="ml-3 text-ink/40">
+            <span className="ml-3 text-ink/60">
               {project.location} · {project.year}
             </span>
           </p>
@@ -176,7 +176,7 @@ export default function PortfolioIndexPage() {
                     <MediaFrame src={tile.url} alt={tile.alt} ratio="4 / 5" hoverZoom />
                     <p className="mt-4 flex items-baseline justify-between gap-3 border-b border-white/15 pb-3 text-sm font-medium">
                       <span>{tile.label}</span>
-                      <span className="tnum text-xs text-white/50">{String(tile.count).padStart(2, '0')}</span>
+                      <span className="tnum text-xs text-white/60">{String(tile.count).padStart(2, '0')}</span>
                     </p>
                   </LocalizedLink>
                 </Reveal>

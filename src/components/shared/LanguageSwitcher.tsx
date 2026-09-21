@@ -40,7 +40,7 @@ export function LanguageSwitcher({
     >
       {options.map((opt, i) => (
         <span key={opt.locale} className="flex items-center gap-1">
-          {i > 0 && <span className={dark ? 'text-white/30' : 'text-muted-foreground/40'}>/</span>}
+          {i > 0 && <span className={dark ? 'text-white/60' : 'text-muted-foreground'}>/</span>}
           {opt.locale === locale ? (
             <span aria-current="true" className={cn('font-semibold', dark ? 'text-white' : 'text-navy')}>
               {opt.label}

@@ -282,7 +282,7 @@ export default function QuotePage() {
                 <div className="flex flex-col items-center gap-2">
                   <div
                     className={cn(
-                      'flex size-8 items-center justify-center rounded-full text-sm font-semibold transition-colors',
+                      'flex size-8 items-center justify-center text-sm font-semibold transition-colors',
                       i <= step ? 'bg-navy text-white' : 'bg-mist text-muted-foreground',
                     )}
                   >

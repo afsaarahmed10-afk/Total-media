@@ -112,7 +112,7 @@ export function Hero() {
               to={projectViewPath(project)}
               className="hidden items-center gap-3 text-right transition-colors hover:text-white sm:flex"
             >
-              <span className="hidden text-white/45 sm:inline">{t('hero.latestWork')}</span>
+              <span className="hidden text-white/60 sm:inline">{t('hero.latestWork')}</span>
               <span className="text-white">{project.title}</span>
               <span aria-hidden="true">↗</span>
             </LocalizedLink>

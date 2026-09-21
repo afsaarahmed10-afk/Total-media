@@ -104,7 +104,7 @@ export default function SolutionsPage() {
                         <LocalizedLink
                           key={service.slug}
                           to={`/services/${service.slug}`}
-                          className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-charcoal hover:border-signal/40 hover:text-signal"
+                          className="border border-border px-3.5 py-1.5 text-xs font-medium text-charcoal hover:border-signal/40 hover:text-signal"
                         >
                           {service.name}
                         </LocalizedLink>

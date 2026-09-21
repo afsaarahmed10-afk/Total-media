@@ -180,6 +180,19 @@ html[lang='ja'] .cinematic p {
   }
 }
 
+/* Grid/flex children default to min-width:auto, so one long unbreakable run
+   (common in Japanese product names like "…&LEDソリューション") can push a
+   single-column grid wider than the viewport. Let them shrink instead. */
+.cinematic .grid > *,
+.cinematic .flex > * {
+  min-width: 0;
+}
+.cinematic h1,
+.cinematic h2,
+.cinematic h3 {
+  overflow-wrap: break-word;
+}
+
 /* Wider, more generous gutters than the legacy 1280 container. */
 .cinematic .container-page {
   max-width: 1480px;

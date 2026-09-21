@@ -25,7 +25,7 @@ export function Breadcrumbs({ items, className }: { items: BreadcrumbItem[]; cla
                 </span>
               )}
               {!isLast && (
-                <span aria-hidden="true" className="text-white/30">
+                <span aria-hidden="true" className="text-white/60">
                   /
                 </span>
               )}

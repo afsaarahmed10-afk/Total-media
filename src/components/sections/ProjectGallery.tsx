@@ -74,7 +74,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
       <div ref={sectionRef as React.RefObject<HTMLDivElement>} className="scroll-mt-24">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <SectionHeading tone="dark" eyebrow={t('detail.gallery')} title={title} />
-          <p className="eyebrow tnum text-white/50">{t('detail.photoCount', { count: images.length })}</p>
+          <p className="eyebrow tnum text-white/60">{t('detail.photoCount', { count: images.length })}</p>
         </div>
 
         {categories.length > 1 && (
@@ -89,11 +89,11 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                   '-mb-px flex items-baseline gap-2 border-b-2 pb-4 text-[0.75rem] font-semibold uppercase tracking-[0.14em] transition-colors',
                   active === c.key
                     ? 'border-white text-white'
-                    : 'border-transparent text-white/55 hover:text-white',
+                    : 'border-transparent text-white/60 hover:text-white',
                 )}
               >
                 {c.label}
-                <span className="tnum text-[0.6875rem] text-white/40">{c.count}</span>
+                <span className="tnum text-[0.6875rem] text-white/60">{c.count}</span>
               </button>
             ))}
           </div>

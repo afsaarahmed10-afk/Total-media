@@ -104,7 +104,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
             {footerColumns.map((col) => (
               <div key={col.title}>
-                <Eyebrow tone="dark" className="mb-5 border-b border-white/10 pb-5 !text-white/45">
+                <Eyebrow tone="dark" className="mb-5 border-b border-white/10 pb-5 !text-white/60">
                   {col.title}
                 </Eyebrow>
                 <ul className="space-y-3">
@@ -123,7 +123,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-start justify-between gap-3 py-7 text-xs text-white/50 sm:flex-row sm:items-center">
+        <div className="container-page flex flex-col items-start justify-between gap-3 py-7 text-xs text-white/60 sm:flex-row sm:items-center">
           <p>{t('copyright', { year })}</p>
           <p>{t('bottomTagline')}</p>
         </div>

@@ -14,7 +14,7 @@ export function Eyebrow({ children, index, tone = 'light', className }: EyebrowP
   return (
     <p className={cn('eyebrow', tone === 'dark' ? 'text-blue-tint' : 'text-blue', className)}>
       {index && (
-        <span className={cn('tnum mr-3', tone === 'dark' ? 'text-white/50' : 'text-ink/45')}>
+        <span className={cn('tnum mr-3', tone === 'dark' ? 'text-white/60' : 'text-ink/60')}>
           {index}
         </span>
       )}

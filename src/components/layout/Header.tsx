@@ -221,7 +221,7 @@ function MenuOverlay({
                             onClick={close}
                             className="group flex items-baseline gap-5 py-4 lg:gap-8 lg:py-6"
                           >
-                            <span className="eyebrow tnum w-6 shrink-0 text-white/40">
+                            <span className="eyebrow tnum w-6 shrink-0 text-white/60">
                               {String(i + 1).padStart(2, '0')}
                             </span>
                             <span className="text-[clamp(2rem,1rem+3.4vw,4rem)] font-medium leading-none tracking-[-0.035em] transition-colors duration-300 group-hover:text-blue-tint">
@@ -236,7 +236,7 @@ function MenuOverlay({
                       ))}
                     </ol>
 
-                    <p className="eyebrow mt-10 text-white/40">{t('menuMore')}</p>
+                    <p className="eyebrow mt-10 text-white/60">{t('menuMore')}</p>
                     <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
                       {moreLinks.map((link) => (
                         <li key={link.to}>
@@ -270,7 +270,7 @@ function MenuOverlay({
                 <div className="border-t border-white/10">
                   <div className="container-page flex flex-col gap-8 py-8 lg:flex-row lg:items-center lg:justify-between">
                     <div className="space-y-1 text-sm text-white/70">
-                      <p className="eyebrow mb-3 text-white/40">{t('getInTouch')}</p>
+                      <p className="eyebrow mb-3 text-white/60">{t('getInTouch')}</p>
                       <a href={`mailto:${CONTACT.email}`} className="block hover:text-white">
                         {CONTACT.email}
                       </a>
@@ -283,7 +283,7 @@ function MenuOverlay({
                       <LanguageSwitcher tone="dark" />
                       {user ? (
                         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/75">
-                          <span className="truncate text-white/50">{profile?.full_name || user.email}</span>
+                          <span className="truncate text-white/60">{profile?.full_name || user.email}</span>
                           <LocalizedLink to="/dashboard" onClick={close} className="flex items-center gap-2 hover:text-white">
                             <LayoutDashboard className="size-4" /> {t('dashboard')}
                           </LocalizedLink>
@@ -337,7 +337,7 @@ function MenuList({
 }) {
   return (
     <div>
-      <p className="eyebrow mb-4 border-b border-white/10 pb-4 text-white/40">{title}</p>
+      <p className="eyebrow mb-4 border-b border-white/10 pb-4 text-white/60">{title}</p>
       <ul className={cn('space-y-2.5', columns && 'sm:columns-2 sm:gap-8 sm:space-y-0 [&>li]:mb-2.5')}>
         {children.map((item) => (
           <li key={item.to} className="break-inside-avoid">

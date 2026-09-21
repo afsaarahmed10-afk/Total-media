@@ -133,7 +133,7 @@ export default function PortfolioDetailPage() {
         <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-white/20 pt-6 sm:grid-cols-2 lg:grid-cols-4">
           {facts.map((fact) => (
             <div key={fact.label}>
-              <dt className="eyebrow mb-2 text-white/55">{fact.label}</dt>
+              <dt className="eyebrow mb-2 text-white/60">{fact.label}</dt>
               <dd className="text-sm leading-snug text-white">{fact.value}</dd>
             </div>
           ))}
