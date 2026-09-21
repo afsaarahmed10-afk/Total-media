@@ -1,17 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { Logo } from '@/components/brand/Logo'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { getEquipmentCategories } from '@/lib/data'
 import { getWhatsAppUrl, WHATSAPP_DISPLAY_NUMBER } from '@/lib/whatsapp'
-
-// Phone matches WHATSAPP_DISPLAY_NUMBER (lib/whatsapp.ts) — same number for
-// calls and WhatsApp. Office addresses come from footer.json (translated),
-// not from here, since they differ by locale.
-const CONTACT = {
-  phone: '+81 80-5500-2929',
-  email: 'uno@nippon-group.com',
-}
+import { CONTACT } from '@/lib/contact'
 
 interface FooterOffice {
   name: string
@@ -62,57 +56,61 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-navy text-white">
-      <div className="container-page py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_2fr]">
+    <footer className="on-dark bg-ink text-white">
+      <div className="container-page py-20 lg:py-28">
+        <div className="grid gap-16 lg:grid-cols-[1.1fr_2fr] lg:gap-24">
           <div>
             <Logo tone="white" />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">{t('tagline')}</p>
-            <address className="mt-6 space-y-4 text-sm not-italic text-white/70">
-              <div className="space-y-3">
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/65">{t('tagline')}</p>
+            <address className="mt-10 space-y-6 text-sm not-italic text-white/65">
+              <div className="space-y-5">
                 {offices.map((office) => (
                   <div key={office.name}>
-                    <p className="font-semibold text-white/90">{office.name}</p>
+                    <p className="eyebrow mb-2 text-white/85">{office.name}</p>
                     {office.lines.map((line) => (
-                      <p key={line}>{line}</p>
+                      <p key={line} className="leading-relaxed">
+                        {line}
+                      </p>
                     ))}
                   </div>
                 ))}
               </div>
-              <p>
-                <a href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} className="hover:text-white">
-                  {CONTACT.phone}
-                </a>
-              </p>
-              <p>
-                <a href={`mailto:${CONTACT.email}`} className="hover:text-white">
-                  {CONTACT.email}
-                </a>
-              </p>
-              <p>
-                <a
-                  href={getWhatsAppUrl("Hi TOTAL MEDIA, I'd like to know more about your services.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white"
-                >
-                  {t('whatsappPrefix')}
-                  {WHATSAPP_DISPLAY_NUMBER}
-                </a>
-              </p>
+              <div className="space-y-1.5">
+                <p>
+                  <a href={`tel:${CONTACT.phone.replace(/[^+\d]/g, '')}`} className="transition-colors hover:text-white">
+                    {CONTACT.phone}
+                  </a>
+                </p>
+                <p>
+                  <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-white">
+                    {CONTACT.email}
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href={getWhatsAppUrl("Hi TOTAL MEDIA, I'd like to know more about your services.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-white"
+                  >
+                    {t('whatsappPrefix')}
+                    {WHATSAPP_DISPLAY_NUMBER}
+                  </a>
+                </p>
+              </div>
             </address>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4">
             {footerColumns.map((col) => (
               <div key={col.title}>
-                <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
+                <Eyebrow tone="dark" className="mb-5 border-b border-white/10 pb-5 !text-white/60">
                   {col.title}
-                </p>
-                <ul className="mt-4 space-y-2.5">
+                </Eyebrow>
+                <ul className="space-y-3">
                   {col.links.map((link) => (
                     <li key={link.to}>
-                      <LocalizedLink to={link.to} className="text-sm text-white/80 hover:text-white">
+                      <LocalizedLink to={link.to} className="text-sm text-white/75 transition-colors hover:text-white">
                         {link.label}
                       </LocalizedLink>
                     </li>
@@ -125,7 +123,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row">
+        <div className="container-page flex flex-col items-start justify-between gap-3 py-7 text-xs text-white/60 sm:flex-row sm:items-center">
           <p>{t('copyright', { year })}</p>
           <p>{t('bottomTagline')}</p>
         </div>

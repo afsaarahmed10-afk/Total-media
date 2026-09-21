@@ -1,56 +1,48 @@
+import { Display } from '@/components/cinematic/Display'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
 import { cn } from '@/lib/utils'
 
 interface SectionHeadingProps {
   eyebrow?: string
+  /** Optional "01" style index before the eyebrow label. */
+  index?: string
   title: string
   description?: string
   align?: 'left' | 'center'
   tone?: 'light' | 'dark'
+  /** Trailing substring of `title` set in the accent face. */
+  accent?: string
   className?: string
 }
 
 export function SectionHeading({
   eyebrow,
+  index,
   title,
   description,
   align = 'left',
   tone = 'light',
+  accent,
   className,
 }: SectionHeadingProps) {
   const isCenter = align === 'center'
   const isDark = tone === 'dark'
 
   return (
-    <div
-      className={cn(
-        'max-w-2xl',
-        isCenter && 'mx-auto text-center',
-        className,
-      )}
-    >
+    <div className={cn('max-w-3xl', isCenter && 'mx-auto text-center', className)}>
       {eyebrow && (
-        <p
-          className={cn(
-            'mb-3 text-sm font-semibold uppercase tracking-wider',
-            isDark ? 'text-signal-light' : 'text-signal',
-          )}
-        >
+        <Eyebrow tone={tone} index={index} className="mb-5">
           {eyebrow}
-        </p>
+        </Eyebrow>
       )}
-      <h2
-        className={cn(
-          'text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl',
-          isDark ? 'text-white' : 'text-navy',
-        )}
-      >
+      <Display as="h2" size="sec" tone={tone} accent={accent}>
         {title}
-      </h2>
+      </Display>
       {description && (
         <p
           className={cn(
-            'mt-4 text-lg leading-relaxed',
-            isDark ? 'text-white/70' : 'text-muted-foreground',
+            'mt-6 text-base leading-relaxed lg:text-lg',
+            isDark ? 'text-white/65' : 'text-muted-foreground',
           )}
         >
           {description}

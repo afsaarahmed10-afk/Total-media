@@ -1,5 +1,6 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Section } from '@/components/cinematic/Section'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
 import { FaqAccordion } from '@/components/sections/FaqAccordion'
@@ -24,25 +25,26 @@ export function HomeFaqSection() {
   )
 
   return (
-    <section className="bg-mist py-20 lg:py-28">
-      <div className="container-page">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div>
-            <SectionHeading
-              eyebrow={t('homeFaq.eyebrow')}
-              title={t('homeFaq.title')}
-              description={t('homeFaq.description')}
-            />
-            <LocalizedLink
-              to="/faq"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-signal hover:underline"
-            >
-              {t('homeFaq.viewAll')} <ArrowRight className="size-4" />
-            </LocalizedLink>
-          </div>
+    <Section tone="mist" space="lg">
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <SectionHeading
+            eyebrow={t('homeFaq.eyebrow')}
+            title={t('homeFaq.title')}
+            description={t('homeFaq.description')}
+          />
+          <LocalizedLink
+            to="/faq"
+            className="group mt-8 inline-flex items-center gap-2 border-b border-ink/30 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.14em] transition-colors hover:border-ink"
+          >
+            {t('homeFaq.viewAll')}
+            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </LocalizedLink>
+        </div>
+        <div className="lg:col-span-7">
           <FaqAccordion faqs={homeFaqs} />
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

@@ -1,4 +1,7 @@
 import { useTranslation } from 'react-i18next'
+import { Display } from '@/components/cinematic/Display'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
+import { Section } from '@/components/cinematic/Section'
 import { Reveal } from '@/components/shared/Reveal'
 
 interface Stat {
@@ -11,38 +14,36 @@ export function CompanyIntro() {
   const stats = t('companyIntro.stats', { returnObjects: true }) as Stat[]
 
   return (
-    <section className="py-20 lg:py-28">
-      <div className="container-page">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal">
-              {t('companyIntro.eyebrow')}
-            </p>
-            <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
-              {t('companyIntro.title')}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
-              <p>{t('companyIntro.paragraph1')}</p>
-              <p>{t('companyIntro.paragraph2')}</p>
-            </div>
-          </Reveal>
+    <Section tone="paper" space="lg">
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-6">
+          <Eyebrow className="mb-6">{t('companyIntro.eyebrow')}</Eyebrow>
+          <Display as="h2" size="sec">
+            {t('companyIntro.title')}
+          </Display>
         </div>
-
-        <Reveal delay={0.15}>
-          <div className="mt-16 grid grid-cols-2 gap-8 border-t border-border pt-10 sm:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <p className="text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-1.5 text-sm text-muted-foreground">{stat.label}</p>
-              </div>
-            ))}
+        <Reveal delay={0.1} className="lg:col-span-5 lg:col-start-8 lg:pt-10">
+          <div className="space-y-6 text-base leading-relaxed text-muted-foreground lg:text-lg">
+            <p>{t('companyIntro.paragraph1')}</p>
+            <p>{t('companyIntro.paragraph2')}</p>
           </div>
         </Reveal>
       </div>
-    </section>
+
+      <dl className="mt-20 grid grid-cols-2 border-t border-line lg:mt-28 lg:grid-cols-4">
+        {stats.map((stat, i) => (
+          <Reveal
+            key={stat.label}
+            delay={i * 0.07}
+            className="border-b border-line py-8 pr-6 lg:border-b-0 lg:border-l lg:pl-8 lg:first:border-l-0 lg:first:pl-0"
+          >
+            <dd className="tnum text-[clamp(1.75rem,1.2rem+1.6vw,2.75rem)] font-medium leading-none tracking-[-0.03em]">
+              {stat.value}
+            </dd>
+            <dt className="mt-3 text-sm leading-snug text-muted-foreground">{stat.label}</dt>
+          </Reveal>
+        ))}
+      </dl>
+    </Section>
   )
 }

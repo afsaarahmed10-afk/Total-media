@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { SectionHeading } from '@/components/shared/SectionHeading'
+import { Section } from '@/components/cinematic/Section'
 import { Reveal } from '@/components/shared/Reveal'
+import { SectionHeading } from '@/components/shared/SectionHeading'
 
 interface Step {
   number: string
@@ -13,33 +14,25 @@ export function ProcessSteps() {
   const steps = t('processSteps.steps', { returnObjects: true }) as Step[]
 
   return (
-    <section className="bg-mist py-20 lg:py-28">
-      <div className="container-page">
-        <SectionHeading
-          eyebrow={t('processSteps.eyebrow')}
-          title={t('processSteps.title')}
-          description={t('processSteps.description')}
-        />
+    <Section tone="ink" space="lg">
+      <SectionHeading
+        tone="dark"
+        eyebrow={t('processSteps.eyebrow')}
+        title={t('processSteps.title')}
+        description={t('processSteps.description')}
+      />
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
-          {steps.map((step, i) => (
-            <Reveal key={step.number} delay={i * 0.08}>
-              <div className="relative">
-                <p className="text-4xl font-extrabold tracking-tight text-signal/25">
-                  {step.number}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-navy">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-                {i < steps.length - 1 && (
-                  <div className="mt-6 hidden h-px w-full bg-border lg:block" />
-                )}
-              </div>
+      <ol className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:mt-24 lg:grid-cols-5">
+        {steps.map((step, i) => (
+          <li key={step.number} className="border-t border-white/25 pt-6">
+            <Reveal delay={i * 0.08}>
+              <p className="eyebrow tnum text-blue-tint">{step.number}</p>
+              <h3 className="mt-8 text-xl font-medium tracking-[-0.02em]">{step.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/60">{step.description}</p>
             </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
+          </li>
+        ))}
+      </ol>
+    </Section>
   )
 }

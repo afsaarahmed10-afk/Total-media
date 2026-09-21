@@ -4,6 +4,8 @@
 @import '@fontsource/inter/600.css';
 @import '@fontsource/inter/700.css';
 @import '@fontsource/inter/800.css';
+@import '@fontsource/instrument-serif/latin-400-italic.css';
+@import './styles/cinematic.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -30,6 +32,14 @@
      background at once. Not used for icons/buttons/borders, only text. */
   --color-signal-light: #3885ff;
 
+  --color-ink: #050c1c;
+  --color-ink-2: #0b1530;
+  --color-blue: #0e3bb7;
+  --color-blue-deep: #0a2c8e;
+  --color-blue-tint: #7ea2ff;
+  --color-paper: #fafbfd;
+  --color-line: #e3e7ec;
+
   --background: var(--color-white);
   --foreground: var(--color-charcoal);
   --card: var(--color-white);
@@ -53,7 +63,18 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo, 'Noto Sans CJK JP', sans-serif;
+  --font-serif-accent: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+
+  /* Cinematic palette (see .cinematic scope below for how the public site
+     remaps the legacy navy/signal/mist names onto these). */
+  --color-ink: var(--color-ink);
+  --color-ink-2: var(--color-ink-2);
+  --color-blue: var(--color-blue);
+  --color-blue-deep: var(--color-blue-deep);
+  --color-blue-tint: var(--color-blue-tint);
+  --color-paper: var(--color-paper);
+  --color-line: var(--color-line);
 
   --color-navy: var(--color-navy);
   --color-navy-deep: var(--color-navy-deep);

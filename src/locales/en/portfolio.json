@@ -31,6 +31,21 @@
     "theExperience": "The Experience",
     "theResult": "The Result",
     "gallery": "Gallery",
-    "videos": "Videos"
+    "videos": "Videos",
+    "client": "Client",
+    "venue": "Venue",
+    "date": "Date",
+    "format": "Format",
+    "allPhotos": "All",
+    "photoCount": "{{count}} photos",
+    "openPhoto": "Open photo {{n}}: {{alt}}",
+    "lightboxLabel": "Photo viewer",
+    "closeViewer": "Close",
+    "previousPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "playVideo": "Play video",
+    "filterLabel": "Filter photos by category",
+    "aboutProject": "About the project",
+    "viewProject": "View project"
   }
 }

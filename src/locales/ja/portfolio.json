@@ -31,6 +31,21 @@
     "theExperience": "体験",
     "theResult": "成果",
     "gallery": "ギャラリー",
-    "videos": "動画"
+    "videos": "動画",
+    "client": "クライアント",
+    "venue": "会場",
+    "date": "開催日",
+    "format": "形式",
+    "allPhotos": "すべて",
+    "photoCount": "写真 {{count}}枚",
+    "openPhoto": "写真{{n}}を開く：{{alt}}",
+    "lightboxLabel": "写真ビューアー",
+    "closeViewer": "閉じる",
+    "previousPhoto": "前の写真",
+    "nextPhoto": "次の写真",
+    "playVideo": "動画を再生",
+    "filterLabel": "カテゴリーで写真を絞り込む",
+    "aboutProject": "プロジェクトについて",
+    "viewProject": "プロジェクトを見る"
   }
 }

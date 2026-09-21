@@ -28,6 +28,9 @@
     "questions": "Questions",
     "frequentlyAsked": "Frequently Asked",
     "related": "Related",
+    "overview": "Overview",
+    "relatedWork": "Related Work",
+    "viewProject": "View project",
     "youMightAlsoNeed": "You Might Also Need",
     "readyToPlan": "Ready to Plan Your {{name}}?",
     "ctaDescription": "Tell us the details and we'll respond with a proposal within 1–2 business days."

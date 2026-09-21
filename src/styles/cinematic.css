@@ -1,0 +1,214 @@
+/* ───────────────────────────────────────────────────────────────────────
+   CINEMATIC design system — public marketing site only.
+
+   Applied via <div class="cinematic"> in Layout.tsx, so admin / auth /
+   dashboard screens (which never mount Layout) keep the original look.
+   Inside the scope we remap the legacy token names (navy, signal, mist,
+   radius…) onto the Cinematic palette, so every existing `bg-navy`,
+   `text-signal`, `rounded-xl` on a public page picks up the new system
+   without a per-page rewrite. Bespoke pages (home, services, portfolio)
+   are then built on the new `ink / blue / paper` names directly.
+   ─────────────────────────────────────────────────────────────────────── */
+.cinematic {
+  --color-navy: #050c1c;
+  --color-navy-deep: #030815;
+  --color-charcoal: #0b1221;
+  --color-signal: #0e3bb7; /* 8.3:1 on paper, 8.7:1 white-on-blue */
+  --color-signal-soft: #eaf0ff;
+  --color-signal-light: #7ea2ff; /* text-on-dark blue, ~8:1 on ink */
+  --color-mist: #f1f4f9;
+  --color-mist-dark: #e3e7ec;
+
+  --background: #fafbfd;
+  --foreground: #0b1221;
+  --primary: #050c1c;
+  --secondary: #f1f4f9;
+  --secondary-foreground: #050c1c;
+  --muted: #f1f4f9;
+  --muted-foreground: #556074; /* 5.9:1 on paper */
+  --accent: #eaf0ff;
+  --accent-foreground: #050c1c;
+  --border: #e3e7ec;
+  --input: #e3e7ec;
+  --ring: #0e3bb7;
+  --radius: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+}
+
+/* In the base layer so utilities (`bg-ink`, `text-white`) on the same
+   element — e.g. the portalled menu overlay — still win. */
+@layer base {
+  .cinematic {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+/* Dark sections/header/footer opt in with .on-dark so focus rings stay
+   visible (blue on ink is only ~2.4:1). */
+.cinematic :focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+.cinematic .on-dark :focus-visible,
+.cinematic.on-dark :focus-visible {
+  outline-color: var(--color-blue-tint);
+}
+
+/* Headings: lighter and tighter than the legacy extrabold. Deliberately
+   unlayered so it wins over the `font-extrabold` utilities that still sit
+   on older page markup. */
+.cinematic h1,
+.cinematic h2 {
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+/* Japanese: no tracking compression, taller leading, native phrase
+   breaking where supported (Chrome 119+; harmless elsewhere). */
+html[lang='ja'] .cinematic {
+  line-break: strict;
+  word-break: auto-phrase;
+}
+html[lang='ja'] .cinematic h1,
+html[lang='ja'] .cinematic h2,
+html[lang='ja'] .cinematic h3 {
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  font-feature-settings: 'palt';
+}
+html[lang='ja'] .cinematic p {
+  line-height: 1.9;
+}
+
+@layer utilities {
+  /* Display scale — fluid, tight, cinematic. */
+  .display-xl {
+    font-size: clamp(2.6rem, 0.9rem + 7.4vw, 8.25rem);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+  .display-lg {
+    font-size: clamp(2rem, 1rem + 3.9vw, 4.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+  .display-md {
+    font-size: clamp(1.5rem, 1rem + 1.7vw, 2.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+  html[lang='ja'] .display-xl {
+    font-size: clamp(2.2rem, 0.9rem + 5.6vw, 6rem);
+    line-height: 1.16;
+    letter-spacing: 0;
+  }
+  html[lang='ja'] .display-lg {
+    font-size: clamp(1.7rem, 0.9rem + 3.1vw, 3.6rem);
+    line-height: 1.22;
+    letter-spacing: 0.005em;
+  }
+  html[lang='ja'] .display-md {
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+  }
+
+  /* Small uppercase label — the template's "FEATURED WORK" tag. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  html[lang='ja'] .eyebrow {
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+  }
+
+  /* One serif-italic accent word per headline. Japanese has no italic,
+     so the accent falls back to a lighter weight + the blue colour. */
+  .accent {
+    font-family: var(--font-serif-accent);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+  html[lang='ja'] .accent {
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  /* Homepage hero: a notch under display-xl so a three-line headline sits
+     beside the photograph instead of on top of it. */
+  .display-hero {
+    font-size: clamp(2.4rem, 0.9rem + 5.3vw, 6.25rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+  }
+  html[lang='ja'] .display-hero {
+    font-size: clamp(2.1rem, 0.9rem + 4.4vw, 5rem);
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  /* Section-heading scale: between display-md and display-lg. */
+  .display-sec {
+    font-size: clamp(1.85rem, 1rem + 2.9vw, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+  html[lang='ja'] .display-sec {
+    font-size: clamp(1.55rem, 0.9rem + 2.3vw, 3rem);
+    line-height: 1.28;
+    letter-spacing: 0.005em;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Grid/flex children default to min-width:auto, so one long unbreakable run
+   (common in Japanese product names like "…&LEDソリューション") can push a
+   single-column grid wider than the viewport. Let them shrink instead. */
+.cinematic .grid > *,
+.cinematic .flex > * {
+  min-width: 0;
+}
+.cinematic h1,
+.cinematic h2,
+.cinematic h3 {
+  overflow-wrap: break-word;
+}
+
+/* Wider, more generous gutters than the legacy 1280 container. */
+.cinematic .container-page {
+  max-width: 1480px;
+  padding-inline: clamp(1.25rem, 0.5rem + 3.4vw, 4rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

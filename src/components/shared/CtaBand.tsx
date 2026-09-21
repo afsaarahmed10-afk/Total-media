@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/components/ui/button'
-import { AbstractVisual } from '@/components/shared/AbstractVisual'
-import { LocalizedLink } from '@/components/shared/LocalizedLink'
-import { ArrowRight } from 'lucide-react'
+import { CineButton } from '@/components/cinematic/CineButton'
+import { Display } from '@/components/cinematic/Display'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
 import { trackEvent } from '@/lib/analytics'
 
 interface CtaBandProps {
@@ -13,8 +12,13 @@ interface CtaBandProps {
   primaryTo?: string
   secondaryLabel?: string
   secondaryTo?: string
+  /** Trailing substring of `title` set in the accent face. */
+  accent?: string
 }
 
+/** Closing block — the template's solid-blue "LET'S MAKE AN IMPACT." band.
+ * Copy, destinations and click tracking are unchanged from the legacy
+ * band; only the presentation is new. */
 export function CtaBand({
   eyebrow,
   title,
@@ -23,6 +27,7 @@ export function CtaBand({
   primaryTo = '/quote',
   secondaryLabel,
   secondaryTo = '/contact',
+  accent,
 }: CtaBandProps) {
   const { t } = useTranslation('common')
 
@@ -32,32 +37,44 @@ export function CtaBand({
   }
 
   return (
-    <section className="relative overflow-hidden bg-navy py-20 text-white lg:py-28">
-      <div className="absolute inset-0 opacity-30">
-        <AbstractVisual seed={title} variant="radial" />
-      </div>
-      <div className="container-page relative text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-signal-light">
-          {eyebrow ?? t('ctaBand.letsTalk')}
-        </p>
-        <h2 className="mx-auto max-w-2xl text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-          {title}
-        </h2>
-        {description && (
-          <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">{description}</p>
-        )}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Button asChild size="lg" className="bg-signal text-white hover:bg-signal/90">
-            <LocalizedLink to={primaryTo} onClick={() => handleCtaClick(primaryTo)}>
+    <section className="on-dark relative overflow-hidden bg-blue py-24 text-white lg:py-36">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px)',
+          backgroundSize: 'calc(100% / 6) 100%',
+        }}
+      />
+      <div className="container-page relative grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-20">
+        <div>
+          <Eyebrow tone="dark" className="mb-6 !text-white/75">
+            {eyebrow ?? t('ctaBand.letsTalk')}
+          </Eyebrow>
+          <Display as="h2" size="lg" tone="dark" accent={accent} className="max-w-4xl [&_.accent]:text-white">
+            {title}
+          </Display>
+        </div>
+        <div>
+          {description && <p className="max-w-md text-base leading-relaxed text-white/80 lg:text-lg">{description}</p>}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <CineButton
+              to={primaryTo}
+              variant="white"
+              onClick={() => handleCtaClick(primaryTo)}
+            >
               {primaryLabel ?? t('buttons.getQuote')}
-              <ArrowRight className="ml-1 size-4" />
-            </LocalizedLink>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white">
-            <LocalizedLink to={secondaryTo} onClick={() => handleCtaClick(secondaryTo)}>
+            </CineButton>
+            <CineButton
+              to={secondaryTo}
+              variant="outline"
+              tone="dark"
+              onClick={() => handleCtaClick(secondaryTo)}
+            >
               {secondaryLabel ?? t('buttons.contactUs')}
-            </LocalizedLink>
-          </Button>
+            </CineButton>
+          </div>
         </div>
       </div>
     </section>
