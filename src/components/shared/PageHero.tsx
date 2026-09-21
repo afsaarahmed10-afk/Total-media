@@ -16,6 +16,9 @@ interface PageHeroProps {
   image?: string | null
   /** Trailing substring of `title` set in the accent face. */
   accent?: string
+  /** `soft` lets a real, deliberately-shot photograph show through; `strong`
+   * (default) suits illustrative/generated covers behind long headlines. */
+  imageScrim?: 'strong' | 'soft'
   children?: ReactNode
   className?: string
 }
@@ -30,11 +33,12 @@ export function PageHero({
   breadcrumbs,
   image,
   accent,
+  imageScrim = 'strong',
   children,
   className,
 }: PageHeroProps) {
   return (
-    <section className={cn('on-dark relative isolate overflow-hidden bg-ink text-white', className)}>
+    <section className={cn('on-dark relative isolate flex flex-col overflow-hidden bg-ink text-white', className)}>
       {image ? (
         <>
           <img
@@ -45,7 +49,18 @@ export function PageHero({
             decoding="async"
             className="absolute inset-0 -z-20 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
+          <div
+            className={cn(
+              'absolute inset-0 -z-10 bg-gradient-to-t from-ink',
+              imageScrim === 'soft' ? 'via-ink/35 to-ink/15' : 'via-ink/80 to-ink/55',
+            )}
+          />
+          <div
+            className={cn(
+              'absolute inset-0 -z-10 bg-gradient-to-r to-transparent',
+              imageScrim === 'soft' ? 'from-ink/60' : 'from-ink/70',
+            )}
+          />
         </>
       ) : (
         <>
@@ -61,10 +76,14 @@ export function PageHero({
         </>
       )}
 
-      <div className="container-page relative flex min-h-[46vh] flex-col pb-14 pt-8 lg:min-h-[54vh] lg:pb-20 lg:pt-10">
+      <div className="container-page relative flex min-h-[46vh] flex-1 flex-col pb-14 pt-8 lg:min-h-[54vh] lg:pb-20 lg:pt-10">
         {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-16 lg:mb-24" />}
         <div className="mt-auto">
-          {eyebrow && <Eyebrow tone="dark" className="mb-6">{eyebrow}</Eyebrow>}
+          {eyebrow && (
+            <Eyebrow tone="dark" className={cn('mb-6', image && '!text-white/85')}>
+              {eyebrow}
+            </Eyebrow>
+          )}
           <Display as="h1" size="lg" tone="dark" accent={accent} className="max-w-5xl">
             {title}
           </Display>

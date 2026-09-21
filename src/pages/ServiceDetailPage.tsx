@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { CheckCircle2, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
@@ -8,8 +7,12 @@ import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
 import { FaqAccordion } from '@/components/sections/FaqAccordion'
-import { ContentVisual } from '@/components/shared/ContentVisual'
+import { ServiceIndexRow } from '@/components/sections/ServiceIndexRow'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { CineButton } from '@/components/cinematic/CineButton'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
+import { MediaFrame } from '@/components/cinematic/MediaFrame'
+import { Section } from '@/components/cinematic/Section'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { trackEvent } from '@/lib/analytics'
 import {
@@ -17,6 +20,7 @@ import {
   getServicesBySlugs,
   getFaqsByIds,
   getEquipmentCategoryBySlug,
+  getProjects,
 } from '@/lib/data'
 import NotFoundPage from '@/pages/NotFoundPage'
 
@@ -37,6 +41,9 @@ export default function ServiceDetailPage() {
   const relatedEquipment = service.relatedEquipmentCategorySlugs
     .map((s) => getEquipmentCategoryBySlug(s, locale))
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
+  const relatedProjects = getProjects()
+    .filter((p) => p.servicesUsed.includes(service.slug))
+    .slice(0, 2)
 
   const breadcrumbs = [
     { label: t('home', { ns: 'common' }), to: '/' },
@@ -68,136 +75,146 @@ export default function ServiceDetailPage() {
         title={service.heroStatement}
         description={service.shortDescription}
         visualSeed={service.slug}
+        image={service.imageUrl}
         breadcrumbs={breadcrumbs}
       />
 
-      <section className="py-20 lg:py-24">
-        <div className="container-page grid gap-16 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-          <div>
-            <Reveal>
-              <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
-                {service.overview.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="mt-12">
-                <h2 className="text-xl font-bold text-navy">{t('detail.whatsIncluded')}</h2>
-                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {service.capabilities.map((capability) => (
-                    <li key={capability} className="flex items-start gap-2.5 text-sm text-charcoal">
-                      <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-signal" />
-                      {capability}
+      <Section tone="paper" space="lg">
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
+          <aside className="lg:col-span-4">
+            <div className="space-y-12 lg:sticky lg:top-28">
+              <div>
+                <Eyebrow className="mb-5 border-b border-ink pb-5 !text-ink">{t('detail.idealFor')}</Eyebrow>
+                <ul className="space-y-3">
+                  {service.idealFor.map((item) => (
+                    <li key={item} className="border-b border-line pb-3 text-sm leading-snug">
+                      {item}
                     </li>
                   ))}
                 </ul>
               </div>
-            </Reveal>
 
-            <Reveal delay={0.15}>
-              <div className="mt-12">
-                <h2 className="text-xl font-bold text-navy">{t('detail.howItWorks')}</h2>
-                <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                  {service.process.map((step, i) => (
-                    <div key={step.title} className="rounded-lg bg-mist p-5">
-                      <p className="text-xs font-semibold text-signal">{t('detail.step', { n: i + 1 })}</p>
-                      <h3 className="mt-1 font-semibold text-navy">{step.title}</h3>
-                      <p className="mt-1.5 text-sm text-muted-foreground">{step.description}</p>
-                    </div>
-                  ))}
+              {relatedEquipment.length > 0 && (
+                <div>
+                  <Eyebrow className="mb-5 border-b border-ink pb-5 !text-ink">{t('detail.relatedEquipment')}</Eyebrow>
+                  <ul>
+                    {relatedEquipment.map((cat) => (
+                      <li key={cat.slug} className="border-b border-line">
+                        <LocalizedLink
+                          to={`/equipment/${cat.slug}`}
+                          className="group flex items-center justify-between py-3 text-sm transition-colors hover:text-blue"
+                        >
+                          {cat.name}
+                          <span aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                            ↗
+                          </span>
+                        </LocalizedLink>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+              )}
+
+              <CineButton to="/quote" className="w-full justify-between">
+                {t('detail.requestQuoteFor', { name: service.name })}
+              </CineButton>
+            </div>
+          </aside>
+
+          <div className="lg:col-span-8">
+            <Reveal>
+              <Eyebrow className="mb-6">{t('detail.overview')}</Eyebrow>
+              <div className="space-y-6 text-lg leading-relaxed lg:text-xl lg:leading-relaxed">
+                {service.overview.map((paragraph, i) => (
+                  <p key={i} className={i === 0 ? 'text-ink' : 'text-muted-foreground'}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </Reveal>
-          </div>
 
-          <div className="space-y-8">
-            <div className="overflow-hidden rounded-xl">
-              <div className="aspect-[4/3]">
-                <ContentVisual
-                  imageUrl={service.imageUrl}
-                  seed={`${service.slug}-detail`}
-                  variant="facet"
-                  alt={service.name}
-                />
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-border p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                {t('detail.idealFor')}
-              </h3>
-              <ul className="mt-4 space-y-2">
-                {service.idealFor.map((item) => (
-                  <li key={item} className="text-sm text-charcoal">
-                    {item}
+            <Reveal className="mt-20">
+              <h2 className="display-md mb-8">{t('detail.whatsIncluded')}</h2>
+              <ul className="grid border-t border-ink sm:grid-cols-2 sm:gap-x-10">
+                {service.capabilities.map((capability, i) => (
+                  <li key={capability} className="flex gap-4 border-b border-line py-4 text-sm leading-snug">
+                    <span className="eyebrow tnum pt-0.5 text-blue">{String(i + 1).padStart(2, '0')}</span>
+                    {capability}
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
 
-            {relatedEquipment.length > 0 && (
-              <div className="rounded-xl border border-border p-6">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t('detail.relatedEquipment')}
-                </h3>
-                <ul className="mt-4 space-y-2">
-                  {relatedEquipment.map((cat) => (
-                    <li key={cat.slug}>
-                      <LocalizedLink
-                        to={`/equipment/${cat.slug}`}
-                        className="flex items-center justify-between text-sm text-charcoal hover:text-signal"
-                      >
-                        {cat.name}
-                        <ArrowRight className="size-3.5" />
-                      </LocalizedLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <LocalizedLink
-              to="/quote"
-              className="flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-4 text-sm font-semibold text-white hover:bg-navy-deep"
-            >
-              {t('detail.requestQuoteFor', { name: service.name })}
-              <ArrowRight className="size-4" />
-            </LocalizedLink>
+            <Reveal className="mt-20">
+              <h2 className="display-md mb-8">{t('detail.howItWorks')}</h2>
+              <ol className="border-t border-ink">
+                {service.process.map((step, i) => (
+                  <li
+                    key={step.title}
+                    className="grid gap-x-8 gap-y-2 border-b border-line py-7 sm:grid-cols-[6rem_1fr_1.2fr]"
+                  >
+                    <span className="eyebrow tnum pt-1.5 text-blue">{t('detail.step', { n: i + 1 })}</span>
+                    <h3 className="text-lg font-medium tracking-[-0.015em]">{step.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
           </div>
         </div>
-      </section>
+      </Section>
+
+      {relatedProjects.length > 0 && (
+        <Section tone="ink" space="lg">
+          <SectionHeading tone="dark" title={t('detail.relatedWork')} />
+          <div className="mt-14 grid gap-8 lg:mt-20 lg:grid-cols-12 lg:gap-16">
+            {relatedProjects.map((project, i) => (
+              <Reveal key={project.slug} delay={i * 0.08} className={i === 0 ? 'lg:col-span-8' : 'lg:col-span-4'}>
+                <LocalizedLink to={`/portfolio/${project.slug}`} className="group block">
+                  <MediaFrame
+                    src={project.imageUrl}
+                    alt={project.title}
+                    seed={project.visualSeed}
+                    ratio={i === 0 ? '16 / 10' : '4 / 5'}
+                    hoverZoom
+                  />
+                  <p className="eyebrow mt-5 flex justify-between gap-4 text-white/60">
+                    <span>{project.client}</span>
+                    <span className="text-white">{t('detail.viewProject')} ↗</span>
+                  </p>
+                </LocalizedLink>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {relatedFaqs.length > 0 && (
-        <section className="bg-mist py-20 lg:py-24">
-          <div className="container-page mx-auto max-w-3xl">
-            <SectionHeading eyebrow={t('detail.questions')} title={t('detail.frequentlyAsked')} />
-            <div className="mt-8">
+        <Section tone="mist" space="lg">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <SectionHeading eyebrow={t('detail.questions')} title={t('detail.frequentlyAsked')} />
+            </div>
+            <div className="lg:col-span-8">
               <FaqAccordion faqs={relatedFaqs} />
             </div>
           </div>
-        </section>
+        </Section>
       )}
 
       {relatedServices.length > 0 && (
-        <section className="py-20 lg:py-24">
-          <div className="container-page">
-            <SectionHeading eyebrow={t('detail.related')} title={t('detail.youMightAlsoNeed')} />
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
-              {relatedServices.map((related) => (
-                <LocalizedLink
-                  key={related.slug}
-                  to={`/services/${related.slug}`}
-                  className="group rounded-xl border border-border p-6 hover:border-signal/30"
-                >
-                  <h3 className="font-semibold text-navy group-hover:text-signal">{related.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{related.shortDescription}</p>
-                </LocalizedLink>
-              ))}
+        <Section tone="paper" space="lg">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <SectionHeading eyebrow={t('detail.related')} title={t('detail.youMightAlsoNeed')} />
             </div>
+            <ol className="border-t border-ink lg:col-span-8">
+              {relatedServices.map((related, i) => (
+                <ServiceIndexRow key={related.slug} service={related} index={i + 1} delay={i * 0.05} />
+              ))}
+            </ol>
           </div>
-        </section>
+        </Section>
       )}
 
       <CtaBand

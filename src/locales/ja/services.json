@@ -28,6 +28,9 @@
     "questions": "ご質問",
     "frequentlyAsked": "よくある質問",
     "related": "関連サービス",
+    "overview": "概要",
+    "relatedWork": "関連する実績",
+    "viewProject": "プロジェクトを見る",
     "youMightAlsoNeed": "こちらもおすすめです",
     "readyToPlan": "{{name}}についてご相談ください",
     "ctaDescription": "詳細をお聞かせください。1〜2営業日以内にご提案をお送りします。"

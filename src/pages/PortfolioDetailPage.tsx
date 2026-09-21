@@ -1,33 +1,28 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { MapPin, Calendar, ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Seo, SITE_URL } from '@/components/layout/Seo'
 import { PageHero } from '@/components/shared/PageHero'
 import { SectionHeading } from '@/components/shared/SectionHeading'
 import { Reveal } from '@/components/shared/Reveal'
 import { CtaBand } from '@/components/shared/CtaBand'
-import { ContentVisual } from '@/components/shared/ContentVisual'
 import { LocalizedLink } from '@/components/shared/LocalizedLink'
+import { Eyebrow } from '@/components/cinematic/Eyebrow'
+import { MediaFrame } from '@/components/cinematic/MediaFrame'
+import { Section } from '@/components/cinematic/Section'
+import { PosterVideo } from '@/components/sections/PosterVideo'
+import { ProjectGallery } from '@/components/sections/ProjectGallery'
 import { getProjectBySlug, getServicesBySlugs, getProjects, getEquipmentItems } from '@/lib/data'
+import { pickImage } from '@/lib/featured-project'
 import { useLocale } from '@/lib/locale/LocaleContext'
 import { trackEvent } from '@/lib/analytics'
-import type { ProjectImage } from '@/content/types'
 import NotFoundPage from '@/pages/NotFoundPage'
 
-/** Groups a project's gallery by `category`, preserving first-appearance
- * order (images already arrive sorted by sortOrder) — uncategorized
- * images (empty string) render as a single unlabeled group. */
-function groupImagesByCategory(images: ProjectImage[]): [string, ProjectImage[]][] {
-  const groups = new Map<string, ProjectImage[]>()
-  for (const image of images) {
-    const key = image.category || ''
-    const list = groups.get(key)
-    if (list) list.push(image)
-    else groups.set(key, [image])
-  }
-  return Array.from(groups.entries())
-}
+/** Unfinished admin template text such as "[Describe Total Media's role…]" or
+ * "[ADD ANY SPECIFIC RESULT…]" must never render on the public site. The
+ * admin form still shows it, so nothing is lost — it just isn't published
+ * until someone replaces it with real copy. */
+const isPlaceholder = (paragraph: string) => /\[\s*(describe|add|insert|todo|tbd)\b[^\]]*\]/i.test(paragraph)
 
 export default function PortfolioDetailPage() {
   const { t } = useTranslation(['portfolio', 'common'])
@@ -94,6 +89,28 @@ export default function PortfolioDetailPage() {
       }
     : null
 
+  const heroImage = pickImage(project, 'stage')?.url ?? project.imageUrl
+  const description = project.description.filter((p) => !isPlaceholder(p))
+  const facts = [
+    { label: t('detail.client'), value: project.client },
+    { label: t('detail.venue'), value: project.venue || project.location },
+    { label: t('detail.date'), value: project.dateLabel || String(project.year) },
+    { label: t('detail.format'), value: t(`categories.${project.category}`) },
+  ]
+
+  const storyBlocks = project.story
+    ? (
+        [
+          ['theEvent', project.story.theEvent],
+          ['ourRole', project.story.ourRole],
+          ['theExperience', project.story.theExperience],
+          ['theResult', project.story.theResult],
+        ] as const
+      )
+        .map(([key, paragraphs]) => [key, paragraphs.filter((p) => !isPlaceholder(p))] as const)
+        .filter(([, paragraphs]) => paragraphs.length > 0)
+    : []
+
   return (
     <>
       <Seo
@@ -108,70 +125,72 @@ export default function PortfolioDetailPage() {
         title={project.title}
         description={project.summary}
         visualSeed={project.visualSeed}
+        image={heroImage}
+        imageScrim="soft"
         breadcrumbs={breadcrumbs}
+        className="lg:min-h-[78vh]"
       >
-        <div className="mt-8 flex flex-wrap gap-6 text-sm text-white/80">
-          <span className="flex items-center gap-1.5">
-            <MapPin className="size-4 text-signal" /> {project.venue || project.location}
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Calendar className="size-4 text-signal" /> {project.dateLabel || project.year}
-          </span>
-          <span className="font-medium text-white">{project.client}</span>
-        </div>
+        <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-white/20 pt-6 sm:grid-cols-2 lg:grid-cols-4">
+          {facts.map((fact) => (
+            <div key={fact.label}>
+              <dt className="eyebrow mb-2 text-white/55">{fact.label}</dt>
+              <dd className="text-sm leading-snug text-white">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
       </PageHero>
 
-      <section className="py-20 lg:py-24">
-        <div className="container-page grid gap-16 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-          <div>
-            <Reveal>
-              <div className="aspect-[16/9] overflow-hidden rounded-xl">
-                <ContentVisual
-                  imageUrl={project.imageUrl}
-                  seed={`${project.visualSeed}-hero`}
-                  alt={project.title}
-                />
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="mt-10 space-y-5 text-lg leading-relaxed text-muted-foreground">
-                {project.description.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
+      <Section tone="paper" space="lg">
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
+          {description.length > 0 && (
+            <Reveal className="lg:col-span-7">
+              <Eyebrow className="mb-6">{t('detail.aboutProject')}</Eyebrow>
+              <div className="space-y-6 text-lg leading-relaxed text-muted-foreground lg:text-xl lg:leading-relaxed">
+                {description.map((paragraph, i) => (
+                  <p key={i} className={i === 0 ? 'text-ink' : undefined}>
+                    {paragraph}
+                  </p>
                 ))}
               </div>
             </Reveal>
-          </div>
+          )}
 
-          <div className="space-y-8">
+          {/* With no long-form description the lists span the full width as
+              a tidy row instead of leaving an empty left column. */}
+          <aside
+            className={
+              description.length > 0
+                ? 'space-y-12 lg:col-span-4 lg:col-start-9'
+                : 'grid gap-12 lg:col-span-12 lg:grid-cols-3 lg:gap-16'
+            }
+          >
             {project.stats.length > 0 && (
-              <div className="rounded-xl border border-border p-6">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t('detail.results')}
-                </h3>
-                <dl className="mt-4 space-y-4">
+              <div>
+                <Eyebrow className="mb-5 border-b border-ink pb-5 !text-ink">{t('detail.results')}</Eyebrow>
+                <dl>
                   {project.stats.map((stat) => (
-                    <div key={stat.label}>
+                    <div key={stat.label} className="border-b border-line py-4">
                       <dt className="text-xs text-muted-foreground">{stat.label}</dt>
-                      <dd className="text-xl font-bold text-navy">{stat.value}</dd>
+                      <dd className="mt-1 text-lg font-medium tracking-[-0.01em]">{stat.value}</dd>
                     </div>
                   ))}
                 </dl>
               </div>
             )}
 
-            <div className="rounded-xl border border-border p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                {t('detail.servicesUsed')}
-              </h3>
-              <ul className="mt-4 space-y-2">
+            <div>
+              <Eyebrow className="mb-5 border-b border-ink pb-5 !text-ink">{t('detail.servicesUsed')}</Eyebrow>
+              <ul>
                 {services.map((service) => (
-                  <li key={service.slug}>
+                  <li key={service.slug} className="border-b border-line">
                     <LocalizedLink
                       to={`/services/${service.slug}`}
-                      className="flex items-center justify-between text-sm text-charcoal hover:text-signal"
+                      className="group flex items-center justify-between py-3 text-sm transition-colors hover:text-blue"
                     >
                       {service.name}
-                      <ArrowRight className="size-3.5" />
+                      <span aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                        ↗
+                      </span>
                     </LocalizedLink>
                   </li>
                 ))}
@@ -179,131 +198,93 @@ export default function PortfolioDetailPage() {
             </div>
 
             {equipmentUsed.length > 0 && (
-              <div className="rounded-xl border border-border p-6">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                  {t('detail.equipmentUsed')}
-                </h3>
-                <ul className="mt-4 space-y-2">
+              <div>
+                <Eyebrow className="mb-5 border-b border-ink pb-5 !text-ink">{t('detail.equipmentUsed')}</Eyebrow>
+                <ul>
                   {equipmentUsed.map((eq) => (
-                    <li key={eq.slug}>
+                    <li key={eq.slug} className="border-b border-line">
                       <LocalizedLink
                         to={`/equipment/${eq.categorySlug}/${eq.slug}`}
-                        className="flex items-center justify-between text-sm text-charcoal hover:text-signal"
+                        className="group flex items-center justify-between py-3 text-sm transition-colors hover:text-blue"
                       >
                         {eq.name}
-                        <ArrowRight className="size-3.5" />
+                        <span aria-hidden="true" className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                          ↗
+                        </span>
                       </LocalizedLink>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
-          </div>
+          </aside>
         </div>
-      </section>
+      </Section>
 
-      {project.story && (
-        <section className="bg-mist py-20 lg:py-24">
-          <div className="container-page grid gap-10 sm:grid-cols-2">
-            {(
-              [
-                ['theEvent', project.story.theEvent],
-                ['ourRole', project.story.ourRole],
-                ['theExperience', project.story.theExperience],
-                ['theResult', project.story.theResult],
-              ] as const
-            )
-              .filter(([, paragraphs]) => paragraphs.length > 0)
-              .map(([key, paragraphs], i) => (
-                <Reveal key={key} delay={i * 0.05}>
-                  <h3 className="text-lg font-semibold text-navy">{t(`detail.${key}`)}</h3>
-                  <div className="mt-3 space-y-3 text-muted-foreground">
-                    {paragraphs.map((paragraph, j) => (
-                      <p key={j}>{paragraph}</p>
-                    ))}
-                  </div>
-                </Reveal>
-              ))}
+      {storyBlocks.length > 0 && (
+        <Section tone="mist" space="lg">
+          <div className="grid border-t border-ink sm:grid-cols-2">
+            {storyBlocks.map(([key, paragraphs], i) => (
+              <Reveal
+                key={key}
+                delay={(i % 2) * 0.08}
+                className="border-b border-line py-10 sm:pr-12 lg:py-14"
+              >
+                <p className="eyebrow tnum mb-6 text-blue">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="display-md">{t(`detail.${key}`)}</h3>
+                <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
+                  {paragraphs.map((paragraph, j) => (
+                    <p key={j}>{paragraph}</p>
+                  ))}
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
+        </Section>
       )}
 
       {project.images && project.images.length > 0 && (
-        <section className="py-20 lg:py-24">
-          <div className="container-page">
-            <SectionHeading eyebrow={t('detail.gallery')} title={project.title} />
-            <div className="mt-10 space-y-12">
-              {groupImagesByCategory(project.images).map(([category, images]) => (
-                <div key={category || 'uncategorized'}>
-                  {category && <h3 className="mb-4 text-lg font-semibold text-navy">{category}</h3>}
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {images.map((image) => (
-                      <Reveal key={image.id}>
-                        <div className="aspect-[4/3] overflow-hidden rounded-xl">
-                          <img
-                            src={image.url}
-                            alt={image.alt}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                      </Reveal>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ProjectGallery images={project.images} title={project.title} />
       )}
 
       {project.videos && project.videos.length > 0 && (
-        <section className="bg-mist py-20 lg:py-24">
-          <div className="container-page">
-            <SectionHeading eyebrow={t('detail.videos')} title={project.title} />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2">
-              {project.videos.map((video) => (
-                <Reveal key={video.id}>
-                  <div className="overflow-hidden rounded-xl bg-black">
-                    <video
-                      controls
-                      preload="none"
-                      poster={video.posterUrl || undefined}
-                      src={video.url}
-                      className="aspect-video w-full"
-                    />
-                  </div>
-                  <h3 className="mt-3 font-semibold text-navy">{video.title}</h3>
-                  {video.description && <p className="text-sm text-muted-foreground">{video.description}</p>}
-                </Reveal>
-              ))}
-            </div>
+        <Section tone="paper" space="lg">
+          <SectionHeading eyebrow={t('detail.videos')} title={project.title} />
+          <div className="mt-14 grid gap-x-8 gap-y-14 lg:mt-20 lg:grid-cols-2">
+            {project.videos.map((video, i) => (
+              <Reveal
+                key={video.id}
+                className={project.videos!.length === 1 ? 'lg:col-span-2' : i === 0 ? 'lg:col-span-2' : undefined}
+              >
+                <PosterVideo video={video} projectSlug={project.slug} />
+                <h3 className="mt-5 text-lg font-medium tracking-[-0.015em]">{video.title}</h3>
+                {video.description && (
+                  <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{video.description}</p>
+                )}
+              </Reveal>
+            ))}
           </div>
-        </section>
+        </Section>
       )}
 
       {otherProjects.length > 0 && (
-        <section className="bg-mist py-20 lg:py-24">
-          <div className="container-page">
-            <SectionHeading
-              eyebrow={t('detail.moreWork')}
-              title={t('detail.moreProjects', { category: t(`categories.${project.category}`) })}
-            />
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
-              {otherProjects.map((p) => (
-                <LocalizedLink key={p.slug} to={`/portfolio/${p.slug}`} className="group block">
-                  <div className="aspect-[4/3] overflow-hidden rounded-xl">
-                    <div className="transition-transform duration-500 group-hover:scale-105">
-                      <ContentVisual imageUrl={p.imageUrl} seed={p.visualSeed} alt={p.title} />
-                    </div>
-                  </div>
-                  <h3 className="mt-3 font-semibold text-navy group-hover:text-signal">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground">{p.client}</p>
-                </LocalizedLink>
-              ))}
-            </div>
+        <Section tone="mist" space="lg">
+          <SectionHeading
+            eyebrow={t('detail.moreWork')}
+            title={t('detail.moreProjects', { category: t(`categories.${project.category}`) })}
+          />
+          <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-3 lg:mt-20">
+            {otherProjects.map((p) => (
+              <LocalizedLink key={p.slug} to={`/portfolio/${p.slug}`} className="group block">
+                <MediaFrame src={p.imageUrl} alt={p.title} seed={p.visualSeed} ratio="4 / 3" hoverZoom />
+                <h3 className="mt-5 text-lg font-medium tracking-[-0.015em] transition-colors group-hover:text-blue">
+                  {p.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">{p.client}</p>
+              </LocalizedLink>
+            ))}
           </div>
-        </section>
+        </Section>
       )}
 
       <CtaBand title={t('detail.ctaTitle')} description={t('detail.ctaDescription')} />
